@@ -36,11 +36,16 @@ fn trigger_chip(label: &'static str, test_id: &'static str) -> impl IntoElement 
         )
 }
 
-/// A styled menu row's shared geometry and states.
+/// A styled menu row's shared geometry and states: label leading, hint
+/// trailing, on one line.
 fn menu_row(row: MenuItemElement) -> MenuItemElement {
-    row.px_3()
-        .py_2()
-        .rounded(move || theme().radius)
+    row.flex_row()
+        .items_center()
+        .justify_between()
+        .gap_3()
+        .px_2()
+        .py_1p5()
+        .rounded_sm()
         .hover(|s| s.bg(move || theme().accent))
         .active(|s| s.bg(move || theme().accent))
         .focus(|s| s.bg(move || theme().accent))
@@ -215,7 +220,7 @@ pub(crate) fn popover_section() -> impl IntoElement {
                 ),
         )
         .child(caption(
-            "Anchored to the button, kept inside the safe area; on phones a press outside only closes it.",
+            "Anchored, kept inside the safe area; a press outside closes it and still reaches what you hit — try Copy link while it is open.",
         ))
         .child(status_line({ let s = status; move || s.get() }))
 }
@@ -270,7 +275,7 @@ pub(crate) fn menu_section() -> impl IntoElement {
                             })
                             .indicator(
                                 text("✓")
-                                    .text_xs()
+                                    .text_sm()
                                     .text_color(move || theme().primary)
                                     .opacity(move || {
                                         if line_numbers.get() {
@@ -281,7 +286,8 @@ pub(crate) fn menu_section() -> impl IntoElement {
                                     }),
                             ),
                     )
-                    .child(row_label("Show line numbers")),
+                    .child(row_label("Show line numbers"))
+                    .child(text(" ").text_sm()),
                 )
                 .child(separator())
                 .child(group_label("Export"))
@@ -332,7 +338,7 @@ pub(crate) fn menu_section() -> impl IntoElement {
                 ),
         )
         .child(caption(
-            "A popup at the trigger on the desktops with a cascading submenu; a sheet at the bottom on phones, the submenu in place.",
+            "A popup at the trigger with a cascading submenu; a sheet at the bottom on phones. The checkmark and the choice history outlive the menu.",
         ))
         .child(status_line({ let s = last; move || s.get() }))
         .child(status_line(move || {

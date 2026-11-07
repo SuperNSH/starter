@@ -2,6 +2,28 @@
 //! scrim and return focus to the trigger; alerts answer a real flow; the
 //! sheet adapts to the width; the popups open and close; toasts queue and
 //! dismiss on the clock; a dock drag lands in the layout data.
+//!
+//! Every test was seen to fail once by breaking the code on purpose (the
+//! "Break seen" column); the break was restored before this file was left.
+//!
+//! | test | break seen |
+//! | --- | --- |
+//! | the_dialog_closes_on_escape_and_returns_focus | the `on_cancel` escape branch made a no-op |
+//! | the_dialog_keeps_escape_out_when_the_prop_says_so | the switch bound to a fresh `signal(true)` instead of `escape_closes` |
+//! | the_dialog_closes_on_a_scrim_press | the scrim's `on_press` body emptied |
+//! | the_alert_dialog_deletes_the_draft_from_the_flow | the `Some("delete")` answer rewired to the "kept" path |
+//! | the_action_sheet_reports_the_cancel_answer | the dismissed answer rewired to "Kept the draft" |
+//! | the_sheet_opens_as_a_side_panel_on_desktop_width | the width check replaced by a constant `Placement::Bottom` |
+//! | the_sheet_opens_as_a_bottom_sheet_on_phone_width | "Tall" wrote detent 1 instead of 2; and the tall marker gated on `detent == 3` |
+//! | the_popover_closes_on_a_press_outside | `on_open_change` stopped writing `open` (controlled popovers never open) |
+//! | the_menu_selects_items_and_toggles_the_checkable_one | Rename's `on_select` no-op; then the checkable item stopped toggling `line_numbers` |
+//! | the_menu_opens_as_a_sheet_on_a_phone | Rename's `on_select` no-op (same closure as the desktop menu) |
+//! | the_context_menu_opens_on_a_right_click | Copy's `on_select` no-op |
+//! | the_hover_card_opens_on_a_hover | the card stopped following open requests |
+//! | the_tooltip_opens_from_the_app_on_touch | the toggle forced `shown = false` |
+//! | toasts_queue_in_order_and_dismiss_on_the_clock | push ids offset so FIFO order broke; then the 4-second timeout removed |
+//! | the_dock_drag_lands_in_the_layout_data | `on_layout_change` stopped writing `layout`; then Reset made a no-op |
+//! | the_resizable_panel_steps_from_the_keyboard_path | "Wider" clamped to 200 (no movement) |
 
 use std::time::Duration;
 

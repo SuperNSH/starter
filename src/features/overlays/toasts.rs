@@ -117,7 +117,7 @@ pub(crate) fn ToastsArea() -> impl IntoElement {
                 ),
         )
         .child(caption(
-            "The newest toast shows nearest the corner; the stack expands under the pointer, pausing the timeouts.",
+            "Newest nearest the corner; the queue line reads oldest to newest, each toast with its own timeout — or none, until its action.",
         ))
         .child(status_line({ let s = queue_note; move || s.get() }))
         .child(toast_stack_host(

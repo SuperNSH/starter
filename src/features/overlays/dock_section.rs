@@ -199,7 +199,7 @@ pub(crate) fn dock_section() -> impl IntoElement {
                 ),
         )
         .child(caption(
-            "Drag a tab onto another group, or to a group's edge to split it; drag the docks' edges.",
+            "Drag a tab onto another group or a group's edge; the line below is the layout as data, updated by every edit and by Reset.",
         ))
         .child(
             view()

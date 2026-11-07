@@ -92,7 +92,7 @@ pub(crate) fn sheet_section() -> impl IntoElement {
         .child(overlay_switch("Push notifications", push))
         .child(overlay_switch("Mentions only", mentions))
         .child(caption(
-            "At desktop width it opens as a side panel; at phone width a bottom sheet with three detents and swipe-to-close.",
+            "A side panel at desktop width, a bottom sheet with three detents and swipe-to-close on the phone; the tall detent reveals rows the shorter ones hide.",
         ))
         .child(caption(move || format!("Detent step {} of 0–2", detent.get())))
         .child(status_line({ let s = status; move || s.get() }))
@@ -129,6 +129,9 @@ fn sheet_host(
         let side = side.get();
         let is_bottom = side == Placement::Bottom;
         sheet()
+            // The sheet is controlled: the region mounts it while `open`
+            // holds, and the component reads the same value.
+            .open(move || Some(open.get()))
             .side(side)
             .popup_style(move |s| panel_look(side, detent, s))
             .backdrop_style(scrim)

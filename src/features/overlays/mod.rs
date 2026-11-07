@@ -73,6 +73,59 @@ pub(crate) fn scrim(s: StyleRefinement) -> StyleRefinement {
     ui_popups::popup_backdrop(s)
 }
 
+/// Where this page deliberately goes past `crate::ui`'s wrappers, kept as
+/// local builders until the extensions below exist (one block each: what
+/// the section needs, what the wrapper lacks, the extension that would
+/// close the gap):
+///
+/// - Menu entries with sections and shortcuts. Needs: grouped rows with
+///   section labels, a trailing shortcut hint per row, and an explicit
+///   accessibility label for rows whose visible text is "label + hint".
+///   `ui::popups::menu_entry` styles one flat row from its label alone and
+///   has no shortcut slot, no label override and no group labels. An
+///   `accessibility_label` parameter, an optional `shortcut: &str` and a
+///   plain `group_label` helper would let the sections adopt it.
+/// - Sheet with detents. Needs: a bottom panel whose height follows a
+///   detent signal (fractions of the viewport) and swipe-to-close on the
+///   bottom side only. `ui::sheet::sheet_of` fixes the panel at
+///   `w(320).h_full()` for every side, ignores detents, never enables
+///   `close_on_swipe`, and folds the close reason away (its
+///   `on_open_change` wrapper drops `OpenChangeReason`, so a section
+///   cannot tell Escape from a scrim press). A `height`/`max_height`
+///   parameter for `Placement::Bottom`, a `close_on_swipe` flag and a
+///   reason-preserving `on_open_change` would close the gap.
+/// - Toasts with actions and distinct timeouts. Needs: per-toast timeout
+///   (some none), an action button that dismisses and reports, a close
+///   button, and a readable queue order line. `ui::toast::notify` queues
+///   bare strings with a fixed 5-second timeout into the app-level
+///   `ToastHost`, with no action, no close, no per-toast options and no
+///   queue view. `ToastOptions`-carrying messages (`timeout`, `action`)
+///   and a section-scoped host would close the gap; the app-level host
+///   stays the shell's.
+/// - Dock area with testable tabs and real panels. Needs: per-tab test ids
+///   (`tab-<key>`) for drag tests, rich per-panel content (views, not a
+///   text string), and the layout reported with the status the section
+///   shows. `ui::dock::dock_workspace` renders no test ids and takes
+///   `content: SharedString` per panel. A `test_id` on rendered tabs and a
+///   render-closure content field would close the gap.
+/// - Resizable panels with controlled sizes and bounds. Needs: per-panel
+///   `min_size`/`max_size`, the sizes held in the section's signal that
+///   step buttons also write, and reactive re-application. `ui::resizable::
+///   h_resizable_panels` fixes `min_size(80)`, takes no initial/controlled
+///   sizes, and reports only through its own signal. `min_size`/`max_size`
+///   on the panel spec plus accepting a controlled `sizes` signal would
+///   close the gap.
+/// - Editor with an edit hook. Needs: uncontrolled `default_value` text,
+///   bounded growth (`min_rows`/`max_rows`) and an edit counter fed by
+///   `on_change`. `ui::editor::editor_of` controls `value` and offers no
+///   change hook. An optional `on_change` callback and `default_value`
+///   when no signal is given would close the gap.
+/// - Diff with a layout toggle and stats. Needs: side-by-side and unified
+///   layouts switched from the section, and the diff's stats for the
+///   status line. `ui::editor::diff_view_of` fixes `DiffLayout::Unified`
+///   and drops `on_stats_change`. A `layout` parameter and a stats hook
+///   would close the gap.
+///
 /// Secondary reading inside a section, static or following a signal.
 pub(crate) fn caption(note: impl IntoReactive<SharedString> + 'static) -> impl IntoElement {
     text(note)
