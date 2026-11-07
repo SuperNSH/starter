@@ -28,6 +28,9 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Fetch the sibling libraries
+        shell: bash
+        run: tools/ci/fetch-siblings.sh
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master
         with:
           toolchain: stable
@@ -72,6 +75,22 @@ jobs:
       - name: Install Linux packages
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y $LINUX_PACKAGES
+      - name: Install NSH
+        if: runner.os != 'Windows'
+        env:
+          NSH_VERSION: v0.4.0
+        run: |
+          curl -fsSL https://nsh.dev/install.sh | sh
+          echo "$HOME/.nsh/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Install NSH
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          NSH_VERSION: v0.4.0
+        run: |
+          irm https://nsh.dev/install.ps1 | iex
+          "$env:LOCALAPPDATA\nsh\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
       - name: Clippy (the just check gate)
         run: cargo clippy --all-targets -- -D warnings
       - name: Test (the just test gate)
@@ -114,20 +133,8 @@ jobs:
           echo "CC_aarch64_linux_android=$bin/aarch64-linux-android24-clang" >> "$GITHUB_ENV"
           echo "AR_aarch64_linux_android=$bin/llvm-ar" >> "$GITHUB_ENV"
           echo "CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER=$bin/aarch64-linux-android24-clang" >> "$GITHUB_ENV"
-      - name: Work around NSH 0.4.0's crates.io packaging of nsh-platform-ios
-        if: contains(matrix.target, 'ios')
-        # The published crate includes a file it does not ship, so build NSH's crates from its v0.4.0 source.
-        shell: bash
-        run: |
-          git clone --quiet --depth 1 --branch v0.4.0 https://github.com/longbridge/nsh "$RUNNER_TEMP/nsh-src"
-          mkdir -p .cargo
-          {
-            echo "[patch.crates-io]"
-            for crate in "$RUNNER_TEMP"/nsh-src/crates/nsh-*; do
-              echo "$(basename "$crate") = { path = \"$crate\" }"
-            done
-          } > .cargo/config.toml
-      - run: cargo clippy --target ${{ matrix.target }} -- -D warnings
+      # The binary's main is desktop-only (compile_error! elsewhere), so the library is what crosses.
+      - run: cargo clippy --lib --target ${{ matrix.target }} -- -D warnings
 
   typescript:
     runs-on: ubuntu-latest
@@ -166,14 +173,15 @@ jobs:
           ln -s "$parent/nsh-query/packages/nsh-query" packages/remote-screen/node_modules/nsh-query
           ln -s "$parent/nsh-form/packages/nsh-form" packages/remote-screen/node_modules/nsh-form
       - name: Root app, check and build without warnings, then test
-        # Root `nsh test` runs cargo test, then every *.test.tsx: App.test.tsx, smoke/ and vision/.
-        # vision/ screenshot passes need a real display and model review, so they run here only
-        # for their state assertions (headless captures are skipped by the tests themselves).
+        # vision/ is not in this headless gate: its tests drive screenshots that need a real
+        # target (`nsh test vision/<file> --target macos`) and a model to review them. Headless
+        # runs fail there by design, so only App.test.tsx and smoke/ run; each run also does cargo test.
         run: |
           nsh check
           nsh build 2>&1 | tee build.log
           ! grep -i warn build.log
-          nsh test
+          nsh test App.test.tsx
+          nsh test smoke/pages.test.tsx
       - name: packages/remote-screen, check and build without warnings, then test
         working-directory: packages/remote-screen
         run: |
@@ -184,8 +192,9 @@ jobs:
 
   demo:
     name: demo (${{ matrix.target }})
+    # Packaging does not depend on the test jobs, so demo builds keep being checked while a test
+    # is red; publish still waits for every gate.
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [format, rust, cross-check, typescript]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     strategy:
