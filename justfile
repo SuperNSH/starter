@@ -23,10 +23,13 @@ test:
 test-tsx:
     cd packages/remote-screen && nsh check && nsh build && nsh test
 
-# Whole-tree headless smoke gate: the root's `nsh test` (which runs
-# `cargo test`, then every *.test.tsx) plus the remote-screen package gates.
+# Headless smoke gate: the root's App test plus the per-page smoke suite,
+# and the remote-screen package gates. vision/ is excluded on purpose: its
+# tests drive screenshots, which need a real target (`--target`) and a
+# reviewing model, so they fail a headless run by design.
 smoke:
-    nsh test
+    nsh test App.test.tsx
+    nsh test smoke/pages.test.tsx
     just test-tsx
 
 # Desktop run in the AppKit development host, with hot reload.

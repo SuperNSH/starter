@@ -26,6 +26,17 @@ fn nsh(args: &[&str]) -> String {
     String::from_utf8_lossy(&out.stdout).to_string()
 }
 
+/// Symlink creation is a per-OS API; the bundler needs the same link either way.
+#[cfg(unix)]
+fn make_node_modules_link(target: &str, link: &std::path::Path) {
+    std::os::unix::fs::symlink(target, link).unwrap();
+}
+
+#[cfg(windows)]
+fn make_node_modules_link(target: &str, link: &std::path::Path) {
+    std::os::windows::fs::symlink_dir(target, link).unwrap();
+}
+
 #[test]
 fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
     let dir = std::env::temp_dir().join(format!("nsh-starter-remote-{}", std::process::id()));
@@ -58,8 +69,9 @@ fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
     std::fs::create_dir_all(&modules).unwrap();
     for name in ["nsh-query", "nsh-form"] {
         let target = format!("../../../../{name}/packages/{name}");
-        if modules.join(name).symlink_metadata().is_err() {
-            std::os::unix::fs::symlink(target, modules.join(name)).unwrap();
+        let link = modules.join(name);
+        if link.symlink_metadata().is_err() {
+            make_node_modules_link(&target, &link);
         }
     }
 

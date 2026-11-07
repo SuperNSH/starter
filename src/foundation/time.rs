@@ -1,8 +1,6 @@
 //! The app's time: thin readers over the engine's clock, so everything
 //! here follows a test's manual clock instead of the wall.
 
-use std::time::Instant;
-
 use nsh_core::time;
 
 /// Milliseconds since the Unix epoch on the engine's clock (a test's
@@ -11,13 +9,16 @@ pub fn now_ms() -> f64 {
     time::unix_ms()
 }
 
-/// A monotonic point on the engine's clock, for measuring durations.
-pub fn now() -> Instant {
+/// A monotonic point on the engine's clock, for measuring durations. The
+/// engine's own `Instant`, not `std`'s: on wasm the engine type is a
+/// `Duration`-backed struct, so `std::time::Instant` does not exist there.
+pub fn now() -> time::Instant {
     time::now()
 }
 
-/// Milliseconds from `start` to now.
-pub fn elapsed_ms(start: Instant) -> f64 {
+/// Milliseconds from `start` to now (`elapsed` is a `std::time::Duration`
+/// on every target, native and wasm alike).
+pub fn elapsed_ms(start: time::Instant) -> f64 {
     start.elapsed().as_secs_f64() * 1000.0
 }
 
