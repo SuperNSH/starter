@@ -34,7 +34,23 @@ fn make_node_modules_link(target: &str, link: &std::path::Path) {
 
 #[cfg(windows)]
 fn make_node_modules_link(target: &str, link: &std::path::Path) {
-    std::os::windows::fs::symlink_dir(target, link).unwrap();
+    // A junction, not a symlink: it needs no privilege and resolvers treat
+    // it as a plain directory. NTFS stores the target verbatim, so a
+    // forward-slash or relative target can fail to resolve; mklink reads
+    // its target from the working directory anyway, hence the absolute path.
+    let base = link.parent().expect("the link always sits in node_modules");
+    let abs = base.join(target).to_string_lossy().replace('/', "\\");
+    let link = link.as_os_str().to_string_lossy().replace('/', "\\");
+    let out = Command::new("cmd")
+        .args(["/C", "mklink", "/J", &link, &abs])
+        .output()
+        .expect("cmd is on PATH");
+    assert!(
+        out.status.success(),
+        "mklink /J failed: {} {}",
+        String::from_utf8_lossy(&out.stdout),
+        String::from_utf8_lossy(&out.stderr)
+    );
 }
 
 #[test]
