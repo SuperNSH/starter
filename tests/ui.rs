@@ -213,6 +213,18 @@ fn the_full_dialog_closes_from_its_own_button() -> Result<(), String> {
 }
 
 #[test]
+fn a_nav_row_press_selects_it() -> Result<(), String> {
+    let mut app = start();
+    app.wait_for("text:Navigation rows")?;
+    app.wait_for("text:Home row selected")?;
+    app.press("id:nav-inbox")?;
+    app.wait_for("text:Inbox row selected")?;
+    app.press("id:nav-reports")?;
+    app.wait_for("text:Reports row selected")?;
+    Ok(())
+}
+
+#[test]
 fn the_gallery_renders_at_desktop_width() -> Result<(), String> {
     let mut app = start_at_desktop_width();
     for section in ["Buttons", "Controls", "Overlays", "Surfaces", "Data views"] {

@@ -42,6 +42,7 @@ pub fn ui_gallery_page() -> impl IntoElement {
                     .child(fields_section())
                     .child(controls_section())
                     .child(selection_section())
+                    .child(nav_rows_section())
                     .child(pickers_section())
                     .child(overlays_section(
                         open_dialog,
@@ -88,7 +89,7 @@ pub fn ui_gallery_page() -> impl IntoElement {
                         button::ButtonSize::Small,
                         false,
                         None,
-                        move || {},
+                        move || open_full_dialog.set(false),
                     ))
                     .into_element()
             },
@@ -453,6 +454,52 @@ fn selection_section() -> impl IntoElement {
                         2,
                     )),
             ),
+    )
+}
+
+fn nav_rows_section() -> impl IntoElement {
+    let which = signal(SharedString::from("Home"));
+    layout::section(
+        "Navigation rows",
+        view()
+            .flex_col()
+            .gap_2()
+            .children([
+                crate::ui::nav::nav_row(
+                    "Home",
+                    None,
+                    computed(move || which.get().as_ref() == "Home"),
+                    "nav-home",
+                    move || which.set(SharedString::from("Home")),
+                )
+                .into_element(),
+                crate::ui::nav::nav_row(
+                    "Inbox",
+                    Some(view().child(layout::badge("4", layout::BadgeTone::Primary))),
+                    computed(move || which.get().as_ref() == "Inbox"),
+                    "nav-inbox",
+                    move || which.set(SharedString::from("Inbox")),
+                )
+                .into_element(),
+                crate::ui::nav::nav_row(
+                    "Reports",
+                    Some(crate::ui::nav::chevron()),
+                    computed(move || which.get().as_ref() == "Reports"),
+                    "nav-reports",
+                    move || which.set(SharedString::from("Reports")),
+                )
+                .into_element(),
+                crate::ui::nav::nav_row(
+                    "Archive",
+                    Some(crate::ui::nav::chevron()),
+                    false,
+                    "nav-archive",
+                    || (),
+                )
+                .disabled(true)
+                .into_element(),
+            ])
+            .child(text::muted(move || format!("{} row selected", which.get()))),
     )
 }
 

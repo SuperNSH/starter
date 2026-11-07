@@ -63,8 +63,7 @@ pub(crate) fn hover_card_section() -> impl IntoElement {
                     hover_card()
                         .open(move || Some(open.get()))
                         .on_open_change({
-                            let status = status;
-                            move |e: &HoverCardEvent| {
+                                                        move |e: &HoverCardEvent| {
                                 if let HoverCardEvent::OpenChange(next, reason) = e {
                                     // Controlled: the card follows the
                                     // pointer's and focus's requests.
@@ -194,7 +193,6 @@ pub(crate) fn tooltip_section() -> impl IntoElement {
                                 .placement(Placement::Top)
                                 .open(move || Some(shown.get()))
                                 .on_open_change({
-                                    let status = status;
                                     move |e: &TooltipEvent| {
                                         if let TooltipEvent::OpenChange(next, _) = e {
                                             // Hover requests follow through;
@@ -231,7 +229,6 @@ pub(crate) fn tooltip_section() -> impl IntoElement {
                         ),
                 )
                 .child(overlay_button("Toggle hint", ButtonVariant::Outline, {
-                    let status = status;
                     move || {
                         // The app-driven open is the touch path; it
                         // reports like the pointer path does.
@@ -248,7 +245,7 @@ pub(crate) fn tooltip_section() -> impl IntoElement {
             "Hover the Save button for the hint; touch screens show it only when the app opens it.",
         ))
         .child(status_line({
-            let s = status.clone();
+            let s = status;
             move || s.get()
         }))
 }

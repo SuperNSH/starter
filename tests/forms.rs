@@ -3,6 +3,22 @@
 //! draft autosave and restore, the dirty guard, the keyboard flow and the
 //! settings form's load and save. Everything runs on a manual clock, with
 //! the fake server's latency moved by `run_for`, and no network.
+//!
+//! Break seen — each test was failed once on purpose with the break named
+//! here, then the code restored:
+//!
+//! | test | break seen |
+//! |---|---|
+//! | `an_error_shows_after_blur_not_while_typing` | the email format rule removed |
+//! | `the_username_check_debounces_and_drops_stale_answers` | `USERNAME_DEBOUNCE` raised to 10 s |
+//! | `a_taken_username_reports_after_the_check` | `check_username` always answered `None` |
+//! | `a_taken_answer_shows_while_the_field_keeps_focus` | the hint fell back to "Available" instead of the mirrored answer |
+//! | `submitting_focuses_the_first_invalid_field` | the submit button's `on_press` did nothing |
+//! | `a_server_error_lands_on_its_field_and_clears_on_edit` | the rejected code returned `SubmitError::form`, not `::field` |
+//! | `submitting_creates_the_account` | `fake_server` always returned `Err` |
+//! | `the_draft_autosaves_and_restores` | the draft restore skipped; separately, `password` kept in the draft for the exclusion assertion |
+//! | `the_dirty_guard_blocks_back_until_discarded` | `pop_on_back(true)` constant |
+//! | `settings_loads_saves_and_guards` | the settings `form.load` skipped |
 
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, SystemTime};
@@ -187,6 +203,20 @@ fn submitting_focuses_the_first_invalid_field() {
 }
 
 #[test]
+fn a_taken_answer_shows_while_the_field_keeps_focus() {
+    let mut app = start(seeded_storage(&[]));
+    app.type_text("id:signup-username", "grace").unwrap();
+    // The raw answer lands while the field still holds the focus; the
+    // field's own error waits for blur, the hint must not say Available.
+    app.wait_for("That username is taken").unwrap();
+    assert!(
+        !app.shows("Available"),
+        "a taken username was offered as available: {:?}",
+        app.screen().texts()
+    );
+}
+
+#[test]
 fn a_server_error_lands_on_its_field_and_clears_on_edit() {
     let mut app = start(seeded_storage(&[]));
     fill_valid(&mut app, "000000");
@@ -214,19 +244,32 @@ fn submitting_creates_the_account() {
     app.wait_for("Account created for ada@example.com").unwrap();
 }
 
+/// A draft with the date and time filled, for the picker round-trip.
+const SEEDED_DRAFT: &str = r#"{"email":"","username":"","phone":"","referral":"","birth_date":"2011-11-11","meeting_time":"09:30","region":null,"interests":[],"plan":null,"terms":false,"newsletter":false,"age":21.0,"favorite_color":"","budget":null,"bio":""}"#;
+
 #[test]
 fn the_draft_autosaves_and_restores() {
     let storage = seeded_storage(&[]);
     {
         let mut app = start(storage.clone());
+        app.press("text:Pick a date").unwrap();
+        app.press("label:2026-10-14").unwrap();
         app.type_text("id:signup-email", "ada@example.com").unwrap();
+        app.type_text("id:signup-password", "correct horse")
+            .unwrap();
         app.wait_until("the draft reached storage", Duration::from_secs(2), |_| {
             storage
                 .entries()
                 .get(DRAFT_KEY)
-                .is_some_and(|json| json.contains("ada@example.com"))
+                .is_some_and(|json| json.contains("ada@example.com") && json.contains("2026-10-14"))
         })
         .unwrap();
+        // Credentials are not a draft's business.
+        let json = storage.entries().get(DRAFT_KEY).cloned().unwrap();
+        assert!(
+            !json.contains("correct horse"),
+            "the draft stored the password: {json}"
+        );
     }
     let app = start(storage);
     let restored = app.screen().input_text("id:signup-email").unwrap();
@@ -234,6 +277,21 @@ fn the_draft_autosaves_and_restores() {
         restored,
         Some("ada@example.com"),
         "the draft did not come back in a fresh app"
+    );
+    assert!(
+        app.shows("2026/10/14"),
+        "the picked birth date did not come back"
+    );
+}
+
+#[test]
+fn the_seeded_draft_restores_the_pickers() {
+    let mut app = start(seeded_storage(&[(DRAFT_KEY, SEEDED_DRAFT)]));
+    app.wait_for("2011/11/11").unwrap();
+    assert!(
+        app.shows("09") && app.shows("30"),
+        "the seeded meeting time did not come back: {:?}",
+        app.screen().texts()
     );
 }
 
@@ -256,11 +314,9 @@ fn the_dirty_guard_blocks_back_until_discarded() {
         "discard kept the typed email"
     );
     assert!(
-        !storage
-            .entries()
-            .get(DRAFT_KEY)
-            .is_some_and(|json| json.contains("ada@example.com")),
-        "discard left the typed email in the stored draft"
+        !storage.entries().contains_key(DRAFT_KEY),
+        "discard left a draft behind: {:?}",
+        storage.entries().get(DRAFT_KEY)
     );
     // Clean now, the same back pops, and the feature's stack empties.
     app.back().unwrap();

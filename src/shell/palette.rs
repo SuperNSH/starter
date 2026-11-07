@@ -74,8 +74,10 @@ pub fn palette_dialog() -> AnyElement {
     when(
         move || open.with(|open| open.0),
         || {
+            // Wrapper gap: ui::dialog_of lays out a full page, so a
+            // floating card over a scrim keeps nsh_base::dialog here.
             dialog()
-                .on_cancel(close)
+                .on_cancel(|| {})
                 .flex_1()
                 .flex_col()
                 .items_center()

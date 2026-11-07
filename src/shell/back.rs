@@ -62,7 +62,7 @@ pub fn install() {
                 true
             }
             BackStep::AskExit => {
-                let _ = prompt;
+                prompt().set(PromptOpen(true));
                 true
             }
             BackStep::Exit => false,
@@ -76,6 +76,8 @@ pub fn exit_prompt_dialog() -> AnyElement {
     when(
         move || open.with(|open| open.0),
         || {
+            // Wrapper gap: ui::dialog_of lays out a full page, so the
+            // centered card over a scrim keeps nsh_base::dialog here.
             dialog()
                 .close_on_escape(false)
                 .on_cancel(move || prompt().set(PromptOpen(false)))

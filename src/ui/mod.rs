@@ -29,6 +29,7 @@ pub mod field;
 pub mod gallery;
 pub mod layout;
 pub mod link;
+pub mod nav;
 pub mod number;
 pub mod pagination;
 pub mod pickers;

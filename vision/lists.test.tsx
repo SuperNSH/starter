@@ -11,7 +11,7 @@ const VIEWS: [string, string, string][] = [
   ["tree", "Tree", "Nothing selected"],
   ["calendar", "Calendar", "November 2026"],
   ["grid", "Grid", "Jump to card 1500"],
-  ["chat", "Chat", "msg 260"],
+  ["chat", "Chat", "msg 280"],
   ["carousel", "Carousel", "Slide 1 of 5"],
   ["pager", "Pages", "Page 1 of 50"],
 ];

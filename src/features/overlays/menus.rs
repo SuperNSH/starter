@@ -2,10 +2,12 @@
 //! shortcuts, a checkable item and a submenu) and `ContextMenu` (a file
 //! card's commands at the pointer or a held finger).
 
-use super::{ButtonVariant, caption, overlay_button, popup_surface, scrim, shortcut, status_line};
+use super::{
+    ButtonVariant, caption, overlay_button, popup_surface, scrim, shortcut, status_line, text_field,
+};
 use nsh_base::{
-    MenuItemElement, MenuSeparatorElement, OpenChangeReason, PopoverEvent, context_menu, input,
-    menu, menu_item, menu_separator, popover, submenu, theme,
+    MenuItemElement, MenuSeparatorElement, OpenChangeReason, PopoverEvent, context_menu, menu,
+    menu_item, menu_separator, popover, submenu, theme,
 };
 use nsh_core::prelude::*;
 
@@ -167,14 +169,9 @@ pub(crate) fn popover_section() -> impl IntoElement {
                                 .flex_row()
                                 .gap_2()
                                 .child(
-                                    input()
+                                    text_field(invite, "Add people by email")
                                         .test_id("invite-field")
-                                        .value(invite.clone())
-                                        .placeholder("Add people by email")
-                                        .flex_1()
-                                        .on_change(move |value: &str| {
-                                            invite.set(value.to_owned())
-                                        }),
+                                        .flex_1(),
                                 )
                                 .child(
                                     overlay_button("Invite", ButtonVariant::Outline, move || {
@@ -246,8 +243,7 @@ pub(crate) fn menu_section() -> impl IntoElement {
                         menu_item()
                             .accessibility_label("Rename")
                             .on_select({
-                                let last = last;
-                                move || last.set("Renamed".to_owned())
+                                                                move || last.set("Renamed".to_owned())
                             }),
                     )
                     .child(row_label("Rename…"))
@@ -258,8 +254,7 @@ pub(crate) fn menu_section() -> impl IntoElement {
                         menu_item()
                             .accessibility_label("Duplicate")
                             .on_select({
-                                let last = last;
-                                move || last.set("Duplicated".to_owned())
+                                                                move || last.set("Duplicated".to_owned())
                             }),
                     )
                     .child(row_label("Duplicate")),
@@ -304,8 +299,7 @@ pub(crate) fn menu_section() -> impl IntoElement {
                                 menu_item()
                                     .accessibility_label("Export as Markdown")
                                     .on_select({
-                                        let last = last;
-                                        move || last.set("Exported Markdown".to_owned())
+                                                                                move || last.set("Exported Markdown".to_owned())
                                     }),
                             )
                             .child(row_label("Markdown")),
@@ -315,8 +309,7 @@ pub(crate) fn menu_section() -> impl IntoElement {
                                 menu_item()
                                     .accessibility_label("Export as HTML")
                                     .on_select({
-                                        let last = last;
-                                        move || last.set("Exported HTML".to_owned())
+                                                                                move || last.set("Exported HTML".to_owned())
                                     }),
                             )
                             .child(row_label("HTML")),
@@ -328,8 +321,7 @@ pub(crate) fn menu_section() -> impl IntoElement {
                         menu_item()
                             .accessibility_label("Delete")
                             .on_select({
-                                let last = last;
-                                move || last.set("Deleted".to_owned())
+                                                                move || last.set("Deleted".to_owned())
                             }),
                     )
                     .child(
@@ -383,10 +375,11 @@ pub(crate) fn context_menu_section() -> impl IntoElement {
                         .child(caption("Right-click here, or hold a finger.")),
                 )
                 .child(
-                    menu_row(menu_item().accessibility_label("Copy").on_select({
-                        let last = last;
-                        move || last.set("Copied".to_owned())
-                    }))
+                    menu_row(
+                        menu_item()
+                            .accessibility_label("Copy")
+                            .on_select(move || last.set("Copied".to_owned())),
+                    )
                     .child(row_label("Copy"))
                     .child(shortcut("⌘C")),
                 )
@@ -394,20 +387,13 @@ pub(crate) fn context_menu_section() -> impl IntoElement {
                     menu_row(
                         menu_item()
                             .accessibility_label("Move to archive")
-                            .on_select({
-                                let last = last;
-                                move || last.set("Moved to archive".to_owned())
-                            }),
+                            .on_select(move || last.set("Moved to archive".to_owned())),
                     )
                     .child(row_label("Move to archive…")),
                 )
                 .child(separator())
                 .child(
-                    menu_row(menu_item().on_select({
-                        let last = last;
-                        move || last.set("Deleted".to_owned())
-                    }))
-                    .child(
+                    menu_row(menu_item().on_select(move || last.set("Deleted".to_owned()))).child(
                         text("Delete")
                             .text_sm()
                             .text_color(move || theme().destructive),
@@ -418,7 +404,7 @@ pub(crate) fn context_menu_section() -> impl IntoElement {
             "The menu opens where the pointer was; on touch screens it is a sheet.",
         ))
         .child(status_line({
-            let s = last.clone();
+            let s = last;
             move || s.get()
         }))
 }

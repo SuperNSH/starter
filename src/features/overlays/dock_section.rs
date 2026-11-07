@@ -176,14 +176,12 @@ pub(crate) fn dock_section() -> impl IntoElement {
                 .gap_2()
                 .child(
                     overlay_button("Reset layout", ButtonVariant::Outline, {
-                        let layout = layout;
-                        move || layout.set(initial_layout())
+                                                move || layout.set(initial_layout())
                     }),
                 )
                 .child(
                     overlay_button("Toggle files", ButtonVariant::Ghost, {
-                        let area = area;
-                        move || {
+                                                move || {
                             if let Some(api) = area.api::<DockAreaApi>() {
                                 api.toggle_dock(DockPlacement::Left);
                             }
@@ -192,8 +190,7 @@ pub(crate) fn dock_section() -> impl IntoElement {
                 )
                 .child(
                     overlay_button("Toggle terminal", ButtonVariant::Ghost, {
-                        let area = area;
-                        move || {
+                                                move || {
                             if let Some(api) = area.api::<DockAreaApi>() {
                                 api.toggle_dock(DockPlacement::Bottom);
                             }
@@ -220,24 +217,20 @@ pub(crate) fn dock_section() -> impl IntoElement {
                         .flex_1()
                         .layout(move || Some(layout.get()))
                         .on_layout_change({
-                            let layout = layout;
-                            let status = status;
-                            move |next: &DockAreaLayout| {
+                                                                                    move |next: &DockAreaLayout| {
                                 status.set(describe(&next.center));
                                 layout.set(next.clone());
                             }
                         })
                         .on_panel_active_change({
-                            let status = status;
-                            move |e: &DockAreaEvent| {
+                                                        move |e: &DockAreaEvent| {
                                 if let DockAreaEvent::PanelActiveChange(panel, true) = e {
                                     status.set(format!("Showing {}", title(panel.as_str())));
                                 }
                             }
                         })
                         .on_panel_remove({
-                            let status = status;
-                            move |panel: &PanelId| {
+                                                        move |panel: &PanelId| {
                                 status.set(format!("Closed {}", title(panel.as_str())));
                             }
                         })

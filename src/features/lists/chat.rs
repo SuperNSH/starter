@@ -2,9 +2,17 @@
 //! up loads older pages at the visual top; scrolling to the bottom loads
 //! newer messages at the start, and the keys keep the visible messages in
 //! place while they arrive.
+//!
+//! The window the chat opens with is ids `WINDOW_BOTTOM..=WINDOW_TOP`
+//! (240..=280) of a room that runs `OLDEST..=ROOM_END` (1..=300): older
+//! pages 239 and below and newer pages 281 and above both exist to load,
+//! so neither loader starts exhausted. `older_page` and `newer_page` are
+//! the only place the page math lives, so the loads stay contiguous with
+//! the window (no gap, no duplicate) by construction.
 
 use crate::ui::button::{ButtonSize, ButtonVariant, button_with};
-use nsh_base::{input, theme};
+use crate::ui::field::text_field;
+use nsh_base::theme;
 use nsh_core::{element::SubmitBehavior, prelude::*};
 
 use super::{heading, note};
@@ -20,18 +28,20 @@ const LINES: [&str; 6] = [
 ];
 
 /// How many messages a load brings, at either end.
-const PAGE: u32 = 15;
+pub const PAGE: u32 = 15;
 
-/// The newest id the room's history reaches: loading newer stops here.
-const NEWEST: u32 = 260;
+/// The oldest id the room's history reaches.
+pub const OLDEST: u32 = 1;
 
-/// The oldest id the room's history reaches: loading older stops here.
-const OLDEST: u32 = 1;
+/// The newest id the room's history reaches at first.
+pub const ROOM_END: u32 = 300;
 
-/// The ids the chat opens with: 200 down to 81, mid-history, far enough
-/// from both ends that opening loads nothing.
-const FIRST_ID: u32 = 200;
-const LAST_ID: u32 = 81;
+/// The newest id the chat opens with; 281..=ROOM_END load at the start.
+pub const WINDOW_TOP: u32 = 280;
+
+/// The oldest id the chat opens with; OLDEST..=WINDOW_BOTTOM-1 load at
+/// the top.
+pub const WINDOW_BOTTOM: u32 = 240;
 
 /// One message. `id` orders the room: higher is newer.
 #[derive(Clone, PartialEq)]
@@ -48,6 +58,23 @@ fn history(id: u32) -> Message {
         body: LINES[(id as usize) % LINES.len()].to_owned(),
         mine: id.is_multiple_of(3),
     }
+}
+
+/// The ids one older load appends: `PAGE` ids ending just below `held`
+/// (the oldest id the window holds, already in it), never past
+/// [`OLDEST`](OLDEST). Newest-first, the order an append needs.
+pub fn older_page(held: u32) -> Vec<u32> {
+    let first = held.saturating_sub(PAGE).max(OLDEST);
+    (first..held).rev().collect()
+}
+
+/// The ids one newer load prepends: `PAGE` ids starting just above
+/// `held` (the newest id the window holds, already in it), never past
+/// `ceiling` (the room's newest). Newest-first, the order a prepend
+/// needs.
+pub fn newer_page(held: u32, ceiling: u32) -> Vec<u32> {
+    let last = held.saturating_add(PAGE).min(ceiling);
+    ((held + 1)..=last).rev().collect()
 }
 
 /// A bubble: mine at the end in the accent, theirs at the start in a card,
@@ -92,44 +119,37 @@ fn bubble(message: Memo<Message>) -> impl IntoElement {
         )
 }
 
-/// The Chat demo: inverted, opened mid-history, loading at both ends.
+/// The Chat demo: inverted, opened on ids 240..=280 of 1..=300.
 #[component]
 pub fn ChatDemo() -> impl IntoElement {
     // The room's ids the window reaches at either end; the loaders stop at
     // the room's ends. These drive the loaders, nothing displays them.
-    let older_until = stored(LAST_ID);
-    let newer_until = stored(FIRST_ID);
-    let messages = signal((FIRST_ID..=NEWEST).rev().map(history).collect::<Vec<_>>());
+    let older_until = stored(WINDOW_BOTTOM);
+    let newer_until = stored(WINDOW_TOP);
+    // The room's newest id, grown by Receive; the start loader brings
+    // everything above `newer_until` up to it.
+    let received = stored(ROOM_END);
+    let messages = signal(
+        (WINDOW_BOTTOM..=WINDOW_TOP)
+            .rev()
+            .map(history)
+            .collect::<Vec<_>>(),
+    );
     let draft = signal(String::new());
-    // The room's newest id, grown by the Receive button once the start
-    // loader has caught up.
-    let received = stored(NEWEST);
-    let receive = move |_: &()| {
-        let id = received.with(|last| {
-            *last += 1;
-            *last
-        });
-        let body = LINES[(id as usize) % LINES.len()].to_owned();
-        messages.update(|m| {
-            m.insert(
-                0,
-                Message {
-                    id,
-                    body,
-                    mine: false,
-                },
-            )
-        });
-    };
     let send = move || {
         let body = draft.get_untracked().trim().to_owned();
         if body.is_empty() {
             return;
         }
         draft.set(String::new());
-        // A sent message is the newest: above whatever leads now.
+        // A sent message is in the window at once: above whatever leads,
+        // and the start loader's ceiling moves with it.
+        let id = received.with(|last| {
+            *last += 1;
+            *last
+        });
+        newer_until.with(|until| *until = id);
         messages.update(|m| {
-            let id = m.first().map_or(NEWEST, |m| m.id) + 1;
             m.insert(
                 0,
                 Message {
@@ -137,32 +157,38 @@ pub fn ChatDemo() -> impl IntoElement {
                     body,
                     mine: true,
                 },
-            );
+            )
+        });
+    };
+    // Receive grows the room only: the message arrives at the start when
+    // the user next approaches it, through the loader, like any chat.
+    let receive = move |_: &()| {
+        received.with(|last| {
+            *last += 1;
         });
     };
     // Scrolled to the visual top: older pages join at the end.
     let load_older = move |_: &()| {
-        let last = older_until.with(|until| *until);
-        if last <= OLDEST {
+        let held = older_until.with(|until| *until);
+        let page = older_page(held);
+        if page.is_empty() {
             return;
         }
-        let first = (last - PAGE + 1).max(OLDEST);
-        older_until.with(|until| *until = first);
-        let loaded: Vec<_> = (first..=last).rev().map(history).collect();
-        messages.update(|m| m.extend(loaded));
+        older_until.with(|until| *until = page[page.len() - 1]);
+        messages.update(|m| m.extend(page.into_iter().map(history)));
     };
     // Scrolled to the visual bottom: newer messages join at the start, and
     // the keys keep what is on screen where it is.
     let load_newer = move |_: &()| {
-        let last = newer_until.with(|until| *until);
-        if last >= NEWEST {
+        let ceiling = received.with(|last| *last);
+        let held = newer_until.with(|until| *until);
+        let page = newer_page(held, ceiling);
+        if page.is_empty() {
             return;
         }
-        let next = (last + PAGE).min(NEWEST);
-        newer_until.with(|until| *until = next);
-        let loaded: Vec<_> = (last + 1..=next).rev().map(history).collect();
+        newer_until.with(|until| *until = page[0]);
         messages.update(|m| {
-            m.splice(0..0, loaded);
+            m.splice(0..0, page.into_iter().map(history));
         });
     };
     let list = element_ref();
@@ -222,22 +248,12 @@ pub fn ChatDemo() -> impl IntoElement {
                     move || list.scroll_to_index(0, percentage(0.0), px(0.0), false),
                 ))
                 .child(
-                    input()
+                    text_field(draft, "Message")
                         .test_id("chat-draft")
-                        .value(move || draft.get())
-                        .on_change(move |text: &str| draft.set(text.to_owned()))
                         .on_submit(move |_: &str| send())
                         .submit_behavior(SubmitBehavior::Submit)
-                        .placeholder("Message")
-                        .placeholder_color(move || color(theme().muted_foreground))
                         .flex_1()
                         .h(px(40.0))
-                        .px_3()
-                        .text_sm()
-                        .text_color(move || theme().foreground)
-                        .bg(move || theme().card)
-                        .border_1()
-                        .border_color(move || theme().border)
                         .rounded_full(),
                 )
                 .child(button_with(

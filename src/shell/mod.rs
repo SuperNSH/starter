@@ -15,12 +15,13 @@ pub mod routes;
 pub mod status;
 pub mod undo;
 
-use nsh_base::{button, nav_stack, theme};
+use nsh_base::{nav_stack, theme};
 use nsh_core::prelude::*;
 
 use crate::{
     shell::routes::Route,
     ui::{
+        nav::nav_row,
         tab_bar::{mobile_tab_bar, tab_item},
         toast,
     },
@@ -80,15 +81,12 @@ fn phone_shell() -> AnyElement {
     // One past the tabs selects none (a route the bar does not show).
     let selected = signal(tabs.len() as u32);
     // The stack drives the tabs...
-    effect({
-        let selected = selected;
-        move || {
-            let at = tabs
-                .iter()
-                .position(|tab| *tab == nav::current())
-                .map_or(tabs.len() as u32, |at| at as u32);
-            selected.set(at);
-        }
+    effect(move || {
+        let at = tabs
+            .iter()
+            .position(|tab| *tab == nav::current())
+            .map_or(tabs.len() as u32, |at| at as u32);
+        selected.set(at);
     });
     // ...and the tabs drive the stack (a no-op when this effect itself
     // moved the selection, so the two never loop).
@@ -205,43 +203,20 @@ fn sidebar() -> impl IntoElement {
         )
 }
 
-/// A sidebar row: a raised fill while its page is on top, an accent fill
-/// under the pointer otherwise. The test id rides a wrapper, as a
-/// component element takes none of its own.
+/// A sidebar row: the ui row's selected fill while its page is on top.
+/// Hover is softened to half the accent at the call site: the default
+/// theme's `accent` and `secondary` are the same gray, so a full hover
+/// fill on another row read as a second selected pill in the vision pass
+/// (exactly one row carries the full pill at any time).
 fn sidebar_row(route: Route) -> AnyElement {
     let selected = move || nav::current() == route;
-    button()
-        .on_press(move || nav::open(route))
-        .selected(selected)
-        .selected_style(|s| s.bg(move || theme().secondary))
-        .hover(|s| s.bg(move || theme().accent))
-        .focus(|s| s.outline(px(2.0)).outline_color(move || theme().ring))
-        .h_9()
-        .flex_row()
-        .items_center()
-        .gap_2()
-        .px_3()
-        .rounded(move || theme().radius)
-        .child(
-            // The row's test id rides this view, inside the button: a
-            // press on it reaches the button, as a tap on a label does. A
-            // style keeps the view mounted: an unstyled one collapses
-            // into its parent and the id never mounts.
-            view()
-                .test_id(&format!("nav-{}", route.key()))
-                .flex_1()
-                .child(
-                    text(route.label())
-                        .text_sm()
-                        .number_of_lines(1)
-                        .text_color(move || {
-                            if selected() {
-                                theme().card_foreground
-                            } else {
-                                theme().muted_foreground
-                            }
-                        }),
-                ),
-        )
-        .into_element()
+    nav_row(
+        route.label_str(),
+        None,
+        selected,
+        route.nav_row_id(),
+        move || nav::open(route),
+    )
+    .hover(|s| s.bg(move || theme().accent.opacity(0.5)))
+    .into_element()
 }

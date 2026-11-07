@@ -13,59 +13,37 @@ mod panels;
 mod sheet_section;
 mod toasts;
 
-use nsh_base::{ButtonElement, button, sheet, switch, theme};
+use crate::ui::button as ui_button;
+use crate::ui::controls as ui_controls;
+use crate::ui::field as ui_field;
+use crate::ui::popups as ui_popups;
+use nsh_base::ButtonElement;
+use nsh_base::theme;
 use nsh_core::{element::StyleRefinement, prelude::*};
 
-/// A local pressable with the app's tokens, until `crate::ui` lands its
-/// `Button` wrapper (finding for the ui area).
+/// A section's button, forwarded to `crate::ui`'s with this area's
+/// variant names for the destructive commitment.
 pub(crate) fn overlay_button(
     label: &'static str,
     variant: ButtonVariant,
     on_press: impl Fn() + 'static,
 ) -> ButtonElement {
-    button()
-        .on_press(on_press)
-        .min_h_9()
-        .px_4()
-        .py_2()
-        .items_center()
-        .justify_center()
-        .rounded(move || theme().radius)
-        .transition_colors()
-        .when(variant == ButtonVariant::Primary, |b| {
-            b.bg(move || theme().primary)
-                .active(|s| s.bg(move || theme().primary.opacity(0.85)))
-        })
-        .when(variant == ButtonVariant::Outline, |b| {
-            b.border_1()
-                .border_color(move || theme().border)
-                .bg(move || theme().background)
-                .active(|s| s.bg(move || theme().accent))
-        })
-        .when(variant == ButtonVariant::Ghost, |b| {
-            b.active(|s| s.bg(move || theme().accent))
-        })
-        .when(variant == ButtonVariant::Destructive, |b| {
-            b.bg(move || theme().destructive)
-                .active(|s| s.bg(move || theme().destructive.opacity(0.85)))
-        })
-        .focus(|s| s.outline(px(2.0)).outline_color(move || theme().ring))
-        .disabled_style(|s| s.opacity(0.5))
-        .child(
-            text(label)
-                .text_sm()
-                .font_weight(FontWeight::MEDIUM)
-                .text_color(move || match variant {
-                    ButtonVariant::Primary => theme().primary_foreground,
-                    ButtonVariant::Destructive => theme()
-                        .color("destructive-foreground")
-                        .unwrap_or(theme().primary_foreground),
-                    _ => theme().foreground,
-                }),
-        )
+    ui_button::button_with(
+        label,
+        match variant {
+            ButtonVariant::Primary => ui_button::ButtonVariant::Primary,
+            ButtonVariant::Outline => ui_button::ButtonVariant::Outline,
+            ButtonVariant::Ghost => ui_button::ButtonVariant::Ghost,
+            ButtonVariant::Destructive => ui_button::ButtonVariant::Danger,
+        },
+        ui_button::ButtonSize::Medium,
+        false,
+        None,
+        on_press,
+    )
 }
 
-/// The variants [`overlay_button`] draws.
+/// The variants [`overlay_button`] forwards.
 #[derive(Clone, Copy, PartialEq)]
 pub(crate) enum ButtonVariant {
     Primary,
@@ -74,53 +52,25 @@ pub(crate) enum ButtonVariant {
     Destructive,
 }
 
-/// A labelled `Switch` with the app's tokens: the track and thumb draw
-/// nothing until styled, so the look lives here until `crate::ui` lands
-/// its `Switch` wrapper.
-pub(crate) fn overlay_switch(label: &'static str, on: Signal<bool>) -> nsh_base::SwitchElement {
-    switch()
-        .checked(on)
-        .on_change(move |next: &bool| on.set(*next))
-        .flex_row()
-        .items_center()
-        .gap_3()
-        .disabled_style(|s| s.opacity(0.5))
-        .track_style(|s| {
-            s.w(px(44.0))
-                .p(px(2.0))
-                .rounded_full()
-                .bg(move || theme().muted)
-                .transition_colors()
-                .checked(|s| s.bg(move || theme().primary))
-        })
-        .thumb_style(|s| {
-            s.size(px(20.0))
-                .rounded_full()
-                .bg(move || theme().background)
-                .shadow_sm()
-                .transition_transform()
-                .checked(|s| s.translate_x(px(20.0)))
-        })
-        .child(text(label).text_sm().text_color(move || theme().foreground))
+/// A section's switch row, forwarded to `crate::ui`.
+pub(crate) fn overlay_switch(label: &'static str, on: Signal<bool>) -> impl IntoElement {
+    ui_controls::switch_row(label, on)
 }
 
-/// The popup family's one surface treatment — background, hairline,
-/// radius, shadow — shared by menus, popovers and hover cards so they do
-/// not drift apart.
+/// A section's single-line field, `crate::ui`'s.
+pub(crate) fn text_field(value: Signal<String>, placeholder: impl Into<String>) -> nsh_base::Input {
+    ui_field::text_field(value, placeholder)
+}
+
+/// The popup family's one surface, `crate::ui`'s.
 pub(crate) fn popup_surface(s: StyleRefinement) -> StyleRefinement {
-    s.min_w(px(192.0))
-        .p_1()
-        .rounded(move || theme().radius)
-        .border_1()
-        .border_color(move || theme().border)
-        .bg(move || theme().popover)
-        .shadow_lg()
+    ui_popups::popup_surface(s)
 }
 
-/// A scrim over what a dialog or sheet covers, mixed from a token rather
-/// than a literal (finding for the ui area: a `backdrop` token).
+/// A scrim over what a dialog or sheet covers, `crate::ui`'s token-backed
+/// backdrop.
 pub(crate) fn scrim(s: StyleRefinement) -> StyleRefinement {
-    s.bg(move || theme().foreground.opacity(0.4))
+    ui_popups::popup_backdrop(s)
 }
 
 /// Secondary reading inside a section, static or following a signal.
@@ -192,54 +142,4 @@ pub fn overlays_page() -> impl IntoElement {
 #[component]
 pub fn OverlaysTestRoot() -> impl IntoElement {
     overlays_page()
-}
-
-/// A scratch root for probing the sheet's mount; removed with the probe
-/// that uses it.
-#[component]
-pub fn OverlaysScrollProbe() -> impl IntoElement {
-    let open = signal(false);
-    let side = if std::env::var("PROBE_SIDE").is_ok() {
-        Placement::Right
-    } else {
-        Placement::Bottom
-    };
-    view()
-        .flex_1()
-        .bg(move || theme().background)
-        .flex_col()
-        .child(
-            view()
-                .min_h_9()
-                .px_4()
-                .flex_row()
-                .items_center()
-                .bg(move || theme().primary)
-                .test_id("probe-open-sheet")
-                .role(AccessibilityRole::Button)
-                .on_press(move || open.set(true))
-                .child(text("Open sheet").text_sm()),
-        )
-        .child(when(open, {
-            let open = open;
-            move || {
-                sheet()
-                    .side(side)
-                    .popup_style(|s| s.bg(move || theme().background).flex_col().gap_3().p_5())
-                    .on_open_change({
-                        let open = open;
-                        move |e: &nsh_base::SheetEvent| {
-                            if let nsh_base::SheetEvent::OpenChange(false, _) = e {
-                                open.set(false);
-                            }
-                        }
-                    })
-                    .h(px(300.0))
-                    .child(
-                        text("Probe sheet body")
-                            .text_sm()
-                            .test_id("probe-sheet-body"),
-                    )
-            }
-        }))
 }

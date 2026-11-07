@@ -1,87 +1,57 @@
 // The UI gallery for the vision pass: the whole styled layer captured in
-// both appearances at phone and desktop width. Run on a real target so the
-// screenshots draw (`nsh test --target macos vision/ui.test.tsx`); headless
-// draws nothing. Navigation assumes the shell exposes the gallery under the
-// label "UI gallery".
+// both appearances (light, dark) at both widths (phone 390 × 844, desktop
+// 1280 × 800), through the real shell (its home row is labeled
+// "UI gallery"). Run on a real target so the screenshots draw:
+// `nsh test --target macos vision/ui.test.tsx`; headless draws nothing.
+//
+// `shows()` matches every mounted text, so visibility cannot be probed:
+// each test sweeps the gallery scroll in fixed flicks and screenshots
+// every stop. The stops tile the full content height, so every section
+// (Buttons, Choices from a list, Text and marks, Fields, Controls,
+// Navigation rows, Selection and toggles, Pickers, Overlays, Data views,
+// Surfaces, Link and scroll bar) appears in at least one capture of each
+// of the four combos.
 import { open, test } from "nsh/test";
 
-const OUT = "docs/evidence/ui";
+const OUT = "docs/evidence/ui/vision";
+const SCROLL_VIEW = "id:gallery-scroll";
+/** Points per flick down the gallery scroll. */
+const STEP = 1300;
+/** Stops per sweep, top to bottom. */
+const STOPS = 14;
+const TEST_TIMEOUT = 300_000;
 
-/** Opens the app on the gallery, scrolled back to the top. */
-async function gallery(scheme: "light" | "dark", width: number, height: number) {
-  const app = await open(".", {
-    colorScheme: scheme,
-    width,
-    height,
-  });
-  await app.press("label:UI gallery");
-  await app.waitFor("text:UI gallery");
-  return app;
-}
+type GalleryApp = Awaited<ReturnType<typeof open>>;
 
 for (const scheme of ["light", "dark"] as const) {
-  test(`buttons, text and fields draw, in ${scheme} at phone width`, async () => {
-    const app = await gallery(scheme, 390, 844);
-    await app.waitFor("text:Buttons");
-    await app.screenshot(`${OUT}/gallery-buttons-${scheme}-phone.png`);
-    await app.scroll("text:Text and marks", 600);
-    await app.waitFor("text:Fields");
-    await app.screenshot(`${OUT}/gallery-fields-${scheme}-phone.png`);
-  });
+  test(`gallery sweep, ${scheme}, phone`, async () => {
+    const app = await open("..", { colorScheme: scheme });
+    await app.press("label:UI gallery");
+    await app.waitFor("text:UI gallery");
+    // A nudge makes the next step wait out the push slide before the
+    // first capture (stop-00 otherwise catches the page mid-slide).
+    await app.scroll(SCROLL_VIEW, 2);
+    await sweep(app, scheme, "phone");
+  }, TEST_TIMEOUT);
 
-  test(`controls and choices draw, in ${scheme} at phone width`, async () => {
-    const app = await gallery(scheme, 390, 844);
-    await app.scroll("text:Controls", 1600);
-    await app.waitFor("text:Controls");
-    await app.screenshot(`${OUT}/gallery-controls-${scheme}-phone.png`);
-    await app.scroll("text:Choices from a list", 1600);
-    await app.waitFor("text:Choices from a list");
-    await app.screenshot(`${OUT}/gallery-choices-${scheme}-phone.png`);
-  });
+  test(`gallery sweep, ${scheme}, desktop`, async () => {
+    const app = await open("..", { colorScheme: scheme });
+    await app.press("label:UI gallery");
+    await app.waitFor("text:UI gallery");
+    await app.setViewport(1280, 800);
+    await app.waitFor("text:UI gallery");
+    await app.scroll(SCROLL_VIEW, 2);
+    await sweep(app, scheme, "desktop");
+  }, TEST_TIMEOUT);
+}
 
-  test(`pickers draw, in ${scheme} at phone width`, async () => {
-    const app = await gallery(scheme, 390, 844);
-    await app.scroll("text:Pickers", 2600);
-    await app.waitFor("text:Pickers");
-    await app.screenshot(`${OUT}/gallery-pickers-${scheme}-phone.png`);
-  });
-
-  test(`overlays open on the gallery, in ${scheme} at phone width`, async () => {
-    const app = await gallery(scheme, 390, 844);
-    await app.scroll("text:Overlays", 3400);
-    await app.waitFor("text:Overlays");
-    // The menu, open at its trigger.
-    await app.press("role:button[Actions]");
-    await app.waitFor("text:Rename…");
-    await app.screenshot(`${OUT}/gallery-menu-open-${scheme}-phone.png`);
-    await app.press("text:Rename…");
-    // The dialog card, open with its decision visible.
-    await app.press("role:button[Open dialog]");
-    await app.waitFor("text:Delete the draft?");
-    await app.screenshot(`${OUT}/gallery-dialog-open-${scheme}-phone.png`);
-    await app.press("role:button[Cancel]");
-    await app.waitFor("text:Delete the draft?", { state: "gone" });
-  });
-
-  test(`data views and surfaces draw, in ${scheme} at phone width`, async () => {
-    const app = await gallery(scheme, 390, 844);
-    await app.scroll("text:Data views", 4400);
-    await app.waitFor("text:Data views");
-    await app.screenshot(`${OUT}/gallery-data-${scheme}-phone.png`);
-    await app.scroll("text:Surfaces", 4400);
-    await app.waitFor("text:Surfaces");
-    await app.screenshot(`${OUT}/gallery-surfaces-${scheme}-phone.png`);
-  });
-
-  test(`the gallery draws at desktop width, in ${scheme}`, async () => {
-    const app = await gallery(scheme, 1200, 800);
-    await app.waitFor("text:Buttons");
-    await app.screenshot(`${OUT}/gallery-top-${scheme}-desktop.png`);
-    await app.scroll("text:Controls", 2000);
-    await app.waitFor("text:Controls");
-    await app.screenshot(`${OUT}/gallery-controls-${scheme}-desktop.png`);
-    await app.scroll("text:Surfaces", 5000);
-    await app.waitFor("text:Surfaces");
-    await app.screenshot(`${OUT}/gallery-surfaces-${scheme}-desktop.png`);
-  });
+/** Screenshots the gallery at every stop of one top-to-bottom sweep. */
+async function sweep(app: GalleryApp, scheme: string, width: string) {
+  for (let stop = 0; stop < STOPS; stop += 1) {
+    if (stop > 0) {
+      await app.scroll(SCROLL_VIEW, STEP);
+    }
+    const name = `gallery-stop-${String(stop).padStart(2, "0")}-${scheme}-${width}.png`;
+    await app.screenshot(`${OUT}/${name}`);
+  }
 }

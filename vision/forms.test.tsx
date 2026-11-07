@@ -5,20 +5,24 @@
 // shell's index exposes the feature under the label "Forms".
 import { expect, open, test } from "nsh/test";
 
+// The runner resolves the entry against this file's directory, so the app
+// opens from the project root, while screenshot paths resolve against the
+// process CWD. The directory must exist; the app's sandbox grants no
+// fs.write to make one.
 const OUT = "docs/evidence/forms";
 
 /** Headless runs draw nothing; only a real target can keep the captures. */
 async function capture(app: { screenshot(path: string): Promise<unknown> }, path: string) {
   try {
     await app.screenshot(`${OUT}/${path}`);
-  } catch {
-    console.log(`skipped ${path}: no drawing on this target`);
+  } catch (error) {
+    console.log(`skipped ${path}: ${error}`);
   }
 }
 
 for (const scheme of ["light", "dark"] as const) {
   test(`sign-up fresh, then with errors, in ${scheme}`, async () => {
-    const app = await open(".", { colorScheme: scheme });
+    const app = await open("..", { colorScheme: scheme });
     await app.press("label:Forms");
     await app.waitFor("text:Create account");
     await capture(app, `sign-up-fresh-${scheme}.png`);

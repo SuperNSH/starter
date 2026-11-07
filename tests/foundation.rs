@@ -61,10 +61,11 @@ fn config_migration_roundtrip() {
     let mut app = app_with(storage.clone());
     // First frame: the index is up, so the pre-seeded flow stays done.
     app.wait_for("text:Foundation and state").unwrap();
-    // The logging ring is process-global and parallel tests share it:
-    // clearing now means only a line written after this point — this
-    // engine's save-back, logged by DemoRoot's `app.config` subscription —
-    // can satisfy the assertion below.
+    // The logging ring is process-global and parallel tests share it.
+    // Clearing now bounds the read to this test's window, and the line
+    // itself names this engine's saved config ("Ada") — no other test's
+    // engine saves a config with that name, so only this engine's
+    // DemoRoot subscription can produce the asserted string.
     nsh_starter::foundation::logging::clear_log();
     open_diagnostics(&mut app);
 
@@ -80,7 +81,7 @@ fn config_migration_roundtrip() {
     assert!(
         nsh_starter::foundation::logging::log_tail(200)
             .iter()
-            .any(|line| line.message == "config saved (app.config)"),
+            .any(|line| line.message == "config saved (app.config) for Ada"),
         "the subscription did not log: {:?}",
         nsh_starter::foundation::logging::log_tail(200)
     );
@@ -210,7 +211,9 @@ fn first_run_once_only() {
     let mut app = app_with(storage.clone());
     app.wait_for("text:Welcome to nsh-starter").unwrap();
 
-    app.type_text("id:first-run-name", "Ada").unwrap();
+    // "Bo", not the roundtrip test's "Ada": each test's engine logs its
+    // own saved name, so the process-global ring never cross-matches.
+    app.type_text("id:first-run-name", "Bo").unwrap();
     app.press("role:button[Get started]").unwrap();
     app.wait_for("text:Foundation and state").unwrap();
 
@@ -224,7 +227,7 @@ fn first_run_once_only() {
     assert!(marker.starts_with("first-run-"), "marker: {marker}");
     let config = stored.get("app.config").expect("config saved").clone();
     assert!(
-        config.contains(r#""display_name":"Ada""#),
+        config.contains(r#""display_name":"Bo""#),
         "stored: {config}"
     );
 

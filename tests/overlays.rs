@@ -134,9 +134,14 @@ fn the_sheet_opens_as_a_bottom_sheet_on_phone_width() {
     reveal(&mut app, "role:button[Notification settings…]");
     app.press("role:button[Notification settings…]").unwrap();
     app.wait_for("text:Opened as a bottom panel").unwrap();
-    // The detents are the section's data; the panel follows.
+    // The detents are the section's data; the panel's popup style follows,
+    // and the tall detent alone shows the extra rows.
     app.press("role:button[Tall]").unwrap();
     app.wait_for("text:Detent step 2 of 0–2").unwrap();
+    app.wait_for("id:sheet-tall-marker").unwrap();
+    app.press("role:button[Short]").unwrap();
+    app.wait_for_gone("id:sheet-tall-marker", Duration::from_secs(2))
+        .unwrap();
 }
 
 #[test]
@@ -269,34 +274,4 @@ fn the_resizable_panel_steps_from_the_keyboard_path() {
     app.wait_for("text:First panel at 240 pt").unwrap();
     app.press("role:button[Narrower]").unwrap();
     app.wait_for("text:First panel at 200 pt").unwrap();
-}
-
-#[test]
-fn zz_probe_sheet() {
-    let mut config = EngineConfig::new(Root::of::<
-        nsh_starter::features::overlays::OverlaysScrollProbe,
-    >());
-    config.viewport = nsh_core::Size::new(Points(390.0), Points(700.0));
-    if std::env::var("PROBE_MANUAL").is_ok() {
-        config.clock = nsh_core::time::Clock::manual(std::time::SystemTime::UNIX_EPOCH);
-    }
-    if std::env::var("PROBE_STILL").is_ok() {
-        config.environment.reduce_motion = true;
-    }
-    let mut app = Headless::start(config).unwrap();
-    app.wait_for("id:probe-open-sheet").unwrap();
-    app.press("id:probe-open-sheet").unwrap();
-    println!(
-        "probe sheet body: {}",
-        app.screen().shows("Probe sheet body")
-    );
-    app.press_key("escape").unwrap();
-    println!(
-        "probe sheet after escape: {}",
-        app.screen().shows("Probe sheet body")
-    );
-    println!(
-        "probe open signal gone: {}",
-        !app.screen().shows("Probe sheet body")
-    );
 }

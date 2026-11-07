@@ -119,9 +119,16 @@ pub fn DemoRoot() -> impl IntoElement {
         DemoRoute::FirstRun
     }]);
     // The root owns the app-wide subscription: config changes leave a
-    // trace in the log, tagged with the config's storage key.
+    // trace in the log, named by this engine's saved config, so parallel
+    // engines sharing the process-global ring never cross-match a line.
     event_bus::subscribe(event_bus::TOPIC_CONFIG_SAVED, |event| {
-        logging::log_info(&format!("config saved ({})", event.payload));
+        let name = config::load().display_name;
+        let who = if name.is_empty() {
+            "(unnamed)"
+        } else {
+            name.as_str()
+        };
+        logging::log_info(&format!("config saved ({}) for {who}", event.payload));
     });
     view()
         .flex_1()

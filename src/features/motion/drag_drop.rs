@@ -100,8 +100,10 @@ pub(crate) fn drop_reorder() -> impl IntoElement {
         view()
             .flex_col()
             .gap(px(8.0))
+            // The rows render in the data's order, keyed by slot: a drop
+            // moves the rows, and the layout animation animates the move.
             .child(each(
-                move || (0..ITEMS.len()).collect::<Vec<usize>>(),
+                order,
                 |slot| *slot,
                 move |slot: ReadSignal<usize>, _: ReadSignal<usize>| {
                     handle(slot.get(), ITEMS[slot.get()], order, dragging)

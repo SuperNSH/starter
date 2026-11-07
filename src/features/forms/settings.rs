@@ -166,14 +166,30 @@ fn text_field_row(
 
 fn select_row(start_page: nsh_form::Field<Settings, Option<String>>) -> View {
     let field = start_page;
+    const PAGES: [(&str, &str); 3] = [
+        ("feed", "Feed"),
+        ("profile", "Profile"),
+        ("bookmarks", "Bookmarks"),
+    ];
+    let title = |value: Option<String>| {
+        value
+            .and_then(|value| {
+                PAGES
+                    .iter()
+                    .find(|(key, _)| *key == value)
+                    .map(|(_, title)| *title)
+            })
+            .unwrap_or("Pick a page")
+    };
     field_row(
         "Start page",
         select()
-            .items(vec![
-                SelectItem::new("feed", "Feed"),
-                SelectItem::new("profile", "Profile"),
-                SelectItem::new("bookmarks", "Bookmarks"),
-            ])
+            .items(
+                PAGES
+                    .iter()
+                    .map(|(value, title)| SelectItem::new(*value, *title))
+                    .collect::<Vec<SelectItem>>(),
+            )
             .value(move || field.value().map(SharedString::from))
             .on_change(move |value: &Option<SharedString>| {
                 field.set(value.as_deref().map(str::to_owned));
@@ -199,10 +215,7 @@ fn select_row(start_page: nsh_form::Field<Settings, Option<String>>) -> View {
                     .border_1()
                     .border_color(move || theme().input)
                     .test_id("settings-start-page")
-                    .child(
-                        text(move || field.value().unwrap_or_else(|| "Pick a page".to_owned()))
-                            .text_size(px(15.0)),
-                    ),
+                    .child(text(move || title(field.value())).text_size(px(15.0))),
             ),
         move || field.error(),
     )

@@ -47,8 +47,7 @@ pub(crate) fn panels_section() -> impl IntoElement {
                 .gap_2()
                 .child(
                     overlay_button("Wider", ButtonVariant::Outline, {
-                        let sizes = sizes;
-                        move || {
+                                                move || {
                             sizes.update(|s| {
                                 s[0] = px((s[0].0 + 40.0).clamp(120.0, 560.0));
                             });
@@ -58,8 +57,7 @@ pub(crate) fn panels_section() -> impl IntoElement {
                 )
                 .child(
                     overlay_button("Narrower", ButtonVariant::Outline, {
-                        let sizes = sizes;
-                        move || {
+                                                move || {
                             sizes.update(|s| {
                                 s[0] = px((s[0].0 - 40.0).clamp(120.0, 560.0));
                             });
@@ -86,9 +84,7 @@ pub(crate) fn panels_section() -> impl IntoElement {
                         .opacity(0.5)
                 })
                 .on_resize({
-                    let sizes = sizes;
-                    let status = status;
-                    move |next: &Vec<Points>| {
+                                                            move |next: &Vec<Points>| {
                         if let Some(first) = next.first() {
                             sizes.update(|s| s[0] = *first);
                         }

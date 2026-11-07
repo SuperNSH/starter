@@ -197,13 +197,13 @@ fn pan_activation_hands_the_scrubber_the_horizontal_drag() -> Result<(), String>
     // mid-drag the pad reports the scrub; the lift ends it, leaving the
     // playhead where the release put it (a scrubber keeps its position).
     app.drag_and_hold("id:scrub-pad", point(px(80.0), px(0.0)))?;
-    app.wait_for("text:/^1 grants · scrubbing at/")?;
+    app.wait_for("text:/^1 grant · scrubbing at/")?;
     app.drop_held()?;
-    app.wait_for("text:/^1 grants · scrubbed to/")?;
+    app.wait_for("text:/^1 grant · scrubbed to/")?;
     // A vertical drag passes the fail offset first: the scroll keeps it,
     // so no second grant and the playhead stays.
     app.drag("id:scrub-pad", point(px(0.0), px(60.0)))?;
-    app.wait_for("text:/^1 grants · scrubbed to/")?;
+    app.wait_for("text:/^1 grant · scrubbed to/")?;
     Ok(())
 }
 

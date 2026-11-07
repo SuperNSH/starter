@@ -1,8 +1,10 @@
 //! The `Dialog` and `AlertDialog` sections: a rename flow in a dialog the
 //! app styles, and the system's alerts answering a real destructive flow.
 
-use super::{ButtonVariant, caption, overlay_button, overlay_switch, scrim, status_line};
-use nsh_base::{alert_dialog, dialog, input, theme};
+use super::{
+    ButtonVariant, caption, overlay_button, overlay_switch, scrim, status_line, text_field,
+};
+use nsh_base::{alert_dialog, dialog, theme};
 use nsh_core::prelude::*;
 
 /// A dialog card's shared geometry: centered over the scrim, above it,
@@ -55,14 +57,8 @@ pub(crate) fn dialog_section() -> impl IntoElement {
     let focus_note = signal("Focus: page".to_owned());
     let trigger_ref = element_ref();
     // Focus watches live while the page does, on whatever carries the ref.
-    trigger_ref.on_focus_in({
-        let focus_note = focus_note;
-        move || focus_note.set("Focus: rename trigger".to_owned())
-    });
-    trigger_ref.on_focus_out({
-        let focus_note = focus_note;
-        move || focus_note.set("Focus: elsewhere".to_owned())
-    });
+    trigger_ref.on_focus_in(move || focus_note.set("Focus: rename trigger".to_owned()));
+    trigger_ref.on_focus_out(move || focus_note.set("Focus: elsewhere".to_owned()));
     let open_dialog = move || {
         draft.set(name.get_untracked());
         open.set(true);
@@ -95,15 +91,14 @@ pub(crate) fn dialog_section() -> impl IntoElement {
                         .text_color(move || theme().muted_foreground),
                 ),
         )
-        .child(overlay_switch("Escape closes", escape_closes.clone()))
+        .child(overlay_switch("Escape closes", escape_closes))
         .child(caption(
             "Escape, the back button and the scrim close it (when allowed); the dialog takes the focus while it is up.",
         ))
         .child(status_line({ let s = status; move || s.get() }))
         .child(status_line({ let s = focus_note; move || s.get() }))
         .child(when(open, move || {
-            let close = close;
-            let save = move || {
+                        let save = move || {
                 name.set(draft.get_untracked());
                 status.set(format!("Renamed to {}", draft.get_untracked()));
                 close();
@@ -123,8 +118,7 @@ pub(crate) fn dialog_section() -> impl IntoElement {
                     }
                 })
                 .child(dialog_backdrop({
-                    let close = close;
-                    move || {
+                                        move || {
                         status.set("Closed with the scrim".to_owned());
                         close();
                     }
@@ -140,11 +134,7 @@ pub(crate) fn dialog_section() -> impl IntoElement {
                                 .text_color(move || theme().popover_foreground),
                         )
                         .child(
-                            input()
-                                .test_id("rename-field")
-                                .value(draft.clone())
-                                .placeholder("File name")
-                                .on_change(move |value: &str| draft.set(value.to_owned())),
+                            text_field(draft, "File name").test_id("rename-field"),
                         )
                         .child(
                             view()
@@ -153,8 +143,7 @@ pub(crate) fn dialog_section() -> impl IntoElement {
                                 .gap_2()
                                 .child(
                                     overlay_button("Cancel", ButtonVariant::Ghost, {
-                                        let close = close;
-                                        move || {
+                                                                                move || {
                                             status.set("Closed with Cancel".to_owned());
                                             close();
                                         }

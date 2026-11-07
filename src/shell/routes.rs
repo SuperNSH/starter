@@ -114,6 +114,47 @@ impl Route {
         }
     }
 
+    /// The Home row's test id (`page-<key>`), as a literal: the ui row
+    /// wrapper carries test ids on `&'static str`.
+    pub fn page_row_id(self) -> &'static str {
+        match self {
+            Route::Home => "page-home",
+            Route::UiGallery => "page-ui",
+            Route::Forms => "page-forms",
+            Route::Data => "page-data",
+            Route::QueryDevtools => "page-query-devtools",
+            Route::Lists => "page-lists",
+            Route::Canvas => "page-canvas",
+            Route::Motion => "page-motion",
+            Route::Overlays => "page-overlays",
+            Route::Platform => "page-platform",
+            Route::Device => "page-device",
+            Route::RemoteScreen => "page-remote",
+            Route::Diagnostics => "page-diagnostics",
+            Route::DataDetail(_) => "page-data-item",
+        }
+    }
+
+    /// The sidebar row's test id (`nav-<key>`), as a literal.
+    pub fn nav_row_id(self) -> &'static str {
+        match self {
+            Route::Home => "nav-home",
+            Route::UiGallery => "nav-ui",
+            Route::Forms => "nav-forms",
+            Route::Data => "nav-data",
+            Route::QueryDevtools => "nav-query-devtools",
+            Route::Lists => "nav-lists",
+            Route::Canvas => "nav-canvas",
+            Route::Motion => "nav-motion",
+            Route::Overlays => "nav-overlays",
+            Route::Platform => "nav-platform",
+            Route::Device => "nav-device",
+            Route::RemoteScreen => "nav-remote",
+            Route::Diagnostics => "nav-diagnostics",
+            Route::DataDetail(_) => "nav-data-item",
+        }
+    }
+
     /// The system header's title.
     pub fn title(self) -> SharedString {
         self.label().into()

@@ -53,10 +53,10 @@ pub fn motion_page() -> impl IntoElement {
                 .child(transitions::route_flip())
                 .child(reorder::layout_reorder())
                 .child(swipe::swipe_rows())
-                .child(drag_drop::drop_reorder())
                 .child(transform::pinch_rotate())
                 .child(header::collapsing_header())
-                .child(scrub::scrubber()),
+                .child(scrub::scrubber())
+                .child(drag_drop::drop_reorder()),
         )
 }
 

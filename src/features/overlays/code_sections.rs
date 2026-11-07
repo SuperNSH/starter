@@ -68,14 +68,8 @@ pub(crate) fn editor_section() -> impl IntoElement {
 pub(crate) fn diff_section() -> impl IntoElement {
     let layout = signal(DiffLayout::Split);
     let stats = signal("—".to_owned());
-    let set_split = {
-        let layout = layout;
-        move || layout.set(DiffLayout::Split)
-    };
-    let set_unified = {
-        let layout = layout;
-        move || layout.set(DiffLayout::Unified)
-    };
+    let set_split = move || layout.set(DiffLayout::Split);
+    let set_unified = move || layout.set(DiffLayout::Unified);
     view()
         .flex_col()
         .gap_3()
@@ -150,8 +144,7 @@ pub(crate) fn text_section() -> impl IntoElement {
                     ..Default::default()
                 })
                 .on_link_press({
-                    let last_link = last_link;
-                    move |e: &nsh_base::TextViewLinkPressEvent| {
+                                        move |e: &nsh_base::TextViewLinkPressEvent| {
                         last_link.set(format!("Link: {}", e.url));
                     }
                 }),

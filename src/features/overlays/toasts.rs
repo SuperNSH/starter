@@ -121,7 +121,7 @@ pub(crate) fn ToastsArea() -> impl IntoElement {
         ))
         .child(status_line({ let s = queue_note; move || s.get() }))
         .child(toast_stack_host(
-            shown.clone(),
+            shown,
             stack_state,
             Rc::new(move |id: &u64| {
                 manager.with(|m| m.dismiss(id, now()));

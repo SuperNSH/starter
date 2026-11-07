@@ -52,9 +52,7 @@ const CODE_CHECK_LATENCY: Duration = Duration::from_millis(500);
 /// The draft's key in `Storage`; a fresh app restores it on mount.
 const DRAFT_KEY: &str = "forms.sign_up.draft";
 
-/// The sign-up's values. `birth_date` and `meeting_time` hold the picker
-/// types, which the draft cannot round-trip: parsing them back needs
-/// `chrono`, not a dependency of this crate.
+/// The sign-up's values.
 #[derive(Clone, PartialEq)]
 struct SignUp {
     email: String,
@@ -102,15 +100,19 @@ impl Default for SignUp {
     }
 }
 
-/// The draft as `Storage` keeps it: the fields it can restore.
+/// The draft as `Storage` keeps it: every non-secret value, the pickers as
+/// ISO text. `password`, `confirm_password` and `verification_code` are
+/// deliberately left out — a template does not save credentials.
 #[derive(Default, Serialize, Deserialize)]
 struct SignUpDraft {
     email: String,
-    password: String,
-    confirm_password: String,
     username: String,
     phone: String,
     referral: String,
+    /// `"YYYY-MM-DD"`, as the date picker's value round-trips.
+    birth_date: Option<String>,
+    /// `"HH:MM"`, as the time field's value round-trips.
+    meeting_time: Option<String>,
     region: Option<String>,
     interests: Vec<String>,
     plan: Option<String>,
@@ -118,7 +120,6 @@ struct SignUpDraft {
     newsletter: bool,
     age: f64,
     favorite_color: String,
-    verification_code: String,
     budget: Option<f64>,
     bio: String,
 }
@@ -127,11 +128,16 @@ impl SignUpDraft {
     fn of(values: &SignUp) -> Self {
         Self {
             email: values.email.clone(),
-            password: values.password.clone(),
-            confirm_password: values.confirm_password.clone(),
             username: values.username.clone(),
             phone: values.phone.clone(),
             referral: values.referral.clone(),
+            birth_date: values
+                .birth_date
+                .start()
+                .map(|day| day.format("%Y-%m-%d").to_string()),
+            meeting_time: values
+                .meeting_time
+                .map(|time| time.0.format("%H:%M").to_string()),
             region: values.region.clone(),
             interests: values.interests.clone(),
             plan: values.plan.clone(),
@@ -139,7 +145,6 @@ impl SignUpDraft {
             newsletter: values.newsletter,
             age: values.age,
             favorite_color: values.favorite_color.clone(),
-            verification_code: values.verification_code.clone(),
             budget: values.budget,
             bio: values.bio.clone(),
         }
@@ -150,11 +155,19 @@ impl SignUp {
     fn from_draft(draft: SignUpDraft) -> Self {
         Self {
             email: draft.email,
-            password: draft.password,
-            confirm_password: draft.confirm_password,
             username: draft.username,
             phone: draft.phone,
             referral: draft.referral,
+            birth_date: draft
+                .birth_date
+                .and_then(|text| chrono::NaiveDate::parse_from_str(&text, "%Y-%m-%d").ok())
+                .and_then(|day| day.and_hms_opt(0, 0, 0))
+                .map(|day| DateTime::Single(Some(day)))
+                .unwrap_or_default(),
+            meeting_time: draft
+                .meeting_time
+                .and_then(|text| chrono::NaiveTime::parse_from_str(&text, "%H:%M").ok())
+                .map(TimeOfDay),
             region: draft.region,
             interests: draft.interests,
             plan: draft.plan,
@@ -162,7 +175,6 @@ impl SignUp {
             newsletter: draft.newsletter,
             age: draft.age,
             favorite_color: draft.favorite_color,
-            verification_code: draft.verification_code,
             budget: draft.budget,
             bio: draft.bio,
             ..Self::default()
@@ -210,15 +222,25 @@ fn text_field_row(
     field_row(label, field.bind(input), move || field.error())
 }
 
-/// The username row, with the availability check's live hint.
-fn username_row(username: Field<SignUp, String>, input: nsh_base::Input) -> View {
+/// The username row. The hint mirrors the check's raw answer, which unlike
+/// the field's error does not wait for the field to be left.
+fn username_row(
+    username: Field<SignUp, String>,
+    answer: Signal<String>,
+    input: nsh_base::Input,
+) -> View {
     let hint = move || {
-        if username.value().chars().count() < 3 || username.error().is_some() {
+        if username.error().is_some() {
+            // The field's error line says it, in red, below the input.
+            SharedString::from("")
+        } else if !answer.get().is_empty() {
+            answer.get().into()
+        } else if username.value().chars().count() < 3 {
             SharedString::from("")
         } else if username.is_validating() {
             SharedString::from("Checking…")
         } else {
-            SharedString::from("Available")
+            SharedString::from("")
         }
     };
     view()
@@ -285,11 +307,42 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
 
     // What the fake code check said about the code as it was completed.
     let code_check = signal(String::new());
+    // What the availability check answered for the name as it stands —
+    // raw, unlike the field's error, which waits for blur or submit.
+    let username_answer = signal(String::new());
+    let username_seen = stored(0_u64);
+    effect(move || {
+        let name = username.value();
+        let seen = username_seen.with(|seen| {
+            *seen += 1;
+            *seen
+        });
+        // A new edit clears the last answer and drops an older one's write.
+        username_answer.set(String::new());
+        if name.chars().count() < 3 {
+            return;
+        }
+        let answer = username_answer;
+        spawn(async move {
+            timer(USERNAME_DEBOUNCE + USERNAME_CHECK_LATENCY).await;
+            if username_seen.with(|seen| *seen) == seen {
+                answer.set(if username_taken(&name) {
+                    "That username is taken".to_owned()
+                } else {
+                    "Available".to_owned()
+                });
+            }
+        });
+    });
     // The email the fake server accepted, for the success banner.
     let created = signal(None::<String>);
 
-    // Draft autosave: every change lands in `Storage` as it happens.
+    // Draft autosave: an actual edit lands in `Storage` as it happens, and
+    // a clean form (fresh page, Discard) writes nothing.
     effect(move || {
+        if !form.is_dirty() {
+            return;
+        }
         let draft = SignUpDraft::of(&form.values());
         if let Ok(json) = serde_json::to_string(&draft) {
             let _ = Storage::set_item(DRAFT_KEY, json);
@@ -342,6 +395,7 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
             ),
             username_row(
                 username,
+                username_answer,
                 input_shell(move || username.error().is_some())
                     .placeholder("Lowercase letters and digits")
                     .auto_capitalize(AutoCapitalize::None)
@@ -459,7 +513,7 @@ fn sign_up_nav(form: Form<SignUp>) -> Screen {
     nav_page()
         .title("Sign up")
         .header(page_header("Sign up", None::<fn()>))
-        .pop_on_back(move || !form.is_dirty())
+        .pop_on_back(true)
         .on_back_press(move || {
             // Discard clears the draft; the next back goes through, the
             // form now clean.
@@ -542,16 +596,32 @@ fn time_row(meeting_time: Field<SignUp, Option<TimeOfDay>>) -> View {
 }
 
 fn region_row(region: Field<SignUp, Option<String>>) -> View {
+    const REGIONS: [(&str, &str); 5] = [
+        ("eu", "Europe"),
+        ("na", "North America"),
+        ("apac", "Asia-Pacific"),
+        ("sa", "South America"),
+        ("amea", "Africa & Middle East"),
+    ];
+    let title = |value: Option<String>| {
+        value
+            .and_then(|value| {
+                REGIONS
+                    .iter()
+                    .find(|(key, _)| *key == value)
+                    .map(|(_, title)| *title)
+            })
+            .unwrap_or("Pick a region")
+    };
     field_row(
         "Region",
         select()
-            .items(vec![
-                SelectItem::new("eu", "Europe"),
-                SelectItem::new("na", "North America"),
-                SelectItem::new("apac", "Asia-Pacific"),
-                SelectItem::new("sa", "South America"),
-                SelectItem::new("amea", "Africa & Middle East"),
-            ])
+            .items(
+                REGIONS
+                    .iter()
+                    .map(|(value, title)| SelectItem::new(*value, *title))
+                    .collect::<Vec<SelectItem>>(),
+            )
             .value(move || region.value().map(SharedString::from))
             .on_change(move |value: &Option<SharedString>| {
                 region.set(value.as_deref().map(str::to_owned));
@@ -577,10 +647,7 @@ fn region_row(region: Field<SignUp, Option<String>>) -> View {
                     .border_1()
                     .border_color(move || theme().input)
                     .test_id("signup-region")
-                    .child(
-                        text(move || region.value().unwrap_or_else(|| "Pick a region".to_owned()))
-                            .text_size(px(15.0)),
-                    ),
+                    .child(text(move || title(region.value())).text_size(px(15.0))),
             ),
         move || region.error(),
     )
@@ -772,7 +839,7 @@ fn color_row(favorite_color: Field<SignUp, String>) -> View {
                             .h(px(120.0))
                             .accessibility_label("Color area")
                             .panel_class("rounded-md")
-                            .thumb_class("size-4 rounded-full border-2 border-white"),
+                            .thumb_class("size-4 rounded-full border-2 border-ring"),
                     )
                     .child(
                         color_slider()
@@ -781,7 +848,7 @@ fn color_row(favorite_color: Field<SignUp, String>) -> View {
                             .channel(ColorChannel::Hue)
                             .accessibility_label("Hue")
                             .track_class("h-3 rounded-full")
-                            .thumb_class("size-5 rounded-full border-2 border-white"),
+                            .thumb_class("size-5 rounded-full border-2 border-ring"),
                     ),
             )
             .child(view().flex_row().gap_2().children(SWATCHES.map(|hex| {

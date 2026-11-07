@@ -27,9 +27,11 @@ use widgets::localized;
 /// inside the safe area on every edge, and lifts above the keyboard. The
 /// keyboard and the safe area both own the bottom edge, so one computed
 /// padding decides it (the keyboard covers the bottom inset while it shows).
-fn page(title: &'static str, cards: Vec<AnyElement>) -> AnyElement {
+/// The scroll carries `scroll_id` so captures and tests can scroll the page.
+fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) -> AnyElement {
     scroll()
         .flex_1()
+        .test_id(scroll_id)
         .child(
             view()
                 .pt_safe_area_plus(px(16.0))
@@ -62,6 +64,7 @@ fn page(title: &'static str, cards: Vec<AnyElement>) -> AnyElement {
 pub fn platform_page() -> impl IntoElement {
     page(
         "platform.title",
+        "platform-page-scroll",
         vec![
             safe_area::card(),
             clipboard_card::card(),
@@ -80,5 +83,9 @@ pub fn platform_page() -> impl IntoElement {
 
 /// The device and environment page: what the platform exposes about itself.
 pub fn device_page() -> impl IntoElement {
-    page("platform.device.page_title", environment::cards())
+    page(
+        "platform.device.page_title",
+        "device-page-scroll",
+        environment::cards(),
+    )
 }

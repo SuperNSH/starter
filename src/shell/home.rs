@@ -1,15 +1,17 @@
 //! The shell's index: every page reachable from here, as the smoke suite
-//! walks it. Rows carry test ids (`page-<key>`) so the suite can press
-//! them apart from the sidebar's same-named rows on desktop widths; a
-//! component element takes no test id of its own, so the wrapper carries
-//! it and a press reaches the row's button.
+//! walks it. Rows are the ui `nav_row`, whose test ids (`page-<key>`) let
+//! the suite press them apart from the sidebar's same-named rows on
+//! desktop widths.
 
-use nsh_base::{button, theme};
+use nsh_base::theme;
 use nsh_core::{element::AnyElement, prelude::*};
 
-use crate::shell::{
-    nav,
-    routes::{Route, route_from_deep_link},
+use crate::{
+    shell::{
+        nav,
+        routes::{Route, route_from_deep_link},
+    },
+    ui::nav::{chevron, nav_row},
 };
 
 /// Home's content, under the page's header.
@@ -45,10 +47,10 @@ pub fn content() -> AnyElement {
                     ),
                 )
                 .child(view().gap_1().child(section_label("Pushed")).children([
-                    demo_row("page-data-item", "Open data item 3".into(), move || {
+                    demo_row("page-data-item", "Open data item 3", move || {
                         nav::push(Route::DataDetail(3))
                     }),
-                    demo_row("page-deep-link", "Open a deep link".into(), move || {
+                    demo_row("page-deep-link", "Open a deep link", move || {
                         deep_link("nsh-starter://data/item/7")
                     }),
                 ])),
@@ -77,42 +79,11 @@ fn section_label(label: &'static str) -> impl IntoElement {
 
 /// A page's row: the label and a chevron, the whole row the target.
 fn row(route: Route) -> AnyElement {
-    demo_row(&format!("page-{}", route.key()), route.label(), move || {
+    demo_row(route.page_row_id(), route.label_str(), move || {
         nav::open(route)
     })
 }
 
-fn demo_row(id: &str, label: String, open: impl Fn() + 'static) -> AnyElement {
-    button()
-        .on_press(open)
-        .accessibility_label(label.clone())
-        .h_11()
-        .w_full()
-        .flex_row()
-        .items_center()
-        .gap_2()
-        .px_3()
-        .rounded(move || theme().radius)
-        .hover(|s| s.bg(move || theme().accent))
-        .active(|s| s.opacity(0.7))
-        .focus(|s| s.outline(px(2.0)).outline_color(move || theme().ring))
-        .child(
-            // The row's test id rides this view, inside the button: a
-            // press on it reaches the button, as a tap on a label does.
-            view()
-                .test_id(id)
-                .flex_1()
-                .flex_row()
-                .items_center()
-                .gap_2()
-                .child(
-                    text(label)
-                        .flex_1()
-                        .text_sm()
-                        .number_of_lines(1)
-                        .text_color(move || theme().foreground),
-                )
-                .child(text("›").text_color(move || theme().muted_foreground)),
-        )
-        .into_element()
+fn demo_row(id: &'static str, label: &'static str, open: impl Fn() + 'static) -> AnyElement {
+    nav_row(label, Some(chevron()), false, id, open).into_element()
 }

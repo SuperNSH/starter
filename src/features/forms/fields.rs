@@ -2,7 +2,8 @@
 //! (label, control, error) over the ui library's primitives, and the input
 //! look with the failed state the ui signal-based wrappers cannot express.
 //! The Field-bound variants of `ui::field` are wanted upstream of this
-//! module (see docs/STATUS.md); no raw `nsh_base` control leaves it.
+//! module; the request is recorded in docs/STATUS.md (lands with the
+//! forms area's STATUS section). No raw `nsh_base` control leaves it.
 
 use nsh_base::{Input, input, theme};
 use nsh_core::prelude::*;

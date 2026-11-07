@@ -1,6 +1,28 @@
 //! The shell's headless tests: the deep-link table, the back order and
 //! the palette on a manual clock, undo and redo, the two layouts and the
 //! lifecycle watch. Pure tables first, then the real engine.
+//!
+//! Seen-to-fail record: every test below was seen failing once by
+//! breaking the code on purpose, then restored. Breaks, one row per test
+//! (a break may fail two tests):
+//!
+//! | Test | Break applied |
+//! |---|---|
+//! | `deep_links_parse_into_routes` | `routes.rs`: the `["forms"]` arm answered `UiGallery` |
+//! | `the_back_order_is_overlays_pages_then_the_exit_ask` | `back.rs`: `back_step`'s `depth > 0` arm returned `AskExit` |
+//! | `back_pops_a_page_then_asks_to_exit` | the same `back_step` break; the overlay-first leg: the palette dialog's `on_cancel` closed nothing |
+//! | `the_lifecycle_machine_follows_the_engine_events` | `lifecycle.rs`: `transition` mapped `BecameActive` to `Backgrounded` |
+//! | `the_lifecycle_watch_follows_the_environment` | the same `transition` break |
+//! | `undo_history_is_bounded` | `undo.rs`: `record` trimmed to `LIMIT + 10`, then to clearing `past` |
+//! | `undo_and_redo_retrace_navigation` | `nav.rs`: `push` took no undo snapshot |
+//! | `the_palette_opens_and_navigates` | `palette.rs`: `dispatch` ignored destination ids |
+//! | `the_desktop_width_takes_the_sidebar` | `mod.rs`: `desktop()` thresholds 7000/9000 |
+//! | `keys_are_stable_per_route` (lib) | `routes.rs`: `DataDetail`'s key dropped the id |
+//! | `undo_returns_to_the_recorded_state` (lib) | `undo.rs`: `record` pushed nothing |
+//! | `the_stack_is_bounded` (lib) | the `LIMIT + 10` trim |
+//! | `App.test.tsx` "the root mounts" | `status.rs`: the app's name replaced by `"shell"` |
+//! | `App.test.tsx` "the shell navigates from Home" | `back.rs`: the `AskExit` arm opened no prompt |
+//! | `smoke/pages.test.tsx` | `nav.rs`: `open` never applied the pages |
 
 use std::time::{Duration, SystemTime};
 
@@ -124,9 +146,23 @@ fn back_pops_a_page_then_asks_to_exit() {
     let mut app = phone();
     app.wait_for("text:Home").unwrap();
 
-    // Back over a pushed page pops it.
+    // A page is pushed, then the palette goes up over it.
     app.press("id:page-forms").unwrap();
     app.wait_for("text:Forms").unwrap();
+    app.press_key("mod+k").unwrap();
+    app.wait_for("text:Go to").unwrap();
+
+    // The overlay takes back first: the palette closes and the page
+    // beneath stays (its marker and the status bar still name it).
+    app.back().unwrap();
+    app.wait_until(
+        "the palette closed over the intact page",
+        Duration::from_secs(5),
+        |screen| screen.count("text:Go to") == Ok(0) && screen.count("text:Forms") >= Ok(2),
+    )
+    .unwrap();
+
+    // The next back pops the pushed page.
     app.back().unwrap();
     app.wait_until(
         "the pushed Forms page popped",

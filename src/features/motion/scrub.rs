@@ -107,14 +107,15 @@ pub(crate) fn scrubber() -> impl IntoElement {
             .gap(px(12.0))
             .child(pad)
             .child(status_line("scrub-status", move || {
+                // One grant, two grants: the count word follows the number.
+                let grants = match grants.get() {
+                    1 => String::from("1 grant"),
+                    n => format!("{n} grants"),
+                };
                 match (at.get(), held.get()) {
-                    (Some(x), true) => {
-                        format!("{} grants · scrubbing at {}", grants.get(), x.round())
-                    }
-                    (Some(x), false) => {
-                        format!("{} grants · scrubbed to {}", grants.get(), x.round())
-                    }
-                    (None, _) => format!("{} grants · idle", grants.get()),
+                    (Some(x), true) => format!("{grants} · scrubbing at {}", x.round()),
+                    (Some(x), false) => format!("{grants} · scrubbed to {}", x.round()),
+                    (None, _) => format!("{grants} · idle"),
                 }
             }))
             .child(api_line(

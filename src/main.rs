@@ -19,12 +19,19 @@ fn main() -> impl std::process::Termination {
             nsh_starter::shell::deep_link::from_launch(arg);
         }
     }
+    // The identity comes from nsh.json (compile time), so scripts/rename.sh
+    // renames this binary by rewriting the manifest alone.
+    #[cfg_attr(
+        not(any(target_os = "linux", target_os = "windows")),
+        allow(unused_variables)
+    )]
+    let (name, id, _) = nsh_starter::foundation::manifest_info();
     platform::run_app(
         platform::AppSource::Rust(platform::Root::of::<nsh_starter::App>()),
         platform::AppOptions {
-            title: "nsh-starter".to_owned(),
+            title: name.to_string(),
             #[cfg(any(target_os = "linux", target_os = "windows"))]
-            app_id: "com.example.nshstarter".to_owned(),
+            app_id: id.to_string(),
             // Wide enough for the desktop shell (the sidebar), per the
             // shell's 700-point threshold on the desktops.
             size: (1280, 800),

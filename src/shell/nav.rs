@@ -36,7 +36,7 @@ fn record() {
 /// Opens `route` in the place of whatever was pushed (a tab, a sidebar
 /// row, a palette destination, a deep link). A detail brings its parent.
 pub fn open(route: Route) {
-    let _ = route;
+    record();
     let pages = match (route.parent(), route) {
         (Some(parent), _) => vec![parent, route],
         (_, Route::Home) => Vec::new(),
@@ -50,7 +50,7 @@ pub fn open(route: Route) {
 pub fn push(route: Route) {
     record();
     stack().update(|routes| {
-        if !routes.0.iter().any(|open| *open == route) {
+        if !routes.0.contains(&route) {
             routes.0.push(route);
         }
     });

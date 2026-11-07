@@ -5,10 +5,12 @@ use super::{ButtonVariant, caption, overlay_button, overlay_switch, scrim, statu
 use nsh_base::{OpenChangeReason, SheetEvent, sheet, theme};
 use nsh_core::prelude::*;
 
-/// The panel's look for the side it is on: a rounded sheet at the bottom,
-/// a fixed lane at the sides.
+/// The panel's look for the side it is on: a rounded sheet at the bottom
+/// (its height is the current detent, on the panel itself — the style the
+/// base sheet reads), a fixed lane at the sides.
 fn panel_look(
     side: Placement,
+    detent: Signal<u8>,
     s: nsh_core::element::StyleRefinement,
 ) -> nsh_core::element::StyleRefinement {
     let base = s
@@ -22,7 +24,8 @@ fn panel_look(
         Placement::Bottom => base
             .rounded_t(move || theme().radius.max(px(16.0)))
             .border_t_1()
-            .pb(move || px(safe_area().bottom.0 + 20.0)),
+            .pb(move || px(safe_area().bottom.0 + 20.0))
+            .h(move || detent_height(detent)),
         _ => base.w(px(340.0)).border_l_1(),
     }
 }
@@ -86,20 +89,20 @@ pub(crate) fn sheet_section() -> impl IntoElement {
                 .child(overlay_button("Half", ButtonVariant::Ghost, move || detent.set(1)))
                 .child(overlay_button("Tall", ButtonVariant::Ghost, move || detent.set(2))),
         )
-        .child(overlay_switch("Push notifications", push.clone()))
-        .child(overlay_switch("Mentions only", mentions.clone()))
+        .child(overlay_switch("Push notifications", push))
+        .child(overlay_switch("Mentions only", mentions))
         .child(caption(
             "At desktop width it opens as a side panel; at phone width a bottom sheet with three detents and swipe-to-close.",
         ))
         .child(caption(move || format!("Detent step {} of 0–2", detent.get())))
         .child(status_line({ let s = status; move || s.get() }))
         .child(sheet_host(
-            open.clone(),
-            side.clone(),
-            detent.clone(),
-            push.clone(),
-            mentions.clone(),
-            status.clone(),
+            open,
+            side,
+            detent,
+            push,
+            mentions,
+            status,
         ))
 }
 
@@ -127,7 +130,7 @@ fn sheet_host(
         let is_bottom = side == Placement::Bottom;
         sheet()
             .side(side)
-            .popup_style(move |s| panel_look(side, s))
+            .popup_style(move |s| panel_look(side, detent, s))
             .backdrop_style(scrim)
             .close_on_swipe(is_bottom)
             .on_open_change(move |e: &SheetEvent| {
@@ -137,7 +140,6 @@ fn sheet_host(
                     open.set(false);
                 }
             })
-            .when(is_bottom, |s| s.h(move || detent_height(detent.clone())))
             .child(
                 view()
                     .flex_col()
@@ -164,7 +166,16 @@ fn sheet_host(
                         text(move || format!("Detent step {}", detent.get()))
                             .text_xs()
                             .text_color(move || theme().muted_foreground),
-                    ),
+                    )
+                    .child(when(
+                        move || detent.get() == 2,
+                        || {
+                            text("Extra rows fit at the tall detent")
+                                .text_xs()
+                                .test_id("sheet-tall-marker")
+                                .text_color(move || theme().muted_foreground)
+                        },
+                    )),
             )
     })
 }

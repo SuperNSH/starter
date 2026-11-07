@@ -10,20 +10,28 @@ import type { App } from "nsh/test";
 
 const EVIDENCE = "docs/evidence/motion";
 
-/** How far the page scroll moves the drag-and-drop section into frame. */
-const TO_DROP = 1900;
-/** To the bottom, where the scrubber (the last section) sits. */
-const TO_SCRUB = 3000;
-/** Where the swipe rows and the transform card sit in frame. */
+/** Where the swipe rows sit in frame. */
 const TO_SWIPE = 1600;
-const TO_TRANSFORM = 2500;
+/** Where the transform card sits in frame. */
+const TO_TRANSFORM = 2650;
+/** To the page's bottom, where the drop and scrub sections sit. */
+const TO_BOTTOM = 4000;
 
 async function motion(scheme: "light" | "dark"): Promise<App> {
   // The entry resolves against this file, so the package is the parent.
   const app = await open("..", { clock: {}, colorScheme: scheme });
-  await app.press("id:page-motion");
-  await app.waitFor("text:Motion and gestures");
-  return app;
+  // The home rows can still be settling when the first press lands, and
+  // the tap then opens the row under it: pop back and press again.
+  for (let at = 0; at < 3; at++) {
+    await app.press("id:page-motion");
+    try {
+      await app.waitFor("text:Motion and gestures", { timeout: 3000 });
+      return app;
+    } catch {
+      await app.back();
+    }
+  }
+  throw new Error("the Motion page never opened");
 }
 
 /** The desktop window: 1280 × 800, the width the desktop fit is judged at. */
@@ -33,11 +41,17 @@ async function desktop(scheme: "light" | "dark"): Promise<App> {
   return app;
 }
 
-/** Drops One after Two, with the section scrolled into frame. */
+/** Drops One after Two, with the section scrolled into frame and the
+ * rows settled into the new order (the drop's spring runs on the clock). */
 async function dropped(app: App): Promise<void> {
-  await app.scroll("id:motion-page-scroll", TO_DROP);
+  // The drop section is the page's last, so the bottom frame holds its
+  // rows and the order line however the scroll settles.
+  await app.scroll("id:motion-page-scroll", TO_BOTTOM);
   await app.drag("id:Two", { x: 0, y: 64 });
   await app.waitFor("text:Order: One · Three · Two · Four");
+  // The rows' layout spring runs on the platform's real time, not the
+  // manual clock: let the 700 ms settle finish before the capture.
+  await app.wait(900);
 }
 
 test("the spring and tween demo settles at its target", async () => {
@@ -92,9 +106,9 @@ test("the scroll-linked header hides and the list rests", async () => {
 
 test("the scrubber keeps its playhead where the release left it", async () => {
   const app = await motion("light");
-  await app.scroll("id:motion-page-scroll", TO_SCRUB);
+  await app.scroll("id:motion-page-scroll", TO_BOTTOM);
   await app.drag("id:scrub-pad", { x: 80, y: 0 });
-  await app.waitFor("text:/^1 grants · scrubbed to/");
+  await app.waitFor("text:/^1 grant · scrubbed to/");
   expect(await app.screenshot(`${EVIDENCE}/scrub-granted-light.png`)).toBeTruthy();
 });
 
@@ -139,10 +153,18 @@ test("desktop: the scroll-linked header hides and the list rests", async () => {
 
 test("desktop: the scrubber keeps its playhead", async () => {
   const app = await desktop("light");
-  await app.scroll("id:motion-page-scroll", TO_SCRUB);
+  await app.scroll("id:motion-page-scroll", TO_BOTTOM);
   await app.drag("id:scrub-pad", { x: 80, y: 0 });
-  await app.waitFor("text:/^1 grants · scrubbed to/");
+  await app.waitFor("text:/^1 grant · scrubbed to/");
   expect(await app.screenshot(`${EVIDENCE}/desktop-scrub-light.png`)).toBeTruthy();
+});
+
+// Dark at desktop width: one capture evidences the dark desktop fit.
+test("dark desktop: the spring and tween demo settles", async () => {
+  const app = await desktop("dark");
+  await app.press("text:Play to 240");
+  await app.waitFor("text:Rest 240 · finished");
+  expect(await app.screenshot(`${EVIDENCE}/desktop-springs-dark.png`)).toBeTruthy();
 });
 
 // Dark appearance across the page, phone width.

@@ -60,3 +60,77 @@ is unverified. Every area updates its own section as it lands work.
   final grep pass at the join, and anything still unused needs its
   stated reason); the `brew install nsh` formula name was inferred from
   the brief's `$(brew --prefix nsh)` and never run.
+
+## Lists area audit notes (round 2)
+
+- Wrapper gap kept local: `src/features/lists/calendar_view.rs` does NOT
+  use `ui::pickers::calendar_of`, because that wrapper hardcodes its own
+  `render_item` (it labels weekdays and months with bare numbers, so the
+  month header would read "11" instead of "November 2026"), takes no
+  `disabled_matcher` (the demo's weekends-off behavior is asserted by
+  `tests/lists.rs`), and returns `impl IntoElement`, so neither
+  `render_item` nor `disabled_matcher` can be chained by the caller. To
+  adopt it, `ui::pickers::calendar_of` needs `disabled_matcher` and
+  `render_item` passthrough parameters (or a `_with` variant).
+- Retracted an earlier engine-quirk claim: "a row prepended by
+  `on_load_more_at_start` never mounts, even after `scroll_to_index(0)`"
+  was an artifact of the demo's old loader bookkeeping (a broken window
+  fed duplicate ids into the list's keys). With the fixed window, the
+  start-loader test asserts the arrival mounts after the Latest jump and
+  passes; no upstream issue.
+- Verified engine fact worth keeping: on an inverted list whose array is
+  newest-first, a loader that prepends (array head) is a layout-tail
+  append, so dropping `.keys(…)` produces no visible difference in these
+  flows; keys stay in place per the coding guides, and the chat's loader
+  test breaks on loader bookkeeping instead.
+
+## Lists and data views
+
+- Done: All nine deliverables in `src/features/lists/` — `Table` semantics
+  parts over an order book plus a sectioned list with sticky headers
+  (orders.rs), `DataTable` over 3,000 deterministic quotes with app-side
+  sorting, a fixed symbol column and stripes on `ui::table::data_table_of`
+  (quotes.rs), a controlled `Tree` with depth-indented, expansion-aware
+  rows (tree.rs), a controlled `Calendar` with a weekends-off matcher and
+  named month/weekday items (calendar_view.rs), a 2,000-card grid with
+  viewability logging, jump controls and data-keyed stars (grid.rs), an
+  inverted chat opened mid-history whose loaders produce gapless pages at
+  both ends, with Receive/Latest controls and a `ui::field::text_field`
+  draft (chat.rs), a `ui::carousel_of` cover carousel (carousel_view.rs),
+  and `ui::pagination_of` over 500 generated entries (pager.rs); the
+  audit round moved text, table, pagination and carousel surfaces onto the
+  ui wrappers and landed the chat loader redesign (window 240..=280 of
+  room 1..=300, page math in pure `older_page`/`newer_page` helpers).
+- Verified: `cargo test --test lists` — 7/7 pass (contiguity unit test,
+  sort orders, grid scroll keeps stars, chat start loader + no-jump, chat
+  older loader + mounted-run span check, calendar selection + refused
+  weekend, pager rows) on the manual clock, final run after the audit
+  fixes; scoped `cargo clippy --all-targets` — no findings in
+  `src/features/lists/**` or `tests/lists.rs`; scoped `cargo fmt --check`
+  clean for the area's files; `tsc -p tsconfig.json` exit 0 covering
+  `vision/lists.test.tsx`; two audit rounds — r1 six findings (the
+  chat-loader HIGH window bug, missing loader tests, calendar/input
+  wrapper swaps, in-repo break records, the Latest-mount re-check), r2
+  clean with two comment nits fixed (the older page is 225..=239; the
+  pager break fails at the Archive-21 wait, not the caption); seen-to-fail
+  re-verified per test with the records in the `tests/lists.rs` header;
+  the calendar wrapper-gap record and the retracted Latest-mount claim
+  are in this file's "Lists area audit notes (round 2)" section.
+- Not verified: pixels and real-platform runs — the vision phase has not
+  run yet; `vision/lists.test.tsx` (8 views × light/dark × phone/desktop)
+  is written and type-checks but has never executed, and it presses the
+  shell's "Lists" nav entry, so it needs the shell and a real target;
+  whole-tree gates (`cargo clippy/test --all-targets` over all areas,
+  `nsh build`, the smoke suite) are left to the join/smoke phases —
+  my scoped runs were blocked at times by other areas' in-flight files
+  and re-run until green; two suspected engine quirks remain
+  observations only, repro notes for `docs/upstream-issues.md`: (a) on a
+  manual clock, an animated `scroll_to_index` can leave cell rebinds
+  lagging the geometry (viewability reported rows 0–17 while the cells at
+  those rows still showed their pre-jump texts, repro: grid demo, jump to
+  card 1500 and back, read `screen().texts()`), and (b) on an inverted
+  list, a row prepended by `on_load_more_at_start` while the viewport was
+  anchored away from the start did not appear in the mounted pool after a
+  later jump to the start in early probes — not reproducible after the
+  loader fix (the Latest-mount assertion passes), so it is recorded as a
+  first-half observation, not a claim.

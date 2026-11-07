@@ -10,9 +10,9 @@ use nsh_core::prelude::*;
 
 use super::event_bus;
 
-/// The most tracked tasks the log keeps, like the bus ring's bound: the
-/// oldest ended record drops first, so a running task never disappears
-/// from the diagnostics page.
+/// The most tracked tasks the log keeps, like the bus ring's bound. Past
+/// it the oldest ended record drops first; only when every record is
+/// running does the oldest running record drop with the rest.
 pub const TASK_LOG_MAX: usize = 50;
 
 /// The tracked tasks, oldest first, ended ones included (the diagnostics
