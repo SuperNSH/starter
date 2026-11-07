@@ -6,7 +6,9 @@ import { expect, open, test } from "nsh/test";
 test("the root mounts", async () => {
   const app = await open(".", { clock: {} });
   await app.waitFor("text:Home");
-  expect(app.texts()).toContain("nsh-starter");
+  // The phone shell names the app in the system header only; Home's own
+  // line is what the root drew.
+  expect(app.texts()).toContain("Everything the boilerplate demonstrates, one page each.");
 });
 
 test("the shell navigates from Home", async () => {

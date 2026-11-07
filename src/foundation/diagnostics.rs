@@ -27,21 +27,25 @@ pub fn diagnostics_page() -> Screen {
     nav_page()
         .title("Diagnostics")
         .header(super::page_header("Diagnostics"))
-        .child(
-            scroll().flex_1().child(
-                view()
-                    .flex_1()
-                    .p_safe_area()
-                    .p_4()
-                    .gap_4()
-                    .child(app_card())
-                    .child(config_card())
-                    .child(capabilities_card())
-                    .child(tasks_card())
-                    .child(events_card())
-                    .child(log_card()),
-            ),
-        )
+        .child(diagnostics_content())
+}
+
+/// The page's body without its `nav_page`, for a stack that frames its
+/// pages itself (the shell): a page nested in a page draws nothing.
+pub fn diagnostics_content() -> impl IntoElement {
+    scroll().flex_1().child(
+        view()
+            .flex_1()
+            .p_safe_area()
+            .p_4()
+            .gap_4()
+            .child(app_card())
+            .child(config_card())
+            .child(capabilities_card())
+            .child(tasks_card())
+            .child(events_card())
+            .child(log_card()),
+    )
 }
 
 /// One titled section of the page.
@@ -148,11 +152,13 @@ fn capabilities_card() -> impl IntoElement {
                     .child(
                         text(if declared { "Declared" } else { "Not declared" })
                             .text_xs()
+                            // Undeclared is the safe default, not a fault:
+                            // only a declared one draws the eye.
                             .text_color(move || {
                                 if declared {
-                                    theme().muted_foreground
+                                    crate::ui::tokens::success()
                                 } else {
-                                    theme().destructive
+                                    theme().muted_foreground
                                 }
                             }),
                     )

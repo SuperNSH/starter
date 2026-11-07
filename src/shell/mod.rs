@@ -68,16 +68,10 @@ pub fn shell() -> impl IntoElement {
         .child(toast::toast_host())
 }
 
-/// Phones: the stack of Home and the pushed pages, the status bar and the
-/// system tab bar for the primary pages.
+/// Phones: the stack of Home and the pushed pages, and the system tab bar
+/// for the primary pages (the status bar is the desktop shell's).
 fn phone_shell() -> AnyElement {
-    let tabs = [
-        Route::Home,
-        Route::Forms,
-        Route::Data,
-        Route::Lists,
-        Route::Motion,
-    ];
+    let tabs = Route::TABS;
     // One past the tabs selects none (a route the bar does not show).
     let selected = signal(tabs.len() as u32);
     // The stack drives the tabs...
@@ -106,7 +100,6 @@ fn phone_shell() -> AnyElement {
                 .child(page::page_screen(Route::Home))
                 .child(pushed()),
         )
-        .child(status::status_bar())
         .child(
             // Off the detail pages; the bar itself shows nothing off
             // iOS and Android.
@@ -114,7 +107,7 @@ fn phone_shell() -> AnyElement {
                 .style_when(move || nav::current().is_detail(), |s| s.hidden())
                 .child(mobile_tab_bar(
                     tabs.iter()
-                        .map(|route| tab_item(route.label_str(), None))
+                        .map(|route| tab_item(route.label_str(), route.tab_icon()))
                         .collect::<Vec<_>>(),
                     selected,
                 )),
@@ -166,29 +159,12 @@ fn sidebar() -> impl IntoElement {
         .border_r_1()
         .border_color(move || theme().border)
         .child(
-            view()
-                .px_4()
-                .pt_4()
-                .pb_2()
-                .gap_1()
-                .child(
-                    text(t!("app.name").to_string())
-                        .text_sm()
-                        .font_weight(FontWeight::SEMIBOLD)
-                        .text_color(move || theme().card_foreground),
-                )
-                .child(
-                    text("Boilerplate for Native Shell")
-                        .text_xs()
-                        .text_color(move || theme().muted_foreground),
-                ),
-        )
-        .child(
             scroll().flex_1().child(
                 view()
                     .px_2()
+                    .pt_3()
                     .pb_4()
-                    .gap_1()
+                    .gap_0p5()
                     .child(
                         text("Pages")
                             .text_xs()

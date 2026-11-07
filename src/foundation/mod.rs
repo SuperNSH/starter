@@ -37,7 +37,7 @@ use nsh_core::element::{AccessibilityRole, Screen, SharedString, Signal};
 use nsh_core::prelude::*;
 use serde_json::Value;
 
-pub use self::diagnostics::diagnostics_page;
+pub use self::diagnostics::{diagnostics_content, diagnostics_page};
 pub use self::error::error_surface;
 
 use crate::state::event_bus;

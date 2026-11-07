@@ -18,17 +18,28 @@ pub(crate) fn calm_motion(calm: Signal<bool>) -> impl IntoElement {
     let open = signal(false);
     let status = signal(String::from("Idle"));
     let drawer = animated_value(DRAWER);
+    // Android lets a natively translated child escape its parent's clip,
+    // so the drawer is hidden outright while it rests shut.
+    let shown = signal(false);
     let reveal = move || {
         let to = if open.get_untracked() { DRAWER } else { 0.0 };
         open.update(|o| *o = !*o);
+        let opening = to == 0.0;
+        if opening {
+            shown.set(true);
+        }
         if effective.get_untracked() {
             drawer.set(to);
+            shown.set(opening);
             status.set(format!("Instant {}", to.round()));
             return;
         }
         let end = drawer.spring(to, Spring::default());
         spawn(async move {
             let finished = end.await;
+            if finished && !opening {
+                shown.set(false);
+            }
             status.set(if finished {
                 "Sprung · finished".to_owned()
             } else {
@@ -54,14 +65,18 @@ pub(crate) fn calm_motion(calm: Signal<bool>) -> impl IntoElement {
                     .child(
                         view()
                             .absolute()
-                            .left_0()
+                            // Anchored at the right edge: shut, its own width
+                            // moves it fully past the track's clip.
+                            .right_0()
                             .top_0()
                             .bottom_0()
                             .w(px(DRAWER))
                             .items_center()
                             .justify_center()
+                            .rounded(move || theme().radius)
                             .bg(move || theme().primary)
                             .bind_translate_x(&drawer)
+                            .opacity(move || if shown.get() { 1.0_f32 } else { 0.0 })
                             .child(
                                 text("Drawer")
                                     .text_size(px(14.0))
@@ -70,16 +85,19 @@ pub(crate) fn calm_motion(calm: Signal<bool>) -> impl IntoElement {
                             ),
                     ),
             )
-            .child(ui::button::button(
-                move || {
-                    if open.get() {
-                        "Shut the drawer"
-                    } else {
-                        "Reveal the drawer"
-                    }
-                },
-                reveal,
-            ))
+            .child(
+                ui::button::button(
+                    move || {
+                        if open.get() {
+                            "Shut the drawer"
+                        } else {
+                            "Reveal the drawer"
+                        }
+                    },
+                    reveal,
+                )
+                .self_start(),
+            )
             .child(status_line("calm-status", move || status.get()))
             .child(api_line(
                 "Checked beside the page's own preference",

@@ -133,10 +133,18 @@ pub(crate) fn caption(note: impl IntoReactive<SharedString> + 'static) -> impl I
         .text_color(move || theme().muted_foreground)
 }
 
+/// One flow of the page: its name over a card holding the flow.
+fn framed(title: &'static str, flow: impl IntoElement) -> impl IntoElement {
+    view()
+        .gap_2()
+        .child(crate::ui::text::section_title(title))
+        .child(crate::ui::layout::card().child(flow))
+}
+
 /// A status line a flow writes to, so tests and people see the outcome.
 pub(crate) fn status_line(value: impl Fn() -> String + 'static) -> impl IntoElement {
     text(value)
-        .text_sm()
+        .text_xs()
         .font_family("monospace")
         .text_color(move || theme().muted_foreground)
 }
@@ -162,29 +170,24 @@ pub fn overlays_page() -> impl IntoElement {
                     .gap_6()
                     .p_safe_area()
                     .p_4()
-                    .child(
-                        text("Overlays")
-                            .text_xl()
-                            .font_weight(FontWeight::BOLD)
-                            .text_color(move || theme().foreground),
-                    )
-                    .child(caption(
+                    .child(crate::ui::text::page_intro(
+                        "Overlays",
                         "Dialogs, popups, menus, toasts and desktop surfaces, each in a flow.",
                     ))
-                    .child(dialog_section::dialog_section())
-                    .child(dialog_section::alert_section())
-                    .child(sheet_section::sheet_section())
-                    .child(menus::popover_section())
-                    .child(menus::menu_section())
-                    .child(menus::context_menu_section())
-                    .child(hovering::hover_card_section())
-                    .child(hovering::tooltip_section())
-                    .child(toasts::toasts_area())
-                    .child(dock_section::dock_section())
-                    .child(panels::panels_section())
-                    .child(code_sections::editor_section())
-                    .child(code_sections::diff_section())
-                    .child(code_sections::text_section()),
+                    .child(framed("Dialog", dialog_section::dialog_section()))
+                    .child(framed("Alert dialog", dialog_section::alert_section()))
+                    .child(framed("Sheet", sheet_section::sheet_section()))
+                    .child(framed("Popover", menus::popover_section()))
+                    .child(framed("Menu", menus::menu_section()))
+                    .child(framed("Context menu", menus::context_menu_section()))
+                    .child(framed("Hover card", hovering::hover_card_section()))
+                    .child(framed("Tooltip", hovering::tooltip_section()))
+                    .child(framed("Toasts", toasts::toasts_area()))
+                    .child(framed("Dock area", dock_section::dock_section()))
+                    .child(framed("Resizable panels", panels::panels_section()))
+                    .child(framed("Editor", code_sections::editor_section()))
+                    .child(framed("Diff view", code_sections::diff_section()))
+                    .child(framed("Text view", code_sections::text_section())),
             ),
         ),
     )

@@ -164,7 +164,8 @@ fn revoke_section(revoked: Signal<bool>, state: Signal<Option<DeliveryState>>) -
             // The visible label names it; `name` is for when it would not.
             None,
             move || revoked.set(true),
-        ))
+        )
+        .self_start())
         .child(
             text(move || {
                 if revoked.get() {

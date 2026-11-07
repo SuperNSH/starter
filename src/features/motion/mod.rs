@@ -43,8 +43,8 @@ pub fn motion_page() -> impl IntoElement {
                 .gap(px(24.0))
                 .px(px(16.0))
                 .py(px(20.0))
-                .child(ui::text::title("Motion and gestures"))
-                .child(ui::text::muted(
+                .child(ui::text::page_intro(
+                    "Motion and gestures",
                     "Springs, tweens, layout animations and native gestures",
                 ))
                 .child(calm_motion(calm))

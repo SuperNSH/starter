@@ -153,12 +153,12 @@ fn back_pops_a_page_then_asks_to_exit() {
     app.wait_for("text:Go to").unwrap();
 
     // The overlay takes back first: the palette closes and the page
-    // beneath stays (its marker and the status bar still name it).
+    // beneath stays (the sign-up's own title still shows).
     app.back().unwrap();
     app.wait_until(
         "the palette closed over the intact page",
         Duration::from_secs(5),
-        |screen| screen.count("text:Go to") == Ok(0) && screen.count("text:Forms") >= Ok(2),
+        |screen| screen.count("text:Go to") == Ok(0) && screen.count("text:Sign up") >= Ok(1),
     )
     .unwrap();
 
@@ -167,7 +167,7 @@ fn back_pops_a_page_then_asks_to_exit() {
     app.wait_until(
         "the pushed Forms page popped",
         Duration::from_secs(5),
-        |screen| screen.count("text:Forms") == Ok(1),
+        |screen| screen.count("text:Sign up") == Ok(0),
     )
     .unwrap();
 
@@ -260,14 +260,19 @@ fn the_desktop_width_takes_the_sidebar() {
 
 #[test]
 fn the_lifecycle_watch_follows_the_environment() {
-    let mut app = phone();
+    // The status bar that shows the phase is the desktop shell's.
+    let mut app = desktop();
     app.wait_for("text:Active").unwrap();
+    // The environment handed in is the platform default's: the desktop
+    // width is restated so the shell (and its status bar) stays.
     app.set_environment("the app backgrounds", |environment| {
+        environment.window = Size::new(Points(1280.0), Points(800.0));
         environment.lifecycle = Lifecycle::Background;
     })
     .unwrap();
     app.wait_for("text:Backgrounded").unwrap();
     app.set_environment("the app activates", |environment| {
+        environment.window = Size::new(Points(1280.0), Points(800.0));
         environment.lifecycle = Lifecycle::Active;
     })
     .unwrap();

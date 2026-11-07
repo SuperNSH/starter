@@ -95,6 +95,45 @@ impl Route {
     }
 
     /// The key of a root route, as a literal (static contexts).
+    /// The tab bar's icon: an SF Symbol on iOS, a system drawable on
+    /// Android (`nsh package` cannot add app drawables); none elsewhere.
+    pub fn tab_icon(self) -> Option<&'static str> {
+        use nsh_core::platform::Os;
+        let (ios, android) = match self {
+            Route::Home => ("house", "android:ic_menu_compass"),
+            Route::Forms => ("square.and.pencil", "android:ic_menu_edit"),
+            Route::Data => ("tray.full", "android:ic_menu_agenda"),
+            Route::Lists => ("list.bullet", "android:ic_menu_sort_by_size"),
+            Route::Motion => ("wind", "android:ic_menu_rotate"),
+            _ => return None,
+        };
+        match os() {
+            Os::Ios => Some(ios),
+            Os::Android => Some(android),
+            _ => None,
+        }
+    }
+
+    /// One line on what the page shows, for Home's cards.
+    pub fn summary(self) -> &'static str {
+        match self {
+            Route::Home => "Every page of the boilerplate.",
+            Route::UiGallery => "Every control of the app's own library, with its states.",
+            Route::Forms => "A full sign-up and a settings form on nsh-form.",
+            Route::Data => "An infinite feed on nsh-query with optimistic likes.",
+            Route::DataDetail(_) => "One post, read through a tracked query key.",
+            Route::QueryDevtools => "The query cache: keys, states and timings.",
+            Route::Lists => "Tables, a tree, a calendar, a chat and a carousel.",
+            Route::Canvas => "Drawing, charts, shaders, SVG, media and the web view.",
+            Route::Motion => "Springs, transitions, swipe rows and gestures.",
+            Route::Overlays => "Dialogs, sheets, menus, toasts and desktop panes.",
+            Route::Platform => "Safe areas, clipboard, picker, speech and locales.",
+            Route::Device => "The device, its screen and the environment.",
+            Route::RemoteScreen => "A signed TSX package, verified and revocable.",
+            Route::Diagnostics => "Config, capabilities, tasks, events and the log.",
+        }
+    }
+
     pub fn key_str(self) -> &'static str {
         match self {
             Route::Home => "home",
@@ -160,6 +199,26 @@ impl Route {
         self.label().into()
     }
 
+    /// The pages the phone's tab bar holds, in its order.
+    pub const TABS: [Route; 5] = [
+        Route::Home,
+        Route::Forms,
+        Route::Data,
+        Route::Lists,
+        Route::Motion,
+    ];
+
+    /// One of the phone's tabs: a root there, so it shows no back button.
+    pub fn is_tab(self) -> bool {
+        Route::TABS.contains(&self)
+    }
+
+    /// A page that runs a `nav_stack` of its own (Forms: sign-up, then
+    /// settings), whose pages draw the phone's system header themselves.
+    pub fn has_own_stack(self) -> bool {
+        matches!(self, Route::Forms)
+    }
+
     /// A page pushed over its parent rather than opened in its place.
     pub fn is_detail(self) -> bool {
         matches!(self, Route::DataDetail(_))
@@ -191,7 +250,7 @@ impl Route {
             Route::RemoteScreen => {
                 crate::features::remote_screen::remote_screen_page().into_element()
             }
-            Route::Diagnostics => crate::foundation::diagnostics_page().into_element(),
+            Route::Diagnostics => crate::foundation::diagnostics_content().into_element(),
         }
     }
 }

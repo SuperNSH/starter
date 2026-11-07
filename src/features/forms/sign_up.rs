@@ -493,10 +493,12 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
     sign_up_nav(form).child(
         scroll()
             .flex_1()
+            // nav_page paints the platform's color; the page takes the theme's.
+            .bg(move || theme().background)
             // The focused field's label keeps clear of the page header when
             // the reveal scrolls it to the top.
             .content_inset(EdgeInsets {
-                top: px(28.0),
+                top: px(8.0),
                 ..EdgeInsets::default()
             })
             .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
@@ -518,7 +520,7 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
 
 /// The screen's page furniture: title, drawn header, the dirty guard.
 fn sign_up_nav(form: Form<SignUp>) -> Screen {
-    nav_page()
+    crate::ui::nav::themed_header(nav_page())
         .title("Sign up")
         .header(page_header("Sign up", None::<fn()>))
         .pop_on_back(move || !form.is_dirty())
@@ -807,7 +809,7 @@ fn switch_row(newsletter: Field<SignUp, bool>) -> View {
                     s.w(px(44.0))
                         .p(px(2.0))
                         .rounded_full()
-                        .bg(move || theme().muted)
+                        .bg(move || theme().muted_foreground.opacity(0.3))
                         .transition_colors()
                         .checked(|s| s.bg(move || theme().primary))
                 })

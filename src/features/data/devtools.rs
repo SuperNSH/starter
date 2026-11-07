@@ -41,7 +41,7 @@ fn offline_switch() -> impl IntoElement {
             s.w(px(44.0))
                 .p(px(2.0))
                 .rounded_full()
-                .bg(move || theme().muted)
+                .bg(move || theme().muted_foreground.opacity(0.3))
                 .transition_colors()
                 .checked(|s| s.bg(move || theme().destructive))
         })

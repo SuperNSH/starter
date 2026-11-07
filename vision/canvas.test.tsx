@@ -75,6 +75,23 @@ test("the images and the bundled video show", async () => {
   await capture(app, "docs/evidence/canvas/media.png");
 });
 
+test("the infinite board pans, zooms and selects a node", async () => {
+  const app = await canvasApp();
+  await app.waitFor("text:/^world 100% · pan 0, 0$/");
+  await app.drag("id:world-board", { x: 60, y: 0 });
+  await app.waitFor("text:/^world 100% · pan 60, 0$/");
+  await app.press("text:Zoom in");
+  await app.waitFor("text:/^world 125% · pan 75, 0$/");
+  await capture(app, "docs/evidence/canvas/world-zoomed.png");
+  await app.drag("id:world-board", { x: -100, y: 0 });
+  await app.waitFor("text:/^center 20, 0 · under: Notes$/");
+  await app.press("text:Zoom in");
+  await app.waitFor("text:/^world 156% · pan -31, 0$/");
+  await app.drag("id:world-board", { x: 30, y: 0 });
+  await app.waitFor("text:/^selected: Notes · 89, 0$/");
+  await capture(app, "docs/evidence/canvas/world-node-selected.png");
+});
+
 test("the web view exchange is recorded both ways", async () => {
   const app = await canvasApp();
   await app.waitFor("text:Post to the page");

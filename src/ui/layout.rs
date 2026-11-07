@@ -91,12 +91,18 @@ pub fn badge(label: impl IntoReactive<SharedString>, tone: BadgeTone) -> impl In
         BadgeTone::Info => (crate::ui::tokens::info, crate::ui::tokens::info_foreground),
         BadgeTone::Danger => (danger_bg, crate::ui::tokens::destructive_foreground),
     };
-    view().px_2().py_0p5().rounded_full().bg(bg).child(
-        text(label.into_reactive())
-            .text_xs()
-            .font_weight(FontWeight::MEDIUM)
-            .text_color(fg),
-    )
+    view()
+        .self_start()
+        .px_2()
+        .py_0p5()
+        .rounded_full()
+        .bg(bg)
+        .child(
+            text(label.into_reactive())
+                .text_xs()
+                .font_weight(FontWeight::MEDIUM)
+                .text_color(fg),
+        )
 }
 
 /// The static placeholder box for content that is loading: draw it in

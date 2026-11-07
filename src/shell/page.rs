@@ -8,17 +8,48 @@ use nsh_core::{element::Screen, prelude::*};
 
 use crate::{
     shell::{nav, palette, routes::Route},
-    ui::button::{ButtonSize, ButtonVariant, button_with},
+    ui::{
+        button::{ButtonSize, ButtonVariant, button_with},
+        nav::themed_header,
+    },
 };
+
+/// The widest the page content grows, in points: past it, label and value
+/// columns drift too far apart to read as one row.
+const CONTENT_MAX: f32 = 1040.0;
 
 /// The route's page as the stack shows it.
 pub fn page_screen(route: Route) -> Screen {
-    let mut screen = nav_page().key(route.key()).title(route.title());
+    let mut screen = themed_header(nav_page().key(route.key()).title(route.title()));
     // A detail over the tab bar's pages keeps the bar out while it is up.
     if route.is_detail() {
         screen = screen.hides_bottom_bar_when_pushed(true);
     }
-    screen.header(page_header(route)).child(route.page())
+    // A tab is a root on phones: the tab bar, not a back button, leaves it
+    // (Android's system back still returns Home, the shell's back order).
+    if route.is_tab() && !is_desktop() {
+        screen = screen.header_back_visible(false).pop_on_swipe(false);
+    }
+    // One system header per screen: the feature's own stack draws it.
+    if route.has_own_stack() && !is_desktop() {
+        screen = screen.header_visible(false);
+    }
+    // nav_page paints the platform's window color (macOS dark: #1e1e1e),
+    // so the content area takes the theme's own background on every page;
+    // wide windows center the content at a readable measure.
+    screen.header(page_header(route)).child(
+        view()
+            .flex_1()
+            .items_center()
+            .bg(move || theme().background)
+            .child(
+                view()
+                    .flex_1()
+                    .w_full()
+                    .max_w(px(CONTENT_MAX))
+                    .child(route.page()),
+            ),
+    )
 }
 
 /// The header slot (desktops and the web only; iOS and Android draw their
@@ -33,6 +64,7 @@ fn page_header(route: Route) -> impl IntoElement {
         .px_3()
         .border_b_1()
         .border_color(move || theme().border)
+        .bg(move || theme().background)
         .when(route != Route::Home, |header| {
             header.child(button_with(
                 "Back",

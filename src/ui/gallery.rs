@@ -630,50 +630,59 @@ fn overlays_section(
                             .into_element(),
                     ),
             )
-            .child(popups::popover_of(
-                button::button_with(
-                    "Details",
-                    button::ButtonVariant::Outline,
-                    button::ButtonSize::Small,
-                    false,
-                    None,
-                    move || popover_open.set(!popover_open.get()),
-                ),
-                view()
-                    .w(px(220.0))
-                    .flex_col()
-                    .gap_1()
-                    .child(text::body("Shipped yesterday"))
-                    .child(text::muted("Popovers keep the task going.")),
-                move |open| popover_open.set(open),
-            ))
+            // Triggers hug their labels in one wrapping row; alone in the
+            // column each stretched to the full width.
             .child(
                 view()
-                    .tooltip(popups::tooltip_of("Keyboard: mod+/"))
-                    .child(button::icon_button("?", "Help", || ())),
+                    .flex_row()
+                    .flex_wrap()
+                    .items_center()
+                    .gap_2()
+                    .child(popups::popover_of(
+                        button::button_with(
+                            "Details",
+                            button::ButtonVariant::Outline,
+                            button::ButtonSize::Medium,
+                            false,
+                            None,
+                            move || popover_open.set(!popover_open.get()),
+                        ),
+                        view()
+                            .w(px(220.0))
+                            .flex_col()
+                            .gap_1()
+                            .child(text::body("Shipped yesterday"))
+                            .child(text::muted("Popovers keep the task going.")),
+                        move |open| popover_open.set(open),
+                    ))
+                    .child(
+                        view()
+                            .tooltip(popups::tooltip_of("Keyboard: mod+/"))
+                            .child(button::icon_button("?", "Help", || ())),
+                    )
+                    .child(popups::hover_card_of(
+                        button::button_with(
+                            "Hover me",
+                            button::ButtonVariant::Ghost,
+                            button::ButtonSize::Medium,
+                            false,
+                            None,
+                            || (),
+                        ),
+                        view()
+                            .w(px(200.0))
+                            .child(text::body("Ada Lovelace"))
+                            .child(text::muted("Writes the first programs.")),
+                    ))
+                    .child(button::button_with(
+                        "Command palette",
+                        button::ButtonVariant::Secondary,
+                        button::ButtonSize::Medium,
+                        false,
+                        None,
+                        move || menu_open.set(true),
+                    )),
             )
-            .child(popups::hover_card_of(
-                button::button_with(
-                    "Hover me",
-                    button::ButtonVariant::Ghost,
-                    button::ButtonSize::Small,
-                    false,
-                    None,
-                    || (),
-                ),
-                view()
-                    .w(px(200.0))
-                    .child(text::body("Ada Lovelace"))
-                    .child(text::muted("Writes the first programs.")),
-            ))
-            .child(button::button_with(
-                "Command palette",
-                button::ButtonVariant::Secondary,
-                button::ButtonSize::Medium,
-                false,
-                None,
-                move || menu_open.set(true),
-            ))
             // Commands on the object under the pointer or finger: right
             // click on the desktops, a held finger on touch screens.
             .child(popups::context_menu_of(

@@ -115,3 +115,30 @@ fn posting_to_the_web_view_page_records_the_message() -> Result<(), String> {
     app.wait_for("text:hi #1")?;
     Ok(())
 }
+
+#[test]
+fn the_world_board_pans_zooms_and_selects_a_node_at_zoom() -> Result<(), String> {
+    let mut app = app();
+    app.wait_for("text:/^world 100% · pan 0, 0$/")?;
+    // A drag on the empty board pans: the readout's pan follows the drag.
+    app.drag("id:world-board", point(px(60.0), px(0.0)))?;
+    app.wait_for("text:/^world 100% · pan 60, 0$/")?;
+    // Zoom in: anchored at the view's center, so the pan scales by the
+    // same ratio as the zoom.
+    app.press("text:Zoom in")?;
+    app.wait_for("text:/^world 125% · pan 75, 0$/")?;
+    // The hit test runs in world space: the viewport center's world point
+    // is 20, 0 — on Notes — and the readout names both exactly.
+    app.drag("id:world-board", point(px(-100.0), px(0.0)))?;
+    app.wait_for("text:/^center 20, 0 · under: Notes$/")?;
+    // A further zoom keeps the node under the center: the same world
+    // point, at a different zoom.
+    app.press("text:Zoom in")?;
+    app.wait_for("text:/^world 156% · pan -31, 0$/")?;
+    app.wait_for("text:/^center 20, 0 · under: Notes$/")?;
+    // A drag from the center selects Notes and moves it in world units:
+    // 30 screen points at 156% is 19 world points.
+    app.drag("id:world-board", point(px(30.0), px(0.0)))?;
+    app.wait_for("text:/^selected: Notes · 89, 0$/")?;
+    Ok(())
+}

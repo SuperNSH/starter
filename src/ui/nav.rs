@@ -73,3 +73,17 @@ pub fn chevron() -> View {
             .text_color(move || theme().muted_foreground),
     )
 }
+
+/// The system header in the app's colors on Android, whose native header
+/// otherwise keeps the system appearance when the app picks its own (iOS
+/// follows the app's appearance and keeps its material).
+pub fn themed_header(screen: nsh_core::element::Screen) -> nsh_core::element::Screen {
+    if os() != nsh_core::platform::Os::Android {
+        return screen;
+    }
+    screen.header_style_with(|s| {
+        s.bg(move || theme().background)
+            .text_color(move || theme().foreground)
+            .tint_color(move || theme().foreground)
+    })
+}

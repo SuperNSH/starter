@@ -100,6 +100,7 @@ fn total() -> f64 {
 /// destructive when it died.
 fn status_pill(status: Status) -> impl IntoElement {
     view()
+        .self_start()
         .px_2()
         .py(px(2.0))
         .rounded_full()

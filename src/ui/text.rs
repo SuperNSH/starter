@@ -57,3 +57,12 @@ pub fn code(label: impl IntoReactive<SharedString>) -> impl IntoElement {
         .bg(move || theme().muted)
         .text_color(move || theme().foreground)
 }
+
+/// A page's opening: its title over one line of what the page is, kept
+/// tight together so the pair reads as one block above the sections.
+pub fn page_intro(
+    heading: impl IntoReactive<SharedString>,
+    summary: impl IntoReactive<SharedString>,
+) -> impl IntoElement {
+    view().gap_1().child(title(heading)).child(muted(summary))
+}

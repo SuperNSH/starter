@@ -199,15 +199,18 @@ pub fn dropdown_menu(
         .trigger(
             base_button()
                 .on_press(|| ())
-                .min_h(px(32.0))
-                .px_3()
-                .py_1p5()
+                // The outline button's medium frame, so the trigger lines
+                // up with the buttons beside it.
+                .min_h(move || px(if is_desktop() { 36.0 } else { 44.0 }))
+                .px_4()
                 .flex_row()
                 .items_center()
+                .justify_center()
                 .gap_1()
                 .rounded(move || theme().radius)
                 .border_1()
                 .border_color(move || theme().input)
+                .bg(move || theme().background)
                 .transition_colors()
                 .hover(|s| s.bg(move || theme().accent))
                 .active(|s| s.opacity(0.8))
@@ -219,6 +222,7 @@ pub fn dropdown_menu(
                 .child(
                     text(trigger_label.into_reactive())
                         .text_sm()
+                        .font_weight(FontWeight::MEDIUM)
                         .text_color(move || theme().foreground),
                 ),
         )
