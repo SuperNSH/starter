@@ -1,0 +1,9 @@
+{
+  "name": "nsh-starter",
+  "id": "com.example.nshstarter",
+  "version": "1.0.0",
+  "build": 1,
+  "theme": "themes/theme.json",
+  "rust": ".",
+  "root": "App"
+}
