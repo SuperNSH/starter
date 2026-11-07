@@ -2893,7 +2893,9 @@ dependencies = [
 name = "nsh-starter"
 version = "0.1.0"
 dependencies = [
+ "chrono",
  "env_logger",
+ "log",
  "nsh-base",
  "nsh-core",
  "nsh-engine",

@@ -4,6 +4,18 @@
 import { expect, open, test } from "nsh/test";
 
 test("the root mounts", async () => {
-  const app = await open(".");
+  const app = await open(".", { clock: {} });
+  await app.waitFor("text:Home");
   expect(app.texts()).toContain("nsh-starter");
+});
+
+test("the shell navigates from Home", async () => {
+  const app = await open(".", { clock: {} });
+  await app.press("id:page-forms");
+  await app.waitFor("text:Forms");
+  // Back pops the pushed page; back again on Home asks to exit.
+  await app.back();
+  await app.back();
+  await app.waitFor("text:Exit nsh-starter?");
+  await app.press("role:button[Cancel]");
 });

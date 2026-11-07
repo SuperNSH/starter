@@ -1,0 +1,1500 @@
+✓ built the Rust crate nsh-starter (18.6s)
+✓ built the headless runner of nsh-starter (21.4s, 1 warning: -v shows it)
+perf commit: 0 ops, 9566µs (list js 0µs), 363 mount items, 117 nodes
+perf first frame: eval 0µs, total 10226µs
+── open(): 363 items
+   Create { id: 3, kind: View }
+   Insert { parent: 1, child: 3, before: None }
+   LayoutDirection { rtl: false }
+   Create { id: 5, kind: View }
+   Insert { parent: 3, child: 5, before: None }
+   Create { id: 7, kind: View }
+   Insert { parent: 5, child: 7, before: None }
+   Create { id: 9, kind: View }
+   Create { id: 11, kind: Stack }
+   Create { id: 13, kind: Screen }
+   Create { id: 15, kind: HeaderItem }
+   Create { id: 17, kind: View }
+   Create { id: 19, kind: Text }
+   Insert { parent: 17, child: 19, before: None }
+   Insert { parent: 15, child: 17, before: None }
+   Insert { parent: 13, child: 15, before: None }
+   Create { id: 23, kind: Scroll }
+   Create { id: 25, kind: View }
+   Create { id: 27, kind: View }
+   Create { id: 29, kind: Text }
+   Insert { parent: 27, child: 29, before: None }
+   Create { id: 33, kind: Text }
+   Insert { parent: 27, child: 33, before: None }
+   Insert { parent: 25, child: 27, before: None }
+   Create { id: 37, kind: View }
+   Create { id: 39, kind: Text }
+   Insert { parent: 37, child: 39, before: None }
+   Create { id: 43, kind: View }
+   Insert { parent: 37, child: 43, before: None }
+   Create { id: 55, kind: View }
+   Insert { parent: 37, child: 55, before: None }
+   Create { id: 67, kind: View }
+   Insert { parent: 37, child: 67, before: None }
+   Create { id: 79, kind: View }
+   Insert { parent: 37, child: 79, before: None }
+   Create { id: 91, kind: View }
+   Insert { parent: 37, child: 91, before: None }
+   Create { id: 103, kind: View }
+   Insert { parent: 37, child: 103, before: None }
+   Create { id: 115, kind: View }
+   Insert { parent: 37, child: 115, before: None }
+   Create { id: 127, kind: View }
+   Insert { parent: 37, child: 127, before: None }
+   Create { id: 139, kind: View }
+   Insert { parent: 37, child: 139, before: None }
+   Create { id: 151, kind: View }
+   Insert { parent: 37, child: 151, before: None }
+   Create { id: 163, kind: View }
+   Insert { parent: 37, child: 163, before: None }
+   Create { id: 175, kind: View }
+   Insert { parent: 37, child: 175, before: None }
+   Insert { parent: 25, child: 37, before: None }
+   Create { id: 187, kind: View }
+   Create { id: 189, kind: Text }
+   Insert { parent: 187, child: 189, before: None }
+   Create { id: 193, kind: View }
+   Insert { parent: 187, child: 193, before: None }
+   Create { id: 205, kind: View }
+   Insert { parent: 187, child: 205, before: None }
+   Insert { parent: 25, child: 187, before: None }
+   Insert { parent: 23, child: 25, before: None }
+   Insert { parent: 13, child: 23, before: None }
+   Insert { parent: 11, child: 13, before: None }
+   Insert { parent: 9, child: 11, before: None }
+   Create { id: 217, kind: View }
+   Create { id: 219, kind: Text }
+   Insert { parent: 217, child: 219, before: None }
+   Create { id: 223, kind: View }
+   Create { id: 225, kind: Text }
+   Insert { parent: 223, child: 225, before: None }
+   Create { id: 229, kind: Text }
+   Insert { parent: 223, child: 229, before: None }
+   Insert { parent: 217, child: 223, before: None }
+   Insert { parent: 9, child: 217, before: None }
+   Insert { parent: 7, child: 9, before: None }
+   Create { id: 233, kind: Native }
+   Insert { parent: 9, child: 233, before: None }
+   Component { id: 233, name: "nsh/tab-bar" }
+   TrackStates { id: 205, states: 7 }
+   Create { id: 207, kind: View }
+   Create { id: 209, kind: Text }
+   Insert { parent: 207, child: 209, before: None }
+   Create { id: 213, kind: Text }
+   Insert { parent: 207, child: 213, before: None }
+   Insert { parent: 205, child: 207, before: None }
+   TrackStates { id: 193, states: 7 }
+   Create { id: 195, kind: View }
+   Create { id: 197, kind: Text }
+   Insert { parent: 195, child: 197, before: None }
+   Create { id: 201, kind: Text }
+   Insert { parent: 195, child: 201, before: None }
+   Insert { parent: 193, child: 195, before: None }
+   TrackStates { id: 175, states: 7 }
+   Create { id: 177, kind: View }
+   Create { id: 179, kind: Text }
+   Insert { parent: 177, child: 179, before: None }
+   Create { id: 183, kind: Text }
+   Insert { parent: 177, child: 183, before: None }
+   Insert { parent: 175, child: 177, before: None }
+   TrackStates { id: 163, states: 7 }
+   Create { id: 165, kind: View }
+   Create { id: 167, kind: Text }
+   Insert { parent: 165, child: 167, before: None }
+   Create { id: 171, kind: Text }
+   Insert { parent: 165, child: 171, before: None }
+   Insert { parent: 163, child: 165, before: None }
+   TrackStates { id: 151, states: 7 }
+   Create { id: 153, kind: View }
+   Create { id: 155, kind: Text }
+   Insert { parent: 153, child: 155, before: None }
+   Create { id: 159, kind: Text }
+   Insert { parent: 153, child: 159, before: None }
+   Insert { parent: 151, child: 153, before: None }
+   TrackStates { id: 139, states: 7 }
+   Create { id: 141, kind: View }
+   Create { id: 143, kind: Text }
+   Insert { parent: 141, child: 143, before: None }
+   Create { id: 147, kind: Text }
+   Insert { parent: 141, child: 147, before: None }
+   Insert { parent: 139, child: 141, before: None }
+   TrackStates { id: 127, states: 7 }
+   Create { id: 129, kind: View }
+   Create { id: 131, kind: Text }
+   Insert { parent: 129, child: 131, before: None }
+   Create { id: 135, kind: Text }
+   Insert { parent: 129, child: 135, before: None }
+   Insert { parent: 127, child: 129, before: None }
+   TrackStates { id: 115, states: 7 }
+   Create { id: 117, kind: View }
+   Create { id: 119, kind: Text }
+   Insert { parent: 117, child: 119, before: None }
+   Create { id: 123, kind: Text }
+   Insert { parent: 117, child: 123, before: None }
+   Insert { parent: 115, child: 117, before: None }
+   TrackStates { id: 103, states: 7 }
+   Create { id: 105, kind: View }
+   Create { id: 107, kind: Text }
+   Insert { parent: 105, child: 107, before: None }
+   Create { id: 111, kind: Text }
+   Insert { parent: 105, child: 111, before: None }
+   Insert { parent: 103, child: 105, before: None }
+   TrackStates { id: 91, states: 7 }
+   Create { id: 93, kind: View }
+   Create { id: 95, kind: Text }
+   Insert { parent: 93, child: 95, before: None }
+   Create { id: 99, kind: Text }
+   Insert { parent: 93, child: 99, before: None }
+   Insert { parent: 91, child: 93, before: None }
+   TrackStates { id: 79, states: 7 }
+   Create { id: 81, kind: View }
+   Create { id: 83, kind: Text }
+   Insert { parent: 81, child: 83, before: None }
+   Create { id: 87, kind: Text }
+   Insert { parent: 81, child: 87, before: None }
+   Insert { parent: 79, child: 81, before: None }
+   TrackStates { id: 67, states: 7 }
+   Create { id: 69, kind: View }
+   Create { id: 71, kind: Text }
+   Insert { parent: 69, child: 71, before: None }
+   Create { id: 75, kind: Text }
+   Insert { parent: 69, child: 75, before: None }
+   Insert { parent: 67, child: 69, before: None }
+   TrackStates { id: 55, states: 7 }
+   Create { id: 57, kind: View }
+   Create { id: 59, kind: Text }
+   Insert { parent: 57, child: 59, before: None }
+   Create { id: 63, kind: Text }
+   Insert { parent: 57, child: 63, before: None }
+   Insert { parent: 55, child: 57, before: None }
+   TrackStates { id: 43, states: 7 }
+   Create { id: 45, kind: View }
+   Create { id: 47, kind: Text }
+   Insert { parent: 45, child: 47, before: None }
+   Create { id: 51, kind: Text }
+   Insert { parent: 45, child: 51, before: None }
+   Insert { parent: 43, child: 45, before: None }
+   Keymap(Keymap { bindings: [KeyBinding { id: 2147483648, keystroke: Keystroke { modifiers: Modifiers { ctrl: false, alt: false, shift: false, cmd: true }, key: Char('k') }, in_text: true, repeat: false }, KeyBinding { id: 2147483649, keystroke: Keystroke { modifiers: Modifiers { ctrl: false, alt: false, shift: false, cmd: true }, key: Char('z') }, in_text: false, repeat: false }, KeyBinding { id: 2147483650, keystroke: Keystroke { modifiers: Modifiers { ctrl: false, alt: false, shift: true, cmd: true }, key: Char('z') }, in_text: false, repeat: false }] })
+   ViewStyle { id: 3, style: ViewStyle { background_color: Color(4294967295), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewStyle { id: 7, style: ViewStyle { background_color: Color(4294967295), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 13, events: EventMask([16777216, 0]) }
+   ScreenConfig { id: 13, config: ScreenConfig { title: Some("Home"), header_visible: true, large_title: false, header_transparent: false, hides_bottom_bar_when_pushed: false, tint_color: None, background_color: None, title_color: None, back_title: None, back_visible: true, gesture_enabled: true, prevent_back: false, animation: Default, left: None, right: None, right_system_item: None, right_symbol: None, left_system_item: None, left_symbol: None, title_view: None, header_view: Some(15), header_height: 0pt } }
+   ViewStyle { id: 17, style: ViewStyle { background_color: Color(0), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 1pt, left: 0pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewProps { id: 45, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-ui"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 57, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-forms"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 69, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-data"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 81, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-query-devtools"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 93, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-lists"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 105, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-canvas"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 117, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-motion"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 129, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-overlays"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 141, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-platform"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 153, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-device"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 165, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-remote"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 177, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-diagnostics"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 195, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-data-item"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewProps { id: 207, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("page-deep-link"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 217, style: ViewStyle { background_color: Color(4294967295), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ScrollConfig { id: 23, horizontal: false, scrollbar_visible: true, replaced: false, scroll_value: None, pull_value: None, keyboard_dismiss: None, mirrored: false }
+   ViewStyle { id: 43, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 43, events: EventMask([24577, 0]) }
+   ViewProps { id: 43, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("UI gallery"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 55, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 55, events: EventMask([24577, 0]) }
+   ViewProps { id: 55, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Forms"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 67, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 67, events: EventMask([24577, 0]) }
+   ViewProps { id: 67, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Data"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 79, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 79, events: EventMask([24577, 0]) }
+   ViewProps { id: 79, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Query devtools"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 91, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 91, events: EventMask([24577, 0]) }
+   ViewProps { id: 91, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Lists"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 103, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 103, events: EventMask([24577, 0]) }
+   ViewProps { id: 103, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Canvas"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 115, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 115, events: EventMask([24577, 0]) }
+   ViewProps { id: 115, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Motion"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 127, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 127, events: EventMask([24577, 0]) }
+   ViewProps { id: 127, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Overlays"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 139, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 139, events: EventMask([24577, 0]) }
+   ViewProps { id: 139, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Platform"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 151, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 151, events: EventMask([24577, 0]) }
+   ViewProps { id: 151, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Device"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 163, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 163, events: EventMask([24577, 0]) }
+   ViewProps { id: 163, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Remote screen"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 175, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 175, events: EventMask([24577, 0]) }
+   ViewProps { id: 175, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Diagnostics"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 193, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 193, events: EventMask([24577, 0]) }
+   ViewProps { id: 193, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Open data item 3"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 205, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 205, events: EventMask([24577, 0]) }
+   ViewProps { id: 205, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Open a deep link"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Events { id: 233, events: EventMask([140737488355328, 0]) }
+   ComponentProps { id: 233, props: [("items", Some(Array [Object {"title": String("Home")}, Object {"title": String("Forms")}, Object {"title": String("Data")}, Object {"title": String("Lists")}, Object {"title": String("Motion")}])), ("selectedIndex", Some(Number(0))), ("hidden", Some(Bool(false))), ("tint", Some(String("#4F46E5")))] }
+   Events { id: 1, events: EventMask([562954248388608, 0]) }
+   Frame { id: 3, x: 0, y: 0, w: 390, h: 844 }
+   Frame { id: 5, x: 0, y: 0, w: 390, h: 844 }
+   Frame { id: 7, x: 0, y: 0, w: 390, h: 844 }
+   Frame { id: 9, x: 0, y: 0, w: 390, h: 844 }
+   Frame { id: 11, x: 0, y: 0, w: 390, h: 824 }
+   Frame { id: 217, x: 0, y: 824, w: 390, h: 20 }
+   Frame { id: 219, x: 12, y: 5, w: 73, h: 15 }
+   Frame { id: 223, x: 299, y: 5, w: 79, h: 15 }
+   Frame { id: 225, x: 0, y: 0, w: 27, h: 15 }
+   Frame { id: 229, x: 39, y: 0, w: 40, h: 15 }
+   Frame { id: 233, x: 0, y: 844, w: 390, h: 0 }
+   Frame { id: 13, x: 0, y: 0, w: 390, h: 824 }
+   Frame { id: 23, x: 0, y: 44, w: 390, h: 780 }
+   ScrollContent { id: 23, size: Size { width: 390pt, height: 846pt } }
+   Frame { id: 25, x: 0, y: 0, w: 390, h: 846 }
+   Frame { id: 27, x: 16, y: 16, w: 358, h: 64 }
+   Frame { id: 29, x: 0, y: 0, w: 358, h: 22 }
+   Frame { id: 33, x: 0, y: 30, w: 358, h: 34 }
+   Frame { id: 37, x: 16, y: 96, w: 358, h: 599 }
+   Frame { id: 39, x: 0, y: 0, w: 358, h: 23 }
+   Frame { id: 43, x: 0, y: 27, w: 358, h: 44 }
+   Frame { id: 45, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 47, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 51, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 55, x: 0, y: 75, w: 358, h: 44 }
+   Frame { id: 57, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 59, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 63, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 67, x: 0, y: 123, w: 358, h: 44 }
+   Frame { id: 69, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 71, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 75, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 79, x: 0, y: 171, w: 358, h: 44 }
+   Frame { id: 81, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 83, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 87, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 91, x: 0, y: 219, w: 358, h: 44 }
+   Frame { id: 93, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 95, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 99, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 103, x: 0, y: 267, w: 358, h: 44 }
+   Frame { id: 105, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 107, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 111, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 115, x: 0, y: 315, w: 358, h: 44 }
+   Frame { id: 117, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 119, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 123, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 127, x: 0, y: 363, w: 358, h: 44 }
+   Frame { id: 129, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 131, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 135, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 139, x: 0, y: 411, w: 358, h: 44 }
+   Frame { id: 141, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 143, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 147, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 151, x: 0, y: 459, w: 358, h: 44 }
+   Frame { id: 153, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 155, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 159, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 163, x: 0, y: 507, w: 358, h: 44 }
+   Frame { id: 165, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 167, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 171, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 175, x: 0, y: 555, w: 358, h: 44 }
+   Frame { id: 177, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 179, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 183, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 187, x: 16, y: 711, w: 358, h: 119 }
+   Frame { id: 189, x: 0, y: 0, w: 358, h: 23 }
+   Frame { id: 193, x: 0, y: 27, w: 358, h: 44 }
+   Frame { id: 195, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 197, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 201, x: 326, y: 0, w: 8, h: 17 }
+   Frame { id: 205, x: 0, y: 75, w: 358, h: 44 }
+   Frame { id: 207, x: 12, y: 14, w: 334, h: 17 }
+   Frame { id: 209, x: 0, y: 0, w: 318, h: 17 }
+   Frame { id: 213, x: 326, y: 0, w: 8, h: 17 }
+   ScreenConfig { id: 13, config: ScreenConfig { title: Some("Home"), header_visible: true, large_title: false, header_transparent: false, hides_bottom_bar_when_pushed: false, tint_color: None, background_color: None, title_color: None, back_title: None, back_visible: true, gesture_enabled: true, prevent_back: false, animation: Default, left: None, right: None, right_system_item: None, right_symbol: None, left_system_item: None, left_symbol: None, title_view: None, header_view: Some(15), header_height: 44pt } }
+   Frame { id: 15, x: 0, y: 0, w: 55, h: 48 }
+   Frame { id: 17, x: 0, y: 0, w: 55, h: 48 }
+   Frame { id: 19, x: 12, y: 15, w: 31, h: 17 }
+   Text { id: 19, text: "Home", content: 31x17 @ 0,0 }
+   Text { id: 29, text: "Home", content: 358x22 @ 0,0 }
+   Text { id: 33, text: "Everything the boilerplate demonstrates, one page each.", content: 358x34 @ 0,0 }
+   Text { id: 39, text: "Pages", content: 342x15 @ 8,8 }
+   Text { id: 47, text: "UI gallery", content: 318x17 @ 0,0 }
+   Text { id: 51, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 59, text: "Forms", content: 318x17 @ 0,0 }
+   Text { id: 63, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 71, text: "Data", content: 318x17 @ 0,0 }
+   Text { id: 75, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 83, text: "Query devtools", content: 318x17 @ 0,0 }
+   Text { id: 87, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 95, text: "Lists", content: 318x17 @ 0,0 }
+   Text { id: 99, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 107, text: "Canvas", content: 318x17 @ 0,0 }
+   Text { id: 111, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 119, text: "Motion", content: 318x17 @ 0,0 }
+   Text { id: 123, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 131, text: "Overlays", content: 318x17 @ 0,0 }
+   Text { id: 135, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 143, text: "Platform", content: 318x17 @ 0,0 }
+   Text { id: 147, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 155, text: "Device", content: 318x17 @ 0,0 }
+   Text { id: 159, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 167, text: "Remote screen", content: 318x17 @ 0,0 }
+   Text { id: 171, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 179, text: "Diagnostics", content: 318x17 @ 0,0 }
+   Text { id: 183, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 189, text: "Pushed", content: 342x15 @ 8,8 }
+   Text { id: 197, text: "Open data item 3", content: 318x17 @ 0,0 }
+   Text { id: 201, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 209, text: "Open a deep link", content: 318x17 @ 0,0 }
+   Text { id: 213, text: "›", content: 8x17 @ 0,0 }
+   Text { id: 219, text: "nsh-starter", content: 73x15 @ 0,0 }
+   Text { id: 225, text: "Home", content: 27x15 @ 0,0 }
+   Text { id: 229, text: "Active", content: 40x15 @ 0,0 }
+   Command { id: 1, command: Tokens(Tokens { colors: {"chart-3": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.32156864, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.32156864, a: 1.0 } }, "accent-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "muted-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.4509804, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.6313726, a: 1.0 } }, "sidebar-primary": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.6261905, s: 0.84000003, l: 0.49019608, a: 1.0 } }, "chart-1": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.83137256, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.83137256, a: 1.0 } }, "sidebar-primary-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "sidebar-border": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.8980392, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 0.101960786 } }, "sidebar": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 } }, "muted": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "popover": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 } }, "primary-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 } }, "popover-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "card": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 } }, "secondary-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "chart-5": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "secondary": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "ring": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.6313726, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.4509804, a: 1.0 } }, "input": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.8980392, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 0.14901961 } }, "destructive": AdaptiveColor { light: Hsla { h: 0.9920635, s: 1.0, l: 0.45294118, a: 1.0 }, dark: Hsla { h: 0.9967742, s: 1.0, l: 0.6960784, a: 1.0 } }, "border": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.8980392, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 0.101960786 } }, "card-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "accent": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "primary": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.8980392, a: 1.0 } }, "sidebar-accent-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "sidebar-ring": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.6313726, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.4509804, a: 1.0 } }, "sidebar-accent": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "chart-4": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.2509804, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.2509804, a: 1.0 } }, "chart-2": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.4509804, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.4509804, a: 1.0 } }, "background": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 } }, "sidebar-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }}, numbers: {"radius": 10.0}, fonts: {} }) }
+   Command { id: 1, command: Tokens(Tokens { colors: {"chart-3": AdaptiveColor { light: Hsla { h: 0.39479908, s: 0.7621622, l: 0.3627451, a: 1.0 }, dark: Hsla { h: 0.39414415, s: 0.69158876, l: 0.5803922, a: 1.0 } }, "accent-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "destructive-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 } }, "foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "muted-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.4509804, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.6313726, a: 1.0 } }, "sidebar-primary": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.6261905, s: 0.84000003, l: 0.49019608, a: 1.0 } }, "chart-1": AdaptiveColor { light: Hsla { h: 0.6761007, s: 0.7535545, l: 0.5862745, a: 1.0 }, dark: Hsla { h: 0.6512605, s: 0.89473695, l: 0.73921573, a: 1.0 } }, "sidebar-primary-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "sidebar-border": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.8980392, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 0.101960786 } }, "warning-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.058080807, s: 0.9166667, l: 0.14117648, a: 1.0 } }, "sidebar": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 } }, "muted": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "popover": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 } }, "primary-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.6770833, s: 0.47058827, l: 0.2, a: 1.0 } }, "success": AdaptiveColor { light: Hsla { h: 0.39479908, s: 0.7621622, l: 0.3627451, a: 1.0 }, dark: Hsla { h: 0.39414415, s: 0.69158876, l: 0.5803922, a: 1.0 } }, "info-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.6284153, s: 0.5700935, l: 0.20980392, a: 1.0 } }, "popover-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "card": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 } }, "up": AdaptiveColor { light: Hsla { h: 0.3956386, s: 0.7181208, l: 0.29215688, a: 1.0 }, dark: Hsla { h: 0.39414415, s: 0.69158876, l: 0.5803922, a: 1.0 } }, "secondary-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "chart-5": AdaptiveColor { light: Hsla { h: 0.9176829, s: 0.8118812, l: 0.6039216, a: 1.0 }, dark: Hsla { h: 0.9128205, s: 0.8552632, l: 0.7019608, a: 1.0 } }, "success-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.40243903, s: 0.8039216, l: 0.1, a: 1.0 } }, "secondary": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "warning": AdaptiveColor { light: Hsla { h: 0.0892575, s: 0.94618833, l: 0.4372549, a: 1.0 }, dark: Hsla { h: 0.120155044, s: 0.9641256, l: 0.5627451, a: 1.0 } }, "ring": AdaptiveColor { light: Hsla { h: 0.6512605, s: 0.89473695, l: 0.73921573, a: 1.0 }, dark: Hsla { h: 0.66314554, s: 0.8352941, l: 0.6666667, a: 1.0 } }, "input": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.8980392, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 0.14901961 } }, "destructive": AdaptiveColor { light: Hsla { h: 0.0, s: 0.72222227, l: 0.5058824, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.84236455, l: 0.6019608, a: 1.0 } }, "border": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.8980392, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 0.101960786 } }, "card-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "accent": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "primary": AdaptiveColor { light: Hsla { h: 0.6761007, s: 0.7535545, l: 0.5862745, a: 1.0 }, dark: Hsla { h: 0.6512605, s: 0.89473695, l: 0.73921573, a: 1.0 } }, "sidebar-accent-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.09019608, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }, "sidebar-ring": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.6313726, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.4509804, a: 1.0 } }, "sidebar-accent": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.9607843, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.14901961, a: 1.0 } }, "chart-4": AdaptiveColor { light: Hsla { h: 0.10470086, s: 0.9212599, l: 0.5019608, a: 1.0 }, dark: Hsla { h: 0.120155044, s: 0.9641256, l: 0.5627451, a: 1.0 } }, "chart-2": AdaptiveColor { light: Hsla { h: 0.55175036, s: 0.88663965, l: 0.48431373, a: 1.0 }, dark: Hsla { h: 0.55121523, s: 0.9320389, l: 0.59607846, a: 1.0 } }, "down": AdaptiveColor { light: Hsla { h: 0.0, s: 0.72222227, l: 0.5058824, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.90604025, l: 0.7078431, a: 1.0 } }, "info": AdaptiveColor { light: Hsla { h: 0.6144781, s: 0.83193284, l: 0.53333336, a: 1.0 }, dark: Hsla { h: 0.59199136, s: 0.9390244, l: 0.6784314, a: 1.0 } }, "background": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 1.0, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 } }, "sidebar-foreground": AdaptiveColor { light: Hsla { h: 0.0, s: 0.0, l: 0.039215688, a: 1.0 }, dark: Hsla { h: 0.0, s: 0.0, l: 0.98039216, a: 1.0 } }}, numbers: {"radius": 8.0}, fonts: {} }) }
+perf event PressDown on view 67
+perf event PressUp on view 67
+perf event Press on view 67
+perf commit: 0 ops, 949µs (list js 0µs), 55 mount items, 132 nodes
+perf turn: 1023µs (timers and tasks 59µs)
+── press(id:page-data): 55 items
+   Create { id: 235, kind: Screen }
+   Create { id: 237, kind: HeaderItem }
+   Create { id: 239, kind: View }
+   Create { id: 241, kind: View }
+   Insert { parent: 239, child: 241, before: None }
+   Create { id: 247, kind: Text }
+   Insert { parent: 239, child: 247, before: None }
+   Insert { parent: 237, child: 239, before: None }
+   Insert { parent: 235, child: 237, before: None }
+   Create { id: 251, kind: View }
+   Create { id: 253, kind: View }
+   Insert { parent: 251, child: 253, before: None }
+   Insert { parent: 235, child: 251, before: None }
+   Insert { parent: 11, child: 235, before: None }
+   Create { id: 255, kind: View }
+   Create { id: 257, kind: View }
+   Insert { parent: 255, child: 257, before: None }
+   Create { id: 259, kind: View }
+   Insert { parent: 255, child: 259, before: None }
+   Create { id: 261, kind: View }
+   Insert { parent: 255, child: 261, before: None }
+   Create { id: 263, kind: View }
+   Insert { parent: 255, child: 263, before: None }
+   Insert { parent: 253, child: 255, before: None }
+   TrackStates { id: 241, states: 7 }
+   Create { id: 243, kind: Text }
+   Insert { parent: 241, child: 243, before: None }
+   Events { id: 235, events: EventMask([18874368, 0]) }
+   ScreenConfig { id: 235, config: ScreenConfig { title: Some("Data"), header_visible: true, large_title: false, header_transparent: false, hides_bottom_bar_when_pushed: false, tint_color: None, background_color: None, title_color: None, back_title: None, back_visible: true, gesture_enabled: true, prevent_back: false, animation: Default, left: None, right: None, right_system_item: None, right_symbol: None, left_system_item: None, left_symbol: None, title_view: None, header_view: Some(237), header_height: 0pt } }
+   ViewStyle { id: 239, style: ViewStyle { background_color: Color(0), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 1pt, left: 0pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewStyle { id: 241, style: ViewStyle { background_color: Color(0), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: Some(Transition { properties: TransitionProps(1), duration: 150.0, delay: 0.0, easing: [0.4, 0.0, 0.2, 1.0] }), animation: None } }
+   Events { id: 241, events: EventMask([24577, 0]) }
+   ViewProps { id: 241, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ComponentProps { id: 233, props: [("selectedIndex", Some(Number(2)))] }
+   ViewStyle { id: 257, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewStyle { id: 259, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewStyle { id: 261, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewStyle { id: 263, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Frame { id: 235, x: 0, y: 0, w: 390, h: 824 }
+   Frame { id: 251, x: 0, y: 44, w: 390, h: 780 }
+   Frame { id: 253, x: 0, y: 0, w: 390, h: 780 }
+   Frame { id: 255, x: 0, y: 0, w: 390, h: 780 }
+   Frame { id: 257, x: 16, y: 196, w: 358, h: 88 }
+   Frame { id: 259, x: 16, y: 296, w: 358, h: 88 }
+   Frame { id: 261, x: 16, y: 396, w: 358, h: 88 }
+   Frame { id: 263, x: 16, y: 496, w: 358, h: 88 }
+   ScreenConfig { id: 235, config: ScreenConfig { title: Some("Data"), header_visible: true, large_title: false, header_transparent: false, hides_bottom_bar_when_pushed: false, tint_color: None, background_color: None, title_color: None, back_title: None, back_visible: true, gesture_enabled: true, prevent_back: false, animation: Default, left: None, right: None, right_system_item: None, right_symbol: None, left_system_item: None, left_symbol: None, title_view: None, header_view: Some(237), header_height: 44pt } }
+   Frame { id: 237, x: 0, y: 0, w: 114, h: 48 }
+   Frame { id: 239, x: 0, y: 0, w: 114, h: 48 }
+   Frame { id: 241, x: 12, y: 4, w: 51, h: 40 }
+   Frame { id: 243, x: 12, y: 12, w: 27, h: 15 }
+   Frame { id: 247, x: 71, y: 15, w: 31, h: 17 }
+   Text { id: 243, text: "Back", content: 27x15 @ 0,0 }
+   Text { id: 247, text: "Data", content: 31x17 @ 0,0 }
+   Text { id: 225, text: "Data", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 4027µs (list js 62µs), 424 mount items, 272 nodes
+perf turn: 4362µs (timers and tasks 320µs)
+── waitFor(label:Post 1, Shipping a Rust shell): 424 items
+   Delete { id: 257 }
+   Delete { id: 259 }
+   Delete { id: 261 }
+   Delete { id: 263 }
+   Delete { id: 255 }
+   Create { id: 265, kind: Scroll }
+   Create { id: 267, kind: View }
+   Create { id: 269, kind: View }
+   Insert { parent: 267, child: 269, before: None }
+   Insert { parent: 265, child: 267, before: None }
+   Insert { parent: 253, child: 265, before: None }
+   Events { id: 265, events: EventMask([48, 0]) }
+   ScrollConfig { id: 265, horizontal: false, scrollbar_visible: true, replaced: false, scroll_value: None, pull_value: None, keyboard_dismiss: None, mirrored: false }
+   Refreshing { id: 265, refreshing: false }
+   ViewProps { id: 265, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: Some("feed-list"), pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 265, x: 0, y: 0, w: 390, h: 780 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 1403pt } }
+   Create { id: 271, kind: View }
+   Insert { parent: 265, child: 271, before: None }
+   Create { id: 273, kind: View }
+   Insert { parent: 265, child: 273, before: None }
+   Create { id: 275, kind: View }
+   Insert { parent: 265, child: 275, before: None }
+   Create { id: 277, kind: View }
+   Insert { parent: 265, child: 277, before: None }
+   Create { id: 279, kind: View }
+   Insert { parent: 265, child: 279, before: None }
+   Create { id: 281, kind: View }
+   Insert { parent: 265, child: 281, before: None }
+   Create { id: 283, kind: View }
+   Insert { parent: 265, child: 283, before: None }
+   Create { id: 285, kind: View }
+   Insert { parent: 265, child: 285, before: None }
+   Create { id: 287, kind: View }
+   Insert { parent: 265, child: 287, before: None }
+   Create { id: 289, kind: View }
+   Insert { parent: 265, child: 289, before: None }
+   Create { id: 291, kind: View }
+   TrackStates { id: 291, states: 1 }
+   Create { id: 293, kind: View }
+   Create { id: 295, kind: Text }
+   Insert { parent: 293, child: 295, before: None }
+   Create { id: 299, kind: Text }
+   Insert { parent: 293, child: 299, before: None }
+   Create { id: 303, kind: Text }
+   Insert { parent: 293, child: 303, before: None }
+   Create { id: 307, kind: Text }
+   Insert { parent: 293, child: 307, before: None }
+   Insert { parent: 291, child: 293, before: None }
+   Create { id: 311, kind: View }
+   Insert { parent: 291, child: 311, before: None }
+   Insert { parent: 289, child: 291, before: None }
+   TrackStates { id: 311, states: 1 }
+   Create { id: 313, kind: Text }
+   Insert { parent: 311, child: 313, before: None }
+   Create { id: 317, kind: View }
+   TrackStates { id: 317, states: 1 }
+   Create { id: 319, kind: View }
+   Create { id: 321, kind: Text }
+   Insert { parent: 319, child: 321, before: None }
+   Create { id: 325, kind: Text }
+   Insert { parent: 319, child: 325, before: None }
+   Create { id: 329, kind: Text }
+   Insert { parent: 319, child: 329, before: None }
+   Create { id: 333, kind: Text }
+   Insert { parent: 319, child: 333, before: None }
+   Insert { parent: 317, child: 319, before: None }
+   Create { id: 337, kind: View }
+   Insert { parent: 317, child: 337, before: None }
+   Insert { parent: 287, child: 317, before: None }
+   TrackStates { id: 337, states: 1 }
+   Create { id: 339, kind: Text }
+   Insert { parent: 337, child: 339, before: None }
+   Create { id: 343, kind: View }
+   TrackStates { id: 343, states: 1 }
+   Create { id: 345, kind: View }
+   Create { id: 347, kind: Text }
+   Insert { parent: 345, child: 347, before: None }
+   Create { id: 351, kind: Text }
+   Insert { parent: 345, child: 351, before: None }
+   Create { id: 355, kind: Text }
+   Insert { parent: 345, child: 355, before: None }
+   Create { id: 359, kind: Text }
+   Insert { parent: 345, child: 359, before: None }
+   Insert { parent: 343, child: 345, before: None }
+   Create { id: 363, kind: View }
+   Insert { parent: 343, child: 363, before: None }
+   Insert { parent: 285, child: 343, before: None }
+   TrackStates { id: 363, states: 1 }
+   Create { id: 365, kind: Text }
+   Insert { parent: 363, child: 365, before: None }
+   Create { id: 369, kind: View }
+   TrackStates { id: 369, states: 1 }
+   Create { id: 371, kind: View }
+   Create { id: 373, kind: Text }
+   Insert { parent: 371, child: 373, before: None }
+   Create { id: 377, kind: Text }
+   Insert { parent: 371, child: 377, before: None }
+   Create { id: 381, kind: Text }
+   Insert { parent: 371, child: 381, before: None }
+   Create { id: 385, kind: Text }
+   Insert { parent: 371, child: 385, before: None }
+   Insert { parent: 369, child: 371, before: None }
+   Create { id: 389, kind: View }
+   Insert { parent: 369, child: 389, before: None }
+   Insert { parent: 283, child: 369, before: None }
+   TrackStates { id: 389, states: 1 }
+   Create { id: 391, kind: Text }
+   Insert { parent: 389, child: 391, before: None }
+   Create { id: 395, kind: View }
+   TrackStates { id: 395, states: 1 }
+   Create { id: 397, kind: View }
+   Create { id: 399, kind: Text }
+   Insert { parent: 397, child: 399, before: None }
+   Create { id: 403, kind: Text }
+   Insert { parent: 397, child: 403, before: None }
+   Create { id: 407, kind: Text }
+   Insert { parent: 397, child: 407, before: None }
+   Create { id: 411, kind: Text }
+   Insert { parent: 397, child: 411, before: None }
+   Insert { parent: 395, child: 397, before: None }
+   Create { id: 415, kind: View }
+   Insert { parent: 395, child: 415, before: None }
+   Insert { parent: 281, child: 395, before: None }
+   TrackStates { id: 415, states: 1 }
+   Create { id: 417, kind: Text }
+   Insert { parent: 415, child: 417, before: None }
+   Create { id: 421, kind: View }
+   TrackStates { id: 421, states: 1 }
+   Create { id: 423, kind: View }
+   Create { id: 425, kind: Text }
+   Insert { parent: 423, child: 425, before: None }
+   Create { id: 429, kind: Text }
+   Insert { parent: 423, child: 429, before: None }
+   Create { id: 433, kind: Text }
+   Insert { parent: 423, child: 433, before: None }
+   Create { id: 437, kind: Text }
+   Insert { parent: 423, child: 437, before: None }
+   Insert { parent: 421, child: 423, before: None }
+   Create { id: 441, kind: View }
+   Insert { parent: 421, child: 441, before: None }
+   Insert { parent: 279, child: 421, before: None }
+   TrackStates { id: 441, states: 1 }
+   Create { id: 443, kind: Text }
+   Insert { parent: 441, child: 443, before: None }
+   Create { id: 447, kind: View }
+   TrackStates { id: 447, states: 1 }
+   Create { id: 449, kind: View }
+   Create { id: 451, kind: Text }
+   Insert { parent: 449, child: 451, before: None }
+   Create { id: 455, kind: Text }
+   Insert { parent: 449, child: 455, before: None }
+   Create { id: 459, kind: Text }
+   Insert { parent: 449, child: 459, before: None }
+   Create { id: 463, kind: Text }
+   Insert { parent: 449, child: 463, before: None }
+   Insert { parent: 447, child: 449, before: None }
+   Create { id: 467, kind: View }
+   Insert { parent: 447, child: 467, before: None }
+   Insert { parent: 277, child: 447, before: None }
+   TrackStates { id: 467, states: 1 }
+   Create { id: 469, kind: Text }
+   Insert { parent: 467, child: 469, before: None }
+   Create { id: 473, kind: View }
+   TrackStates { id: 473, states: 1 }
+   Create { id: 475, kind: View }
+   Create { id: 477, kind: Text }
+   Insert { parent: 475, child: 477, before: None }
+   Create { id: 481, kind: Text }
+   Insert { parent: 475, child: 481, before: None }
+   Create { id: 485, kind: Text }
+   Insert { parent: 475, child: 485, before: None }
+   Create { id: 489, kind: Text }
+   Insert { parent: 475, child: 489, before: None }
+   Insert { parent: 473, child: 475, before: None }
+   Create { id: 493, kind: View }
+   Insert { parent: 473, child: 493, before: None }
+   Insert { parent: 275, child: 473, before: None }
+   TrackStates { id: 493, states: 1 }
+   Create { id: 495, kind: Text }
+   Insert { parent: 493, child: 495, before: None }
+   Create { id: 499, kind: View }
+   TrackStates { id: 499, states: 1 }
+   Create { id: 501, kind: View }
+   Create { id: 503, kind: Text }
+   Insert { parent: 501, child: 503, before: None }
+   Create { id: 507, kind: Text }
+   Insert { parent: 501, child: 507, before: None }
+   Create { id: 511, kind: Text }
+   Insert { parent: 501, child: 511, before: None }
+   Create { id: 515, kind: Text }
+   Insert { parent: 501, child: 515, before: None }
+   Insert { parent: 499, child: 501, before: None }
+   Create { id: 519, kind: View }
+   Insert { parent: 499, child: 519, before: None }
+   Insert { parent: 273, child: 499, before: None }
+   TrackStates { id: 519, states: 1 }
+   Create { id: 521, kind: Text }
+   Insert { parent: 519, child: 521, before: None }
+   Create { id: 525, kind: View }
+   TrackStates { id: 525, states: 1 }
+   Create { id: 527, kind: View }
+   Create { id: 529, kind: Text }
+   Insert { parent: 527, child: 529, before: None }
+   Create { id: 533, kind: Text }
+   Insert { parent: 527, child: 533, before: None }
+   Create { id: 537, kind: Text }
+   Insert { parent: 527, child: 537, before: None }
+   Create { id: 541, kind: Text }
+   Insert { parent: 527, child: 541, before: None }
+   Insert { parent: 525, child: 527, before: None }
+   Create { id: 545, kind: View }
+   Insert { parent: 525, child: 545, before: None }
+   Insert { parent: 271, child: 525, before: None }
+   TrackStates { id: 545, states: 1 }
+   Create { id: 547, kind: Text }
+   Insert { parent: 545, child: 547, before: None }
+   ViewStyle { id: 291, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 291, events: EventMask([1, 0]) }
+   ViewProps { id: 291, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 10, Keys keep the state"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 311, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 311, events: EventMask([24577, 0]) }
+   ViewProps { id: 311, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 10"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 317, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 317, events: EventMask([1, 0]) }
+   ViewProps { id: 317, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 9, The offline banner"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 337, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 337, events: EventMask([24577, 0]) }
+   ViewProps { id: 337, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 9"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 343, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 343, events: EventMask([1, 0]) }
+   ViewProps { id: 343, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 8, Latency you can hold"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 363, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 363, events: EventMask([24577, 0]) }
+   ViewProps { id: 363, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 8"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 369, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 369, events: EventMask([1, 0]) }
+   ViewProps { id: 369, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 7, A tracer's notebook"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 389, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 389, events: EventMask([24577, 0]) }
+   ViewProps { id: 389, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 7"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 395, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 395, events: EventMask([1, 0]) }
+   ViewProps { id: 395, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 6, Optimistic hearts"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 415, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 415, events: EventMask([24577, 0]) }
+   ViewProps { id: 415, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 6"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 421, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 421, events: EventMask([1, 0]) }
+   ViewProps { id: 421, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 5, Pull to refresh, properly"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 441, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 441, events: EventMask([24577, 0]) }
+   ViewProps { id: 441, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 5"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 447, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 447, events: EventMask([1, 0]) }
+   ViewProps { id: 447, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 4, The five-minute query"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 467, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 467, events: EventMask([24577, 0]) }
+   ViewProps { id: 467, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 4"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 473, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 473, events: EventMask([1, 0]) }
+   ViewProps { id: 473, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 3, Signals over snapshots"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 493, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 493, events: EventMask([24577, 0]) }
+   ViewProps { id: 493, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 3"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 499, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 499, events: EventMask([1, 0]) }
+   ViewProps { id: 499, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 2, Why cells recycle"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 519, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 519, events: EventMask([24577, 0]) }
+   ViewProps { id: 519, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 2"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 525, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 525, events: EventMask([1, 0]) }
+   ViewProps { id: 525, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 1, Shipping a Rust shell"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 545, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 545, events: EventMask([24577, 0]) }
+   ViewProps { id: 545, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 1"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 271, x: 16, y: 16, w: 358, h: 122 }
+   Frame { id: 525, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 527, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 529, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 533, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 537, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 541, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 545, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 547, x: 12, y: 9, w: 20, h: 15 }
+   Frame { id: 273, x: 16, y: 150, w: 358, h: 122 }
+   Frame { id: 499, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 501, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 503, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 507, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 511, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 515, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 519, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 521, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 275, x: 16, y: 284, w: 358, h: 122 }
+   Frame { id: 473, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 475, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 477, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 481, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 485, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 489, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 493, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 495, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 277, x: 16, y: 418, w: 358, h: 122 }
+   Frame { id: 447, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 449, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 451, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 455, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 459, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 463, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 467, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 469, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 279, x: 16, y: 552, w: 358, h: 122 }
+   Frame { id: 421, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 423, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 425, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 429, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 433, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 437, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 441, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 443, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 281, x: 16, y: 686, w: 358, h: 122 }
+   Frame { id: 395, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 397, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 399, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 403, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 407, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 411, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 415, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 417, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 283, x: 16, y: 820, w: 358, h: 122 }
+   Frame { id: 369, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 371, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 373, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 377, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 381, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 385, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 389, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 391, x: 12, y: 9, w: 20, h: 15 }
+   Frame { id: 285, x: 16, y: 954, w: 358, h: 122 }
+   Frame { id: 343, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 345, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 347, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 351, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 355, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 359, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 363, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 365, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 287, x: 16, y: 1088, w: 358, h: 122 }
+   Frame { id: 317, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 319, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 321, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 325, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 329, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 333, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 337, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 339, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 289, x: 16, y: 1222, w: 358, h: 122 }
+   Frame { id: 291, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 293, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 295, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 299, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 303, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 307, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 311, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 313, x: 12, y: 9, w: 27, h: 15 }
+   Text { id: 295, text: "Keys keep the state", content: 261x17 @ 0,0 }
+   Text { id: 299, text: "Identity is a domain id, never a position and never a generated value.", content: 261x29 @ 0,0 }
+   Text { id: 303, text: "Barbara Liskov", content: 261x15 @ 0,0 }
+   Text { id: 307, text: "1 comment", content: 261x15 @ 0,0 }
+   Text { id: 313, text: "♡ 26", content: 27x15 @ 0,0 }
+   Text { id: 321, text: "The offline banner", content: 261x17 @ 0,0 }
+   Text { id: 325, text: "Gray the feed, say why, and fail the writes fast so the UI can say so too.", content: 261x29 @ 0,0 }
+   Text { id: 329, text: "Alan Kay", content: 261x15 @ 0,0 }
+   Text { id: 333, text: "No comments yet", content: 261x15 @ 0,0 }
+   Text { id: 339, text: "♡ 19", content: 27x15 @ 0,0 }
+   Text { id: 347, text: "Latency you can hold", content: 261x17 @ 0,0 }
+   Text { id: 351, text: "Two hundred milliseconds is enough to see every state a screen can be in.", content: 261x29 @ 0,0 }
+   Text { id: 355, text: "Grace Hopper", content: 261x15 @ 0,0 }
+   Text { id: 359, text: "3 comments", content: 261x15 @ 0,0 }
+   Text { id: 365, text: "♡ 12", content: 27x15 @ 0,0 }
+   Text { id: 373, text: "A tracer's notebook", content: 268x17 @ 0,0 }
+   Text { id: 377, text: "Mount items are the honest number: deterministic, small, and easy to defend.", content: 268x29 @ 0,0 }
+   Text { id: 381, text: "Ada Lovelace", content: 268x15 @ 0,0 }
+   Text { id: 385, text: "2 comments", content: 268x15 @ 0,0 }
+   Text { id: 391, text: "♡ 5", content: 20x15 @ 0,0 }
+   Text { id: 399, text: "Optimistic hearts", content: 261x17 @ 0,0 }
+   Text { id: 403, text: "Show the like at once, take it back if the write fails, and never block the tap.", content: 261x29 @ 0,0 }
+   Text { id: 407, text: "Margaret Hamilton", content: 261x15 @ 0,0 }
+   Text { id: 411, text: "1 comment", content: 261x15 @ 0,0 }
+   Text { id: 417, text: "♥ 38", content: 27x15 @ 0,0 }
+   Text { id: 425, text: "Pull to refresh, properly", content: 261x17 @ 0,0 }
+   Text { id: 429, text: "The spinner is the platform's; the state is one bool the app owns.", content: 261x29 @ 0,0 }
+   Text { id: 433, text: "Dennis Ritchie", content: 261x15 @ 0,0 }
+   Text { id: 437, text: "No comments yet", content: 261x15 @ 0,0 }
+   Text { id: 443, text: "♡ 31", content: 27x15 @ 0,0 }
+   Text { id: 451, text: "The five-minute query", content: 261x17 @ 0,0 }
+   Text { id: 455, text: "Serve yesterday's answer while today's is on its way, and nobody watches a spinner.", content: 261x29 @ 0,0 }
+   Text { id: 459, text: "Barbara Liskov", content: 261x15 @ 0,0 }
+   Text { id: 463, text: "3 comments", content: 261x15 @ 0,0 }
+   Text { id: 469, text: "♡ 24", content: 27x15 @ 0,0 }
+   Text { id: 477, text: "Signals over snapshots", content: 261x17 @ 0,0 }
+   Text { id: 481, text: "A value read in a body is a photograph; a closure where a value goes stays current.", content: 261x29 @ 0,0 }
+   Text { id: 485, text: "Alan Kay", content: 261x15 @ 0,0 }
+   Text { id: 489, text: "2 comments", content: 261x15 @ 0,0 }
+   Text { id: 495, text: "♡ 17", content: 27x15 @ 0,0 }
+   Text { id: 503, text: "Why cells recycle", content: 261x17 @ 0,0 }
+   Text { id: 507, text: "A cell is handed another row, and only the bindings that read the position run again.", content: 261x29 @ 0,0 }
+   Text { id: 511, text: "Grace Hopper", content: 261x15 @ 0,0 }
+   Text { id: 515, text: "1 comment", content: 261x15 @ 0,0 }
+   Text { id: 521, text: "♡ 10", content: 27x15 @ 0,0 }
+   Text { id: 529, text: "Shipping a Rust shell", content: 268x17 @ 0,0 }
+   Text { id: 533, text: "One turn of the app's code becomes one commit, and the commit is what the screen shows.", content: 268x29 @ 0,0 }
+   Text { id: 537, text: "Ada Lovelace", content: 268x15 @ 0,0 }
+   Text { id: 541, text: "No comments yet", content: 268x15 @ 0,0 }
+   Text { id: 547, text: "♥ 3", content: 20x15 @ 0,0 }
+   Create { id: 551, kind: Text }
+   Insert { parent: 269, child: 551, before: None }
+   Frame { id: 267, x: 16, y: 1356, w: 358, h: 31 }
+   Frame { id: 269, x: 0, y: 0, w: 358, h: 31 }
+   Frame { id: 551, x: 136, y: 8, w: 86, h: 15 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 1403pt } }
+   Text { id: 551, text: "Loading more…", content: 86x15 @ 0,0 }
+perf commit: 0 ops, 761µs (list js 0µs), 85 mount items, 298 nodes
+perf turn: 886µs (timers and tasks 113µs)
+── clock.runFor(1000): 85 items
+   Delete { id: 551 }
+   Frame { id: 267, x: 16, y: 2556, w: 358, h: 16 }
+   Frame { id: 269, x: 0, y: 0, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2616pt } }
+   Create { id: 555, kind: View }
+   Insert { parent: 265, child: 555, before: None }
+   Create { id: 557, kind: View }
+   Insert { parent: 265, child: 557, before: None }
+   Create { id: 559, kind: View }
+   TrackStates { id: 559, states: 1 }
+   Create { id: 561, kind: View }
+   Create { id: 563, kind: Text }
+   Insert { parent: 561, child: 563, before: None }
+   Create { id: 567, kind: Text }
+   Insert { parent: 561, child: 567, before: None }
+   Create { id: 571, kind: Text }
+   Insert { parent: 561, child: 571, before: None }
+   Create { id: 575, kind: Text }
+   Insert { parent: 561, child: 575, before: None }
+   Insert { parent: 559, child: 561, before: None }
+   Create { id: 579, kind: View }
+   Insert { parent: 559, child: 579, before: None }
+   Insert { parent: 557, child: 559, before: None }
+   TrackStates { id: 579, states: 1 }
+   Create { id: 581, kind: Text }
+   Insert { parent: 579, child: 581, before: None }
+   Create { id: 585, kind: View }
+   TrackStates { id: 585, states: 1 }
+   Create { id: 587, kind: View }
+   Create { id: 589, kind: Text }
+   Insert { parent: 587, child: 589, before: None }
+   Create { id: 593, kind: Text }
+   Insert { parent: 587, child: 593, before: None }
+   Create { id: 597, kind: Text }
+   Insert { parent: 587, child: 597, before: None }
+   Create { id: 601, kind: Text }
+   Insert { parent: 587, child: 601, before: None }
+   Insert { parent: 585, child: 587, before: None }
+   Create { id: 605, kind: View }
+   Insert { parent: 585, child: 605, before: None }
+   Insert { parent: 555, child: 585, before: None }
+   TrackStates { id: 605, states: 1 }
+   Create { id: 607, kind: Text }
+   Insert { parent: 605, child: 607, before: None }
+   ViewStyle { id: 559, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 559, events: EventMask([1, 0]) }
+   ViewProps { id: 559, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 12, Why cells recycle"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 579, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 579, events: EventMask([24577, 0]) }
+   ViewProps { id: 579, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 12"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 585, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 585, events: EventMask([1, 0]) }
+   ViewProps { id: 585, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 11, Shipping a Rust shell"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 605, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 605, events: EventMask([24577, 0]) }
+   ViewProps { id: 605, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 11"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 555, x: 16, y: 1356, w: 358, h: 122 }
+   Frame { id: 585, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 587, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 589, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 593, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 597, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 601, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 605, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 607, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 557, x: 16, y: 1490, w: 358, h: 122 }
+   Frame { id: 559, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 561, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 563, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 567, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 571, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 575, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 579, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 581, x: 12, y: 9, w: 20, h: 15 }
+   Frame { id: 267, x: 16, y: 2584, w: 358, h: 16 }
+   Text { id: 563, text: "Why cells recycle", content: 268x17 @ 0,0 }
+   Text { id: 567, text: "A cell is handed another row, and only the bindings that read the position run again.", content: 268x29 @ 0,0 }
+   Text { id: 571, text: "Margaret Hamilton", content: 268x15 @ 0,0 }
+   Text { id: 575, text: "3 comments", content: 268x15 @ 0,0 }
+   Text { id: 581, text: "♡ 0", content: 20x15 @ 0,0 }
+   Text { id: 589, text: "Shipping a Rust shell", content: 261x17 @ 0,0 }
+   Text { id: 593, text: "One turn of the app's code becomes one commit, and the commit is what the screen shows.", content: 261x29 @ 0,0 }
+   Text { id: 597, text: "Dennis Ritchie", content: 261x15 @ 0,0 }
+   Text { id: 601, text: "2 comments", content: 261x15 @ 0,0 }
+   Text { id: 607, text: "♥ 33", content: 27x15 @ 0,0 }
+trace-measure: the like tap's commit lines follow
+perf event PressDown on view 519
+perf event PressUp on view 519
+perf event Press on view 519
+perf commit: 0 ops, 32µs (list js 0µs), 1 mount items, 298 nodes
+perf turn: 207µs (timers and tasks 165µs)
+── press(role:button[Like post 2]): 1 items
+   Text { id: 521, text: "♥ 11", content: 27x15 @ 0,0 }
+trace-measure: the scroll's commit lines follow
+perf commit: 0 ops, 385µs (list js 0µs), 42 mount items, 312 nodes
+perf turn: 396µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 42 items
+   Create { id: 611, kind: View }
+   Insert { parent: 265, child: 611, before: None }
+   Create { id: 613, kind: View }
+   TrackStates { id: 613, states: 1 }
+   Create { id: 615, kind: View }
+   Create { id: 617, kind: Text }
+   Insert { parent: 615, child: 617, before: None }
+   Create { id: 621, kind: Text }
+   Insert { parent: 615, child: 621, before: None }
+   Create { id: 625, kind: Text }
+   Insert { parent: 615, child: 625, before: None }
+   Create { id: 629, kind: Text }
+   Insert { parent: 615, child: 629, before: None }
+   Insert { parent: 613, child: 615, before: None }
+   Create { id: 633, kind: View }
+   Insert { parent: 613, child: 633, before: None }
+   Insert { parent: 611, child: 613, before: None }
+   TrackStates { id: 633, states: 1 }
+   Create { id: 635, kind: Text }
+   Insert { parent: 633, child: 635, before: None }
+   ViewStyle { id: 613, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 613, events: EventMask([1, 0]) }
+   ViewProps { id: 613, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 13, Signals over snapshots"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 633, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 633, events: EventMask([24577, 0]) }
+   ViewProps { id: 633, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 13"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 611, x: 16, y: 1624, w: 358, h: 122 }
+   Frame { id: 613, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 615, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 617, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 621, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 625, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 629, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 633, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 635, x: 12, y: 9, w: 20, h: 15 }
+   Frame { id: 267, x: 16, y: 2598, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2630pt } }
+   Text { id: 617, text: "Signals over snapshots", content: 268x17 @ 0,0 }
+   Text { id: 621, text: "A value read in a body is a photograph; a closure where a value goes stays current.", content: 268x29 @ 0,0 }
+   Text { id: 625, text: "Ada Lovelace", content: 268x15 @ 0,0 }
+   Text { id: 629, text: "No comments yet", content: 268x15 @ 0,0 }
+   Text { id: 635, text: "♡ 7", content: 20x15 @ 0,0 }
+perf commit: 0 ops, 360µs (list js 0µs), 42 mount items, 326 nodes
+perf turn: 371µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 42 items
+   Create { id: 639, kind: View }
+   Insert { parent: 265, child: 639, before: None }
+   Create { id: 641, kind: View }
+   TrackStates { id: 641, states: 1 }
+   Create { id: 643, kind: View }
+   Create { id: 645, kind: Text }
+   Insert { parent: 643, child: 645, before: None }
+   Create { id: 649, kind: Text }
+   Insert { parent: 643, child: 649, before: None }
+   Create { id: 653, kind: Text }
+   Insert { parent: 643, child: 653, before: None }
+   Create { id: 657, kind: Text }
+   Insert { parent: 643, child: 657, before: None }
+   Insert { parent: 641, child: 643, before: None }
+   Create { id: 661, kind: View }
+   Insert { parent: 641, child: 661, before: None }
+   Insert { parent: 639, child: 641, before: None }
+   TrackStates { id: 661, states: 1 }
+   Create { id: 663, kind: Text }
+   Insert { parent: 661, child: 663, before: None }
+   ViewStyle { id: 641, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 641, events: EventMask([1, 0]) }
+   ViewProps { id: 641, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 14, The five-minute query"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 661, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 661, events: EventMask([24577, 0]) }
+   ViewProps { id: 661, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 14"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 639, x: 16, y: 1758, w: 358, h: 122 }
+   Frame { id: 641, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 643, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 645, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 649, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 653, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 657, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 661, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 663, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 267, x: 16, y: 2612, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2644pt } }
+   Text { id: 645, text: "The five-minute query", content: 261x17 @ 0,0 }
+   Text { id: 649, text: "Serve yesterday's answer while today's is on its way, and nobody watches a spinner.", content: 261x29 @ 0,0 }
+   Text { id: 653, text: "Grace Hopper", content: 261x15 @ 0,0 }
+   Text { id: 657, text: "1 comment", content: 261x15 @ 0,0 }
+   Text { id: 663, text: "♡ 14", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 376µs (list js 0µs), 42 mount items, 340 nodes
+perf turn: 386µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 42 items
+   Create { id: 667, kind: View }
+   Insert { parent: 265, child: 667, before: None }
+   Create { id: 669, kind: View }
+   TrackStates { id: 669, states: 1 }
+   Create { id: 671, kind: View }
+   Create { id: 673, kind: Text }
+   Insert { parent: 671, child: 673, before: None }
+   Create { id: 677, kind: Text }
+   Insert { parent: 671, child: 677, before: None }
+   Create { id: 681, kind: Text }
+   Insert { parent: 671, child: 681, before: None }
+   Create { id: 685, kind: Text }
+   Insert { parent: 671, child: 685, before: None }
+   Insert { parent: 669, child: 671, before: None }
+   Create { id: 689, kind: View }
+   Insert { parent: 669, child: 689, before: None }
+   Insert { parent: 667, child: 669, before: None }
+   TrackStates { id: 689, states: 1 }
+   Create { id: 691, kind: Text }
+   Insert { parent: 689, child: 691, before: None }
+   ViewStyle { id: 669, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 669, events: EventMask([1, 0]) }
+   ViewProps { id: 669, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 15, Pull to refresh, properly"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 689, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 689, events: EventMask([24577, 0]) }
+   ViewProps { id: 689, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 15"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 667, x: 16, y: 1892, w: 358, h: 122 }
+   Frame { id: 669, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 671, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 673, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 677, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 681, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 685, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 689, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 691, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 267, x: 16, y: 2626, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2658pt } }
+   Text { id: 673, text: "Pull to refresh, properly", content: 261x17 @ 0,0 }
+   Text { id: 677, text: "The spinner is the platform's; the state is one bool the app owns.", content: 261x29 @ 0,0 }
+   Text { id: 681, text: "Alan Kay", content: 261x15 @ 0,0 }
+   Text { id: 685, text: "2 comments", content: 261x15 @ 0,0 }
+   Text { id: 691, text: "♡ 21", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 359µs (list js 0µs), 42 mount items, 354 nodes
+perf turn: 372µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 42 items
+   Create { id: 695, kind: View }
+   Insert { parent: 265, child: 695, before: None }
+   Create { id: 697, kind: View }
+   TrackStates { id: 697, states: 1 }
+   Create { id: 699, kind: View }
+   Create { id: 701, kind: Text }
+   Insert { parent: 699, child: 701, before: None }
+   Create { id: 705, kind: Text }
+   Insert { parent: 699, child: 705, before: None }
+   Create { id: 709, kind: Text }
+   Insert { parent: 699, child: 709, before: None }
+   Create { id: 713, kind: Text }
+   Insert { parent: 699, child: 713, before: None }
+   Insert { parent: 697, child: 699, before: None }
+   Create { id: 717, kind: View }
+   Insert { parent: 697, child: 717, before: None }
+   Insert { parent: 695, child: 697, before: None }
+   TrackStates { id: 717, states: 1 }
+   Create { id: 719, kind: Text }
+   Insert { parent: 717, child: 719, before: None }
+   ViewStyle { id: 697, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 697, events: EventMask([1, 0]) }
+   ViewProps { id: 697, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 16, Optimistic hearts"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 717, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 717, events: EventMask([24577, 0]) }
+   ViewProps { id: 717, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 16"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 695, x: 16, y: 2026, w: 358, h: 122 }
+   Frame { id: 697, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 699, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 701, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 705, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 709, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 713, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 717, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 719, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 267, x: 16, y: 2640, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2672pt } }
+   Text { id: 701, text: "Optimistic hearts", content: 261x17 @ 0,0 }
+   Text { id: 705, text: "Show the like at once, take it back if the write fails, and never block the tap.", content: 261x29 @ 0,0 }
+   Text { id: 709, text: "Barbara Liskov", content: 261x15 @ 0,0 }
+   Text { id: 713, text: "3 comments", content: 261x15 @ 0,0 }
+   Text { id: 719, text: "♥ 28", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 403µs (list js 0µs), 42 mount items, 368 nodes
+perf turn: 413µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 42 items
+   Create { id: 723, kind: View }
+   Insert { parent: 265, child: 723, before: None }
+   Create { id: 725, kind: View }
+   TrackStates { id: 725, states: 1 }
+   Create { id: 727, kind: View }
+   Create { id: 729, kind: Text }
+   Insert { parent: 727, child: 729, before: None }
+   Create { id: 733, kind: Text }
+   Insert { parent: 727, child: 733, before: None }
+   Create { id: 737, kind: Text }
+   Insert { parent: 727, child: 737, before: None }
+   Create { id: 741, kind: Text }
+   Insert { parent: 727, child: 741, before: None }
+   Insert { parent: 725, child: 727, before: None }
+   Create { id: 745, kind: View }
+   Insert { parent: 725, child: 745, before: None }
+   Insert { parent: 723, child: 725, before: None }
+   TrackStates { id: 745, states: 1 }
+   Create { id: 747, kind: Text }
+   Insert { parent: 745, child: 747, before: None }
+   ViewStyle { id: 725, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 725, events: EventMask([1, 0]) }
+   ViewProps { id: 725, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 17, A tracer's notebook"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 745, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 745, events: EventMask([24577, 0]) }
+   ViewProps { id: 745, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 17"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 723, x: 16, y: 2160, w: 358, h: 122 }
+   Frame { id: 725, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 727, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 729, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 733, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 737, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 741, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 745, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 747, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 267, x: 16, y: 2654, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2686pt } }
+   Text { id: 729, text: "A tracer's notebook", content: 261x17 @ 0,0 }
+   Text { id: 733, text: "Mount items are the honest number: deterministic, small, and easy to defend.", content: 261x29 @ 0,0 }
+   Text { id: 737, text: "Dennis Ritchie", content: 261x15 @ 0,0 }
+   Text { id: 741, text: "No comments yet", content: 261x15 @ 0,0 }
+   Text { id: 747, text: "♡ 35", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 369µs (list js 0µs), 42 mount items, 382 nodes
+perf turn: 380µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 42 items
+   Create { id: 751, kind: View }
+   Insert { parent: 265, child: 751, before: None }
+   Create { id: 753, kind: View }
+   TrackStates { id: 753, states: 1 }
+   Create { id: 755, kind: View }
+   Create { id: 757, kind: Text }
+   Insert { parent: 755, child: 757, before: None }
+   Create { id: 761, kind: Text }
+   Insert { parent: 755, child: 761, before: None }
+   Create { id: 765, kind: Text }
+   Insert { parent: 755, child: 765, before: None }
+   Create { id: 769, kind: Text }
+   Insert { parent: 755, child: 769, before: None }
+   Insert { parent: 753, child: 755, before: None }
+   Create { id: 773, kind: View }
+   Insert { parent: 753, child: 773, before: None }
+   Insert { parent: 751, child: 753, before: None }
+   TrackStates { id: 773, states: 1 }
+   Create { id: 775, kind: Text }
+   Insert { parent: 773, child: 775, before: None }
+   ViewStyle { id: 753, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 753, events: EventMask([1, 0]) }
+   ViewProps { id: 753, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 18, Latency you can hold"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 773, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 773, events: EventMask([24577, 0]) }
+   ViewProps { id: 773, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 18"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 751, x: 16, y: 2294, w: 358, h: 122 }
+   Frame { id: 753, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 755, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 757, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 761, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 765, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 769, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 773, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 775, x: 12, y: 9, w: 20, h: 15 }
+   Frame { id: 267, x: 16, y: 2668, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2700pt } }
+   Text { id: 757, text: "Latency you can hold", content: 268x17 @ 0,0 }
+   Text { id: 761, text: "Two hundred milliseconds is enough to see every state a screen can be in.", content: 268x29 @ 0,0 }
+   Text { id: 765, text: "Margaret Hamilton", content: 268x15 @ 0,0 }
+   Text { id: 769, text: "1 comment", content: 268x15 @ 0,0 }
+   Text { id: 775, text: "♡ 2", content: 20x15 @ 0,0 }
+perf commit: 0 ops, 405µs (list js 0µs), 42 mount items, 396 nodes
+perf turn: 415µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 42 items
+   Create { id: 779, kind: View }
+   Insert { parent: 265, child: 779, before: None }
+   Create { id: 781, kind: View }
+   TrackStates { id: 781, states: 1 }
+   Create { id: 783, kind: View }
+   Create { id: 785, kind: Text }
+   Insert { parent: 783, child: 785, before: None }
+   Create { id: 789, kind: Text }
+   Insert { parent: 783, child: 789, before: None }
+   Create { id: 793, kind: Text }
+   Insert { parent: 783, child: 793, before: None }
+   Create { id: 797, kind: Text }
+   Insert { parent: 783, child: 797, before: None }
+   Insert { parent: 781, child: 783, before: None }
+   Create { id: 801, kind: View }
+   Insert { parent: 781, child: 801, before: None }
+   Insert { parent: 779, child: 781, before: None }
+   TrackStates { id: 801, states: 1 }
+   Create { id: 803, kind: Text }
+   Insert { parent: 801, child: 803, before: None }
+   ViewStyle { id: 781, style: ViewStyle { background_color: Color(4294967295), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 1pt, right: 1pt, bottom: 1pt, left: 1pt }, colors: [Color(3857049087), Color(3857049087), Color(3857049087), Color(3857049087)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 781, events: EventMask([1, 0]) }
+   ViewProps { id: 781, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Post 19, The offline banner"), hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 801, style: ViewStyle { background_color: Color(4126537215), border_radius: 8pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   Events { id: 801, events: EventMask([24577, 0]) }
+   ViewProps { id: 801, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: Some("Like post 19"), hint: None, role: Button, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 779, x: 16, y: 2428, w: 358, h: 122 }
+   Frame { id: 781, x: 0, y: 0, w: 358, h: 122 }
+   Frame { id: 783, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 785, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 789, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 793, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 797, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 801, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 803, x: 12, y: 9, w: 20, h: 15 }
+   Frame { id: 267, x: 16, y: 2682, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2714pt } }
+   Text { id: 785, text: "The offline banner", content: 268x17 @ 0,0 }
+   Text { id: 789, text: "Gray the feed, say why, and fail the writes fast so the UI can say so too.", content: 268x29 @ 0,0 }
+   Text { id: 793, text: "Ada Lovelace", content: 268x15 @ 0,0 }
+   Text { id: 797, text: "2 comments", content: 268x15 @ 0,0 }
+   Text { id: 803, text: "♡ 9", content: 20x15 @ 0,0 }
+perf commit: 0 ops, 182µs (list js 0µs), 17 mount items, 396 nodes
+perf turn: 191µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 17 items
+   AccessibilityLabel { id: 525, label: Some("Post 20, Keys keep the state") }
+   AccessibilityLabel { id: 545, label: Some("Like post 20") }
+   Frame { id: 271, x: 16, y: 2562, w: 358, h: 122 }
+   Frame { id: 527, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 529, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 533, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 537, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 541, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 545, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 547, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 267, x: 16, y: 2696, w: 358, h: 16 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2728pt } }
+   Text { id: 529, text: "Keys keep the state", content: 261x17 @ 0,0 }
+   Text { id: 533, text: "Identity is a domain id, never a position and never a generated value.", content: 261x29 @ 0,0 }
+   Text { id: 537, text: "Grace Hopper", content: 261x15 @ 0,0 }
+   Text { id: 541, text: "3 comments", content: 261x15 @ 0,0 }
+   Text { id: 547, text: "♡ 16", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 212µs (list js 98µs), 7 mount items, 398 nodes
+perf turn: 222µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 7 items
+   Create { id: 807, kind: Text }
+   Insert { parent: 269, child: 807, before: None }
+   Frame { id: 267, x: 16, y: 2696, w: 358, h: 31 }
+   Frame { id: 269, x: 0, y: 0, w: 358, h: 31 }
+   Frame { id: 807, x: 136, y: 8, w: 86, h: 15 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 2743pt } }
+   Text { id: 807, text: "Loading more…", content: 86x15 @ 0,0 }
+perf commit: 0 ops, 264µs (list js 0µs), 21 mount items, 398 nodes
+perf turn: 409µs (timers and tasks 135µs)
+── scroll(id:feed-list, 4000pt): 21 items
+   Create { id: 811, kind: Text }
+   Insert { parent: 269, child: 811, before: None }
+   Delete { id: 807 }
+   ViewStyle { id: 273, style: ViewStyle { background_color: Color(0), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: true, cursor: Auto, transition: None, animation: None } }
+   ViewProps { id: 273, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: true, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   ViewStyle { id: 275, style: ViewStyle { background_color: Color(0), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: true, cursor: Auto, transition: None, animation: None } }
+   ViewProps { id: 275, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: true, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 267, x: 16, y: 3896, w: 358, h: 31 }
+   Frame { id: 811, x: 113, y: 8, w: 132, h: 15 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 3957pt } }
+   Text { id: 811, text: "You're all caught up", content: 132x15 @ 0,0 }
+   AccessibilityLabel { id: 473, label: Some("Post 21, Shipping a Rust shell") }
+   AccessibilityLabel { id: 493, label: Some("Like post 21") }
+   Frame { id: 275, x: 16, y: 2696, w: 358, h: 122 }
+   ViewStyle { id: 275, style: ViewStyle { background_color: Color(0), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewProps { id: 275, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 267, x: 16, y: 3910, w: 358, h: 31 }
+   Text { id: 477, text: "Shipping a Rust shell", content: 261x17 @ 0,0 }
+   Text { id: 481, text: "One turn of the app's code becomes one commit, and the commit is what the screen shows.", content: 261x29 @ 0,0 }
+   Text { id: 489, text: "No comments yet", content: 261x15 @ 0,0 }
+   Text { id: 495, text: "♥ 23", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 157µs (list js 0µs), 9 mount items, 398 nodes
+perf turn: 167µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 9 items
+   AccessibilityLabel { id: 499, label: Some("Post 22, Why cells recycle") }
+   AccessibilityLabel { id: 519, label: Some("Like post 22") }
+   Frame { id: 273, x: 16, y: 2830, w: 358, h: 122 }
+   ViewStyle { id: 273, style: ViewStyle { background_color: Color(0), border_radius: 0pt, corner_radius: Corners { top_left: None, top_right: None, bottom_right: None, bottom_left: None }, continuous_corners: false, borders: Borders { widths: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, colors: [Color(255), Color(255), Color(255), Color(255)], style: Solid }, opacity: 1.0, overflow_hidden: false, transform: [], tint_color: None, elevation: 0pt, transform_origin: TransformOrigin { x: 50%, y: 50%, z: 0pt }, object_position: ObjectPosition { x: PositionAxis { from_end: false, offset: 50% }, y: PositionAxis { from_end: false, offset: 50% } }, backface_hidden: false, effects: None, blend_mode: Normal, backdrop_material: UltraThin, glass_effect: None, outline: Outline { width: 0pt, color: Color(255), style: Solid, offset: 0pt }, hidden: false, cursor: Auto, transition: None, animation: None } }
+   ViewProps { id: 273, props: ViewProps { pointer_events: Auto, hit_slop: Edges { top: 0pt, right: 0pt, bottom: 0pt, left: 0pt }, long_press_delay: None, ripple: None, accessibility: Accessibility { accessible: None, label: None, hint: None, role: None, state: AccessibilityState { disabled: false, selected: false, checked: None, busy: false, expanded: None, pressed: None, current: None }, value: None, hidden: false, live_region: None, actions: [], level: None }, test_id: None, pan_activation: None, pan_scroll_handoff: false, window_drag: None, focusable: None, selectable_view: false } }
+   Frame { id: 267, x: 16, y: 3924, w: 358, h: 31 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 3971pt } }
+   Text { id: 511, text: "Barbara Liskov", content: 261x15 @ 0,0 }
+   Text { id: 521, text: "♡ 30", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 162µs (list js 0µs), 10 mount items, 398 nodes
+perf turn: 172µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 10 items
+   AccessibilityLabel { id: 447, label: Some("Post 23, Signals over snapshots") }
+   AccessibilityLabel { id: 467, label: Some("Like post 23") }
+   Frame { id: 277, x: 16, y: 2964, w: 358, h: 122 }
+   Frame { id: 267, x: 16, y: 3938, w: 358, h: 31 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 3985pt } }
+   Text { id: 451, text: "Signals over snapshots", content: 261x17 @ 0,0 }
+   Text { id: 455, text: "A value read in a body is a photograph; a closure where a value goes stays current.", content: 261x29 @ 0,0 }
+   Text { id: 459, text: "Dennis Ritchie", content: 261x15 @ 0,0 }
+   Text { id: 463, text: "2 comments", content: 261x15 @ 0,0 }
+   Text { id: 469, text: "♡ 37", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 176µs (list js 0µs), 17 mount items, 398 nodes
+perf turn: 186µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 17 items
+   AccessibilityLabel { id: 421, label: Some("Post 24, The five-minute query") }
+   AccessibilityLabel { id: 441, label: Some("Like post 24") }
+   Frame { id: 279, x: 16, y: 3098, w: 358, h: 122 }
+   Frame { id: 423, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 425, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 429, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 433, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 437, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 441, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 443, x: 12, y: 9, w: 20, h: 15 }
+   Frame { id: 267, x: 16, y: 3952, w: 358, h: 31 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 3999pt } }
+   Text { id: 425, text: "The five-minute query", content: 268x17 @ 0,0 }
+   Text { id: 429, text: "Serve yesterday's answer while today's is on its way, and nobody watches a spinner.", content: 268x29 @ 0,0 }
+   Text { id: 433, text: "Margaret Hamilton", content: 268x15 @ 0,0 }
+   Text { id: 437, text: "3 comments", content: 268x15 @ 0,0 }
+   Text { id: 443, text: "♡ 4", content: 20x15 @ 0,0 }
+perf commit: 0 ops, 158µs (list js 0µs), 10 mount items, 398 nodes
+perf turn: 167µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 10 items
+   AccessibilityLabel { id: 395, label: Some("Post 25, Pull to refresh, properly") }
+   AccessibilityLabel { id: 415, label: Some("Like post 25") }
+   Frame { id: 281, x: 16, y: 3232, w: 358, h: 122 }
+   Frame { id: 267, x: 16, y: 3966, w: 358, h: 31 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 4013pt } }
+   Text { id: 399, text: "Pull to refresh, properly", content: 261x17 @ 0,0 }
+   Text { id: 403, text: "The spinner is the platform's; the state is one bool the app owns.", content: 261x29 @ 0,0 }
+   Text { id: 407, text: "Ada Lovelace", content: 261x15 @ 0,0 }
+   Text { id: 411, text: "No comments yet", content: 261x15 @ 0,0 }
+   Text { id: 417, text: "♡ 11", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 181µs (list js 0µs), 17 mount items, 398 nodes
+perf turn: 191µs (timers and tasks 0µs)
+── scroll(id:feed-list, 4000pt): 17 items
+   AccessibilityLabel { id: 369, label: Some("Post 26, Optimistic hearts") }
+   AccessibilityLabel { id: 389, label: Some("Like post 26") }
+   Frame { id: 283, x: 16, y: 3366, w: 358, h: 122 }
+   Frame { id: 371, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 373, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 377, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 381, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 385, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 389, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 391, x: 12, y: 9, w: 27, h: 15 }
+   Frame { id: 267, x: 16, y: 3980, w: 358, h: 31 }
+   ScrollContent { id: 265, size: Size { width: 390pt, height: 4027pt } }
+   Text { id: 373, text: "Optimistic hearts", content: 261x17 @ 0,0 }
+   Text { id: 377, text: "Show the like at once, take it back if the write fails, and never block the tap.", content: 261x29 @ 0,0 }
+   Text { id: 381, text: "Grace Hopper", content: 261x15 @ 0,0 }
+   Text { id: 385, text: "1 comment", content: 261x15 @ 0,0 }
+   Text { id: 391, text: "♥ 18", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 214µs (list js 0µs), 15 mount items, 398 nodes
+perf turn: 226µs (timers and tasks 0µs)
+── scroll(id:feed-list, -4000pt): 15 items
+   AccessibilityLabel { id: 369, label: Some("Post 7, A tracer's notebook") }
+   AccessibilityLabel { id: 389, label: Some("Like post 7") }
+   Frame { id: 283, x: 16, y: 820, w: 358, h: 122 }
+   Frame { id: 371, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 373, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 377, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 381, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 385, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 389, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 391, x: 12, y: 9, w: 20, h: 15 }
+   Text { id: 385, text: "2 comments", content: 268x15 @ 0,0 }
+   Text { id: 373, text: "A tracer's notebook", content: 268x17 @ 0,0 }
+   Text { id: 377, text: "Mount items are the honest number: deterministic, small, and easy to defend.", content: 268x29 @ 0,0 }
+   Text { id: 381, text: "Ada Lovelace", content: 268x15 @ 0,0 }
+   Text { id: 391, text: "♡ 5", content: 20x15 @ 0,0 }
+perf commit: 0 ops, 170µs (list js 0µs), 8 mount items, 398 nodes
+perf turn: 181µs (timers and tasks 0µs)
+── scroll(id:feed-list, -4000pt): 8 items
+   AccessibilityLabel { id: 395, label: Some("Post 6, Optimistic hearts") }
+   AccessibilityLabel { id: 415, label: Some("Like post 6") }
+   Frame { id: 281, x: 16, y: 686, w: 358, h: 122 }
+   Text { id: 411, text: "1 comment", content: 261x15 @ 0,0 }
+   Text { id: 399, text: "Optimistic hearts", content: 261x17 @ 0,0 }
+   Text { id: 403, text: "Show the like at once, take it back if the write fails, and never block the tap.", content: 261x29 @ 0,0 }
+   Text { id: 407, text: "Margaret Hamilton", content: 261x15 @ 0,0 }
+   Text { id: 417, text: "♥ 38", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 176µs (list js 0µs), 15 mount items, 398 nodes
+perf turn: 187µs (timers and tasks 0µs)
+── scroll(id:feed-list, -4000pt): 15 items
+   AccessibilityLabel { id: 421, label: Some("Post 5, Pull to refresh, properly") }
+   AccessibilityLabel { id: 441, label: Some("Like post 5") }
+   Frame { id: 279, x: 16, y: 552, w: 358, h: 122 }
+   Frame { id: 423, x: 17, y: 17, w: 261, h: 88 }
+   Frame { id: 425, x: 0, y: 0, w: 261, h: 17 }
+   Frame { id: 429, x: 0, y: 21, w: 261, h: 29 }
+   Frame { id: 433, x: 0, y: 54, w: 261, h: 15 }
+   Frame { id: 437, x: 0, y: 73, w: 261, h: 15 }
+   Frame { id: 441, x: 290, y: 17, w: 51, h: 32 }
+   Frame { id: 443, x: 12, y: 9, w: 27, h: 15 }
+   Text { id: 437, text: "No comments yet", content: 261x15 @ 0,0 }
+   Text { id: 425, text: "Pull to refresh, properly", content: 261x17 @ 0,0 }
+   Text { id: 429, text: "The spinner is the platform's; the state is one bool the app owns.", content: 261x29 @ 0,0 }
+   Text { id: 433, text: "Dennis Ritchie", content: 261x15 @ 0,0 }
+   Text { id: 443, text: "♡ 31", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 154µs (list js 0µs), 8 mount items, 398 nodes
+perf turn: 164µs (timers and tasks 0µs)
+── scroll(id:feed-list, -4000pt): 8 items
+   AccessibilityLabel { id: 447, label: Some("Post 4, The five-minute query") }
+   AccessibilityLabel { id: 467, label: Some("Like post 4") }
+   Frame { id: 277, x: 16, y: 418, w: 358, h: 122 }
+   Text { id: 463, text: "3 comments", content: 261x15 @ 0,0 }
+   Text { id: 451, text: "The five-minute query", content: 261x17 @ 0,0 }
+   Text { id: 455, text: "Serve yesterday's answer while today's is on its way, and nobody watches a spinner.", content: 261x29 @ 0,0 }
+   Text { id: 459, text: "Barbara Liskov", content: 261x15 @ 0,0 }
+   Text { id: 469, text: "♡ 24", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 156µs (list js 0µs), 8 mount items, 398 nodes
+perf turn: 166µs (timers and tasks 0µs)
+── scroll(id:feed-list, -4000pt): 8 items
+   AccessibilityLabel { id: 499, label: Some("Post 3, Signals over snapshots") }
+   AccessibilityLabel { id: 519, label: Some("Like post 3") }
+   Frame { id: 273, x: 16, y: 284, w: 358, h: 122 }
+   Text { id: 511, text: "Alan Kay", content: 261x15 @ 0,0 }
+   Text { id: 515, text: "2 comments", content: 261x15 @ 0,0 }
+   Text { id: 503, text: "Signals over snapshots", content: 261x17 @ 0,0 }
+   Text { id: 507, text: "A value read in a body is a photograph; a closure where a value goes stays current.", content: 261x29 @ 0,0 }
+   Text { id: 521, text: "♡ 17", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 154µs (list js 0µs), 8 mount items, 398 nodes
+perf turn: 164µs (timers and tasks 0µs)
+── scroll(id:feed-list, -4000pt): 8 items
+   AccessibilityLabel { id: 473, label: Some("Post 2, Why cells recycle") }
+   AccessibilityLabel { id: 493, label: Some("Like post 2") }
+   Frame { id: 275, x: 16, y: 150, w: 358, h: 122 }
+   Text { id: 489, text: "1 comment", content: 261x15 @ 0,0 }
+   Text { id: 477, text: "Why cells recycle", content: 261x17 @ 0,0 }
+   Text { id: 481, text: "A cell is handed another row, and only the bindings that read the position run again.", content: 261x29 @ 0,0 }
+   Text { id: 485, text: "Grace Hopper", content: 261x15 @ 0,0 }
+   Text { id: 495, text: "♥ 11", content: 27x15 @ 0,0 }
+perf commit: 0 ops, 166µs (list js 0µs), 15 mount items, 398 nodes
+perf turn: 179µs (timers and tasks 0µs)
+── scroll(id:feed-list, -4000pt): 15 items
+   AccessibilityLabel { id: 525, label: Some("Post 1, Shipping a Rust shell") }
+   AccessibilityLabel { id: 545, label: Some("Like post 1") }
+   Frame { id: 271, x: 16, y: 16, w: 358, h: 122 }
+   Frame { id: 527, x: 17, y: 17, w: 268, h: 88 }
+   Frame { id: 529, x: 0, y: 0, w: 268, h: 17 }
+   Frame { id: 533, x: 0, y: 21, w: 268, h: 29 }
+   Frame { id: 537, x: 0, y: 54, w: 268, h: 15 }
+   Frame { id: 541, x: 0, y: 73, w: 268, h: 15 }
+   Frame { id: 545, x: 297, y: 17, w: 44, h: 32 }
+   Frame { id: 547, x: 12, y: 9, w: 20, h: 15 }
+   Text { id: 541, text: "No comments yet", content: 268x15 @ 0,0 }
+   Text { id: 529, text: "Shipping a Rust shell", content: 268x17 @ 0,0 }
+   Text { id: 533, text: "One turn of the app's code becomes one commit, and the commit is what the screen shows.", content: 268x29 @ 0,0 }
+   Text { id: 537, text: "Ada Lovelace", content: 268x15 @ 0,0 }
+   Text { id: 547, text: "♥ 3", content: 20x15 @ 0,0 }
+✓ trace/feed.test.tsx › a like tap and a feed scroll stay cheap (65ms)
+✓ 1 test: 1 passed, 0 failed (24.8s)

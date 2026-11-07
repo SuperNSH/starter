@@ -3,7 +3,15 @@
   "id": "com.example.nshstarter",
   "version": "1.0.0",
   "build": 1,
+  "icon": "assets/icon.png",
+  "appearance": "system",
   "theme": "themes/theme.json",
   "rust": ".",
-  "root": "App"
+  "root": "App",
+  "capabilities": {
+    "clipboard": true,
+    "picker": true,
+    "speech": true,
+    "webview": { "hosts": [] }
+  }
 }

@@ -1,22 +1,46 @@
-//! The app's UI library: theme helpers and one wrapper per `nsh_base`
-//! component in use, so screens import from `ui` only. Owned by the ui
-//! area, which replaces and extends every file here.
+//! The app's UI library: one wrapper per `nsh_base` component in use,
+//! styled with the theme's tokens only, so screens import controls from
+//! `ui` and never from `nsh_base` directly.
+//!
+//! NSH UI rules (bind every area):
+//! - Screens import controls from this module, never from `nsh/base` or
+//!   `nsh_base`.
+//! - No raw hex, rgb or hsl colors outside `themes/theme.json`; a missing
+//!   color is a new token there, read through [`ui::tokens`].
+//! - Every part of a base component is styled, including pressed, focused
+//!   and disabled states.
+//! - Text containers grow with the user's text size: min-heights and
+//!   padding, never fixed heights.
+//! - Popups paint their own background, border and shadow, and a backdrop
+//!   for phones.
 
+pub mod avatar;
+pub mod button;
+pub mod carousel;
+pub mod collapse;
+pub mod color;
+pub mod command;
+pub mod controls;
+pub mod desktop;
+pub mod dialog;
+pub mod dock;
+pub mod editor;
+pub mod field;
 pub mod gallery;
-
-use nsh_base::theme;
-use nsh_core::prelude::*;
-
-/// Placeholder gallery page; the ui area replaces `gallery.rs`.
-pub fn gallery_placeholder() -> impl IntoElement {
-    view()
-        .flex_1()
-        .items_center()
-        .justify_center()
-        .bg(move || theme().background)
-        .child(
-            text("UI gallery")
-                .text_size(px(22.0))
-                .text_color(move || theme().muted_foreground),
-        )
-}
+pub mod layout;
+pub mod link;
+pub mod number;
+pub mod pagination;
+pub mod pickers;
+pub mod popups;
+pub mod resizable;
+pub mod scrollbar;
+pub mod select;
+pub mod sheet;
+pub mod tab_bar;
+pub mod table;
+pub mod tabs;
+pub mod text;
+pub mod toast;
+pub mod tokens;
+pub mod tree;

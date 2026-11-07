@@ -5,15 +5,80 @@
 //! shell mounts `platform_page` and `device_page`; keep their names and
 //! signatures.
 
-use crate::foundation::page_placeholder;
+mod clipboard_card;
+mod desktop_card;
+mod environment;
+mod files;
+mod i18n_card;
+mod keyboard;
+pub mod locale;
+mod picker_card;
+mod safe_area;
+mod speech_card;
+mod tabbar_card;
+mod widgets;
+
+use nsh_base::theme;
 use nsh_core::prelude::*;
 
-/// Placeholder page; the platform area replaces this file.
-pub fn platform_page() -> impl IntoElement {
-    page_placeholder("Platform")
+use widgets::localized;
+
+/// One page of the platform area: its content in a scroll view that sits
+/// inside the safe area on every edge, and lifts above the keyboard. The
+/// keyboard and the safe area both own the bottom edge, so one computed
+/// padding decides it (the keyboard covers the bottom inset while it shows).
+fn page(title: &'static str, cards: Vec<AnyElement>) -> AnyElement {
+    scroll()
+        .flex_1()
+        .child(
+            view()
+                .pt_safe_area_plus(px(16.0))
+                .pr_safe_area_plus(px(16.0))
+                .pl_safe_area_plus(px(16.0))
+                .pb(move || {
+                    let above = if keyboard_height().0 > 0.0 {
+                        keyboard_height().0
+                    } else {
+                        safe_area().bottom.0
+                    };
+                    px(above + 16.0)
+                })
+                .gap_4()
+                .text_color(move || theme().foreground)
+                .child(
+                    text(localized(title))
+                        .text_size(px(20.0))
+                        .font_weight(FontWeight::MEDIUM)
+                        .role(AccessibilityRole::Header),
+                )
+                .children(cards),
+        )
+        .into_element()
 }
 
-/// Placeholder device page; the platform area replaces this file.
+/// The platform page: safe areas, keyboard, clipboard, picker, speech, file
+/// dialogs, language and RTL, the desktop's windows and menus, the system tab
+/// bar.
+pub fn platform_page() -> impl IntoElement {
+    page(
+        "platform.title",
+        vec![
+            safe_area::card(),
+            clipboard_card::card(),
+            picker_card::card(),
+            speech_card::card(),
+            files::card(),
+            i18n_card::card(),
+            desktop_card::card(),
+            tabbar_card::card(),
+            // The keyboard card last: its field sits at the bottom, where the
+            // keyboard reaches.
+            keyboard::card(),
+        ],
+    )
+}
+
+/// The device and environment page: what the platform exposes about itself.
 pub fn device_page() -> impl IntoElement {
-    page_placeholder("Device")
+    page("platform.device.page_title", environment::cards())
 }

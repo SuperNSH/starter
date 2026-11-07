@@ -24,22 +24,19 @@ pub mod ui;
 #[native_module("nsh-starter/native")]
 fn native(registry: &mut Registry) {
     registry.register::<App>();
+    // The crate's shipped files under assets/: the canvas media's images
+    // and clip, so nsh run serves them and nsh package copies them.
+    registry.assets(nsh_core::element::assets!());
 }
 
-/// The application's root component. Placeholder until the shell area
-/// lands the real root; the module tree holds the feature pages.
+/// The application's root: the surface's background and text color, the
+/// shell's assembly inside it. The safe area is left to the shell's pages
+/// and bars, which know where their headers and tab bars sit.
 #[component]
 pub fn App() -> impl IntoElement {
     view()
         .flex_1()
         .bg(move || theme().background)
         .text_color(move || theme().foreground)
-        .child(
-            view()
-                .flex_1()
-                .p_safe_area()
-                .items_center()
-                .justify_center()
-                .child(text(t!("app.name").to_string()).text_size(px(24.0))),
-        )
+        .child(app::root())
 }

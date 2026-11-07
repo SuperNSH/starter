@@ -3,11 +3,106 @@
 //! on `diff_clamp`, `pan_activation`, reduced-motion paths. Owned by the
 //! motion area. The shell mounts `motion_page`; keep its name and
 //! signature.
+//!
+//! Every section is one demo of a tool from the animation and gesture
+//! guides, run natively (no signal is written per frame to animate). The
+//! look is `crate::ui`'s; only the gesture surfaces draw their own views.
 
-use crate::foundation::page_placeholder;
+mod composite;
+mod drag_drop;
+mod header;
+mod reduced;
+mod reorder;
+mod scrub;
+mod springs;
+mod swipe;
+mod transform;
+mod transitions;
+
+use nsh_base::theme;
 use nsh_core::prelude::*;
 
-/// Placeholder page; the motion area replaces this file.
+use crate::ui;
+use composite::composites;
+use reduced::calm_motion;
+use springs::spring_tween;
+
+/// The page: one scroll of sections, each a self-contained demo.
 pub fn motion_page() -> impl IntoElement {
-    page_placeholder("Motion")
+    // The page's reduced-motion preference, local until the foundation's
+    // typed config lands; the ambient `reduce_motion()` is honored beside it.
+    let calm = signal(false);
+    scroll()
+        .flex_1()
+        .test_id("motion-page-scroll")
+        .bg(move || theme().background)
+        .p_safe_area()
+        .child(
+            view()
+                .flex_col()
+                .gap(px(24.0))
+                .px(px(16.0))
+                .py(px(20.0))
+                .child(ui::text::title("Motion and gestures"))
+                .child(ui::text::muted(
+                    "Springs, tweens, layout animations and native gestures",
+                ))
+                .child(calm_motion(calm))
+                .child(spring_tween(calm))
+                .child(composites())
+                .child(transitions::route_flip())
+                .child(reorder::layout_reorder())
+                .child(swipe::swipe_rows())
+                .child(drag_drop::drop_reorder())
+                .child(transform::pinch_rotate())
+                .child(header::collapsing_header())
+                .child(scrub::scrubber()),
+        )
+}
+
+/// A section: the ui section header over a card around one demo's body.
+pub(crate) fn section(
+    title: &'static str,
+    subtitle: &'static str,
+    body: impl IntoElement,
+) -> impl IntoElement {
+    // The ui section carries the title; the body keeps its own surface.
+    ui::layout::section(
+        title,
+        view()
+            .flex_col()
+            .gap_2()
+            .child(view().flex_col().gap_1().child(ui::text::muted(subtitle)))
+            .child(
+                view()
+                    .flex_col()
+                    .gap(px(12.0))
+                    .p(px(14.0))
+                    .rounded(move || theme().radius)
+                    .border_1()
+                    .border_color(move || theme().border)
+                    .bg(move || theme().card)
+                    .child(body),
+            ),
+    )
+}
+
+/// A caption naming the API a demo uses. Stacked, not a flex row: the
+/// label's measure in a grow row collapses to its minimum width.
+pub(crate) fn api_line(label: &'static str, api: &'static str) -> impl IntoElement {
+    view()
+        .flex_col()
+        .gap_1()
+        .child(ui::text::muted(label))
+        .child(ui::text::code(api))
+}
+
+/// A labeled status line a demo writes its end states to. `test_id` keeps
+/// the sections' lines apart for the steps; the ui text is opaque, so the
+/// id lands on a wrapper view.
+pub(crate) fn status_line(
+    test_id: &'static str,
+    value: impl IntoReactive<SharedString>,
+) -> impl IntoElement {
+    view().test_id(test_id).child(ui::text::body(value))
 }

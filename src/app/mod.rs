@@ -1,2 +1,16 @@
-//! App-level composition owned by the shell area: the root's providers,
-//! the appearance and the window assembly around the shell.
+//! App-level composition owned by the shell area: the window assembly
+//! around the shell. Providers for the app's stores land here as the
+//! foundation area's exports do; the shell keeps its own state in
+//! globals, as the gallery's 0.4.0 pattern does.
+
+use nsh_core::prelude::*;
+
+use crate::shell;
+
+/// The surface's assembly: the shell-wide wiring under the root's owner,
+/// the shell inside it.
+#[component]
+pub fn Root() -> impl IntoElement {
+    shell::install();
+    view().flex_1().child(shell::shell())
+}

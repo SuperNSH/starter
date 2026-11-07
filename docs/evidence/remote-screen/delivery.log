@@ -1,0 +1,54 @@
+
+== nsh 0.4.0 (e626a8d)
+
+== Generate throwaway keys (kept out of git under .nsh/keys)
+root key exists; keys are never overwritten
+release key exists; keys are never overwritten
+
+== Certify the release key for this app family, 90 days
+$ nsh certify --root .nsh/keys/root.secret --key .nsh/keys/release.pub --apps com.example.nshstarter.* --days 90 -o .nsh/keys/release.cert
+.nsh/keys/release.cert: key 3ba2d79a65cea38d certified by root a4317b851e3a8d7e for com.example.nshstarter.* until 90 days from now
+
+== Publish the package (signed with the release key)
+$ nsh publish App.tsx --key .nsh/keys/release.secret --cert .nsh/keys/release.cert -o .nsh/out/com.example.nshstarter.remote-1.nshpkg
+warn app id `com.example.nshstarter.remote` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+✓ built App.tsx (14.0 KB js, 24.6 KB bytecode, 11ms)
+.nsh/out/com.example.nshstarter.remote-1.nshpkg: com.example.nshstarter.remote 1.0.0 (build 1), 0 assets, 108 KB, signed by 3ba2d79a65cea38d, for runtime 0.4.0 or newer
+
+== Verify against the root (as a host would)
+$ nsh verify .nsh/out/com.example.nshstarter.remote-1.nshpkg --root .nsh/keys/root.pub
+valid: com.example.nshstarter.remote 1.0.0 (build 1), release key 3ba2d79a65cea38d, sha256 8968f68297dce801338afb7f3accb0a634e04f85f2c10929c7b678565bb55d94, 0 assets, bytecode for this runtime
+
+== Revoke this package: sequence 1, or the next one over the last list
+$ nsh revoke --root .nsh/keys/root.secret --sequence 1 --package 8968f68297dce801338afb7f3accb0a634e04f85f2c10929c7b678565bb55d94 -o .nsh/delivery/revocations.json
+.nsh/delivery/revocations.json: list 1, 0 release keys and 1 packages revoked
+
+== Verify again with the revocation list applied: it must refuse
+error revoked: package 8968f68297dce801338afb7f3accb0a634e04f85f2c10929c7b678565bb55d94
+(refused, as it must be)
+
+== Write the delivery record the Rust status page reads
+{
+  "package": {
+    "id": "com.example.nshstarter.remote",
+    "name": "Remote screen",
+    "version": "1.0.0",
+    "build": 1,
+    "sha256": "8968f68297dce801338afb7f3accb0a634e04f85f2c10929c7b678565bb55d94",
+    "bytes": 109990,
+    "path": "packages/remote-screen/.nsh/out/com.example.nshstarter.remote-1.nshpkg"
+  },
+  "signature": {
+    "release_key_id": "3ba2d79a65cea38d",
+    "root_key_id": "a4317b851e3a8d7e",
+    "certified_apps": "com.example.nshstarter.*",
+    "cert_days": 90,
+    "min_runtime": "0.4.0"
+  },
+  "revocation": {
+    "sequence": 1,
+    "package_revoked": true,
+    "verify_error": "error revoked: package 8968f68297dce801338afb7f3accb0a634e04f85f2c10929c7b678565bb55d94"
+  }
+}
+delivery complete
