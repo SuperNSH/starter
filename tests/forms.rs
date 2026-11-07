@@ -11,12 +11,13 @@
 //! |---|---|
 //! | `an_error_shows_after_blur_not_while_typing` | the email format rule removed |
 //! | `the_username_check_debounces_and_drops_stale_answers` | `USERNAME_DEBOUNCE` raised to 10 s |
-//! | `a_taken_username_reports_after_the_check` | `check_username` always answered `None` |
-//! | `a_taken_answer_shows_while_the_field_keeps_focus` | the hint fell back to "Available" instead of the mirrored answer |
+//! | `a_taken_username_reports_after_the_check` | `username_taken` answered false always — a mutation shared with the next test; each was seen failing under it |
+//! | `a_taken_answer_shows_while_the_field_keeps_focus` | the shared mutation above, and on its own: the hint fell back to "Available" instead of the mirrored answer |
 //! | `submitting_focuses_the_first_invalid_field` | the submit button's `on_press` did nothing |
 //! | `a_server_error_lands_on_its_field_and_clears_on_edit` | the rejected code returned `SubmitError::form`, not `::field` |
 //! | `submitting_creates_the_account` | `fake_server` always returned `Err` |
-//! | `the_draft_autosaves_and_restores` | the draft restore skipped; separately, `password` kept in the draft for the exclusion assertion |
+//! | `the_draft_autosaves_and_restores` | three, one per assertion: the draft restore skipped (fresh-app email empty); `from_draft` misread the stored date format, so the restored trigger stayed empty while the stored JSON still held `2026-10-14`; `password` kept in the draft (exclusion assertion) |
+//! | `the_seeded_draft_restores_the_pickers` | `from_draft` left both pickers empty (the seeded restore was skipped) |
 //! | `the_dirty_guard_blocks_back_until_discarded` | `pop_on_back(true)` constant |
 //! | `settings_loads_saves_and_guards` | the settings `form.load` skipped |
 

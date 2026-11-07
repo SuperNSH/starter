@@ -3,8 +3,8 @@
 //! server latency runs on the engine's clock.
 
 use nsh_base::{
-    SelectItem, SliderValue, nav_page, number_input, radio, radio_group, select, slider, switch,
-    theme,
+    SelectEntry, SelectItem, SliderValue, nav_page, number_input, radio, radio_group, select,
+    slider, switch, theme,
 };
 use nsh_core::{
     element::{AutoCapitalize, KeyboardDismissMode, ReturnKeyType},
@@ -20,6 +20,7 @@ use crate::features::forms::fields::{
 use crate::features::forms::sign_up::{FormsRoute, SERVER_LATENCY};
 use crate::ui::button::{ButtonSize, ButtonVariant, button_with};
 use crate::ui::dialog::confirm_destructive;
+use crate::ui::popups::{popup_backdrop, popup_surface, popup_trigger_frame};
 use crate::ui::text;
 
 /// The settings' key in `Storage`.
@@ -121,6 +122,10 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
         .child(
             scroll()
                 .flex_1()
+                .content_inset(EdgeInsets {
+                    top: px(28.0),
+                    ..EdgeInsets::default()
+                })
                 .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
                 .child(
                     view()
@@ -183,40 +188,36 @@ fn select_row(start_page: nsh_form::Field<Settings, Option<String>>) -> View {
     };
     field_row(
         "Start page",
-        select()
-            .items(
-                PAGES
-                    .iter()
-                    .map(|(value, title)| SelectItem::new(*value, *title))
-                    .collect::<Vec<SelectItem>>(),
-            )
-            .value(move || field.value().map(SharedString::from))
-            .on_change(move |value: &Option<SharedString>| {
-                field.set(value.as_deref().map(str::to_owned));
-                field.blur();
-            })
-            .accessibility_label("Start page")
-            .popup_style(|s| {
-                s.p_1()
-                    .rounded_lg()
-                    .border_1()
-                    .border_color(move || theme().border)
-                    .bg(move || theme().popover)
-                    .shadow_md()
-            })
-            .item_class("rounded-md focus:bg-accent selected:font-medium disabled:opacity-50")
-            .trigger(
-                view()
-                    .h(px(44.0))
-                    .px(px(12.0))
-                    .flex_row()
-                    .items_center()
-                    .rounded(move || theme().radius)
-                    .border_1()
-                    .border_color(move || theme().input)
-                    .test_id("settings-start-page")
-                    .child(text(move || title(field.value())).text_size(px(15.0))),
-            ),
+        view().test_id("settings-start-page").child(
+            select()
+                .items(
+                    PAGES
+                        .iter()
+                        .map(|(value, title)| SelectItem::new(*value, *title))
+                        .collect::<Vec<SelectItem>>(),
+                )
+                .value(move || field.value().map(SharedString::from))
+                .on_change(move |value: &Option<SharedString>| {
+                    field.set(value.as_deref().map(str::to_owned));
+                    field.blur();
+                })
+                .accessibility_label("Start page")
+                .offset(px(4.0))
+                .popup_style(popup_surface)
+                .backdrop_style(popup_backdrop)
+                .item_class("rounded-md focus:bg-accent selected:font-medium disabled:opacity-50")
+                .render_item(|item: &SelectEntry| {
+                    view().px_2().py_1p5().child(
+                        text(item.title.clone())
+                            .text_sm()
+                            .text_color(move || theme().popover_foreground),
+                    )
+                })
+                .trigger(popup_trigger_frame(
+                    move || title(field.value()).to_string(),
+                    true,
+                )),
+        ),
         move || field.error(),
     )
 }

@@ -8,10 +8,10 @@ use std::time::Duration;
 
 use nsh_base::rich_editor::view::{RichEditor, RichEditorApi, RichEditorChange, rich_editor};
 use nsh_base::{
-    ColorChannel, ColorSpace, DatePickerValue, DateTime, PickedDate, SelectItem, SliderValue,
-    TimeOfDay, checkbox, color_area, color_picker, color_slider, color_swatch, combobox,
-    date_picker, nav_page, nav_stack, number_input, otp_input, radio, radio_group, select, slider,
-    switch, theme, time_field,
+    ColorChannel, ColorSpace, DatePickerValue, DateTime, PickedDate, SelectEntry, SelectItem,
+    SliderValue, TimeOfDay, checkbox, color_area, color_picker, color_slider, color_swatch,
+    combobox, date_picker, nav_page, nav_stack, number_input, otp_input, radio, radio_group,
+    select, slider, switch, theme, time_field,
 };
 use nsh_core::{
     element::{
@@ -32,6 +32,7 @@ use crate::features::forms::fields::{
 use crate::ui::button::{ButtonSize, ButtonVariant, button_with};
 use crate::ui::controls::progress_indeterminate;
 use crate::ui::dialog::confirm_destructive;
+use crate::ui::popups::{popup_backdrop, popup_surface, popup_trigger_frame};
 use crate::ui::text;
 
 /// The usernames the fake availability check reports as taken.
@@ -492,8 +493,15 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
     sign_up_nav(form).child(
         scroll()
             .flex_1()
+            // The focused field's label keeps clear of the page header when
+            // the reveal scrolls it to the top.
+            .content_inset(EdgeInsets {
+                top: px(28.0),
+                ..EdgeInsets::default()
+            })
             .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
             .keyboard_taps(KeyboardTaps::Handled)
+            .test_id("forms-scroll")
             .child(
                 view()
                     .p_4()
@@ -513,7 +521,7 @@ fn sign_up_nav(form: Form<SignUp>) -> Screen {
     nav_page()
         .title("Sign up")
         .header(page_header("Sign up", None::<fn()>))
-        .pop_on_back(true)
+        .pop_on_back(move || !form.is_dirty())
         .on_back_press(move || {
             // Discard clears the draft; the next back goes through, the
             // form now clean.
@@ -540,30 +548,19 @@ fn phone_row(phone: Field<SignUp, String>) -> View {
 fn date_row(birth_date: Field<SignUp, DateTime>) -> View {
     field_row(
         "Birth date",
-        date_picker()
-            .value(move || DatePickerValue::Controlled(birth_date.value()))
-            .on_change(move |picked: &PickedDate| birth_date.set(picked.value))
-            .accessibility_label("Birth date")
-            .popup_style(|s| {
-                s.p_1()
-                    .rounded_lg()
-                    .border_1()
-                    .border_color(move || theme().border)
-                    .bg(move || theme().popover)
-                    .shadow_md()
-            })
-            .trigger(
-                view()
-                    .h(px(44.0))
-                    .px(px(12.0))
-                    .flex_row()
-                    .items_center()
-                    .rounded(move || theme().radius)
-                    .border_1()
-                    .border_color(move || theme().input)
-                    .test_id("signup-birth-date")
-                    .child(text(move || birth_text(birth_date.value())).text_size(px(15.0))),
-            ),
+        view().test_id("signup-birth-date").child(
+            date_picker()
+                .value(move || DatePickerValue::Controlled(birth_date.value()))
+                .on_change(move |picked: &PickedDate| birth_date.set(picked.value))
+                .accessibility_label("Birth date")
+                .offset(px(4.0))
+                .popup_style(popup_surface)
+                .backdrop_style(popup_backdrop)
+                .trigger(popup_trigger_frame(
+                    move || birth_text(birth_date.value()).to_string(),
+                    true,
+                )),
+        ),
         move || birth_date.error(),
     )
 }
@@ -576,6 +573,8 @@ fn birth_text(date: DateTime) -> SharedString {
         .into()
 }
 
+/// The time field wears the input frame itself (border, background and
+/// segment states), as the ui pickers' own wrapper does.
 fn time_row(meeting_time: Field<SignUp, Option<TimeOfDay>>) -> View {
     field_row(
         "Meeting time",
@@ -587,9 +586,20 @@ fn time_row(meeting_time: Field<SignUp, Option<TimeOfDay>>) -> View {
                     meeting_time.blur();
                 })
                 .accessibility_label("Meeting time")
-                .segment_class("rounded-md focus:bg-accent")
-                .segment_style(|s| s.text_size(px(15.0)))
-                .separator_style(|s| s.text_color(move || theme().muted_foreground)),
+                .flex_row()
+                .items_center()
+                .min_h(px(44.0))
+                .px_2()
+                .gap_1()
+                .rounded(move || theme().radius)
+                .border_1()
+                .border_color(move || theme().input)
+                .bg(move || theme().background)
+                .segment_class(
+                    "min-w-7 px-1 py-1.5 rounded-sm text-sm text-popover-foreground text-center \
+                     hover:bg-accent focus:bg-accent",
+                )
+                .separator_style(|s| s.text_sm().text_color(move || theme().muted_foreground)),
         ),
         move || meeting_time.error(),
     )
@@ -615,40 +625,36 @@ fn region_row(region: Field<SignUp, Option<String>>) -> View {
     };
     field_row(
         "Region",
-        select()
-            .items(
-                REGIONS
-                    .iter()
-                    .map(|(value, title)| SelectItem::new(*value, *title))
-                    .collect::<Vec<SelectItem>>(),
-            )
-            .value(move || region.value().map(SharedString::from))
-            .on_change(move |value: &Option<SharedString>| {
-                region.set(value.as_deref().map(str::to_owned));
-                region.blur();
-            })
-            .accessibility_label("Region")
-            .popup_style(|s| {
-                s.p_1()
-                    .rounded_lg()
-                    .border_1()
-                    .border_color(move || theme().border)
-                    .bg(move || theme().popover)
-                    .shadow_md()
-            })
-            .item_class("rounded-md focus:bg-accent selected:font-medium disabled:opacity-50")
-            .trigger(
-                view()
-                    .h(px(44.0))
-                    .px(px(12.0))
-                    .flex_row()
-                    .items_center()
-                    .rounded(move || theme().radius)
-                    .border_1()
-                    .border_color(move || theme().input)
-                    .test_id("signup-region")
-                    .child(text(move || title(region.value())).text_size(px(15.0))),
-            ),
+        view().test_id("signup-region").child(
+            select()
+                .items(
+                    REGIONS
+                        .iter()
+                        .map(|(value, title)| SelectItem::new(*value, *title))
+                        .collect::<Vec<SelectItem>>(),
+                )
+                .value(move || region.value().map(SharedString::from))
+                .on_change(move |value: &Option<SharedString>| {
+                    region.set(value.as_deref().map(str::to_owned));
+                    region.blur();
+                })
+                .accessibility_label("Region")
+                .offset(px(4.0))
+                .popup_style(popup_surface)
+                .backdrop_style(popup_backdrop)
+                .item_class("rounded-md focus:bg-accent selected:font-medium disabled:opacity-50")
+                .render_item(|item: &SelectEntry| {
+                    view().px_2().py_1p5().child(
+                        text(item.title.clone())
+                            .text_sm()
+                            .text_color(move || theme().popover_foreground),
+                    )
+                })
+                .trigger(popup_trigger_frame(
+                    move || title(region.value()).to_string(),
+                    true,
+                )),
+        ),
         move || region.error(),
     )
 }
@@ -925,6 +931,7 @@ fn code_row(code: Field<SignUp, String>, code_check: Signal<String>) -> View {
                     })
                     .on_blur(move || field.blur())
                     .accessibility_label("Verification code")
+                    .group_class("flex-row gap-2")
                     .cell_class(
                         "size-11 items-center justify-center rounded-md border border-input \
                          text-base focus:border-ring data-filled:border-primary",
