@@ -161,35 +161,38 @@ pub(crate) fn shortcut(keys: &'static str) -> impl IntoElement {
 /// section that runs a real flow. Toasts are hosted once, at the end.
 pub fn overlays_page() -> impl IntoElement {
     view().flex_1().bg(move || theme().background).child(
-        scroll().flex_1().child(
-            view().w_full().flex_col().items_center().child(
-                view()
-                    .w_full()
-                    .max_w(px(720.0))
-                    .flex_col()
-                    .gap_6()
-                    .p_safe_area()
-                    .p_4()
-                    .child(crate::ui::text::page_intro(
-                        "Overlays",
-                        "Dialogs, popups, menus, toasts and desktop surfaces, each in a flow.",
-                    ))
-                    .child(framed("Dialog", dialog_section::dialog_section()))
-                    .child(framed("Alert dialog", dialog_section::alert_section()))
-                    .child(framed("Sheet", sheet_section::sheet_section()))
-                    .child(framed("Popover", menus::popover_section()))
-                    .child(framed("Menu", menus::menu_section()))
-                    .child(framed("Context menu", menus::context_menu_section()))
-                    .child(framed("Hover card", hovering::hover_card_section()))
-                    .child(framed("Tooltip", hovering::tooltip_section()))
-                    .child(framed("Toasts", toasts::toasts_area()))
-                    .child(framed("Dock area", dock_section::dock_section()))
-                    .child(framed("Resizable panels", panels::panels_section()))
-                    .child(framed("Editor", code_sections::editor_section()))
-                    .child(framed("Diff view", code_sections::diff_section()))
-                    .child(framed("Text view", code_sections::text_section())),
+        scroll()
+            .flex_1()
+            .content_inset(crate::ui::layout::page_insets(0.0))
+            .child(
+                view().w_full().flex_col().items_center().child(
+                    view()
+                        .w_full()
+                        .max_w(px(720.0))
+                        .flex_col()
+                        .gap_6()
+                        .p_safe_area()
+                        .p_4()
+                        .child(crate::ui::text::page_intro(
+                            "Overlays",
+                            "Dialogs, popups, menus, toasts and desktop surfaces, each in a flow.",
+                        ))
+                        .child(framed("Dialog", dialog_section::dialog_section()))
+                        .child(framed("Alert dialog", dialog_section::alert_section()))
+                        .child(framed("Sheet", sheet_section::sheet_section()))
+                        .child(framed("Popover", menus::popover_section()))
+                        .child(framed("Menu", menus::menu_section()))
+                        .child(framed("Context menu", menus::context_menu_section()))
+                        .child(framed("Hover card", hovering::hover_card_section()))
+                        .child(framed("Tooltip", hovering::tooltip_section()))
+                        .child(framed("Toasts", toasts::toasts_area()))
+                        .child(framed("Dock area", dock_section::dock_section()))
+                        .child(framed("Resizable panels", panels::panels_section()))
+                        .child(framed("Editor", code_sections::editor_section()))
+                        .child(framed("Diff view", code_sections::diff_section()))
+                        .child(framed("Text view", code_sections::text_section())),
+                ),
             ),
-        ),
     )
 }
 

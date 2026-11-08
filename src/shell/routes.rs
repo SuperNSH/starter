@@ -114,6 +114,37 @@ impl Route {
         }
     }
 
+    /// The tab's Lucide icon (ISC), drawn in `currentColor`, for the themed
+    /// tab bar Android shows in place of the system's Material bar.
+    pub fn tab_svg(self) -> &'static str {
+        macro_rules! icon {
+            ($body:literal) => {
+                concat!(
+                    r#"<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">"#,
+                    $body,
+                    "</g></svg>"
+                )
+            };
+        }
+        match self {
+            Route::Home => icon!(
+                r#"<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>"#
+            ),
+            Route::Forms => icon!(
+                r#"<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>"#
+            ),
+            Route::Data => icon!(
+                r#"<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11"/>"#
+            ),
+            Route::Lists => {
+                icon!(r#"<path d="M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13"/>"#)
+            }
+            _ => icon!(
+                r#"<path d="M12.8 19.6A2 2 0 1 0 14 16H2m15.5-8a2.5 2.5 0 1 1 2 4H2m7.8-7.6A2 2 0 1 1 11 8H2"/>"#
+            ),
+        }
+    }
+
     /// One line on what the page shows, for Home's cards.
     pub fn summary(self) -> &'static str {
         match self {
@@ -155,6 +186,17 @@ impl Route {
 
     /// The Home row's test id (`page-<key>`), as a literal: the ui row
     /// wrapper carries test ids on `&'static str`.
+    /// The test id of the route's tab in the themed (Android) tab bar.
+    pub fn tab_id(self) -> &'static str {
+        match self {
+            Route::Home => "tab-home",
+            Route::Forms => "tab-forms",
+            Route::Data => "tab-data",
+            Route::Lists => "tab-lists",
+            _ => "tab-motion",
+        }
+    }
+
     pub fn page_row_id(self) -> &'static str {
         match self {
             Route::Home => "page-home",

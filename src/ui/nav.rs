@@ -74,10 +74,28 @@ pub fn chevron() -> View {
     )
 }
 
-/// The system header in the app's colors on Android, whose native header
-/// otherwise keeps the system appearance when the app picks its own (iOS
-/// follows the app's appearance and keeps its material).
+/// A system screen in the app's colors: the screen itself takes the
+/// theme's background, which on iOS shows under the header and the home
+/// indicator (UIKit's system color there, pure black in dark, sat as a band
+/// above and below the page); on Android the native header takes the
+/// theme's colors too, as it otherwise keeps the system appearance when the
+/// app picks its own (iOS follows the app's appearance and keeps its
+/// material).
+///
+/// On iOS the header is the system's large title over the page's scroll:
+/// the content starts at the top of the screen and passes under the bar's
+/// own glass as it scrolls, and the title shrinks into the bar, as in
+/// Apple's apps. A page whose top is not a scroll view turns it off with
+/// `.header_large_title(false)`.
 pub fn themed_header(screen: nsh_core::element::Screen) -> nsh_core::element::Screen {
+    let screen = screen.bg(move || theme().background);
+    if os() == nsh_core::platform::Os::Ios {
+        // A transparent header: the page draws its own fade-in blur under
+        // it (`ui::layout::top_edge_fade`) instead of UIKit's hard band.
+        return screen
+            .header_large_title(!is_desktop())
+            .header_transparent(!is_desktop());
+    }
     if os() != nsh_core::platform::Os::Android {
         return screen;
     }

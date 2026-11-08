@@ -22,6 +22,7 @@ use crate::{
 pub fn content() -> AnyElement {
     scroll()
         .flex_1()
+        .content_inset(crate::ui::layout::page_insets(0.0))
         .child(
             view()
                 .gap_6()

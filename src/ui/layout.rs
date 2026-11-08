@@ -129,3 +129,38 @@ pub fn skeleton_of(height: f32) -> impl IntoElement {
 pub fn divider() -> impl IntoElement {
     view().w_full().h(px(1.0)).bg(move || theme().border)
 }
+
+/// The height the phone tab bar floats over at the bottom of a page, above
+/// the safe area: iOS's Liquid Glass bar and Android's themed one. Zero on
+/// the desktops and the web, which show no tab bar.
+pub fn tab_bar_room() -> f32 {
+    use nsh_core::platform::Os;
+    if is_desktop() {
+        return 0.0;
+    }
+    match os() {
+        Os::Ios => 64.0,
+        Os::Android => 72.0,
+        _ => 0.0,
+    }
+}
+
+/// A page scroll's content inset on phones: `top` above the content, and
+/// room at the end so the last row scrolls clear of the floating tab bar
+/// (the content passes under the bar on its way there, as under the
+/// header). Read where the scroll is made: `.content_inset(page_insets(0.0))`.
+pub fn page_insets(top: f32) -> impl Fn() -> nsh_core::EdgeInsets + 'static {
+    move || {
+        let room = tab_bar_room();
+        let bottom = if room > 0.0 {
+            room + safe_area().bottom.0
+        } else {
+            0.0
+        };
+        nsh_core::EdgeInsets {
+            top: px(top),
+            bottom: px(bottom),
+            ..nsh_core::EdgeInsets::default()
+        }
+    }
+}

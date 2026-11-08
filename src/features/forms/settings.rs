@@ -124,10 +124,7 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
                 .flex_1()
                 // nav_page paints the platform's color; the page takes the theme's.
                 .bg(move || theme().background)
-                .content_inset(EdgeInsets {
-                    top: px(8.0),
-                    ..EdgeInsets::default()
-                })
+                .content_inset(crate::ui::layout::page_insets(8.0))
                 .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
                 .child(
                     view()
@@ -160,6 +157,8 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
                         ),
                 ),
         )
+        // The same soft header and tab-bar edges as the shell's pages.
+        .child(crate::shell::soft_edges::page_edges())
 }
 
 /// A bound text field row (settings' fields are its own value type).

@@ -24,37 +24,41 @@ pub fn ui_gallery_page() -> impl IntoElement {
         .bg(move || theme().background)
         .text_color(move || theme().foreground)
         .child(
-            scroll().flex_1().test_id("gallery-scroll").child(
-                view()
-                    .flex_col()
-                    .gap_6()
-                    .p_4()
-                    .pb_safe_area_plus(px(24.0))
-                    .max_w(px(720.0))
-                    .child(text::title("UI gallery"))
-                    .child(text::muted(
-                        "Every control of the app's own library, with its states. \
+            scroll()
+                .flex_1()
+                .content_inset(crate::ui::layout::page_insets(0.0))
+                .test_id("gallery-scroll")
+                .child(
+                    view()
+                        .flex_col()
+                        .gap_6()
+                        .p_4()
+                        .pb_safe_area_plus(px(24.0))
+                        .max_w(px(720.0))
+                        .child(text::title("UI gallery"))
+                        .child(text::muted(
+                            "Every control of the app's own library, with its states. \
                          Hover, press, focus and disable each one.",
-                    ))
-                    .child(buttons_section())
-                    .child(choices_section())
-                    .child(text_section())
-                    .child(fields_section())
-                    .child(controls_section())
-                    .child(selection_section())
-                    .child(nav_rows_section())
-                    .child(pickers_section())
-                    .child(overlays_section(
-                        open_dialog,
-                        open_sheet,
-                        open_form_sheet,
-                        open_full_dialog,
-                        deletable,
-                    ))
-                    .child(data_section())
-                    .child(surfaces_section())
-                    .child(link_section()),
-            ),
+                        ))
+                        .child(buttons_section())
+                        .child(choices_section())
+                        .child(text_section())
+                        .child(fields_section())
+                        .child(controls_section())
+                        .child(selection_section())
+                        .child(nav_rows_section())
+                        .child(pickers_section())
+                        .child(overlays_section(
+                            open_dialog,
+                            open_sheet,
+                            open_form_sheet,
+                            open_full_dialog,
+                            deletable,
+                        ))
+                        .child(data_section())
+                        .child(surfaces_section())
+                        .child(link_section()),
+                ),
         )
         .child(toast::toast_host())
         .child(dialog::dialog_sheet(
@@ -308,8 +312,10 @@ fn text_section() -> impl IntoElement {
             .child(text::muted("Secondary text: hints, captions, metadata."))
             .child(text::label("Field label"))
             .child(
+                // Wraps: the code and five badges are wider than a phone.
                 view()
                     .flex_row()
+                    .flex_wrap()
                     .gap_2()
                     .items_center()
                     .child(text::code("nsh_base::button"))

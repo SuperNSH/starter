@@ -105,24 +105,27 @@ pub(crate) fn tool_button(
 /// The canvas and graphics page, one section per element the area covers.
 pub fn canvas_page() -> impl IntoElement {
     view().flex_1().bg(move || theme().background).child(
-        scroll().flex_1().child(
-            view()
-                .flex_1()
-                .gap(px(24.0))
-                .px(px(16.0))
-                .py(px(20.0))
-                .child(ui::text::page_intro(
-                    "Canvas and graphics",
-                    "Drawing, animation, charts, shaders, SVG, media and the web view",
-                ))
-                .child(sketch::sketch())
-                .child(simulation::frame_loop())
-                .child(charts::charts())
-                .child(shader::shader_demo())
-                .child(svg::svg_demo())
-                .child(media::media())
-                .child(web::messaging())
-                .child(world::world_board()),
-        ),
+        scroll()
+            .flex_1()
+            .content_inset(crate::ui::layout::page_insets(0.0))
+            .child(
+                view()
+                    .flex_1()
+                    .gap(px(24.0))
+                    .px(px(16.0))
+                    .py(px(20.0))
+                    .child(ui::text::page_intro(
+                        "Canvas and graphics",
+                        "Drawing, animation, charts, shaders, SVG, media and the web view",
+                    ))
+                    .child(sketch::sketch())
+                    .child(simulation::frame_loop())
+                    .child(charts::charts())
+                    .child(shader::shader_demo())
+                    .child(svg::svg_demo())
+                    .child(media::media())
+                    .child(web::messaging())
+                    .child(world::world_board()),
+            ),
     )
 }

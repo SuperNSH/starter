@@ -34,9 +34,14 @@ pub fn motion_page() -> impl IntoElement {
     let calm = signal(false);
     scroll()
         .flex_1()
+        .content_inset(crate::ui::layout::page_insets(0.0))
         .test_id("motion-page-scroll")
         .bg(move || theme().background)
-        .p_safe_area()
+        // The sides only: UIKit insets the scroll under the header and the
+        // content inset clears the tab bar, so a top and bottom safe-area
+        // padding would leave the space twice.
+        .pl_safe_area()
+        .pr_safe_area()
         .child(
             view()
                 .flex_col()

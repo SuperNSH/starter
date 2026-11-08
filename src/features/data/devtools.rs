@@ -270,25 +270,19 @@ fn cache_section() -> impl IntoElement {
         ))
 }
 
-/// The query devtools page.
+/// The query devtools page: one scroll as the page's root, so the iOS
+/// header's large title and soft edge follow it as on every page (the
+/// header carries the title).
 pub fn devtools_page() -> impl IntoElement {
-    view()
+    scroll()
         .flex_1()
-        .p_safe_area()
-        .p_4()
-        .gap_6()
-        .text_color(move || theme().foreground)
+        .content_inset(crate::ui::layout::page_insets(0.0))
         .child(
-            scroll().flex_1().child(
-                view()
-                    .gap_6()
-                    .child(
-                        text("Query devtools")
-                            .text_xl()
-                            .font_weight(FontWeight::SEMIBOLD),
-                    )
-                    .child(api_section())
-                    .child(cache_section()),
-            ),
+            view()
+                .p_4()
+                .gap_6()
+                .text_color(move || theme().foreground)
+                .child(api_section())
+                .child(cache_section()),
         )
 }

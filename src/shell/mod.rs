@@ -12,6 +12,7 @@ pub mod nav;
 pub mod page;
 pub mod palette;
 pub mod routes;
+pub mod soft_edges;
 pub mod status;
 pub mod undo;
 
@@ -22,7 +23,7 @@ use crate::{
     shell::routes::Route,
     ui::{
         nav::nav_row,
-        tab_bar::{mobile_tab_bar, tab_item},
+        tab_bar::{ThemedTab, mobile_tab_bar, tab_item, themed_tab_bar},
         toast,
     },
 };
@@ -82,6 +83,17 @@ fn phone_shell() -> AnyElement {
             .map_or(tabs.len() as u32, |at| at as u32);
         selected.set(at);
     });
+    // A feed post opened on a phone is pushed as the detail route: the
+    // system header brings its own back button and the tab bar steps aside.
+    // Only while this shell is up: a desktop shell after it overlays.
+    crate::features::data::pushes_detail().set(true);
+    cleanup(|| crate::features::data::pushes_detail().set(false));
+    effect(move || {
+        if let Some(id) = crate::features::data::detail_request().get() {
+            crate::features::data::close_post();
+            nav::push(Route::DataDetail(id));
+        }
+    });
     // ...and the tabs drive the stack (a no-op when this effect itself
     // moved the selection, so the two never loop).
     effect(move || {
@@ -101,16 +113,46 @@ fn phone_shell() -> AnyElement {
                 .child(pushed()),
         )
         .child(
-            // Off the detail pages; the bar itself shows nothing off
-            // iOS and Android.
+            // Off the detail pages; the bar itself shows nothing off iOS
+            // and Android. iOS keeps its system bar (Liquid Glass over the
+            // page's own background); Android's Material bar paints its own
+            // surface color whatever the theme, so Android draws the bar
+            // in the theme's colors instead.
+            // It floats over the stack's bottom edge: pages scroll under it
+            // and keep room at their end (`ui::layout::page_insets`).
             view()
+                .absolute()
+                .left_0()
+                .right_0()
+                .bottom_0()
                 .style_when(move || nav::current().is_detail(), |s| s.hidden())
-                .child(mobile_tab_bar(
-                    tabs.iter()
-                        .map(|route| tab_item(route.label_str(), route.tab_icon()))
-                        .collect::<Vec<_>>(),
-                    selected,
-                )),
+                .child(
+                    when(
+                        || os() == nsh_core::platform::Os::Android,
+                        move || {
+                            themed_tab_bar(
+                                tabs.iter()
+                                    .map(|route| ThemedTab {
+                                        label: route.label_str(),
+                                        svg: route.tab_svg(),
+                                        test_id: route.tab_id(),
+                                    })
+                                    .collect(),
+                                selected,
+                            )
+                            .into_element()
+                        },
+                    )
+                    .otherwise(move || {
+                        mobile_tab_bar(
+                            tabs.iter()
+                                .map(|route| tab_item(route.label_str(), route.tab_icon()))
+                                .collect::<Vec<_>>(),
+                            selected,
+                        )
+                        .into_element()
+                    }),
+                ),
         )
         .into_element()
 }

@@ -61,9 +61,11 @@ fn pinned<C: Component<Props = ()>>() -> Headless {
 #[test]
 fn locale_switch_re_renders_strings() -> Result<(), String> {
     let mut app = start::<PlatformRoot>();
-    app.wait_for("Platform")?;
+    // A card's heading: the page's own title is the iOS header's large
+    // title on phones, which the headless phone does not draw.
+    app.wait_for("Clipboard")?;
     app.press("中文")?;
-    app.wait_for("平台")?;
+    app.wait_for("剪贴板")?;
     // The current-locale line followed the switch too.
     app.wait_for("当前: zh-CN")?;
     // `rust_i18n::set_locale` is process-global: put it back for the other tests.

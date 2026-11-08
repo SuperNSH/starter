@@ -27,8 +27,12 @@ pub fn data_page() -> impl IntoElement {
     let request = detail_request();
     // The detail covers the feed instead of replacing it: the feed's pages
     // and scroll position survive the round trip.
+    // A shell that pushes the detail as its own route (phones: it watches
+    // `detail_request` and says so through `pushes_detail`) takes it from
+    // here; anywhere else, the feed presents it itself.
+    let pushed = pushes_detail();
     view().flex_1().child(feed::feed_page()).child(when(
-        move || request.get().is_some(),
+        move || !pushed.get() && request.get().is_some(),
         move || {
             // Tracked: a different id presented while the overlay is up
             // rebuilds the detail for that post instead of showing the old
@@ -85,6 +89,23 @@ pub const DETAIL_TTL_MS: u64 = fake_api::DETAIL_TTL_MS;
 /// The post the feed wants open, if any.
 pub fn detail_request() -> Signal<Option<u64>> {
     global::<Option<u64>>()
+}
+
+/// Set by a shell that pushes the detail route itself when a post is
+/// opened; the feed then presents no overlay of its own.
+pub fn pushes_detail() -> Signal<bool> {
+    global::<bool>()
+}
+
+/// Bumped to reload the feed from outside it (the shell's native header
+/// button on iOS).
+pub fn refresh_request() -> Signal<u32> {
+    global::<u32>()
+}
+
+/// Reloads the feed from its first page.
+pub fn refresh_feed() {
+    refresh_request().update(|n| *n += 1);
 }
 
 /// Opens a post's detail over the feed.

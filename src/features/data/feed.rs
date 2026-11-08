@@ -244,6 +244,31 @@ pub fn feed_page() -> impl IntoElement {
     // to whoever pressed, and the Retry control's branch unmounts the moment
     // the reset flips the status, so it must not own the load.
     let reloads = signal(0_u32);
+    let api = fake_api::fake_api();
+    // Zero pages with a failure is the error state; zero pages otherwise is
+    // the skeletons; pages mean the rows.
+    let loaded = move || posts.page_count() > 0;
+    let failed = move || posts.page_count() == 0 && posts.status() == QueryStatus::Failure;
+    let error_text = move || {
+        posts
+            .error()
+            .map(|error| error.to_string())
+            .unwrap_or_else(|| "The request failed".to_owned())
+    };
+    // The banner, the skeletons and the error ride in the list's header, so
+    // the list is mounted from the first frame: the iOS header only slides
+    // its glass and edge blur over a scroll view that is there when the
+    // screen is set up, and a list mounted after the first page came too late.
+    let status = view()
+        .gap_3()
+        .child(when(move || api.with(|api| api.offline), offline_banner))
+        .child(when(
+            move || !loaded() && !failed(),
+            move || skeletons().into_element(),
+        ))
+        .child(when(failed, move || {
+            error_state(error_text(), move || reloads.update(|n| *n += 1))
+        }));
     let list = virtual_list(
         move || rows.with(Vec::len),
         move |at| {
@@ -254,6 +279,7 @@ pub fn feed_page() -> impl IntoElement {
     .keys(move || rows.with(|rows| rows.iter().map(|post| post.id).collect::<Vec<_>>()))
     .estimated_item_size(px(108.0))
     .content_padding(px(16.0))
+    .content_inset(crate::ui::layout::page_insets(0.0))
     .row_gap(px(12.0))
     .on_load_more(move |_: &()| posts.fetch_next_page())
     .load_more_threshold(1.0)
@@ -265,6 +291,7 @@ pub fn feed_page() -> impl IntoElement {
         refreshing.set(true);
         reloads.update(|n| *n += 1);
     })
+    .header(status)
     .footer(
         view()
             .gap_2()
@@ -290,6 +317,14 @@ pub fn feed_page() -> impl IntoElement {
     .flex_1();
     // The reload runs here, under the page. Two effects: the reload's own
     // run must not track the status it resets, or it would refetch itself.
+    // A reload asked for from outside the feed (the header's button).
+    let outside = super::refresh_request();
+    let seen = outside.get_untracked();
+    effect(move || {
+        if outside.get() != seen {
+            untracked(|| reloads.update(|n| *n += 1));
+        }
+    });
     effect(move || {
         let tick = reloads.get();
         if tick > 0 {
@@ -304,28 +339,8 @@ pub fn feed_page() -> impl IntoElement {
             refreshing.set(false);
         }
     });
-    let api = fake_api::fake_api();
-    // Zero pages with a failure is the error state; zero pages otherwise is
-    // the skeletons; pages mean the list.
-    let loaded = move || posts.page_count() > 0;
-    let failed = move || posts.page_count() == 0 && posts.status() == QueryStatus::Failure;
-    let error_text = move || {
-        posts
-            .error()
-            .map(|error| error.to_string())
-            .unwrap_or_else(|| "The request failed".to_owned())
-    };
     view()
         .flex_1()
-        .p_safe_area()
         .text_color(move || theme().foreground)
-        .child(when(move || api.with(|api| api.offline), offline_banner))
-        .child(when(
-            move || !loaded() && !failed(),
-            move || skeletons().into_element(),
-        ))
-        .child(when(failed, move || {
-            error_state(error_text(), move || reloads.update(|n| *n += 1))
-        }))
-        .child(when(loaded, move || list.clone().into_element()))
+        .child(list)
 }

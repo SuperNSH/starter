@@ -31,10 +31,13 @@ use widgets::localized;
 fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) -> AnyElement {
     scroll()
         .flex_1()
+        .content_inset(crate::ui::layout::page_insets(0.0))
         .test_id(scroll_id)
         .child(
             view()
-                .pt_safe_area_plus(px(16.0))
+                // UIKit insets the scroll under the header already: a top
+                // safe-area padding would leave that space twice.
+                .pt(px(16.0))
                 .pr_safe_area_plus(px(16.0))
                 .pl_safe_area_plus(px(16.0))
                 .pb(move || {
@@ -47,12 +50,17 @@ fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) ->
                 })
                 .gap_4()
                 .text_color(move || theme().foreground)
-                .child(
-                    text(localized(title))
-                        .text_size(px(20.0))
-                        .font_weight(FontWeight::MEDIUM)
-                        .role(AccessibilityRole::Header),
-                )
+                // iOS phones show the title as the header's large title.
+                .child(when(
+                    || !(os() == nsh_core::platform::Os::Ios && !is_desktop()),
+                    move || {
+                        text(localized(title))
+                            .text_size(px(20.0))
+                            .font_weight(FontWeight::MEDIUM)
+                            .role(AccessibilityRole::Header)
+                            .into_element()
+                    },
+                ))
                 .children(cards),
         )
         .into_element()
