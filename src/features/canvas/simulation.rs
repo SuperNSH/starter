@@ -97,7 +97,11 @@ pub(crate) fn FrameLoop() -> impl IntoElement {
                             move || playing.update(|p| *p = !*p),
                         )),
                     )
-                    .child(tool_button("Reset", false, move || tick.set(0))),
+                    .child(view().test_id("frame-loop-reset").child(tool_button(
+                        "Reset",
+                        false,
+                        move || tick.set(0),
+                    ))),
             )
             .child(caption("tick-count", readout)),
     ))

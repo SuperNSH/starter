@@ -1,16 +1,27 @@
 //! Canvas and graphics: the drawing app on `canvas` with responder input
 //! and undo, a signal-driven frame loop, `Plot` charts, `shader` with
 //! WGSL, SVG, images with placeholder and blur-up, video and `web_view`
-//! with messaging. Owned by the canvas area. The shell mounts
-//! `canvas_page`; keep its name and signature.
+//! with messaging, plus the ports of the gpui-starter canvas pages: the
+//! shape editor, the bézier editor, the node graph, the particle field,
+//! the text and image specimens, and the shared board with demo peers.
+//! Owned by the canvas area. The shell mounts `canvas_page`; keep its
+//! name and signature.
 
+mod bezier;
+mod canvas_image;
+mod canvas_text;
 mod charts;
+mod collab;
 mod media;
+mod node_graph;
+mod particles;
 mod shader;
+mod shape_edit;
 mod simulation;
 mod sketch;
 mod svg;
 mod web;
+mod world;
 
 use crate::ui;
 use nsh_base::theme;
@@ -20,6 +31,8 @@ use nsh_core::prelude::*;
 /// it inside a canvas's binding so a change of appearance redraws it.
 #[derive(Clone, Copy)]
 pub(crate) struct Palette {
+    pub background: Hsla,
+    pub foreground: Hsla,
     pub border: Hsla,
     pub muted_foreground: Hsla,
     pub series: [Hsla; 3],
@@ -29,6 +42,8 @@ impl Palette {
     pub(crate) fn now() -> Self {
         let t = theme();
         Self {
+            background: color(t.background),
+            foreground: color(t.foreground),
             border: color(t.border),
             muted_foreground: color(t.muted_foreground),
             series: [color(t.chart_1), color(t.chart_2), color(t.chart_3)],
@@ -108,7 +123,7 @@ pub fn canvas_page() -> impl IntoElement {
                 .py(px(20.0))
                 .child(ui::text::title("Canvas and graphics"))
                 .child(ui::text::muted(
-                    "Drawing, animation, charts, shaders, SVG, media and the web view",
+                    "Drawing, animation, charts, shaders, SVG, media, the web view, and the gpui-starter canvas pages ported: editors, graph, particles, text and image specimens, shared board",
                 ))
                 .child(sketch::sketch())
                 .child(simulation::frame_loop())
@@ -116,7 +131,15 @@ pub fn canvas_page() -> impl IntoElement {
                 .child(shader::shader_demo())
                 .child(svg::svg_demo())
                 .child(media::media())
-                .child(web::messaging()),
+                .child(web::messaging())
+                .child(world::world_board())
+                .child(shape_edit::shape_editing())
+                .child(bezier::bezier_editor())
+                .child(node_graph::node_graph())
+                .child(particles::particle_field())
+                .child(canvas_text::text_on_canvas())
+                .child(canvas_image::image_on_canvas())
+                .child(collab::shared_board()),
         ),
     )
 }
