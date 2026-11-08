@@ -1,12 +1,22 @@
 //! Canvas and graphics: the drawing app on `canvas` with responder input
 //! and undo, a signal-driven frame loop, `Plot` charts, `shader` with
 //! WGSL, SVG, images with placeholder and blur-up, video and `web_view`
-//! with messaging. Owned by the canvas area. The shell mounts
-//! `canvas_page`; keep its name and signature.
+//! with messaging, plus the ports of the gpui-starter canvas pages: the
+//! shape editor, the bézier editor, the node graph, the particle field,
+//! the text and image specimens, and the shared board with demo peers.
+//! Owned by the canvas area. The shell mounts `canvas_page`; keep its
+//! name and signature.
 
+mod bezier;
+mod canvas_image;
+mod canvas_text;
 mod charts;
+mod collab;
 mod media;
+mod node_graph;
+mod particles;
 mod shader;
+mod shape_edit;
 mod simulation;
 mod sketch;
 mod svg;
@@ -116,7 +126,7 @@ pub fn canvas_page() -> impl IntoElement {
                     .py(px(20.0))
                     .child(ui::text::page_intro(
                         "Canvas and graphics",
-                        "Drawing, animation, charts, shaders, SVG, media and the web view",
+                        "Drawing, animation, charts, shaders, SVG, media, the web view, and the gpui-starter canvas pages ported: editors, graph, particles, text and image specimens, shared board",
                     ))
                     .child(sketch::sketch())
                     .child(simulation::frame_loop())
@@ -125,7 +135,14 @@ pub fn canvas_page() -> impl IntoElement {
                     .child(svg::svg_demo())
                     .child(media::media())
                     .child(web::messaging())
-                    .child(world::world_board()),
+                    .child(world::world_board())
+                    .child(shape_edit::shape_editing())
+                    .child(bezier::bezier_editor())
+                    .child(node_graph::node_graph())
+                    .child(particles::particle_field())
+                    .child(canvas_text::text_on_canvas())
+                    .child(canvas_image::image_on_canvas())
+                    .child(collab::shared_board()),
             ),
     )
 }
