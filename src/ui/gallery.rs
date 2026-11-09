@@ -29,18 +29,15 @@ pub fn ui_gallery_page() -> impl IntoElement {
                 .content_inset(crate::ui::layout::page_insets(0.0))
                 .test_id("gallery-scroll")
                 .child(
-                    view()
-                        .flex_col()
-                        .gap_6()
-                        .p_4()
-                        .pb_safe_area_plus(px(24.0))
+                    layout::page_body()
                         .max_w(px(720.0))
-                        .child(text::title("UI gallery"))
-                        .child(text::muted(
+                        .child(text::page_intro(
+                            "UI gallery",
                             "Every control of the app's own library, with its states. \
                          Hover, press, focus and disable each one.",
                         ))
                         .child(buttons_section())
+                        .child(native_section())
                         .child(choices_section())
                         .child(text_section())
                         .child(fields_section())
@@ -183,6 +180,78 @@ fn choices_section() -> impl IntoElement {
                     "Fruit {} tags {}",
                     fruit.get().unwrap_or_default(),
                     tags.get().join(", ")
+                )
+            })),
+    )
+}
+
+/// The platform's own controls (`ui::native`): UIKit's on iOS, AppKit's
+/// on macOS, the app's styled ones elsewhere. The app's accent tints them.
+fn native_section() -> impl IntoElement {
+    use crate::ui::native::{
+        NativeButtonStyle, is_native, native_button, native_segmented, native_switch,
+    };
+    let presses = signal(0_u32);
+    let press = move || presses.update(|n| *n += 1);
+    let airplane = signal(false);
+    let range = signal(1_usize);
+    layout::section(
+        "Native controls",
+        view()
+            .flex_col()
+            .gap_4()
+            .child(text::muted(if is_native() {
+                "Drawn by the system: its buttons, switch and segmented control, in the app's accent."
+            } else {
+                "The system draws these on iOS and macOS; here they are the app's own controls."
+            }))
+            .child(
+                view()
+                    .flex_row()
+                    .flex_wrap()
+                    .gap_2()
+                    .child(native_button(
+                        "Continue",
+                        NativeButtonStyle::Filled,
+                        None,
+                        press,
+                    ))
+                    .child(native_button(
+                        "Send",
+                        NativeButtonStyle::Tinted,
+                        Some("square.and.arrow.up"),
+                        press,
+                    ))
+                    .child(native_button(
+                        "Later",
+                        NativeButtonStyle::Gray,
+                        None,
+                        press,
+                    ))
+                    .child(native_button(
+                        "Glass",
+                        NativeButtonStyle::Glass,
+                        Some("sparkles"),
+                        press,
+                    ))
+                    .child(native_button(
+                        "Details",
+                        NativeButtonStyle::Plain,
+                        Some("info.circle"),
+                        press,
+                    )),
+            )
+            .child(text::muted(move || {
+                format!("Native presses: {}", presses.get())
+            }))
+            .child(native_switch("Airplane mode", airplane))
+            .child(native_segmented(&["Day", "Week", "Month"], range))
+            .child(text::muted(move || {
+                let ranges = ["Day", "Week", "Month"];
+                format!(
+                    "Airplane mode {} · range {}",
+                    if airplane.get() { "on" } else { "off" },
+                    ranges.get(range.get()).unwrap_or(&"none")
                 )
             })),
     )

@@ -119,11 +119,7 @@ pub fn canvas_page() -> impl IntoElement {
             .flex_1()
             .content_inset(crate::ui::layout::page_insets(0.0))
             .child(
-                view()
-                    .flex_1()
-                    .gap(px(24.0))
-                    .px(px(16.0))
-                    .py(px(20.0))
+                ui::layout::page_body()
                     .child(ui::text::page_intro(
                         "Canvas and graphics",
                         "Drawing, animation, charts, shaders, SVG, media, the web view, and the gpui-starter canvas pages ported: editors, graph, particles, text and image specimens, shared board",

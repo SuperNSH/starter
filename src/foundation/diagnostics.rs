@@ -37,11 +37,11 @@ pub fn diagnostics_content() -> impl IntoElement {
         .flex_1()
         .content_inset(crate::ui::layout::page_insets(0.0))
         .child(
-            view()
-                .flex_1()
-                .p_safe_area()
-                .p_4()
-                .gap_4()
+            crate::ui::layout::page_body()
+                .child(crate::ui::text::page_intro(
+                    "Diagnostics",
+                    "Config, capabilities, tasks, events and the log.",
+                ))
                 .child(app_card())
                 .child(config_card())
                 .child(capabilities_card())

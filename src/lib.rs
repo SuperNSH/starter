@@ -34,6 +34,13 @@ fn native(registry: &mut Registry) {
 #[native_components(ios)]
 fn ios_components(components: &nsh_platform_ios::Components) {
     shell::soft_edges::register(components);
+    ui::native::register_ios(components);
+}
+
+/// The system's own controls on macOS (`ui::native`).
+#[native_components(macos)]
+fn macos_components(components: &nsh_platform_macos::Components) {
+    ui::native::register_macos(components);
 }
 
 /// The application's root: the surface's background and text color, the

@@ -130,6 +130,19 @@ pub fn divider() -> impl IntoElement {
     view().w_full().h(px(1.0)).bg(move || theme().border)
 }
 
+/// A page's content column, the gallery's frame shared by every page: 16pt
+/// around, 24pt between sections, room under the last one. Put it inside the
+/// page's scroll and give it `text::page_intro` first.
+pub fn page_body() -> nsh_core::element::View {
+    view()
+        .w_full()
+        .flex_col()
+        .gap_6()
+        .p_4()
+        .pb_safe_area_plus(px(24.0))
+        .text_color(move || theme().foreground)
+}
+
 /// The height the phone tab bar floats over at the bottom of a page, above
 /// the safe area: iOS's Liquid Glass bar and Android's themed one. Zero on
 /// the desktops and the web, which show no tab bar.

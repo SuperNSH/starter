@@ -375,7 +375,7 @@ pub(crate) fn context_menu_section() -> impl IntoElement {
                         .child(
                             text("quarterly-report.md")
                                 .text_sm()
-                                .font_family("monospace")
+                                .font_family(crate::ui::text::mono_family)
                                 .text_color(move || theme().foreground),
                         )
                         .child(caption("Right-click here, or hold a finger.")),

@@ -21,6 +21,13 @@ pub fn soft_edges() -> impl IntoElement {
         || os() == nsh_core::platform::Os::Ios,
         || {
             nsh_core::element::native(NAME)
+                // The theme's font, for the header's titles.
+                .prop("font", || {
+                    let family = nsh_base::theme().font_sans.clone();
+                    nsh_core::JsonValue::from(
+                        family.as_deref().and_then(first_family).unwrap_or_default(),
+                    )
+                })
                 .absolute()
                 .top_0()
                 .left_0()
@@ -30,6 +37,21 @@ pub fn soft_edges() -> impl IntoElement {
                 .into_element()
         },
     )
+}
+
+/// The first family of a CSS font list (`"Onest, sans-serif"`), unless it
+/// is a generic one (then the system's font stays).
+fn first_family(list: &str) -> Option<String> {
+    let first = list.split(',').next()?.trim().trim_matches(['"', '\'']);
+    let generic = [
+        "system-ui",
+        "sans-serif",
+        "serif",
+        "monospace",
+        "ui-sans-serif",
+        "-apple-system",
+    ];
+    (!first.is_empty() && !generic.contains(&first)).then(|| first.to_owned())
 }
 
 /// An invisible strip of `height` points at its parent's bottom, behind a
@@ -125,7 +147,27 @@ mod ios {
             #[unsafe(method(restAtTop))]
             fn rest_at_top(&self) {
                 if self.tag() != BOTTOM && self.window().is_some() {
+                    self.style_titles();
                     self.open_large_title();
+                }
+            }
+
+            // NSH styles the header again when the appearance flips; the
+            // titles take the font again after it.
+            #[unsafe(method(traitCollectionDidChange:))]
+            fn trait_collection_did_change(&self, previous: Option<&AnyObject>) {
+                // SAFETY: UIView's own method, on super; then NSObject's
+                // documented delayed perform of this class's method.
+                unsafe {
+                    let _: () = msg_send![super(self), traitCollectionDidChange: previous];
+                    let _: () = msg_send![self, performSelector: sel!(restyleTitles), withObject: std::ptr::null::<AnyObject>(), afterDelay: 0.0_f64];
+                }
+            }
+
+            #[unsafe(method(restyleTitles))]
+            fn restyle_titles(&self) {
+                if self.tag() != BOTTOM && self.window().is_some() {
+                    self.style_titles();
                 }
             }
 
@@ -142,10 +184,118 @@ mod ios {
         }
     );
 
+    std::thread_local! {
+        /// The theme's font family for the header titles (`font` prop).
+        static TITLE_FONT: std::cell::RefCell<Option<String>> = const { std::cell::RefCell::new(None) };
+    }
+
+    fn ns_string(text: &str) -> Retained<AnyObject> {
+        let text = std::ffi::CString::new(text.replace('\0', "")).unwrap_or_default();
+        // SAFETY: NSString's documented factory, with a NUL-terminated
+        // UTF-8 buffer that outlives the call.
+        unsafe {
+            msg_send![AnyClass::get(c"NSString").expect("NSString"), stringWithUTF8String: text.as_ptr()]
+        }
+    }
+
+    /// The registered `family` at `size` points and `weight` (UIFontWeight:
+    /// 0.3 semibold, 0.4 bold), or `None` when UIKit has no such family.
+    fn font(family: &str, size: f64, weight: f64) -> Option<Retained<AnyObject>> {
+        let (descriptors, fonts, numbers, dictionaries) = (
+            AnyClass::get(c"UIFontDescriptor")?,
+            AnyClass::get(c"UIFont")?,
+            AnyClass::get(c"NSNumber")?,
+            AnyClass::get(c"NSMutableDictionary")?,
+        );
+        // SAFETY: the documented factories of NSNumber, NSMutableDictionary,
+        // UIFontDescriptor and UIFont; the keys are the string values of
+        // UIFontWeightTrait, UIFontDescriptorTraitsAttribute and
+        // UIFontDescriptorFamilyAttribute.
+        unsafe {
+            let weight: Retained<AnyObject> = msg_send![numbers, numberWithDouble: weight];
+            let traits: Retained<AnyObject> = msg_send![dictionaries, dictionary];
+            let _: () = msg_send![&*traits, setObject: &*weight, forKey: &*ns_string("NSCTFontWeightTrait")];
+            let attrs: Retained<AnyObject> = msg_send![dictionaries, dictionary];
+            let _: () = msg_send![&*attrs, setObject: &*ns_string(family), forKey: &*ns_string("NSFontFamilyAttribute")];
+            let _: () = msg_send![&*attrs, setObject: &*traits, forKey: &*ns_string("NSCTFontTraitsAttribute")];
+            let descriptor: Retained<AnyObject> =
+                msg_send![descriptors, fontDescriptorWithFontAttributes: &*attrs];
+            msg_send![fonts, fontWithDescriptor: &*descriptor, size: size]
+        }
+    }
+
     /// The view's `tag` when it is a bottom strip (`edge: "bottom"`).
     const BOTTOM: isize = 1;
 
     impl SoftEdgesView {
+        /// Sets the theme's font (the `font` prop) on the header titles of
+        /// the page this view is on: its view controller's navigation item
+        /// carries the appearances NSH styled, so the font joins their
+        /// colors there.
+        fn style_titles(&self) {
+            let Some(family) = TITLE_FONT.with(|font| font.borrow().clone()) else {
+                return;
+            };
+            let Some(controller_class) = AnyClass::get(c"UIViewController") else {
+                return;
+            };
+            // SAFETY: UIResponder's `nextResponder` and NSObject's
+            // `isKindOfClass:`, walking up to the page's view controller;
+            // then UINavigationItem's documented appearance getters and
+            // setters, UINavigationBarAppearance's title attributes (copied,
+            // never mutated in place) and UIFont's descriptor factory.
+            unsafe {
+                let mut responder: Option<Retained<AnyObject>> = msg_send![self, nextResponder];
+                let controller = loop {
+                    let Some(next) = responder else { return };
+                    let is_controller: bool = msg_send![&*next, isKindOfClass: controller_class];
+                    if is_controller {
+                        break next;
+                    }
+                    responder = msg_send![&*next, nextResponder];
+                };
+                let item: Retained<AnyObject> = msg_send![&*controller, navigationItem];
+                let title = font(&family, 17.0, 0.3);
+                let large = font(&family, 34.0, 0.4);
+                let pairs = [
+                    (sel!(standardAppearance), sel!(setStandardAppearance:)),
+                    (sel!(scrollEdgeAppearance), sel!(setScrollEdgeAppearance:)),
+                    (sel!(compactAppearance), sel!(setCompactAppearance:)),
+                ];
+                for (get, set) in pairs {
+                    let appearance: Option<Retained<AnyObject>> =
+                        msg_send![&*item, performSelector: get];
+                    let Some(appearance) = appearance else {
+                        continue;
+                    };
+                    let copy: Retained<AnyObject> = msg_send![&*appearance, copy];
+                    for (attrs_get, attrs_set, font) in [
+                        (
+                            sel!(titleTextAttributes),
+                            sel!(setTitleTextAttributes:),
+                            &title,
+                        ),
+                        (
+                            sel!(largeTitleTextAttributes),
+                            sel!(setLargeTitleTextAttributes:),
+                            &large,
+                        ),
+                    ] {
+                        let Some(font) = font else { continue };
+                        let attrs: Retained<AnyObject> =
+                            msg_send![&*copy, performSelector: attrs_get];
+                        let attrs: Retained<AnyObject> = msg_send![&*attrs, mutableCopy];
+                        let _: () =
+                            msg_send![&*attrs, setObject: &**font, forKey: &*ns_string("NSFont")];
+                        let _: Option<Retained<AnyObject>> =
+                            msg_send![&*copy, performSelector: attrs_set, withObject: &*attrs];
+                    }
+                    let _: Option<Retained<AnyObject>> =
+                        msg_send![&*item, performSelector: set, withObject: &*copy];
+                }
+            }
+        }
+
         /// A page that appears with its scroll view untouched rests at the
         /// very top, under the expanded large title: UIKit otherwise keeps
         /// the offset it set before the title was measured (the launch page
@@ -270,6 +420,13 @@ mod ios {
         }
 
         fn set_prop(&mut self, name: &str, value: Option<&JsonValue>) {
+            if name == "font" {
+                let family = value
+                    .and_then(JsonValue::as_str)
+                    .filter(|f| !f.is_empty())
+                    .map(str::to_owned);
+                TITLE_FONT.with(|font| *font.borrow_mut() = family);
+            }
             if name == "edge" {
                 let bottom = value.and_then(JsonValue::as_str) == Some("bottom");
                 self.view.setTag(if bottom { BOTTOM } else { 0 });

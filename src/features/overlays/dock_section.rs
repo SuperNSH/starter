@@ -92,7 +92,7 @@ fn panel_content_owned(panel: String) -> impl IntoElement {
                         .child(
                             text((*name).to_owned())
                                 .text_xs()
-                                .font_family("monospace")
+                                .font_family(crate::ui::text::mono_family)
                                 .text_color(move || theme().foreground),
                         )
                         .test_id("dock-file-row")
@@ -107,19 +107,19 @@ fn panel_content_owned(panel: String) -> impl IntoElement {
             .child(
                 text("$ cargo test")
                     .text_xs()
-                    .font_family("monospace")
+                    .font_family(crate::ui::text::mono_family)
                     .text_color(move || theme().foreground),
             )
             .child(
                 text("   Compiling nsh-starter v0.1.0")
                     .text_xs()
-                    .font_family("monospace")
+                    .font_family(crate::ui::text::mono_family)
                     .text_color(move || theme().muted_foreground),
             )
             .child(
                 text("        Finished in 1.9s")
                     .text_xs()
-                    .font_family("monospace")
+                    .font_family(crate::ui::text::mono_family)
                     .text_color(move || theme().primary),
             ),
         "preview" => view()
@@ -149,7 +149,7 @@ fn panel_content_owned(panel: String) -> impl IntoElement {
                     _ => "fn main() { run(app); }".to_owned(),
                 })
                 .text_xs()
-                .font_family("monospace")
+                .font_family(crate::ui::text::mono_family)
                 .text_color(move || theme().foreground),
             )
             .child(

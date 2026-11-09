@@ -23,9 +23,7 @@ pub fn remote_screen_page() -> impl IntoElement {
         .content_inset(crate::ui::layout::page_insets(0.0))
         .bg(move || theme().background)
         .child(
-            view()
-                .gap_6()
-                .p_4()
+            crate::ui::layout::page_body()
                 .child(page_title())
                 .child(status_section(state, revoked))
                 .child(facts_section(state))
@@ -35,19 +33,10 @@ pub fn remote_screen_page() -> impl IntoElement {
 }
 
 fn page_title() -> impl IntoElement {
-    view()
-        .gap_1()
-        .child(
-            text("Remote screen")
-                .text_lg()
-                .font_weight(FontWeight::SEMIBOLD)
-                .text_color(move || theme().foreground),
-        )
-        .child(
-            text("The signed TSX package in packages/remote-screen")
-                .text_sm()
-                .text_color(move || theme().muted_foreground),
-        )
+    crate::ui::text::page_intro(
+        "Remote screen",
+        "The signed TSX package in packages/remote-screen",
+    )
 }
 
 fn status_section(state: Signal<Option<DeliveryState>>, revoked: Signal<bool>) -> impl IntoElement {

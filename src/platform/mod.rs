@@ -35,8 +35,11 @@ fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) ->
         .test_id(scroll_id)
         .child(
             view()
-                // UIKit insets the scroll under the header already: a top
-                // safe-area padding would leave that space twice.
+                // The gallery's frame (`ui::layout::page_body`), with the
+                // sides kept clear of a landscape notch. UIKit insets the
+                // scroll under the header already, so the top is no inset.
+                .w_full()
+                .flex_col()
                 .pt(px(16.0))
                 .pr_safe_area_plus(px(16.0))
                 .pl_safe_area_plus(px(16.0))
@@ -48,19 +51,9 @@ fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) ->
                     };
                     px(above + 16.0)
                 })
-                .gap_4()
+                .gap_6()
                 .text_color(move || theme().foreground)
-                // iOS phones show the title as the header's large title.
-                .child(when(
-                    || !(os() == nsh_core::platform::Os::Ios && !is_desktop()),
-                    move || {
-                        text(localized(title))
-                            .text_size(px(20.0))
-                            .font_weight(FontWeight::MEDIUM)
-                            .role(AccessibilityRole::Header)
-                            .into_element()
-                    },
-                ))
+                .child(crate::ui::text::page_heading(localized(title)))
                 .children(cards),
         )
         .into_element()

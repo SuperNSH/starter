@@ -38,6 +38,19 @@ pub fn page_screen(route: Route) -> Screen {
     // the same clear header as every page, but starts below it and stops
     // above the floating tab bar, since nothing scrolls under either.
     let fixed = route == Route::Lists && !is_desktop();
+    // The gallery's appearance switch as a native header button (SF
+    // Symbol), beside the system's back button.
+    if route == Route::UiGallery && os() == nsh_core::platform::Os::Ios && !is_desktop() {
+        screen = screen
+            .header_right(
+                view().test_id("gallery-appearance").child(
+                    nsh_base::button()
+                        .on_press(crate::shell::toggle_appearance)
+                        .child(text("Appearance")),
+                ),
+            )
+            .header_right_symbol("circle.lefthalf.filled");
+    }
     // The feed's reload as a native header button: UIKit draws the SF
     // Symbol and a press on it presses this view's button.
     if route == Route::Data && os() == nsh_core::platform::Os::Ios && !is_desktop() {

@@ -43,11 +43,7 @@ pub fn motion_page() -> impl IntoElement {
         .pl_safe_area()
         .pr_safe_area()
         .child(
-            view()
-                .flex_col()
-                .gap(px(24.0))
-                .px(px(16.0))
-                .py(px(20.0))
+            ui::layout::page_body()
                 .child(ui::text::page_intro(
                     "Motion and gestures",
                     "Springs, tweens, layout animations and native gestures",

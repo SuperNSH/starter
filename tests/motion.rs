@@ -52,7 +52,9 @@ fn start_with(environment: Environment) -> Headless {
     .unwrap();
     // `start` can return before the first frame; wait for the page title.
     app.first_render().unwrap();
-    app.wait_for("text:Motion and gestures").unwrap();
+    // The page heading is the phone header's; its summary marks the page.
+    app.wait_for("text:Springs, tweens, layout animations and native gestures")
+        .unwrap();
     app
 }
 

@@ -145,7 +145,7 @@ fn framed(title: &'static str, flow: impl IntoElement) -> impl IntoElement {
 pub(crate) fn status_line(value: impl Fn() -> String + 'static) -> impl IntoElement {
     text(value)
         .text_xs()
-        .font_family("monospace")
+        .font_family(crate::ui::text::mono_family)
         .text_color(move || theme().muted_foreground)
 }
 
@@ -153,7 +153,7 @@ pub(crate) fn status_line(value: impl Fn() -> String + 'static) -> impl IntoElem
 pub(crate) fn shortcut(keys: &'static str) -> impl IntoElement {
     text(keys)
         .text_xs()
-        .font_family("monospace")
+        .font_family(crate::ui::text::mono_family)
         .text_color(move || theme().muted_foreground)
 }
 
@@ -166,13 +166,8 @@ pub fn overlays_page() -> impl IntoElement {
             .content_inset(crate::ui::layout::page_insets(0.0))
             .child(
                 view().w_full().flex_col().items_center().child(
-                    view()
-                        .w_full()
+                    crate::ui::layout::page_body()
                         .max_w(px(720.0))
-                        .flex_col()
-                        .gap_6()
-                        .p_safe_area()
-                        .p_4()
                         .child(crate::ui::text::page_intro(
                             "Overlays",
                             "Dialogs, popups, menus, toasts and desktop surfaces, each in a flow.",

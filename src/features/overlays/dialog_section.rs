@@ -87,7 +87,7 @@ pub(crate) fn dialog_section() -> impl IntoElement {
                 .child(
                     text(move || name.get())
                         .text_sm()
-                        .font_family("monospace")
+                        .font_family(crate::ui::text::mono_family)
                         .text_color(move || theme().muted_foreground),
                 ),
         )
