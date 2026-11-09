@@ -2,6 +2,8 @@
   "cssVars": {
     "theme": {
       "radius": "0.5rem",
+      "font-sans": "Onest, sans-serif",
+      "font-mono": "JetBrains Mono, monospace",
       "destructive-foreground": "#ffffff"
     },
     "light": {

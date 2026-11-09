@@ -27,20 +27,21 @@ for (const scheme of ["light", "dark"] as const) {
   test(`gallery sweep, ${scheme}, phone`, async () => {
     const app = await open("..", { colorScheme: scheme });
     await app.press("label:UI gallery");
-    await app.waitFor("text:UI gallery");
-    // A nudge makes the next step wait out the push slide before the
-    // first capture (stop-00 otherwise catches the page mid-slide).
-    await app.scroll(SCROLL_VIEW, 2);
+    // The gallery's subtitle: unique to the page (the home row's own text
+    // would match before the push).
+    await app.waitFor("text:Every control of the app's own library, with its states. Hover, press, focus and disable each one.");
+    // Clamp the scroll to the top whatever a restored state left it at.
+    await app.scroll(SCROLL_VIEW, -30000);
     await sweep(app, scheme, "phone");
   }, TEST_TIMEOUT);
 
   test(`gallery sweep, ${scheme}, desktop`, async () => {
     const app = await open("..", { colorScheme: scheme });
     await app.press("label:UI gallery");
-    await app.waitFor("text:UI gallery");
+    await app.waitFor("text:Every control of the app's own library, with its states. Hover, press, focus and disable each one.");
     await app.setViewport(1280, 800);
-    await app.waitFor("text:UI gallery");
-    await app.scroll(SCROLL_VIEW, 2);
+    await app.waitFor("text:Every control of the app's own library, with its states. Hover, press, focus and disable each one.");
+    await app.scroll(SCROLL_VIEW, -30000);
     await sweep(app, scheme, "desktop");
   }, TEST_TIMEOUT);
 }

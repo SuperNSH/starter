@@ -110,7 +110,7 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
         ],
     );
 
-    nav_page()
+    crate::ui::nav::themed_header(nav_page())
         .title("Settings")
         .header(page_header("Settings", Some(move || go_back(routes, form))))
         .pop_on_back(move || !form.is_dirty())
@@ -122,10 +122,9 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
         .child(
             scroll()
                 .flex_1()
-                .content_inset(EdgeInsets {
-                    top: px(28.0),
-                    ..EdgeInsets::default()
-                })
+                // nav_page paints the platform's color; the page takes the theme's.
+                .bg(move || theme().background)
+                .content_inset(crate::ui::layout::page_insets(8.0))
                 .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
                 .child(
                     view()
@@ -158,6 +157,8 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
                         ),
                 ),
         )
+        // The same soft header and tab-bar edges as the shell's pages.
+        .child(crate::shell::soft_edges::page_edges())
 }
 
 /// A bound text field row (settings' fields are its own value type).
@@ -319,7 +320,7 @@ fn switch_row(notifications: nsh_form::Field<Settings, bool>, label: &'static st
                     s.w(px(44.0))
                         .p(px(2.0))
                         .rounded_full()
-                        .bg(move || theme().muted)
+                        .bg(move || theme().muted_foreground.opacity(0.3))
                         .transition_colors()
                         .checked(|s| s.bg(move || theme().primary))
                 })

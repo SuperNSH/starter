@@ -77,15 +77,15 @@ fn menus(is_dark: bool) -> Vec<MenuItem> {
 /// The bar the shell draws under the hidden system one: draggable, with
 /// the native window controls' lane kept free at its end.
 pub fn title_bar() -> impl IntoElement {
-    // The controls' lane, read once: it changes only entering full screen,
-    // which remakes nothing; the vision pass revisits it if it clips.
-    let controls = title_bar_insets().right.max(px(72.0));
+    // The native controls' lanes (macOS: left, Windows: right); reading
+    // them subscribes, so entering full screen gives the lane back.
     view()
         .h(px(TITLE_BAR))
         .flex_row()
         .items_center()
         .gap_3()
-        .pl_3()
+        .pl(move || title_bar_insets().left + px(12.0))
+        .pr(move || title_bar_insets().right + px(12.0))
         .border_b_1()
         .border_color(move || theme().border)
         .bg(move || theme().card)
@@ -97,11 +97,10 @@ pub fn title_bar() -> impl IntoElement {
                 .text_color(move || theme().card_foreground),
         )
         .child(
-            text(move || nav::current().label())
+            text("Boilerplate for Native Shell")
                 .flex_1()
-                .text_sm()
+                .text_xs()
                 .number_of_lines(1)
                 .text_color(move || theme().muted_foreground),
         )
-        .child(view().w(controls).h_full())
 }

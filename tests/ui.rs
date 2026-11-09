@@ -57,7 +57,6 @@ fn start_at_desktop_width() -> Headless {
 fn the_gallery_sections_render() -> Result<(), String> {
     let mut app = start();
     for section in [
-        "UI gallery",
         "Buttons",
         "Fields",
         "Controls",
@@ -69,6 +68,23 @@ fn the_gallery_sections_render() -> Result<(), String> {
     ] {
         app.wait_for(&format!("text:{section}"))?;
     }
+    Ok(())
+}
+
+#[test]
+fn the_native_controls_fall_back_to_the_apps_own() -> Result<(), String> {
+    // Headless is an iOS phone on a macOS host: no UIKit, so the section
+    // draws the app's controls and they drive the same state.
+    let mut app = start();
+    app.wait_for("text:Native presses: 0")?;
+    app.press("role:button[Continue]")?;
+    app.wait_for("text:Native presses: 1")?;
+    app.press("role:button[Send]")?;
+    app.wait_for("text:Native presses: 2")?;
+    app.wait_for("text:Airplane mode off · range Week")?;
+    app.press("role:switch[Airplane mode]")?;
+    app.press("role:button[Month]")?;
+    app.wait_for("text:Airplane mode on · range Month")?;
     Ok(())
 }
 
@@ -230,6 +246,7 @@ fn the_gallery_renders_at_desktop_width() -> Result<(), String> {
     for section in ["Buttons", "Controls", "Overlays", "Surfaces", "Data views"] {
         app.wait_for(&format!("text:{section}"))?;
     }
-    assert!(app.shows("UI gallery"));
+    // The heading is the phone header's large title; the summary is the page's.
+    app.wait_for("text:/^Every control of the app's own library/")?;
     Ok(())
 }

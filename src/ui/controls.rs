@@ -41,7 +41,9 @@ pub fn switch_row_with(
                 .h(px(26.0))
                 .p(px(3.0))
                 .rounded_full()
-                .bg(move || theme().muted)
+                // `muted` and `input` vanish on a white card; the off track
+                // needs a real edge against both surfaces.
+                .bg(move || theme().muted_foreground.opacity(0.3))
                 .transition_colors()
                 .checked(|s| s.bg(move || theme().primary))
         })

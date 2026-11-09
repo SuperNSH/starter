@@ -76,8 +76,11 @@ pub fn palette_dialog() -> AnyElement {
         || {
             // Wrapper gap: ui::dialog_of lays out a full page, so a
             // floating card over a scrim keeps nsh_base::dialog here.
+            // The shell closes from `on_cancel`: back must not close the
+            // modal twice (the Command wrapper owns the query's Escape).
             dialog()
-                .on_cancel(|| {})
+                .close_on_escape(false)
+                .on_cancel(close)
                 .flex_1()
                 .flex_col()
                 .items_center()

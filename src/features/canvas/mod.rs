@@ -115,31 +115,30 @@ pub(crate) fn tool_button(
 /// The canvas and graphics page, one section per element the area covers.
 pub fn canvas_page() -> impl IntoElement {
     view().flex_1().bg(move || theme().background).child(
-        scroll().flex_1().child(
-            view()
-                .flex_1()
-                .gap(px(24.0))
-                .px(px(16.0))
-                .py(px(20.0))
-                .child(ui::text::title("Canvas and graphics"))
-                .child(ui::text::muted(
-                    "Drawing, animation, charts, shaders, SVG, media, the web view, and the gpui-starter canvas pages ported: editors, graph, particles, text and image specimens, shared board",
-                ))
-                .child(sketch::sketch())
-                .child(simulation::frame_loop())
-                .child(charts::charts())
-                .child(shader::shader_demo())
-                .child(svg::svg_demo())
-                .child(media::media())
-                .child(web::messaging())
-                .child(world::world_board())
-                .child(shape_edit::shape_editing())
-                .child(bezier::bezier_editor())
-                .child(node_graph::node_graph())
-                .child(particles::particle_field())
-                .child(canvas_text::text_on_canvas())
-                .child(canvas_image::image_on_canvas())
-                .child(collab::shared_board()),
-        ),
+        scroll()
+            .flex_1()
+            .content_inset(crate::ui::layout::page_insets(0.0))
+            .child(
+                ui::layout::page_body()
+                    .child(ui::text::page_intro(
+                        "Canvas and graphics",
+                        "Drawing, animation, charts, shaders, SVG, media, the web view, and the gpui-starter canvas pages ported: editors, graph, particles, text and image specimens, shared board",
+                    ))
+                    .child(sketch::sketch())
+                    .child(simulation::frame_loop())
+                    .child(charts::charts())
+                    .child(shader::shader_demo())
+                    .child(svg::svg_demo())
+                    .child(media::media())
+                    .child(web::messaging())
+                    .child(world::world_board())
+                    .child(shape_edit::shape_editing())
+                    .child(bezier::bezier_editor())
+                    .child(node_graph::node_graph())
+                    .child(particles::particle_field())
+                    .child(canvas_text::text_on_canvas())
+                    .child(canvas_image::image_on_canvas())
+                    .child(collab::shared_board()),
+            ),
     )
 }

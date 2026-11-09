@@ -2813,6 +2813,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "nsh-platform-ios"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2e9d6454be9fa5dea657c39d446d4a1fdc941d0c0c4952e504ce7cd9dadfacfd"
+dependencies = [
+ "block2",
+ "dispatch2",
+ "libc",
+ "log",
+ "nsh-base",
+ "nsh-core",
+ "nsh-engine",
+ "objc2",
+ "objc2-core-foundation",
+ "objc2-core-graphics",
+ "objc2-core-text",
+ "objc2-foundation",
+ "objc2-image-io",
+ "objc2-quartz-core",
+ "objc2-ui-kit",
+ "rustc-hash 2.1.3",
+ "serde_json",
+]
+
+[[package]]
 name = "nsh-platform-linux"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2900,11 +2925,15 @@ dependencies = [
  "nsh-core",
  "nsh-engine",
  "nsh-form",
+ "nsh-platform-ios",
  "nsh-platform-linux",
  "nsh-platform-macos",
  "nsh-platform-windows",
  "nsh-query",
  "nsh-testing",
+ "objc2",
+ "objc2-core-foundation",
+ "objc2-ui-kit",
  "rust-i18n",
  "serde",
  "serde_json",
@@ -3065,6 +3094,21 @@ dependencies = [
  "objc2-core-graphics",
  "objc2-foundation",
  "objc2-metal",
+]
+
+[[package]]
+name = "objc2-ui-kit"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d87d638e33c06f577498cbcc50491496a3ed4246998a7fbba7ccb98b1e7eab22"
+dependencies = [
+ "bitflags 2.13.2",
+ "block2",
+ "objc2",
+ "objc2-core-foundation",
+ "objc2-core-graphics",
+ "objc2-foundation",
+ "objc2-quartz-core",
 ]
 
 [[package]]

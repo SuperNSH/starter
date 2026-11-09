@@ -91,12 +91,18 @@ pub fn badge(label: impl IntoReactive<SharedString>, tone: BadgeTone) -> impl In
         BadgeTone::Info => (crate::ui::tokens::info, crate::ui::tokens::info_foreground),
         BadgeTone::Danger => (danger_bg, crate::ui::tokens::destructive_foreground),
     };
-    view().px_2().py_0p5().rounded_full().bg(bg).child(
-        text(label.into_reactive())
-            .text_xs()
-            .font_weight(FontWeight::MEDIUM)
-            .text_color(fg),
-    )
+    view()
+        .self_start()
+        .px_2()
+        .py_0p5()
+        .rounded_full()
+        .bg(bg)
+        .child(
+            text(label.into_reactive())
+                .text_xs()
+                .font_weight(FontWeight::MEDIUM)
+                .text_color(fg),
+        )
 }
 
 /// The static placeholder box for content that is loading: draw it in
@@ -122,4 +128,52 @@ pub fn skeleton_of(height: f32) -> impl IntoElement {
 /// A hairline between two regions: the boundary owner draws it.
 pub fn divider() -> impl IntoElement {
     view().w_full().h(px(1.0)).bg(move || theme().border)
+}
+
+/// A page's content column, the gallery's frame shared by every page: 16pt
+/// around, 24pt between sections, room under the last one. Put it inside the
+/// page's scroll and give it `text::page_intro` first.
+pub fn page_body() -> nsh_core::element::View {
+    view()
+        .w_full()
+        .flex_col()
+        .gap_6()
+        .p_4()
+        .pb_safe_area_plus(px(24.0))
+        .text_color(move || theme().foreground)
+}
+
+/// The height the phone tab bar floats over at the bottom of a page, above
+/// the safe area: iOS's Liquid Glass bar and Android's themed one. Zero on
+/// the desktops and the web, which show no tab bar.
+pub fn tab_bar_room() -> f32 {
+    use nsh_core::platform::Os;
+    if is_desktop() {
+        return 0.0;
+    }
+    match os() {
+        Os::Ios => 64.0,
+        Os::Android => 72.0,
+        _ => 0.0,
+    }
+}
+
+/// A page scroll's content inset on phones: `top` above the content, and
+/// room at the end so the last row scrolls clear of the floating tab bar
+/// (the content passes under the bar on its way there, as under the
+/// header). Read where the scroll is made: `.content_inset(page_insets(0.0))`.
+pub fn page_insets(top: f32) -> impl Fn() -> nsh_core::EdgeInsets + 'static {
+    move || {
+        let room = tab_bar_room();
+        let bottom = if room > 0.0 {
+            room + safe_area().bottom.0
+        } else {
+            0.0
+        };
+        nsh_core::EdgeInsets {
+            top: px(top),
+            bottom: px(bottom),
+            ..nsh_core::EdgeInsets::default()
+        }
+    }
 }

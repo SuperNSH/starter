@@ -24,37 +24,38 @@ pub fn ui_gallery_page() -> impl IntoElement {
         .bg(move || theme().background)
         .text_color(move || theme().foreground)
         .child(
-            scroll().flex_1().test_id("gallery-scroll").child(
-                view()
-                    .flex_col()
-                    .gap_6()
-                    .p_4()
-                    .pb_safe_area_plus(px(24.0))
-                    .max_w(px(720.0))
-                    .child(text::title("UI gallery"))
-                    .child(text::muted(
-                        "Every control of the app's own library, with its states. \
+            scroll()
+                .flex_1()
+                .content_inset(crate::ui::layout::page_insets(0.0))
+                .test_id("gallery-scroll")
+                .child(
+                    layout::page_body()
+                        .max_w(px(720.0))
+                        .child(text::page_intro(
+                            "UI gallery",
+                            "Every control of the app's own library, with its states. \
                          Hover, press, focus and disable each one.",
-                    ))
-                    .child(buttons_section())
-                    .child(choices_section())
-                    .child(text_section())
-                    .child(fields_section())
-                    .child(controls_section())
-                    .child(selection_section())
-                    .child(nav_rows_section())
-                    .child(pickers_section())
-                    .child(overlays_section(
-                        open_dialog,
-                        open_sheet,
-                        open_form_sheet,
-                        open_full_dialog,
-                        deletable,
-                    ))
-                    .child(data_section())
-                    .child(surfaces_section())
-                    .child(link_section()),
-            ),
+                        ))
+                        .child(buttons_section())
+                        .child(native_section())
+                        .child(choices_section())
+                        .child(text_section())
+                        .child(fields_section())
+                        .child(controls_section())
+                        .child(selection_section())
+                        .child(nav_rows_section())
+                        .child(pickers_section())
+                        .child(overlays_section(
+                            open_dialog,
+                            open_sheet,
+                            open_form_sheet,
+                            open_full_dialog,
+                            deletable,
+                        ))
+                        .child(data_section())
+                        .child(surfaces_section())
+                        .child(link_section()),
+                ),
         )
         .child(toast::toast_host())
         .child(dialog::dialog_sheet(
@@ -184,6 +185,78 @@ fn choices_section() -> impl IntoElement {
     )
 }
 
+/// The platform's own controls (`ui::native`): UIKit's on iOS, AppKit's
+/// on macOS, the app's styled ones elsewhere. The app's accent tints them.
+fn native_section() -> impl IntoElement {
+    use crate::ui::native::{
+        NativeButtonStyle, is_native, native_button, native_segmented, native_switch,
+    };
+    let presses = signal(0_u32);
+    let press = move || presses.update(|n| *n += 1);
+    let airplane = signal(false);
+    let range = signal(1_usize);
+    layout::section(
+        "Native controls",
+        view()
+            .flex_col()
+            .gap_4()
+            .child(text::muted(if is_native() {
+                "Drawn by the system: its buttons, switch and segmented control, in the app's accent."
+            } else {
+                "The system draws these on iOS and macOS; here they are the app's own controls."
+            }))
+            .child(
+                view()
+                    .flex_row()
+                    .flex_wrap()
+                    .gap_2()
+                    .child(native_button(
+                        "Continue",
+                        NativeButtonStyle::Filled,
+                        None,
+                        press,
+                    ))
+                    .child(native_button(
+                        "Send",
+                        NativeButtonStyle::Tinted,
+                        Some("square.and.arrow.up"),
+                        press,
+                    ))
+                    .child(native_button(
+                        "Later",
+                        NativeButtonStyle::Gray,
+                        None,
+                        press,
+                    ))
+                    .child(native_button(
+                        "Glass",
+                        NativeButtonStyle::Glass,
+                        Some("sparkles"),
+                        press,
+                    ))
+                    .child(native_button(
+                        "Details",
+                        NativeButtonStyle::Plain,
+                        Some("info.circle"),
+                        press,
+                    )),
+            )
+            .child(text::muted(move || {
+                format!("Native presses: {}", presses.get())
+            }))
+            .child(native_switch("Airplane mode", airplane))
+            .child(native_segmented(&["Day", "Week", "Month"], range))
+            .child(text::muted(move || {
+                let ranges = ["Day", "Week", "Month"];
+                format!(
+                    "Airplane mode {} · range {}",
+                    if airplane.get() { "on" } else { "off" },
+                    ranges.get(range.get()).unwrap_or(&"none")
+                )
+            })),
+    )
+}
+
 fn buttons_section() -> impl IntoElement {
     let pressed = signal(0_u32);
     let disabled = signal(true);
@@ -308,8 +381,10 @@ fn text_section() -> impl IntoElement {
             .child(text::muted("Secondary text: hints, captions, metadata."))
             .child(text::label("Field label"))
             .child(
+                // Wraps: the code and five badges are wider than a phone.
                 view()
                     .flex_row()
+                    .flex_wrap()
                     .gap_2()
                     .items_center()
                     .child(text::code("nsh_base::button"))
@@ -630,50 +705,59 @@ fn overlays_section(
                             .into_element(),
                     ),
             )
-            .child(popups::popover_of(
-                button::button_with(
-                    "Details",
-                    button::ButtonVariant::Outline,
-                    button::ButtonSize::Small,
-                    false,
-                    None,
-                    move || popover_open.set(!popover_open.get()),
-                ),
-                view()
-                    .w(px(220.0))
-                    .flex_col()
-                    .gap_1()
-                    .child(text::body("Shipped yesterday"))
-                    .child(text::muted("Popovers keep the task going.")),
-                move |open| popover_open.set(open),
-            ))
+            // Triggers hug their labels in one wrapping row; alone in the
+            // column each stretched to the full width.
             .child(
                 view()
-                    .tooltip(popups::tooltip_of("Keyboard: mod+/"))
-                    .child(button::icon_button("?", "Help", || ())),
+                    .flex_row()
+                    .flex_wrap()
+                    .items_center()
+                    .gap_2()
+                    .child(popups::popover_of(
+                        button::button_with(
+                            "Details",
+                            button::ButtonVariant::Outline,
+                            button::ButtonSize::Medium,
+                            false,
+                            None,
+                            move || popover_open.set(!popover_open.get()),
+                        ),
+                        view()
+                            .w(px(220.0))
+                            .flex_col()
+                            .gap_1()
+                            .child(text::body("Shipped yesterday"))
+                            .child(text::muted("Popovers keep the task going.")),
+                        move |open| popover_open.set(open),
+                    ))
+                    .child(
+                        view()
+                            .tooltip(popups::tooltip_of("Keyboard: mod+/"))
+                            .child(button::icon_button("?", "Help", || ())),
+                    )
+                    .child(popups::hover_card_of(
+                        button::button_with(
+                            "Hover me",
+                            button::ButtonVariant::Ghost,
+                            button::ButtonSize::Medium,
+                            false,
+                            None,
+                            || (),
+                        ),
+                        view()
+                            .w(px(200.0))
+                            .child(text::body("Ada Lovelace"))
+                            .child(text::muted("Writes the first programs.")),
+                    ))
+                    .child(button::button_with(
+                        "Command palette",
+                        button::ButtonVariant::Secondary,
+                        button::ButtonSize::Medium,
+                        false,
+                        None,
+                        move || menu_open.set(true),
+                    )),
             )
-            .child(popups::hover_card_of(
-                button::button_with(
-                    "Hover me",
-                    button::ButtonVariant::Ghost,
-                    button::ButtonSize::Small,
-                    false,
-                    None,
-                    || (),
-                ),
-                view()
-                    .w(px(200.0))
-                    .child(text::body("Ada Lovelace"))
-                    .child(text::muted("Writes the first programs.")),
-            ))
-            .child(button::button_with(
-                "Command palette",
-                button::ButtonVariant::Secondary,
-                button::ButtonSize::Medium,
-                false,
-                None,
-                move || menu_open.set(true),
-            ))
             // Commands on the object under the pointer or finger: right
             // click on the desktops, a held finger on touch screens.
             .child(popups::context_menu_of(

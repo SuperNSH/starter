@@ -29,6 +29,20 @@ fn native(registry: &mut Registry) {
     registry.assets(nsh_core::element::assets!());
 }
 
+/// The iOS views the crate draws itself: UIKit's soft scroll edges under
+/// the transparent header (`shell::soft_edges`).
+#[native_components(ios)]
+fn ios_components(components: &nsh_platform_ios::Components) {
+    shell::soft_edges::register(components);
+    ui::native::register_ios(components);
+}
+
+/// The system's own controls on macOS (`ui::native`).
+#[native_components(macos)]
+fn macos_components(components: &nsh_platform_macos::Components) {
+    ui::native::register_macos(components);
+}
+
 /// The application's root: the surface's background and text color, the
 /// shell's assembly inside it. The safe area is left to the shell's pages
 /// and bars, which know where their headers and tab bars sit.

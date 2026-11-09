@@ -1,5 +1,5 @@
-//! The status bar at the bottom of the root: the app, the route on top
-//! and the lifecycle phase, on every platform.
+//! The status bar at the bottom of the desktop shell: the app, the route
+//! on top and the lifecycle phase. Phones leave the room to the tab bar.
 
 use nsh_base::theme;
 use nsh_core::prelude::*;
@@ -13,7 +13,10 @@ pub fn status_bar() -> impl IntoElement {
         .justify_between()
         .px_3()
         .py_1()
-        .pb_safe_area()
+        // A plus, not a bare inset: where the inset is 0 (desktops, the
+        // web) a bare one replaces the row's own 4-point bottom pad and
+        // the label sat cropped at the viewport edge.
+        .pb_safe_area_plus(px(4.0))
         .border_t_1()
         .border_color(move || theme().border)
         .bg(move || theme().card)

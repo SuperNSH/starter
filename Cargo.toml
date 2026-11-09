@@ -18,6 +18,12 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 rust-i18n = "4"
 
+[target.'cfg(target_os = "ios")'.dependencies]
+nsh-platform-ios = { version = "0.4.0", default-features = false }
+objc2 = "0.6.5"
+objc2-ui-kit = { version = "0.3.2", default-features = false, features = ["std", "UIResponder", "UIView", "UIWindow", "UIScrollView", "UIGeometry"] }
+objc2-core-foundation = { version = "0.3.2", default-features = false, features = ["std", "CFCGTypes"] }
+
 [target.'cfg(target_os = "linux")'.dependencies]
 nsh-platform-linux = { version = "0.4.0", default-features = false }
 

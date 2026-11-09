@@ -18,32 +18,25 @@ use nsh_core::prelude::*;
 pub fn remote_screen_page() -> impl IntoElement {
     let state = signal(read_delivery_state());
     let revoked = signal(false);
-    scroll().flex_1().bg(move || theme().background).child(
-        view()
-            .gap_6()
-            .p_4()
-            .child(page_title())
-            .child(status_section(state, revoked))
-            .child(facts_section(state))
-            .child(revoke_section(revoked, state))
-            .child(embedding_section()),
-    )
+    scroll()
+        .flex_1()
+        .content_inset(crate::ui::layout::page_insets(0.0))
+        .bg(move || theme().background)
+        .child(
+            crate::ui::layout::page_body()
+                .child(page_title())
+                .child(status_section(state, revoked))
+                .child(facts_section(state))
+                .child(revoke_section(revoked, state))
+                .child(embedding_section()),
+        )
 }
 
 fn page_title() -> impl IntoElement {
-    view()
-        .gap_1()
-        .child(
-            text("Remote screen")
-                .text_lg()
-                .font_weight(FontWeight::SEMIBOLD)
-                .text_color(move || theme().foreground),
-        )
-        .child(
-            text("The signed TSX package in packages/remote-screen")
-                .text_sm()
-                .text_color(move || theme().muted_foreground),
-        )
+    crate::ui::text::page_intro(
+        "Remote screen",
+        "The signed TSX package in packages/remote-screen",
+    )
 }
 
 fn status_section(state: Signal<Option<DeliveryState>>, revoked: Signal<bool>) -> impl IntoElement {
@@ -164,7 +157,8 @@ fn revoke_section(revoked: Signal<bool>, state: Signal<Option<DeliveryState>>) -
             // The visible label names it; `name` is for when it would not.
             None,
             move || revoked.set(true),
-        ))
+        )
+        .self_start())
         .child(
             text(move || {
                 if revoked.get() {

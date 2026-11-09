@@ -31,10 +31,16 @@ use widgets::localized;
 fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) -> AnyElement {
     scroll()
         .flex_1()
+        .content_inset(crate::ui::layout::page_insets(0.0))
         .test_id(scroll_id)
         .child(
             view()
-                .pt_safe_area_plus(px(16.0))
+                // The gallery's frame (`ui::layout::page_body`), with the
+                // sides kept clear of a landscape notch. UIKit insets the
+                // scroll under the header already, so the top is no inset.
+                .w_full()
+                .flex_col()
+                .pt(px(16.0))
                 .pr_safe_area_plus(px(16.0))
                 .pl_safe_area_plus(px(16.0))
                 .pb(move || {
@@ -45,14 +51,9 @@ fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) ->
                     };
                     px(above + 16.0)
                 })
-                .gap_4()
+                .gap_6()
                 .text_color(move || theme().foreground)
-                .child(
-                    text(localized(title))
-                        .text_size(px(20.0))
-                        .font_weight(FontWeight::MEDIUM)
-                        .role(AccessibilityRole::Header),
-                )
+                .child(crate::ui::text::page_heading(localized(title)))
                 .children(cards),
         )
         .into_element()

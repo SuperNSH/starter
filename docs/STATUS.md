@@ -134,3 +134,16 @@ is unverified. Every area updates its own section as it lands work.
   later jump to the start in early probes — not reproducible after the
   loader fix (the Latest-mount assertion passes), so it is recorded as a
   first-half observation, not a claim.
+
+## UI pass on macOS, iOS and Android (2026-11-08)
+
+- Done: every page captured in light and dark on all three targets, reviewed, fixed, then captured again. Fixes:
+  - Diagnostics rendered blank inside the shell: its `nav_page` sat inside the shell's `nav_page`. The shell now mounts `foundation::diagnostics_content`.
+  - On macOS dark, pages switched between the window gray (#1e1e1e) and the theme background. `shell/page.rs` now paints the theme background on every page and caps content at 1040 pt.
+  - The title bar reserved space on the right, but macOS puts the window controls on the left. It now pads by `title_bar().left` and `.right`.
+  - Home duplicated the sidebar. It is now a grid of page cards, each with a one-line summary (`Route::summary`).
+  - Phones: dropped the status strip above the tab bar. Added tab icons (SF Symbols on iOS, system drawables on Android). Tab roots no longer show a back button. Forms shows one header instead of two.
+  - Android: the system header follows the app's appearance (`ui::nav::themed_header`), and the Forms stack paints the theme background.
+  - Controls: Lists chips and Platform buttons had labels stuck to the top-left; they are now centered. Off-state switch tracks are visible in light and dark. Badges and pills hug their text. Primary buttons no longer stretch full width on desktop. The gallery's popup triggers sit in one row at one size. The motion drawer hides when shut. Overlays flows sit in titled cards. Diagnostics shows undeclared capabilities in a neutral color instead of red.
+- Verified: `nsh test --target macos|ios|android .audit/capture2.test.tsx` (a throwaway capture script kept out of git) passed on each target. Its 52 screenshots per target are in `docs/evidence/shell/ui-pass/{macos,ios,android}/`, and the key ones were looked at after the fixes. `cargo fmt --check`, `cargo clippy --all-targets -D warnings`, `cargo test` (all suites), `nsh check`, `nsh test App.test.tsx` and `nsh test smoke/pages.test.tsx` all pass. Test updates: `tests/shell.rs` (the lifecycle test now runs at desktop width, where the status bar lives; the back-order test uses the "Sign up" marker) and `App.test.tsx` (the root check uses Home's own text). Each failed before its update.
+- Not verified: the web target; widths between phone and desktop (tablet); `vision/*.test.tsx` was not re-run, and its saved screenshots predate this pass.

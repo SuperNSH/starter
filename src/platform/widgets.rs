@@ -81,8 +81,13 @@ pub(crate) fn action_button(
     button()
         .min_h(px(44.0))
         .px_4()
+        .flex_row()
+        .items_center()
+        .justify_center()
+        .self_start()
         .rounded(move || theme().radius)
         .bg(move || theme().primary)
+        .hover(|s| s.opacity(0.9))
         .active(|s| s.opacity(0.85))
         .on_press(on_press)
         .child(
@@ -90,6 +95,7 @@ pub(crate) fn action_button(
             text(label)
                 .test_id(id)
                 .text_sm()
+                .font_weight(FontWeight::MEDIUM)
                 .text_color(move || theme().primary_foreground),
         )
 }
@@ -103,17 +109,23 @@ pub(crate) fn quiet_button(
     button()
         .min_h(px(44.0))
         .px_4()
+        .flex_row()
+        .items_center()
+        .justify_center()
+        .self_start()
         .rounded(move || theme().radius)
         .border_1()
-        .border_color(move || theme().border)
-        .bg(move || theme().secondary)
+        .border_color(move || theme().input)
+        .bg(move || theme().background)
+        .hover(|s| s.bg(move || theme().accent))
         .active(|s| s.opacity(0.85))
         .on_press(on_press)
         .child(
             text(label)
                 .test_id(id)
                 .text_sm()
-                .text_color(move || theme().secondary_foreground),
+                .font_weight(FontWeight::MEDIUM)
+                .text_color(move || theme().foreground),
         )
 }
 
@@ -133,8 +145,8 @@ pub(crate) fn field(
         .px_3()
         .rounded(move || theme().radius)
         .border_1()
-        .border_color(move || theme().border)
-        .bg(move || theme().input)
+        .border_color(move || theme().input)
+        .bg(move || theme().background)
         .text_color(move || theme().foreground)
         .placeholder(localized(placeholder))
         .placeholder_color(move || color(theme().muted_foreground))

@@ -52,7 +52,7 @@ fn min_height(size: ButtonSize) -> impl IntoReactive<Length> + use<> {
 pub fn button(
     label: impl IntoReactive<SharedString>,
     on_press: impl Fn() + 'static,
-) -> impl IntoElement {
+) -> ButtonElement {
     button_with(
         label,
         ButtonVariant::Primary,

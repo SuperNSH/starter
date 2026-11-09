@@ -84,8 +84,11 @@ fn chip(active: Signal<DemoView>, me: DemoView, label: &'static str) -> impl Int
         .selected(mine)
         .accessibility_label(label)
         .hit_slop(6.0)
-        .h(px(36.0))
+        .h(px(32.0))
         .px(px(14.0))
+        .flex_row()
+        .items_center()
+        .justify_center()
         .rounded_full()
         .border_1()
         .border_color(move || {

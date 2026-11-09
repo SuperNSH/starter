@@ -41,7 +41,7 @@ fn offline_switch() -> impl IntoElement {
             s.w(px(44.0))
                 .p(px(2.0))
                 .rounded_full()
-                .bg(move || theme().muted)
+                .bg(move || theme().muted_foreground.opacity(0.3))
                 .transition_colors()
                 .checked(|s| s.bg(move || theme().destructive))
         })
@@ -270,25 +270,19 @@ fn cache_section() -> impl IntoElement {
         ))
 }
 
-/// The query devtools page.
+/// The query devtools page: one scroll as the page's root, so the iOS
+/// header's large title and soft edge follow it as on every page.
 pub fn devtools_page() -> impl IntoElement {
-    view()
+    scroll()
         .flex_1()
-        .p_safe_area()
-        .p_4()
-        .gap_6()
-        .text_color(move || theme().foreground)
+        .content_inset(crate::ui::layout::page_insets(0.0))
         .child(
-            scroll().flex_1().child(
-                view()
-                    .gap_6()
-                    .child(
-                        text("Query devtools")
-                            .text_xl()
-                            .font_weight(FontWeight::SEMIBOLD),
-                    )
-                    .child(api_section())
-                    .child(cache_section()),
-            ),
+            crate::ui::layout::page_body()
+                .child(crate::ui::text::page_intro(
+                    "Query devtools",
+                    "The fake API's knobs and the query cache: keys, states and timings.",
+                ))
+                .child(api_section())
+                .child(cache_section()),
         )
 }
