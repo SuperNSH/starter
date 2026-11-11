@@ -23,7 +23,7 @@ fn app_with(entries: Arc<MemoryStorage>) -> Headless {
     let config = EngineConfig {
         clock: nsh_core::time::Clock::manual(START),
         storage: Some(entries.clone()),
-        ..EngineConfig::new(Root::of::<nsh_starter::foundation::DemoRoot>())
+        ..EngineConfig::new(Root::of::<todo_sample::foundation::DemoRoot>())
     };
     Headless::start(config).unwrap()
 }
@@ -66,7 +66,7 @@ fn config_migration_roundtrip() {
     // itself names this engine's saved config ("Ada") — no other test's
     // engine saves a config with that name, so only this engine's
     // DemoRoot subscription can produce the asserted string.
-    nsh_starter::foundation::logging::clear_log();
+    todo_sample::foundation::logging::clear_log();
     open_diagnostics(&mut app);
 
     // The migrated fields the config card shows.
@@ -79,11 +79,11 @@ fn config_migration_roundtrip() {
     // log card's snapshot cannot hold the line).
     app.wait_for("text:app.config").unwrap();
     assert!(
-        nsh_starter::foundation::logging::log_tail(200)
+        todo_sample::foundation::logging::log_tail(200)
             .iter()
             .any(|line| line.message == "config saved (app.config) for Ada"),
         "the subscription did not log: {:?}",
-        nsh_starter::foundation::logging::log_tail(200)
+        todo_sample::foundation::logging::log_tail(200)
     );
 
     // The migration was saved back in the current schema.
@@ -110,7 +110,7 @@ fn config_migration_roundtrip() {
 #[test]
 fn migrate_maps_schema_zero_fields() {
     let migrated =
-        nsh_starter::foundation::config::migrate(r#"{"name":"Bo","dark":false}"#).unwrap();
+        todo_sample::foundation::config::migrate(r#"{"name":"Bo","dark":false}"#).unwrap();
     assert_eq!(migrated.schema_version, 1);
     assert_eq!(migrated.display_name, "Bo");
     assert_eq!(migrated.theme, "system");
@@ -209,7 +209,7 @@ fn task_manager_runs_to_done_and_drains() {
 fn first_run_once_only() {
     let storage = MemoryStorage::new([]);
     let mut app = app_with(storage.clone());
-    app.wait_for("text:Welcome to nsh-starter").unwrap();
+    app.wait_for("text:Welcome to todo-sample").unwrap();
 
     // "Bo", not the roundtrip test's "Ada": each test's engine logs its
     // own saved name, so the process-global ring never cross-matches.
@@ -235,7 +235,7 @@ fn first_run_once_only() {
     let mut again = app_with(storage.clone());
     again.wait_for("text:Foundation and state").unwrap();
     assert!(
-        !again.screen().shows("Welcome to nsh-starter"),
+        !again.screen().shows("Welcome to todo-sample"),
         "first-run came back"
     );
 }
@@ -270,7 +270,7 @@ fn error_surface_shows_and_dismisses() {
 
     // The same raise landed in the monitoring sink, so the real sink
     // receives everything a page raises.
-    let recorded = nsh_starter::services::monitoring::sink().errors();
+    let recorded = todo_sample::services::monitoring::sink().errors();
     assert_eq!(recorded.len(), 1, "monitoring saw the raise: {recorded:?}");
     assert_eq!(recorded[0].error.code, "diagnostic");
 }

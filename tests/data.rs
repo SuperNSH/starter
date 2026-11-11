@@ -8,7 +8,7 @@ use nsh_core::prelude::*;
 use nsh_engine::{Clock, EngineConfig, Root};
 use nsh_testing::Headless;
 
-use nsh_starter::features::data::{data_page, query_devtools_page};
+use todo_sample::features::data::{data_page, query_devtools_page};
 
 /// The test's surface: the data page on top and the devtools beneath, so a
 /// switch flip reaches a live feed without unmounting it. `Remount feed`

@@ -17,13 +17,13 @@ use nsh_testing::Headless;
 fn PlatformRoot() -> impl IntoElement {
     view()
         .flex_1()
-        .child(nsh_starter::platform::platform_page())
+        .child(todo_sample::platform::platform_page())
 }
 
 /// The device page as the shell mounts it.
 #[component]
 fn DeviceRoot() -> impl IntoElement {
-    view().flex_1().child(nsh_starter::platform::device_page())
+    view().flex_1().child(todo_sample::platform::device_page())
 }
 
 fn start<C: Component<Props = ()>>() -> Headless {

@@ -35,7 +35,7 @@ use nsh_testing::Headless;
 fn MotionHarness() -> impl IntoElement {
     view()
         .flex_1()
-        .child(nsh_starter::features::motion::motion_page())
+        .child(todo_sample::features::motion::motion_page())
 }
 
 fn start() -> Headless {

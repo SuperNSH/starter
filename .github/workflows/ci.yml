@@ -277,7 +277,7 @@ jobs:
         run: |
           mkdir -p dist
           cd "$RUNNER_TEMP/out"
-          name="nsh-starter-demo-${{ matrix.name }}"
+          name="todo-sample-demo-${{ matrix.name }}"
           case "${{ matrix.target }}" in
             android) cp ./*.apk "$GITHUB_WORKSPACE/dist/$name.apk" ;;
             linux) cp ./*.tar.gz "$GITHUB_WORKSPACE/dist/$name.tar.gz" ;;
@@ -345,7 +345,7 @@ jobs:
         run: |
           # NSH packages the web build inside a directory named after the app; the site root is its contents.
           mkdir -p "$RUNNER_TEMP/site"
-          tar -xzf dist/nsh-starter-demo-web.tar.gz -C "$RUNNER_TEMP/site" --strip-components=1
+          tar -xzf dist/todo-sample-demo-web.tar.gz -C "$RUNNER_TEMP/site" --strip-components=1
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:

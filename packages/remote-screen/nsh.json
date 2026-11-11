@@ -1,6 +1,6 @@
 {
   "name": "Remote screen",
-  "id": "com.example.nshstarter.remote",
+  "id": "dev.nsh.todosample.remote",
   "version": "1.0.0",
   "build": 1,
   "theme": "theme.json",

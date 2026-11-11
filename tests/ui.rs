@@ -5,7 +5,7 @@ use std::time::{Duration, SystemTime};
 
 use nsh_core::prelude::*;
 use nsh_engine::{Clock, EngineConfig, Points, Root, Size};
-use nsh_starter::ui::gallery::ui_gallery_page;
+use todo_sample::ui::gallery::ui_gallery_page;
 use nsh_testing::Headless;
 
 /// The gallery as a root: the page the shell mounts, alone in a view.

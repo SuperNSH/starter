@@ -47,7 +47,7 @@ pub fn content() -> AnyElement {
                         nav::push(Route::DataDetail(3))
                     }),
                     demo_row("page-deep-link", "Open a deep link", move || {
-                        deep_link("nsh-starter://data/item/7")
+                        deep_link("todo-sample://data/item/7")
                     }),
                 ])),
         )
@@ -57,7 +57,7 @@ pub fn content() -> AnyElement {
 /// Deep links from within the app: the same parse the host seam uses.
 fn deep_link(url: &str) {
     if let Some(route) = url
-        .strip_prefix("nsh-starter://")
+        .strip_prefix("todo-sample://")
         .and_then(|path| route_from_deep_link(&path.split('/').collect::<Vec<_>>()))
     {
         nav::open(route);

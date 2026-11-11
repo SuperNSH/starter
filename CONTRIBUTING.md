@@ -1,4 +1,4 @@
-# Contributing to nsh-starter
+# Contributing to todo-sample
 
 ## Setup
 

@@ -36,13 +36,13 @@ fi
 
 step "Certify the release key for this app family, 90 days"
 run nsh certify --root "$keys/root.secret" --key "$keys/release.pub" \
-  --apps 'com.example.nshstarter.*' --days 90 -o "$keys/release.cert"
+  --apps 'dev.nsh.todosample.*' --days 90 -o "$keys/release.cert"
 release_id="$(sed -n 's/.*: key \([0-9a-f]*\) certified by root [0-9a-f]* for .* until .*/\1/p' "$log" | tail -1)"
 root_id="$(sed -n 's/.*: key [0-9a-f]* certified by root \([0-9a-f]*\) for .* until .*/\1/p' "$log" | tail -1)"
 cert_apps="$(sed -n 's/.* certified by root [0-9a-f]* for \(.*\) until .*/\1/p' "$log" | tail -1)"
 
 step "Publish the package (signed with the release key)"
-pkg="$out/com.example.nshstarter.remote-1.nshpkg"
+pkg="$out/dev.nsh.todosample.remote-1.nshpkg"
 run nsh publish App.tsx --key "$keys/release.secret" --cert "$keys/release.cert" -o "$pkg"
 
 step "Verify against the root (as a host would)"
@@ -78,13 +78,13 @@ verify_error="$(sed -n 's/^error .*/&/p' "$log" | tail -1)"
 cat > "$delivery/state.json" <<JSON
 {
   "package": {
-    "id": "com.example.nshstarter.remote",
+    "id": "dev.nsh.todosample.remote",
     "name": "Remote screen",
     "version": "1.0.0",
     "build": 1,
     "sha256": "$sha",
     "bytes": $bytes,
-    "path": "packages/remote-screen/.nsh/out/com.example.nshstarter.remote-1.nshpkg"
+    "path": "packages/remote-screen/.nsh/out/dev.nsh.todosample.remote-1.nshpkg"
   },
   "signature": {
     "release_key_id": "${release_id:-$signed_by}",

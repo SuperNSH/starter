@@ -1,10 +1,10 @@
 # Architecture
 
-nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.4.0 application boilerplate. One Rust crate at the repo root is the UI and most features; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. All async state runs on `nsh-query`, all forms on `nsh-form`, both as path dependencies from `../nsh-query` and `../nsh-form`. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
+todo-sample is a [Native Shell](https://nsh.dev) (NSH) 0.4.0 application boilerplate. One Rust crate at the repo root is the UI and most features; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. All async state runs on `nsh-query`, all forms on `nsh-form`, both as path dependencies from `../nsh-query` and `../nsh-form`. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
 
 ## Mode and entry points
 
-`nsh.json` says `"rust": "."` and `"root": "App"`: the app is a Rust app whose root component is `App`, exported to the TSX side through `#[native_module("nsh-starter/native")]` in `src/lib.rs`. What runs where:
+`nsh.json` says `"rust": "."` and `"root": "App"`: the app is a Rust app whose root component is `App`, exported to the TSX side through `#[native_module("todo-sample/native")]` in `src/lib.rs`. What runs where:
 
 - **macOS/Linux/Windows** — `src/main.rs` calls the platform crate's `run_app` with `Root::of::<App>()`. Running the binary directly on a non-desktop target is a compile error; mobile and web go through the dev host.
 - **iOS, Android, web** — `nsh run --target ios|android|web` boots the development host and mounts the same `App` root. The host scaffolding a Rust app needs per target is generated into `.nsh/` (`nsh` writes it; `.nsh/` is git-ignored) — the repository keeps no hand-written TSX except tests and the remote-screen package.

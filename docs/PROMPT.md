@@ -1,8 +1,8 @@
-# Build nsh-starter
+# Build todo-sample
 
 ## Goal
 
-Turn this empty repository into `nsh-starter`, the Native Shell counterpart of `gpui-starter`: a production-grade application boilerplate someone can clone, rename and ship on macOS, iOS, Android and the web, that also works as the living reference for everything NSH can do. It uses `nsh-query` and `nsh-form` for all async state and all forms, and it runs for real on each target.
+Turn this empty repository into `todo-sample`, the Native Shell counterpart of `gpui-starter`: a production-grade application boilerplate someone can clone, rename and ship on macOS, iOS, Android and the web, that also works as the living reference for everything NSH can do. It uses `nsh-query` and `nsh-form` for all async state and all forms, and it runs for real on each target.
 
 This repository holds only directories, `.agents/skills`, `.zcode` and this prompt. You build everything else. `nsh-query` and `nsh-form` are finished and are not your job. Firebase, sign-in and the HTTP library are being built in separate projects, so do not build them here. Leave clean seams instead, as described below.
 
@@ -77,7 +77,7 @@ You have full access to this machine. Use it. A headless pass alone never finish
 
 ## This machine is shared right now
 
-Other agents are building `nsh-starter`, `nsh-firebase`, `nsh-http` and `nsh-auth` on this Mac at the same time, one per repository. Do not interfere with them.
+Other agents are building `todo-sample`, `nsh-firebase`, `nsh-http` and `nsh-auth` on this Mac at the same time, one per repository. Do not interfere with them.
 
 - Stay inside this repository. Reading `~/fo/.refs`, `~/fo/nsh-query` and `~/fo/nsh-form` is fine. Never write to another repository.
 - Use your own devices, named after this repository: `xcrun simctl create <repo> "<a current iPhone>"` and refer to it by UDID, and `avdmanager create avd -n <repo> ...` for your own AVD, with your own `-port`, and `adb -s <serial>` on every call. Never run `xcrun simctl shutdown all`, `xcrun simctl erase all`, `adb kill-server`, `killall`, or anything that stops a process you did not start.

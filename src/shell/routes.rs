@@ -298,7 +298,7 @@ impl Route {
 }
 
 /// The route a deep-link path names: the segments after
-/// `nsh-starter://`, in order. `None` when the path is not the app's.
+/// `todo-sample://`, in order. `None` when the path is not the app's.
 pub fn route_from_deep_link(seg: &[&str]) -> Option<Route> {
     match seg {
         [] => Some(Route::Home),

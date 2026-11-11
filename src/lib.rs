@@ -20,8 +20,8 @@ pub mod state;
 pub mod ui;
 
 /// The app's UI set (`nsh.json` `"rust"`): what a TSX entry imports from
-/// `nsh-starter/native`. The shell area keeps this block current.
-#[native_module("nsh-starter/native")]
+/// `todo-sample/native`. The shell area keeps this block current.
+#[native_module("todo-sample/native")]
 fn native(registry: &mut Registry) {
     registry.register::<App>();
     // The crate's shipped files under assets/: the canvas media's images

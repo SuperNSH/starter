@@ -55,7 +55,7 @@ fn make_node_modules_link(target: &str, link: &std::path::Path) {
 
 #[test]
 fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
-    let dir = std::env::temp_dir().join(format!("nsh-starter-remote-{}", std::process::id()));
+    let dir = std::env::temp_dir().join(format!("todo-sample-remote-{}", std::process::id()));
     let _ = std::fs::remove_dir_all(&dir);
     std::fs::create_dir_all(&dir).unwrap();
     let keys = dir.join("keys");
@@ -70,7 +70,7 @@ fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
         "--key",
         &key("release.pub"),
         "--apps",
-        "com.example.nshstarter.*",
+        "dev.nsh.todosample.*",
         "--days",
         "90",
         "-o",
@@ -104,7 +104,7 @@ fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
         pkg.to_string_lossy().as_ref(),
     ]);
     assert!(
-        published.contains("com.example.nshstarter.remote 1.0.0 (build 1)"),
+        published.contains("dev.nsh.todosample.remote 1.0.0 (build 1)"),
         "{published}"
     );
 
@@ -115,7 +115,7 @@ fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
         &key("root.pub"),
     ]);
     assert!(
-        verify.contains("valid: com.example.nshstarter.remote"),
+        verify.contains("valid: dev.nsh.todosample.remote"),
         "{verify}"
     );
     let sha = verify
@@ -136,7 +136,7 @@ fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
     .unwrap();
     trust.add_root(root);
     let loaded = nsh_engine::load_package(&mut trust, &bytes, &dir.join("assets")).unwrap();
-    assert_eq!(loaded.app.id, "com.example.nshstarter.remote");
+    assert_eq!(loaded.app.id, "dev.nsh.todosample.remote");
 
     let config = EngineConfig {
         clock: Clock::manual(SystemTime::UNIX_EPOCH + Duration::from_secs(1_760_000_000)),
@@ -198,18 +198,18 @@ fn the_signed_package_verifies_runs_and_then_refuses_after_revocation() {
 /// The page's fixture: obviously synthetic values in the record's shape.
 const FIXTURE: &str = r#"{
   "package": {
-    "id": "com.example.nshstarter.remote",
+    "id": "dev.nsh.todosample.remote",
     "name": "Remote screen",
     "version": "9.9.9",
     "build": 7,
     "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
     "bytes": 123456,
-    "path": "packages/remote-screen/.nsh/out/com.example.nshstarter.remote-1.nshpkg"
+    "path": "packages/remote-screen/.nsh/out/dev.nsh.todosample.remote-1.nshpkg"
   },
   "signature": {
     "release_key_id": "0000000000000000",
     "root_key_id": "1111111111111111",
-    "certified_apps": "com.example.nshstarter.*",
+    "certified_apps": "dev.nsh.todosample.*",
     "cert_days": 90,
     "min_runtime": "0.4.0"
   },
@@ -244,7 +244,7 @@ impl Drop for RestoreRecord {
 fn the_status_page_reports_the_delivery_and_its_revocation_flips() {
     // The page reads one fixed path; swap in the fixture behind a guard, so
     // whatever a delivery run left there comes back even on a failed assert.
-    let path = nsh_starter::features::remote_screen::state_path();
+    let path = todo_sample::features::remote_screen::state_path();
     let previous = std::fs::read_to_string(&path).ok();
     std::fs::create_dir_all(path.parent().unwrap()).unwrap();
     std::fs::write(&path, FIXTURE).unwrap();
@@ -268,5 +268,5 @@ fn RemoteScreenHost() -> impl IntoElement {
     view()
         .flex_1()
         .bg(move || nsh_base::theme().background)
-        .child(nsh_starter::features::remote_screen::remote_screen_page())
+        .child(todo_sample::features::remote_screen::remote_screen_page())
 }

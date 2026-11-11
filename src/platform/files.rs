@@ -40,7 +40,7 @@ fn FilesCard() -> impl IntoElement {
                     {
                         move || {
                             spawn(async move {
-                                let outcome = pick_paths(OpenDialog::files().title("nsh-starter"))
+                                let outcome = pick_paths(OpenDialog::files().title("todo-sample"))
                                     .await
                                     .map(|picked| {
                                         picked.map(|paths| {
@@ -65,7 +65,7 @@ fn FilesCard() -> impl IntoElement {
                         move || {
                             spawn(async move {
                                 let outcome =
-                                    pick_paths(OpenDialog::folders().title("nsh-starter"))
+                                    pick_paths(OpenDialog::folders().title("todo-sample"))
                                         .await
                                         .map(|picked| {
                                             picked.map(|paths| {
@@ -92,7 +92,7 @@ fn FilesCard() -> impl IntoElement {
                                 let outcome = pick_save_path(
                                     SaveDialog::new()
                                         .file_name("notes.txt")
-                                        .title("nsh-starter"),
+                                        .title("todo-sample"),
                                 )
                                 .await
                                 .map(|path| path.map(|path| path.display().to_string()));

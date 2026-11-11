@@ -1,6 +1,6 @@
 {
-  "name": "nsh-starter",
-  "id": "com.example.nshstarter",
+  "name": "todo-sample",
+  "id": "dev.nsh.todosample",
   "version": "1.0.0",
   "build": 1,
   "icon": "assets/icon.png",

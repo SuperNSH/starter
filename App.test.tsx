@@ -18,6 +18,6 @@ test("the shell navigates from Home", async () => {
   // Back pops the pushed page; back again on Home asks to exit.
   await app.back();
   await app.back();
-  await app.waitFor("text:Exit nsh-starter?");
+  await app.waitFor("text:Exit todo-sample?");
   await app.press("role:button[Cancel]");
 });

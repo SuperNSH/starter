@@ -34,7 +34,7 @@ is unverified. Every area updates its own section as it lands work.
 - Verified: scoped gate `bash -n scripts/rename.sh` pass and
   `test -x scripts/rename.sh` pass (re-run after every fix round);
   in-place rename functional test in a throwaway /tmp copy — all three
-  token forms (`nsh-starter`, `nsh_starter`, `com.example.nshstarter`)
+  token forms (`todo-sample`, `todo_sample`, `dev.nsh.todosample`)
   renamed across 9 files, Cargo.lock correctly left to cargo, zero
   leftovers outside it, original untouched; roundtrip trap-fix repro in
   /tmp with the gate stubbed — pass path exits 0 with the copy deleted,

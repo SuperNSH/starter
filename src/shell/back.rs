@@ -97,7 +97,7 @@ pub fn exit_prompt_dialog() -> AnyElement {
                         .border_1()
                         .border_color(move || theme().border)
                         .child(
-                            text("Exit nsh-starter?")
+                            text("Exit todo-sample?")
                                 .text_sm()
                                 .font_weight(FontWeight::SEMIBOLD)
                                 .text_color(move || theme().popover_foreground),

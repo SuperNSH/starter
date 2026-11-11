@@ -1,4 +1,4 @@
-# nsh-starter
+# todo-sample
 
 A production-grade application boilerplate for [Native Shell](https://nsh.dev) (NSH): clone it, rename it, ship it on macOS, iOS, Android and the web. It is also the living reference for what NSH 0.4.0 can do — every element and base component ships in a real screen, all async state runs on [`nsh-query`](../nsh-query) and every form on [`nsh-form`](../nsh-form).
 
@@ -38,7 +38,7 @@ The app is Rust-first: one crate at the repo root is the UI, and `packages/remot
 - The two sibling libraries as path dependencies. `Cargo.toml` points at `../nsh-query` and `../nsh-form`, so a checkout of each must sit next to this repo:
   ```
   parent/
-  ├── nsh-starter/   (this repo)
+  ├── todo-sample/   (this repo)
   ├── nsh-query/
   └── nsh-form/
   ```
@@ -48,8 +48,8 @@ The first build compiles the whole NSH crate graph and takes a while; builds aft
 ## From a clean clone to a running app
 
 ```sh
-git clone https://github.com/freeoxide/nsh-starter.git
-cd nsh-starter
+git clone https://github.com/freeoxide/todo-sample.git
+cd todo-sample
 
 just check         # rustfmt + clippy -D warnings
 just test          # cargo test

@@ -32,7 +32,7 @@ use nsh_core::{
     time::Clock,
 };
 use nsh_engine::{EngineConfig, Root};
-use nsh_starter::shell::{
+use todo_sample::shell::{
     back::{BackStep, back_step},
     lifecycle::{AppEvent, AppPhase, transition},
     routes::{Route, route_from_deep_link},
@@ -43,14 +43,14 @@ use nsh_testing::Headless;
 /// A phone-sized app on a manual clock, as a headless run behaves (the
 /// engine reports its build's mobile OS).
 fn phone() -> Headless {
-    let mut config = EngineConfig::new(Root::of::<nsh_starter::App>());
+    let mut config = EngineConfig::new(Root::of::<todo_sample::App>());
     config.clock = Clock::manual(SystemTime::UNIX_EPOCH);
     Headless::start(config).unwrap()
 }
 
 /// A desktop-width app on a manual clock: the sidebar shell.
 fn desktop() -> Headless {
-    let mut config = EngineConfig::new(Root::of::<nsh_starter::App>());
+    let mut config = EngineConfig::new(Root::of::<todo_sample::App>());
     config.viewport = Size::new(Points(1280.0), Points(800.0));
     config.clock = Clock::manual(SystemTime::UNIX_EPOCH);
     Headless::start(config).unwrap()
@@ -173,14 +173,14 @@ fn back_pops_a_page_then_asks_to_exit() {
 
     // Back at Home asks before the platform could exit the app.
     app.back().unwrap();
-    app.wait_for("text:Exit nsh-starter?").unwrap();
+    app.wait_for("text:Exit todo-sample?").unwrap();
     app.press("role:button[Cancel]").unwrap();
-    app.wait_for_gone("text:Exit nsh-starter?", Duration::from_secs(5))
+    app.wait_for_gone("text:Exit todo-sample?", Duration::from_secs(5))
         .unwrap();
 
     // The ask comes again: canceling did not arm the exit.
     app.back().unwrap();
-    app.wait_for("text:Exit nsh-starter?").unwrap();
+    app.wait_for("text:Exit todo-sample?").unwrap();
 }
 
 #[test]

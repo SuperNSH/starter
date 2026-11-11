@@ -111,7 +111,7 @@ fn panel_content_owned(panel: String) -> impl IntoElement {
                     .text_color(move || theme().foreground),
             )
             .child(
-                text("   Compiling nsh-starter v0.1.0")
+                text("   Compiling todo-sample v0.1.0")
                     .text_xs()
                     .font_family(crate::ui::text::mono_family)
                     .text_color(move || theme().muted_foreground),
