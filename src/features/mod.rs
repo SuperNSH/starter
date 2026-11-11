@@ -9,3 +9,4 @@ pub mod lists;
 pub mod motion;
 pub mod overlays;
 pub mod remote_screen;
+pub mod todo;
