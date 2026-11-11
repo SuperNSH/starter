@@ -13,7 +13,7 @@ use nsh_core::{
     prelude::*,
 };
 
-use crate::shell::{nav, palette, routes::Route, undo};
+use crate::shell::{palette, undo};
 
 /// The title bar's height: the platform's window controls center in it
 /// (`set_title_bar` caps at 200 points; a platform boundary, not a scale
@@ -41,9 +41,8 @@ pub fn close() {
     close_window();
 }
 
-/// The application menu: the shell's commands, every route, the window.
+/// The application menu: the shell's commands and the window.
 fn menus(is_dark: bool) -> Vec<MenuItem> {
-    let go = |route: Route| MenuItem::new(route.label()).on_select(move || nav::open(route));
     vec![
         MenuItem::submenu(
             t!("app.name"),
@@ -62,7 +61,6 @@ fn menus(is_dark: bool) -> Vec<MenuItem> {
                 MenuItem::role(MenuRole::Quit),
             ],
         ),
-        MenuItem::submenu("Go", Route::ALL.iter().copied().map(go).collect::<Vec<_>>()),
         MenuItem::submenu(
             "Window",
             [
@@ -97,7 +95,7 @@ pub fn title_bar() -> impl IntoElement {
                 .text_color(move || theme().card_foreground),
         )
         .child(
-            text("Boilerplate for Native Shell")
+            text("A to-do list on Native Shell")
                 .flex_1()
                 .text_xs()
                 .number_of_lines(1)

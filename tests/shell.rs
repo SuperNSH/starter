@@ -8,16 +8,16 @@
 //!
 //! | Test | Break applied |
 //! |---|---|
-//! | `deep_links_parse_into_routes` | `routes.rs`: the `["forms"]` arm answered `UiGallery` |
+//! | `deep_links_parse_into_routes` | `routes.rs`: the `[]` arm answered `None` |
 //! | `the_back_order_is_overlays_pages_then_the_exit_ask` | `back.rs`: `back_step`'s `depth > 0` arm returned `AskExit` |
-//! | `back_pops_a_page_then_asks_to_exit` | the same `back_step` break; the overlay-first leg: the palette dialog's `on_cancel` closed nothing |
+//! | `back_closes_the_overlay_then_asks_to_exit` | the same `back_step` break; the overlay-first leg: the palette dialog's `on_cancel` closed nothing |
 //! | `the_lifecycle_machine_follows_the_engine_events` | `lifecycle.rs`: `transition` mapped `BecameActive` to `Backgrounded` |
 //! | `the_lifecycle_watch_follows_the_environment` | the same `transition` break |
 //! | `undo_history_is_bounded` | `undo.rs`: `record` trimmed to `LIMIT + 10`, then to clearing `past` |
-//! | `undo_and_redo_retrace_navigation` | `nav.rs`: `push` took no undo snapshot |
-//! | `the_palette_opens_and_navigates` | `palette.rs`: `dispatch` ignored destination ids |
+//! | `the_palette_opens_and_dispatches` | `palette.rs`: `dispatch` ignored action ids |
 //! | `the_desktop_width_takes_the_sidebar` | `mod.rs`: `desktop()` thresholds 7000/9000 |
-//! | `keys_are_stable_per_route` (lib) | `routes.rs`: `DataDetail`'s key dropped the id |
+//! | `undo_history_is_bounded`, `the_stack_is_bounded` (lib) | `undo.rs`: `record` trimmed to `LIMIT + 10` (stack lengths, the one page left) |
+//! | `the_home_key_is_stable` (lib) | `routes.rs`: `key` answered `"home "` |
 //! | `undo_returns_to_the_recorded_state` (lib) | `undo.rs`: `record` pushed nothing |
 //! | `the_stack_is_bounded` (lib) | the `LIMIT + 10` trim |
 //! | `App.test.tsx` "the root mounts" | `status.rs`: the app's name replaced by `"shell"` |
@@ -32,13 +32,13 @@ use nsh_core::{
     time::Clock,
 };
 use nsh_engine::{EngineConfig, Root};
+use nsh_testing::Headless;
 use todo_sample::shell::{
     back::{BackStep, back_step},
     lifecycle::{AppEvent, AppPhase, transition},
     routes::{Route, route_from_deep_link},
     undo::UndoHistory,
 };
-use nsh_testing::Headless;
 
 /// A phone-sized app on a manual clock, as a headless run behaves (the
 /// engine reports its build's mobile OS).
@@ -59,24 +59,11 @@ fn desktop() -> Headless {
 #[test]
 fn deep_links_parse_into_routes() {
     assert_eq!(route_from_deep_link(&[]), Some(Route::Home));
-    assert_eq!(route_from_deep_link(&["forms"]), Some(Route::Forms));
-    assert_eq!(route_from_deep_link(&["ui"]), Some(Route::UiGallery));
-    assert_eq!(route_from_deep_link(&["data"]), Some(Route::Data));
-    assert_eq!(
-        route_from_deep_link(&["data", "devtools"]),
-        Some(Route::QueryDevtools)
-    );
-    assert_eq!(
-        route_from_deep_link(&["data", "item", "42"]),
-        Some(Route::DataDetail(42))
-    );
-    assert_eq!(
-        route_from_deep_link(&["diagnostics"]),
-        Some(Route::Diagnostics)
-    );
+    assert_eq!(route_from_deep_link(&["home"]), Some(Route::Home));
+    // The demo pages the app once had are the app's no-longer's.
+    assert_eq!(route_from_deep_link(&["forms"]), None);
+    assert_eq!(route_from_deep_link(&["data"]), None);
     assert_eq!(route_from_deep_link(&["nope"]), None);
-    assert_eq!(route_from_deep_link(&["data", "item", "x"]), None);
-    assert_eq!(route_from_deep_link(&["data", "item"]), None);
 }
 
 #[test]
@@ -126,14 +113,14 @@ fn undo_history_is_bounded() {
     let mut history = UndoHistory::default();
     assert_eq!(history.undo(Vec::new()), None, "nothing recorded yet");
     for depth in 0..60 {
-        history.record(vec![Route::DataDetail(depth)]);
+        // One page now; the stack's length is what varies.
+        history.record((0..depth).map(|_| Route::Home).collect());
     }
     // The oldest snapshots went; the limit is the newest fifty.
-    assert_eq!(
-        history.undo(vec![Route::Home]),
-        Some(vec![Route::DataDetail(59)])
-    );
-    assert_eq!(history.redo(vec![Route::Home]), Some(vec![Route::Home]));
+    let back = history.undo(Vec::new()).expect("a recorded state");
+    assert_eq!(back.len(), 59);
+    // Redo replays the state undo was given: the empty one.
+    assert_eq!(history.redo(vec![Route::Home]), Some(Vec::new()));
     assert_eq!(
         history.redo(vec![Route::Home]),
         None,
@@ -142,36 +129,27 @@ fn undo_history_is_bounded() {
 }
 
 #[test]
-fn back_pops_a_page_then_asks_to_exit() {
+fn back_closes_the_overlay_then_asks_to_exit() {
     let mut app = phone();
-    app.wait_for("text:Home").unwrap();
+    app.wait_for("text:To-dos").unwrap();
 
-    // A page is pushed, then the palette goes up over it.
-    app.press("id:page-forms").unwrap();
-    app.wait_for("text:Forms").unwrap();
+    // The palette goes up over the page.
     app.press_key("mod+k").unwrap();
-    app.wait_for("text:Go to").unwrap();
+    app.wait_for("text:Actions").unwrap();
 
     // The overlay takes back first: the palette closes and the page
-    // beneath stays (the sign-up's own title still shows).
+    // beneath stays (its add field still shows).
     app.back().unwrap();
     app.wait_until(
         "the palette closed over the intact page",
         Duration::from_secs(5),
-        |screen| screen.count("text:Go to") == Ok(0) && screen.count("text:Sign up") >= Ok(1),
+        |screen| {
+            screen.count("text:Actions") == Ok(0) && screen.count("text:What needs doing?") >= Ok(1)
+        },
     )
     .unwrap();
 
-    // The next back pops the pushed page.
-    app.back().unwrap();
-    app.wait_until(
-        "the pushed Forms page popped",
-        Duration::from_secs(5),
-        |screen| screen.count("text:Sign up") == Ok(0),
-    )
-    .unwrap();
-
-    // Back at Home asks before the platform could exit the app.
+    // Back at the page asks before the platform could exit the app.
     app.back().unwrap();
     app.wait_for("text:Exit todo-sample?").unwrap();
     app.press("role:button[Cancel]").unwrap();
@@ -184,76 +162,41 @@ fn back_pops_a_page_then_asks_to_exit() {
 }
 
 #[test]
-fn the_palette_opens_and_navigates() {
+fn the_palette_opens_and_dispatches() {
     let mut app = phone();
-    app.wait_for("text:Home").unwrap();
+    app.wait_for("text:To-dos").unwrap();
     app.press_key("mod+k").unwrap();
-    app.wait_for("text:Go to").unwrap();
+    // One page, so the palette holds the shell's actions alone.
+    app.wait_for("text:Actions").unwrap();
     // The headless keyboard does not focus the palette's search field
     // (auto_focus is unverified there), so the highlight's Return move is
     // not exercisable headlessly: the run chooses the row as a tap does.
-    // With the palette down, only the page (its marker and the status
-    // bar) says the destination's name: two matches.
-    app.press("role:option[UI gallery]").unwrap();
+    app.press("role:option[Toggle appearance]").unwrap();
     app.wait_until(
-        "the first destination opened and the palette closed",
+        "the action ran and the palette closed",
         Duration::from_secs(5),
-        |screen| {
-            // The palette's rows go, and the gallery's page is up (its
-            // first section's label, which neither Home nor the palette
-            // shows). The popped dialog's search field can outlive it in
-            // the headless screen, so its placeholder is no closure
-            // condition here.
-            screen.count("text:Go to") == Ok(0) && screen.count("text:Buttons") >= Ok(1)
-        },
+        |screen| screen.count("text:Actions") == Ok(0),
     )
     .unwrap();
-}
-
-#[test]
-fn undo_and_redo_retrace_navigation() {
-    let mut app = phone();
-    app.wait_for("text:Home").unwrap();
-
-    // Push a detail: its name is on screen (the page's own copy aside,
-    // the data area owns that).
-    app.press("id:page-data-item").unwrap();
-    app.wait_until("the detail is on top", Duration::from_secs(5), |screen| {
-        screen.count("text:Data item 3") >= Ok(1)
-    })
-    .unwrap();
-
-    app.press_key("mod+z").unwrap();
-    app.wait_until("undo popped the detail", Duration::from_secs(5), |screen| {
-        screen.count("text:Data item 3") == Ok(0)
-    })
-    .unwrap();
-
-    app.press_key("mod+shift+z").unwrap();
-    app.wait_until(
-        "redo pushed the detail again",
-        Duration::from_secs(5),
-        |screen| screen.count("text:Data item 3") >= Ok(1),
-    )
-    .unwrap();
+    // The page beneath is untouched: the to-do page's own field.
+    app.wait_for("text:What needs doing?").unwrap();
 }
 
 #[test]
 fn the_desktop_width_takes_the_sidebar() {
     let mut app = desktop();
-    app.wait_for("text:Boilerplate for Native Shell").unwrap();
-    // The pane beside it still shows Home, the status bar under both.
-    app.wait_for("text:Home").unwrap();
+    app.wait_for("text:A to-do list on Native Shell").unwrap();
+    // The pane beside it shows the to-do page; the status bar under both.
+    app.wait_for("text:What needs doing?").unwrap();
     app.wait_for("text:Active").unwrap();
 
-    // A sidebar row opens its page into the pane.
-    app.press("id:nav-forms").unwrap();
-    app.wait_for("text:Forms").unwrap();
+    // The sidebar's one row names the page it opens.
+    app.wait_for("id:nav-home").unwrap();
 
     let mut narrow = phone();
-    narrow.wait_for("text:Home").unwrap();
+    narrow.wait_for("text:To-dos").unwrap();
     assert!(
-        !narrow.shows("Boilerplate for Native Shell"),
+        !narrow.shows("A to-do list on Native Shell"),
         "the phone shell has no sidebar"
     );
 }

@@ -65,7 +65,7 @@ mod tests {
     use super::*;
 
     fn steps() -> Vec<Route> {
-        vec![Route::Forms]
+        vec![Route::Home]
     }
 
     #[test]
@@ -83,9 +83,10 @@ mod tests {
     fn the_stack_is_bounded() {
         let mut history = UndoHistory::default();
         for depth in 0..(LIMIT + 10) {
-            history.record(vec![Route::DataDetail(depth as u64)]);
+            // One page now; the stack's length is what history bounds.
+            history.record((0..depth).map(|_| Route::Home).collect());
         }
         assert_eq!(history.past.len(), LIMIT);
-        assert_eq!(history.past[0], vec![Route::DataDetail(10)]);
+        assert_eq!(history.past[0].len(), 10);
     }
 }

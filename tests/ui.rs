@@ -5,8 +5,8 @@ use std::time::{Duration, SystemTime};
 
 use nsh_core::prelude::*;
 use nsh_engine::{Clock, EngineConfig, Points, Root, Size};
-use todo_sample::ui::gallery::ui_gallery_page;
 use nsh_testing::Headless;
+use todo_sample::ui::gallery::ui_gallery_page;
 
 /// The gallery as a root: the page the shell mounts, alone in a view.
 #[component]

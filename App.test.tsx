@@ -5,18 +5,19 @@ import { expect, open, test } from "nsh/test";
 
 test("the root mounts", async () => {
   const app = await open(".", { clock: {} });
-  await app.waitFor("text:Home");
-  // The phone shell names the app in the system header only; Home's own
-  // line is what the root drew.
-  expect(app.texts()).toContain("Everything the boilerplate demonstrates, one page each.");
+  await app.waitFor("text:To-dos");
+  // The phone shell names the page in the system header; the page's own
+  // add field is what the root drew.
+  await app.waitFor("text:What needs doing?");
+  expect(app.texts()).toContain("No tasks yet — add the first one above.");
 });
 
-test("the shell navigates from Home", async () => {
+test("a task adds from the root", async () => {
   const app = await open(".", { clock: {} });
-  await app.press("id:page-forms");
-  await app.waitFor("text:Forms");
-  // Back pops the pushed page; back again on Home asks to exit.
-  await app.back();
+  await app.waitFor("text:To-dos");
+  await app.type("id:todo-add", "From the TSX root\n");
+  await app.waitFor("text:From the TSX root");
+  // Back on the page asks to exit: the one page is the stack's root.
   await app.back();
   await app.waitFor("text:Exit todo-sample?");
   await app.press("role:button[Cancel]");

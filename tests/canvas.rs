@@ -9,8 +9,8 @@ use std::time::Duration;
 
 use nsh_core::{Size, prelude::*};
 use nsh_engine::{Clock, EngineConfig, Root};
-use todo_sample::features::canvas::canvas_page;
 use nsh_testing::Headless;
+use todo_sample::features::canvas::canvas_page;
 
 /// The page alone: no shell, so selectors name only this area's views.
 #[component]

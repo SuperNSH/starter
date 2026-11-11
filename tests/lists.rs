@@ -36,6 +36,7 @@ use std::time::{Duration, SystemTime};
 use nsh_base::{DataTableSort, DataTableSortDirection};
 use nsh_core::{Size, prelude::*};
 use nsh_engine::{Clock, EngineConfig, Root};
+use nsh_testing::Headless;
 use todo_sample::features::lists::{
     calendar_view::CalendarDemo,
     chat::{ChatDemo, WINDOW_BOTTOM, WINDOW_TOP},
@@ -43,7 +44,6 @@ use todo_sample::features::lists::{
     pager::PagerDemo,
     quotes::{QuotesDemo, quote_rows, sort_quotes},
 };
-use nsh_testing::Headless;
 
 /// The engine's time during the runs: 2026-11-11, so "today" in the
 /// calendar is fixed whatever machine runs this.

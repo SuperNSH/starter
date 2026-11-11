@@ -34,13 +34,11 @@ fn record() {
 }
 
 /// Opens `route` in the place of whatever was pushed (a tab, a sidebar
-/// row, a palette destination, a deep link). A detail brings its parent.
+/// row, a palette destination, a deep link). Home clears the stack.
 pub fn open(route: Route) {
     record();
-    let pages = match (route.parent(), route) {
-        (Some(parent), _) => vec![parent, route],
-        (_, Route::Home) => Vec::new(),
-        (_, _) => vec![route],
+    let pages = match route {
+        Route::Home => Vec::new(),
     };
     stack().set(Routes(pages));
 }
