@@ -105,6 +105,45 @@ pub fn checkbox_row(label: impl Into<SharedString>, checked: Signal<bool>) -> im
         )
 }
 
+/// A checkbox without its label, for rows that compose their own content
+/// beside the indicator. `checked` may be reactive (the row's task state);
+/// the flip goes to `on_change`; `name` is what screen readers hear.
+pub fn checkbox_control(
+    checked: impl IntoReactive<bool>,
+    on_change: impl Fn(bool) + 'static,
+    name: impl Into<SharedString>,
+) -> impl IntoElement {
+    checkbox()
+        .checked(checked.into_reactive())
+        .accessibility_label(name.into())
+        .on_change(move |next: &bool| on_change(*next))
+        .rounded_sm()
+        .focus(|s| {
+            s.outline(px(2.0))
+                .outline_offset(px(2.0))
+                .outline_color(move || theme().ring)
+        })
+        .disabled_style(|s| s.opacity(0.5))
+        .indicator_style(|s| {
+            s.size(px(18.0))
+                .items_center()
+                .justify_center()
+                .rounded_sm()
+                .border_2()
+                .border_color(move || theme().input)
+                .transition_colors()
+                .checked(|s| {
+                    s.bg(move || theme().primary)
+                        .border_color(move || theme().primary)
+                })
+        })
+        .indicator(
+            text("✓")
+                .text_xs()
+                .text_color(move || theme().primary_foreground),
+        )
+}
+
 /// A checkbox's three states for a "select all" over a partial selection.
 pub fn checkbox_tri_state(
     label: impl Into<SharedString>,
