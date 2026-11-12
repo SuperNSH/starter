@@ -2,6 +2,7 @@
 //! the variants, sizes and the press, hover, focus and disabled states.
 
 use nsh_base::{ButtonElement, button as base_button, theme};
+use nsh_core::element::ImageSrc;
 use nsh_core::prelude::*;
 
 /// What a button means. Primary stays scarce: one commitment per area.
@@ -32,19 +33,27 @@ pub enum ButtonSize {
     Large,
 }
 
-/// The touch floor is a physical bound: 44 points on touch screens; the
-/// pointer frames are smaller on the desktops.
+/// The touch floor is a physical bound: 44 points on touch screens. The
+/// desktops use the platform's own control heights (AppKit: 22, 28, 34).
 fn min_height(size: ButtonSize) -> impl IntoReactive<Length> + use<> {
     let touch = !is_desktop();
     move || {
         px(match (size, touch) {
-            (ButtonSize::Small, false) => 32.0,
+            (ButtonSize::Small, false) => 24.0,
             (ButtonSize::Small, true) => 40.0,
-            (ButtonSize::Medium, false) => 36.0,
+            (ButtonSize::Medium, false) => 28.0,
             (ButtonSize::Medium, true) => 44.0,
-            (ButtonSize::Large, false) => 40.0,
+            (ButtonSize::Large, false) => 34.0,
             (ButtonSize::Large, true) => 48.0,
         })
+    }
+}
+
+/// Desktop controls round less than touch ones, as AppKit's do.
+fn corner() -> impl IntoReactive<Length> + use<> {
+    let touch = !is_desktop();
+    move || {
+        if touch { theme().radius } else { px(6.0) }
     }
 }
 
@@ -75,6 +84,7 @@ pub fn button_with(
     on_press: impl Fn() + 'static,
 ) -> ButtonElement {
     let small = size == ButtonSize::Small;
+    let touch = !is_desktop();
     let disabled = disabled.into_reactive();
     // The frame is decided once; the variants only add fill and a label.
     let base = move || {
@@ -85,17 +95,26 @@ pub fn button_with(
         };
         named
             .min_h(min_height(size))
-            .px(if small { px(12.0) } else { px(16.0) })
-            .gap(if small { px(4.0) } else { px(8.0) })
+            .px(match (size, touch) {
+                (ButtonSize::Small, _) => px(8.0),
+                (ButtonSize::Medium, false) => px(12.0),
+                _ => px(16.0),
+            })
+            .gap(if small { px(4.0) } else { px(6.0) })
             .flex_row()
             .items_center()
             .justify_center()
-            .rounded(move || theme().radius)
+            .rounded(corner())
             .transition_colors()
-            .active(|s| {
-                let s = s.opacity(0.8);
-                // Motion honors the user's reduced-motion preference.
-                if reduce_motion() { s } else { s.scale(0.98) }
+            .active(move |s| {
+                let s = s.opacity(0.85);
+                // Desktop buttons darken without moving; touch ones give a
+                // small press, unless the user asked for reduced motion.
+                if touch && !reduce_motion() {
+                    s.scale(0.98)
+                } else {
+                    s
+                }
             })
             .focus(|s| {
                 s.outline(px(2.0))
@@ -108,16 +127,19 @@ pub fn button_with(
     match variant {
         ButtonVariant::Primary => base()
             .bg(move || theme().primary)
-            .hover(|s| s.opacity(0.9))
+            .shadow_xs()
+            .hover(|s| s.bg(move || theme().primary.opacity(0.88)))
             .child(label_text(label, || theme().primary_foreground, size)),
         ButtonVariant::Secondary => base()
             .bg(move || theme().secondary)
             .hover(|s| s.bg(move || theme().accent))
             .child(label_text(label, || theme().secondary_foreground, size)),
+        // The desktop push button: a raised surface with a hairline edge.
         ButtonVariant::Outline => base()
             .border_1()
-            .border_color(move || theme().input)
-            .bg(move || theme().background)
+            .border_color(move || theme().border)
+            .bg(move || theme().card)
+            .shadow_xs()
             .hover(|s| s.bg(move || theme().accent))
             .child(label_text(label, || theme().foreground, size)),
         ButtonVariant::Ghost => base()
@@ -125,7 +147,8 @@ pub fn button_with(
             .child(label_text(label, || theme().foreground, size)),
         ButtonVariant::Danger => base()
             .bg(move || theme().destructive)
-            .hover(|s| s.opacity(0.9))
+            .shadow_xs()
+            .hover(|s| s.bg(move || theme().destructive.opacity(0.88)))
             .child(label_text(
                 label,
                 crate::ui::tokens::destructive_foreground,
@@ -166,16 +189,40 @@ pub fn icon_button(
     name: &'static str,
     on_press: impl Fn() + 'static,
 ) -> ButtonElement {
+    icon_frame(name, on_press).child(
+        text(glyph)
+            .text_base()
+            .text_color(move || theme().foreground),
+    )
+}
+
+/// A toolbar action drawn from an SVG icon (stroked in `currentColor`),
+/// muted until hovered, as the desktops' toolbar buttons are.
+pub fn icon_svg_button(
+    svg_markup: &'static str,
+    name: &'static str,
+    on_press: impl Fn() + 'static,
+) -> ButtonElement {
+    icon_frame(name, on_press).child(
+        svg(ImageSrc::svg_markup(svg_markup))
+            .size(px(16.0))
+            .text_color(move || theme().muted_foreground),
+    )
+}
+
+fn icon_frame(name: &'static str, on_press: impl Fn() + 'static) -> ButtonElement {
+    let side = move || {
+        if is_desktop() { px(28.0) } else { px(40.0) }
+    };
     base_button()
         .on_press(on_press)
         .accessibility_label(name)
-        .min_h(min_height(ButtonSize::Small))
-        .min_w(min_height(ButtonSize::Small))
-        .px_2()
+        .min_h(side)
+        .min_w(side)
         .flex_row()
         .items_center()
         .justify_center()
-        .rounded(move || theme().radius)
+        .rounded(corner())
         .transition_colors()
         .hover(|s| s.bg(move || theme().accent))
         .active(|s| s.opacity(0.7))
@@ -185,11 +232,6 @@ pub fn icon_button(
                 .outline_color(move || theme().ring)
         })
         .disabled_style(|s| s.opacity(0.5))
-        .child(
-            text(glyph)
-                .text_base()
-                .text_color(move || theme().foreground),
-        )
 }
 
 fn label_text(
@@ -201,9 +243,14 @@ fn label_text(
         .text_color(color)
         .font_weight(FontWeight::MEDIUM)
         .number_of_lines(1);
-    match size {
-        ButtonSize::Small => base.text_xs().into_element(),
-        ButtonSize::Medium => base.text_sm().into_element(),
-        ButtonSize::Large => base.text_base().into_element(),
+    // AppKit sets control labels at 13 points (11 small); touch keeps the
+    // type scale.
+    match (size, is_desktop()) {
+        (ButtonSize::Small, true) => base.text_size(px(12.0)).into_element(),
+        (ButtonSize::Medium, true) => base.text_size(px(13.0)).into_element(),
+        (ButtonSize::Large, true) => base.text_size(px(14.0)).into_element(),
+        (ButtonSize::Small, false) => base.text_xs().into_element(),
+        (ButtonSize::Medium, false) => base.text_sm().into_element(),
+        (ButtonSize::Large, false) => base.text_base().into_element(),
     }
 }

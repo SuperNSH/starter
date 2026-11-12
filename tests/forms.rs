@@ -1,5 +1,5 @@
-//! The forms feature's tests: every rule's message only after blur or
-//! submit, the username check's debounce, server errors on their field,
+//! The forms feature's tests: every rule quiet until the first submit,
+//! then following edits, the username check's debounce, server errors on their field,
 //! draft autosave and restore, the dirty guard, the keyboard flow and the
 //! settings form's load and save. Everything runs on a manual clock, with
 //! the fake server's latency moved by `run_for`, and no network.
@@ -9,7 +9,8 @@
 //!
 //! | test | break seen |
 //! |---|---|
-//! | `an_error_shows_after_blur_not_while_typing` | the email format rule removed |
+//! | `errors_wait_for_submit_then_follow_edits` | `SubmitRule::check` registered its rule with `.rule` (change and blur too) |
+//! | `a_failed_submit_scrolls_the_first_failing_row_into_view` | `fields.rs`: `RowReveal::provide` registered no `on_submit_invalid` hook |
 //! | `the_username_check_debounces_and_drops_stale_answers` | `USERNAME_DEBOUNCE` raised to 10 s |
 //! | `a_taken_username_reports_after_the_check` | `username_taken` answered false always — a mutation shared with the next test; each was seen failing under it |
 //! | `a_taken_answer_shows_while_the_field_keeps_focus` | the shared mutation above, and on its own: the hint fell back to "Available" instead of the mirrored answer |
@@ -130,17 +131,48 @@ fn fill_valid(app: &mut Headless, code: &str) {
 }
 
 #[test]
-fn an_error_shows_after_blur_not_while_typing() {
+fn errors_wait_for_submit_then_follow_edits() {
     let mut app = start(seeded_storage(&[]));
     app.type_text("id:signup-email", "not-an-email").unwrap();
-    assert!(
-        !app.shows("That is not an email"),
-        "the email rule spoke while the user was typing"
-    );
-    // Leaving the field is what lets its error show.
+    // Leaving the field is not a reason to scold: only a submit is.
     app.type_text("id:signup-password", "correct horse")
         .unwrap();
+    assert!(
+        !app.shows("That is not an email"),
+        "the email rule spoke before the first submit"
+    );
+    app.press("text:Create account").unwrap();
     app.wait_for("That is not an email").unwrap();
+    // After a submit the rule follows each edit.
+    app.clear("id:signup-email").unwrap();
+    app.type_text("id:signup-email", "ada@example.com").unwrap();
+    app.wait_for_gone("That is not an email", Duration::from_secs(1))
+        .unwrap();
+}
+
+#[test]
+fn a_failed_submit_scrolls_the_first_failing_row_into_view() {
+    let mut app = start(seeded_storage(&[]));
+    app.wait_for("id:signup-email").unwrap();
+    let before = scroll_tos(app.screen());
+    // The empty form fails; the focus reveal alone would leave the
+    // Email label under the header, so the page scrolls the row itself.
+    app.press("text:Create account").unwrap();
+    app.wait_until(
+        "the page scrolled to the failing row",
+        Duration::from_secs(1),
+        |screen| scroll_tos(screen) > before,
+    )
+    .unwrap();
+}
+
+/// How many `ScrollTo` commands the app has sent so far.
+fn scroll_tos(screen: &nsh_testing::Screen) -> usize {
+    screen
+        .commands()
+        .iter()
+        .filter(|(_, command)| matches!(command, nsh_core::Command::ScrollTo { .. }))
+        .count()
 }
 
 #[test]
@@ -166,8 +198,7 @@ fn a_taken_username_reports_after_the_check() {
     app.type_text("id:signup-username", "grace").unwrap();
     app.wait_for("Checking…").unwrap();
     app.run_for(USERNAME_ANSWER).unwrap();
-    // The answer shows once the field was left, not while typing.
-    app.type_text("id:signup-email", "ada@example.com").unwrap();
+    // The live hint answers as the user types; no submit needed.
     app.wait_for("That username is taken").unwrap();
 }
 

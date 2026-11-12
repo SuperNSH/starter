@@ -22,6 +22,11 @@ fn open_state() -> Signal<Open> {
 
 /// Shows or hides the palette (the shortcut, the header's button).
 pub fn toggle() {
+    // macOS: the command bar, a window of its own (`command_bar`).
+    if crate::shell::command_bar::available() {
+        crate::shell::command_bar::open();
+        return;
+    }
     open_state().update(|open| open.0 = !open.0);
 }
 
@@ -31,7 +36,7 @@ fn close() {
 
 /// Runs the command `id` names and closes the palette. A destination's id
 /// is its route key; an action's is `action:<name>`.
-fn dispatch(id: &str) {
+pub(crate) fn dispatch(id: &str) {
     if let Some(route) = Route::ALL.iter().copied().find(|r| r.key_str() == id) {
         nav::open(route);
     } else {
@@ -93,8 +98,13 @@ pub fn palette_dialog() -> AnyElement {
                         .overflow_hidden()
                         .rounded_lg()
                         .border_1()
-                        .border_color(move || theme().border)
-                        .bg(move || theme().popover)
+                        .border_color(move || theme().border.opacity(0.5))
+                        // Liquid Glass where the system has it (iOS 26);
+                        // elsewhere a heavy blur of the page behind a
+                        // translucent fill (Windows, Linux, Android, web).
+                        .glass_effect(nsh_core::GlassEffect::Clear)
+                        .backdrop_blur(px(40.0))
+                        .bg(move || theme().popover.opacity(0.6))
                         .shadow_lg()
                         .child(command_palette(
                             items(),

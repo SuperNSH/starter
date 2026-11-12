@@ -11,11 +11,12 @@ use nsh_core::{
     prelude::*,
     storage::Storage,
 };
-use nsh_form::{BindField, Form, SubmitError, field, rules, use_form};
+use nsh_form::{BindField, Form, SubmitError, field, rules};
 use serde::{Deserialize, Serialize};
 
 use crate::features::forms::fields::{
-    error_line, field_row, field_section, hint_line, input_shell, page_header,
+    SubmitRule, error_line, field_row, field_section, hint_line, input_shell, page_header,
+    submit_first_form,
 };
 use crate::features::forms::sign_up::{FormsRoute, SERVER_LATENCY};
 use crate::ui::button::{ButtonSize, ButtonVariant, button_with};
@@ -51,7 +52,7 @@ impl Default for Settings {
 }
 
 pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
-    let form = use_form(Settings::default());
+    let form = submit_first_form(Settings::default());
     // `load` replaces the values and their baseline, so what loaded reads
     // as clean, not dirty.
     if let Some(saved) = Storage::get_item(SETTINGS_KEY)
@@ -60,7 +61,7 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
         form.load(saved);
     }
 
-    let display_name = field!(form, display_name).rule(rules::required("Enter a display name"));
+    let display_name = field!(form, display_name).check(rules::required("Enter a display name"));
     let start_page = field!(form, start_page);
     let editor_style = field!(form, editor_style);
     let notifications = field!(form, notifications);

@@ -7,11 +7,8 @@ use nsh_base::{nav_page, theme};
 use nsh_core::{element::Screen, prelude::*};
 
 use crate::{
-    shell::{nav, palette, routes::Route},
-    ui::{
-        button::{ButtonSize, ButtonVariant, button_with},
-        nav::themed_header,
-    },
+    shell::{chrome, nav, palette, routes::Route},
+    ui::{icons, native_kit::native_icon_button, nav::themed_header},
 };
 
 /// The widest the page content grows, in points: past it, label and value
@@ -102,42 +99,61 @@ pub fn page_screen(route: Route) -> Screen {
 }
 
 /// The header slot (desktops and the web only; iOS and Android draw their
-/// system header from `title`). Made once per page: a page is born pushed
-/// or root, so the back button's presence is decided here.
+/// system header from `title`), drawn as a unified toolbar: draggable, as
+/// tall as the title bar, clear of the window controls while the sidebar
+/// is hidden. A page is born pushed or root, so the back button's
+/// presence is decided here.
 fn page_header(route: Route) -> impl IntoElement {
+    let lead = move || {
+        if chrome::sidebar_open() {
+            px(12.0)
+        } else {
+            chrome::controls_inset() + px(12.0)
+        }
+    };
     view()
-        .h_12()
+        .h(px(chrome::TITLE_BAR))
         .flex_row()
         .items_center()
-        .gap_2()
-        .px_3()
+        .gap_1()
+        .pl(lead)
+        .pr_3()
         .border_b_1()
         .border_color(move || theme().border)
         .bg(move || theme().background)
+        .window_drag(true)
+        .child(when(
+            move || !chrome::sidebar_open(),
+            || {
+                native_icon_button(
+                    "sidebar.left",
+                    icons::SIDEBAR,
+                    "Show sidebar",
+                    chrome::toggle_sidebar,
+                )
+            },
+        ))
         .when(route != Route::Home, |header| {
-            header.child(button_with(
+            header.child(native_icon_button(
+                "chevron.left",
+                icons::BACK,
                 "Back",
-                ButtonVariant::Ghost,
-                ButtonSize::Small,
-                false,
-                None,
                 nav::pop,
             ))
         })
         .child(
             text(route.title())
                 .flex_1()
-                .text_sm()
+                .px_1()
+                .text_size(px(13.0))
                 .font_weight(FontWeight::SEMIBOLD)
                 .number_of_lines(1),
         )
         .when(is_desktop(), |header| {
-            header.child(button_with(
-                format!("Commands  {}", key_label("mod+k")),
-                ButtonVariant::Ghost,
-                ButtonSize::Small,
-                false,
-                None,
+            header.child(native_icon_button(
+                "magnifyingglass",
+                icons::SEARCH,
+                "Commands",
                 palette::toggle,
             ))
         })

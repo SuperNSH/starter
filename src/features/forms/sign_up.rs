@@ -21,19 +21,22 @@ use nsh_core::{
     prelude::*,
     storage::Storage,
 };
-use nsh_form::{BindField, Field, Form, SubmitError, field, rules, use_form};
+use nsh_form::{BindField, Field, FieldValidators, Form, SubmitError, field, rules};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 use crate::features::forms::fields::{
-    error_line, field_label, field_row, field_section, hint_line, input_shell, message_banner,
-    page_header,
+    RowReveal, SubmitRule, error_line, field_label, field_row, field_section, hint_line,
+    input_shell, message_banner, page_header, revealed_row, submit_first_form,
 };
 use crate::ui::button::{ButtonSize, ButtonVariant, button_with};
 use crate::ui::controls::progress_indeterminate;
 use crate::ui::dialog::confirm_destructive;
 use crate::ui::popups::{popup_backdrop, popup_surface, popup_trigger_frame};
 use crate::ui::text;
+
+/// The page scroll's top content inset, in points.
+const SCROLL_TOP_INSET: f32 = 8.0;
 
 /// The usernames the fake availability check reports as taken.
 const TAKEN_USERNAMES: [&str; 4] = ["ada", "admin", "grace", "lovelace"];
@@ -223,8 +226,8 @@ fn text_field_row(
     field_row(label, field.bind(input), move || field.error())
 }
 
-/// The username row. The hint mirrors the check's raw answer, which unlike
-/// the field's error does not wait for the field to be left.
+/// The username row. The hint mirrors the live check's answer as the user
+/// types; the field's error waits for a submit like every other rule.
 fn username_row(
     username: Field<SignUp, String>,
     answer: Signal<String>,
@@ -238,28 +241,30 @@ fn username_row(
             answer.get().into()
         } else if username.value().chars().count() < 3 {
             SharedString::from("")
-        } else if username.is_validating() {
-            SharedString::from("Checking…")
         } else {
-            SharedString::from("")
+            // The live check is between the debounce and its answer.
+            SharedString::from("Checking…")
         }
     };
-    view()
-        .gap(px(6.0))
-        .child(
-            view()
-                .flex_row()
-                .items_center()
-                .gap_2()
-                .child(field_label("Username"))
-                .child(hint_line(hint)),
-        )
-        .child(username.bind(input))
-        .child(error_line(move || username.error()))
+    revealed_row(
+        view()
+            .gap(px(6.0))
+            .child(
+                view()
+                    .flex_row()
+                    .items_center()
+                    .gap_2()
+                    .child(field_label("Username"))
+                    .child(hint_line(hint)),
+            )
+            .child(username.bind(input))
+            .child(error_line(move || username.error())),
+        move || username.error().is_some(),
+    )
 }
 
 fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
-    let form = use_form(SignUp::default());
+    let form = submit_first_form(SignUp::default());
     // The draft restores before anything reads the form; `load` makes the
     // restored values the baseline too, so a restored draft is not dirty.
     if let Some(draft) = Storage::get_item(DRAFT_KEY)
@@ -269,47 +274,51 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
     }
 
     let email = field!(form, email)
-        .rule(rules::required("Enter your email"))
-        .rule(rules::email("That is not an email"));
+        .check(rules::required("Enter your email"))
+        .check(rules::email("That is not an email"));
     let password = field!(form, password)
-        .rule(rules::required("Choose a password"))
-        .rule(rules::min_length(8, "Use at least 8 characters"));
-    let confirm_password = field!(form, confirm_password).rule(rules::matches(
+        .check(rules::required("Choose a password"))
+        .check(rules::min_length(8, "Use at least 8 characters"));
+    let confirm_password = field!(form, confirm_password).check(rules::matches(
         |values: &SignUp| &values.password,
         "Passwords do not match",
     ));
     let username = field!(form, username)
-        .rule(rules::required("Pick a username"))
-        .rule(rules::min_length(3, "Use at least 3 characters"))
-        .async_rule(USERNAME_DEBOUNCE, check_username);
-    let phone = field!(form, phone).rule(phone_rule());
+        .check(rules::required("Pick a username"))
+        .check(rules::min_length(3, "Use at least 3 characters"))
+        .validators(
+            FieldValidators::new()
+                .on_dynamic_async(check_username)
+                .on_dynamic_async_debounce(USERNAME_DEBOUNCE),
+        );
+    let phone = field!(form, phone).check(phone_rule());
     let referral =
-        field!(form, referral).rule(rules::unsigned_number::<u32, SignUp>("Use digits only"));
-    let birth_date = field!(form, birth_date).rule(|date: &DateTime, _: &SignUp| {
+        field!(form, referral).check(rules::unsigned_number::<u32, SignUp>("Use digits only"));
+    let birth_date = field!(form, birth_date).check(|date: &DateTime, _: &SignUp| {
         (!date.start().is_some()).then(|| "Pick your birth date".to_owned())
     });
     let meeting_time = field!(form, meeting_time);
     let region = field!(form, region);
     let interests = field!(form, interests);
-    let plan = field!(form, plan).rule(rules::required("Choose a plan"));
+    let plan = field!(form, plan).check(rules::required("Choose a plan"));
     let newsletter = field!(form, newsletter);
     let age = field!(form, age);
     let favorite_color = field!(form, favorite_color);
-    let budget = field!(form, budget).rule(budget_rule());
+    let budget = field!(form, budget).check(budget_rule());
     let verification_code = field!(form, verification_code)
-        .rule(rules::required("Enter the 6 digits"))
-        .rule(otp_rule());
-    let bio = field!(form, bio).rule(|bio: &String, _: &SignUp| {
+        .check(rules::required("Enter the 6 digits"))
+        .check(otp_rule());
+    let bio = field!(form, bio).check(|bio: &String, _: &SignUp| {
         (!doc_has_text(bio)).then(|| "Write a line or two about you".to_owned())
     });
-    let terms = field!(form, terms).rule(|terms: &bool, _: &SignUp| {
+    let terms = field!(form, terms).check(|terms: &bool, _: &SignUp| {
         (!terms).then(|| "Accept the terms to continue".to_owned())
     });
 
     // What the fake code check said about the code as it was completed.
     let code_check = signal(String::new());
     // What the availability check answered for the name as it stands —
-    // raw, unlike the field's error, which waits for blur or submit.
+    // raw, unlike the field's error, which waits for the first submit.
     let username_answer = signal(String::new());
     let username_seen = stored(0_u64);
     effect(move || {
@@ -349,6 +358,9 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
             let _ = Storage::set_item(DRAFT_KEY, json);
         }
     });
+
+    // A failed submit scrolls the first failing row's label into view.
+    let reveal = RowReveal::provide(form, SCROLL_TOP_INSET);
 
     let submit = move || form.submit(move |values: SignUp| fake_server(values, created));
 
@@ -492,26 +504,29 @@ fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
 
     sign_up_nav(form)
         .child(
-            scroll()
+            reveal
+                .scroll(scroll())
                 .flex_1()
                 // nav_page paints the platform's color; the page takes the theme's.
                 .bg(move || theme().background)
                 // The focused field's label keeps clear of the page header when
                 // the reveal scrolls it to the top.
-                .content_inset(crate::ui::layout::page_insets(8.0))
+                .content_inset(crate::ui::layout::page_insets(SCROLL_TOP_INSET))
                 .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
                 .keyboard_taps(KeyboardTaps::Handled)
                 .test_id("forms-scroll")
                 .child(
-                    view()
-                        .p_4()
-                        .pb_safe_area_plus(px(24.0))
-                        .gap_4()
-                        .child(account)
-                        .child(profile)
-                        .child(preferences)
-                        .child(verify)
-                        .child(consent),
+                    reveal.content(
+                        view()
+                            .p_4()
+                            .pb_safe_area_plus(px(24.0))
+                            .gap_4()
+                            .child(account)
+                            .child(profile)
+                            .child(preferences)
+                            .child(verify)
+                            .child(consent),
+                    ),
                 ),
         )
         // The same soft header and tab-bar edges as the shell's pages.

@@ -11,6 +11,7 @@ use crate::shell::home;
 pub enum Route {
     Home,
     UiGallery,
+    NativeVsApp,
     Forms,
     Data,
     DataDetail(u64),
@@ -31,6 +32,7 @@ impl Route {
     pub const ALL: &'static [Route] = &[
         Route::Home,
         Route::UiGallery,
+        Route::NativeVsApp,
         Route::Forms,
         Route::Data,
         Route::QueryDevtools,
@@ -50,6 +52,7 @@ impl Route {
         match self {
             Route::Home => "home".into(),
             Route::UiGallery => "ui".into(),
+            Route::NativeVsApp => "native".into(),
             Route::Forms => "forms".into(),
             Route::Data => "data".into(),
             Route::DataDetail(id) => format!("data-item:{id}"),
@@ -79,6 +82,7 @@ impl Route {
         match self {
             Route::Home => "Home",
             Route::UiGallery => "UI gallery",
+            Route::NativeVsApp => "Native vs app",
             Route::Forms => "Forms",
             Route::Data => "Data",
             Route::QueryDevtools => "Query devtools",
@@ -114,34 +118,56 @@ impl Route {
         }
     }
 
-    /// The tab's Lucide icon (ISC), drawn in `currentColor`, for the themed
-    /// tab bar Android shows in place of the system's Material bar.
+    /// The route's Lucide icon (ISC), drawn in `currentColor`: the desktop
+    /// sidebar's rows, and the themed tab bar Android shows in place of the
+    /// system's Material bar.
     pub fn tab_svg(self) -> &'static str {
-        macro_rules! icon {
-            ($body:literal) => {
-                concat!(
-                    r#"<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">"#,
-                    $body,
-                    "</g></svg>"
-                )
-            };
-        }
+        use crate::ui::icons::lucide;
         match self {
-            Route::Home => icon!(
+            Route::Home => lucide!(
                 r#"<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>"#
             ),
-            Route::Forms => icon!(
+            Route::UiGallery => lucide!(
+                r#"<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>"#
+            ),
+            Route::NativeVsApp => lucide!(
+                r#"<path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3M12 20v2M12 14v2M12 8v2M12 2v2"/>"#
+            ),
+            Route::Forms => lucide!(
                 r#"<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>"#
             ),
-            Route::Data => icon!(
+            Route::Data | Route::DataDetail(_) => lucide!(
                 r#"<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11"/>"#
             ),
+            Route::QueryDevtools => lucide!(
+                r#"<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>"#
+            ),
             Route::Lists => {
-                icon!(r#"<path d="M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13"/>"#)
+                lucide!(r#"<path d="M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13"/>"#)
             }
-            _ => icon!(
+            Route::Canvas => lucide!(
+                r#"<path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/>"#
+            ),
+            Route::Motion => lucide!(
                 r#"<path d="M12.8 19.6A2 2 0 1 0 14 16H2m15.5-8a2.5 2.5 0 1 1 2 4H2m7.8-7.6A2 2 0 1 1 11 8H2"/>"#
             ),
+            Route::Overlays => lucide!(
+                r#"<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>"#
+            ),
+            Route::Platform => {
+                lucide!(
+                    r#"<rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/>"#
+                )
+            }
+            Route::Device => {
+                lucide!(
+                    r#"<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>"#
+                )
+            }
+            Route::RemoteScreen => lucide!(
+                r#"<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.29 7 12 12l8.71-5M12 22V12"/>"#
+            ),
+            Route::Diagnostics => lucide!(r#"<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>"#),
         }
     }
 
@@ -150,6 +176,7 @@ impl Route {
         match self {
             Route::Home => "Every page of the boilerplate.",
             Route::UiGallery => "Every control of the app's own library, with its states.",
+            Route::NativeVsApp => "Each control as the app draws it and as the system does.",
             Route::Forms => "A full sign-up and a settings form on nsh-form.",
             Route::Data => "An infinite feed on nsh-query with optimistic likes.",
             Route::DataDetail(_) => "One post, read through a tracked query key.",
@@ -169,6 +196,7 @@ impl Route {
         match self {
             Route::Home => "home",
             Route::UiGallery => "ui",
+            Route::NativeVsApp => "native",
             Route::Forms => "forms",
             Route::Data => "data",
             Route::QueryDevtools => "query-devtools",
@@ -201,6 +229,7 @@ impl Route {
         match self {
             Route::Home => "page-home",
             Route::UiGallery => "page-ui",
+            Route::NativeVsApp => "page-native",
             Route::Forms => "page-forms",
             Route::Data => "page-data",
             Route::QueryDevtools => "page-query-devtools",
@@ -221,6 +250,7 @@ impl Route {
         match self {
             Route::Home => "nav-home",
             Route::UiGallery => "nav-ui",
+            Route::NativeVsApp => "nav-native",
             Route::Forms => "nav-forms",
             Route::Data => "nav-data",
             Route::QueryDevtools => "nav-query-devtools",
@@ -279,6 +309,7 @@ impl Route {
         match self {
             Route::Home => home::content().into_element(),
             Route::UiGallery => crate::ui::gallery::ui_gallery_page().into_element(),
+            Route::NativeVsApp => crate::ui::native_vs_app::native_vs_app_page().into_element(),
             Route::Forms => crate::features::forms::forms_page().into_element(),
             Route::Data => crate::features::data::data_page().into_element(),
             Route::DataDetail(id) => crate::features::data::data_detail_page(id).into_element(),
@@ -304,6 +335,7 @@ pub fn route_from_deep_link(seg: &[&str]) -> Option<Route> {
         [] => Some(Route::Home),
         ["forms"] => Some(Route::Forms),
         ["ui"] => Some(Route::UiGallery),
+        ["native"] => Some(Route::NativeVsApp),
         ["data"] => Some(Route::Data),
         ["data", "devtools"] => Some(Route::QueryDevtools),
         ["data", "item", id] => Some(Route::DataDetail(id.parse().ok()?)),

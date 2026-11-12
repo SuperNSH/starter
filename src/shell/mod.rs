@@ -5,6 +5,7 @@
 
 pub mod back;
 pub mod chrome;
+pub mod command_bar;
 pub mod deep_link;
 pub mod home;
 pub mod lifecycle;
@@ -17,12 +18,13 @@ pub mod status;
 pub mod undo;
 
 use nsh_base::{nav_stack, theme};
-use nsh_core::prelude::*;
+use nsh_core::{element::ImageSrc, prelude::*};
 
 use crate::{
     shell::routes::Route,
     ui::{
-        nav::nav_row,
+        button::icon_svg_button,
+        icons,
         tab_bar::{ThemedTab, mobile_tab_bar, tab_item, themed_tab_bar},
         toast,
     },
@@ -51,6 +53,7 @@ pub fn install() {
     on_key("mod+k", move |_| palette::toggle());
     on_key("mod+z", move |_| undo::undo());
     on_key("mod+shift+z", move |_| undo::redo());
+    on_key("ctrl+mod+s", move |_| chrome::toggle_sidebar());
     back::install();
     lifecycle::watch();
     deep_link::open_pending();
@@ -64,6 +67,7 @@ pub fn shell() -> impl IntoElement {
         .bg(move || theme().background)
         .child(when(desktop, desktop_shell).otherwise(phone_shell))
         .child(palette::palette_dialog())
+        .child(command_bar::bridge())
         .child(back::exit_prompt_dialog())
         // App level, so a toast from any page or task reaches the host.
         .child(toast::toast_host())
@@ -157,23 +161,26 @@ fn phone_shell() -> AnyElement {
         .into_element()
 }
 
-/// Desktop widths: the sidebar and the pane beside it, under the app's own
-/// title bar.
+/// Desktop widths: the sidebar running full height under the window
+/// controls, as a macOS source list does, and the page stack beside it.
 fn desktop_shell() -> AnyElement {
     chrome::install();
     view()
         .flex_1()
-        .flex_col()
-        .child(chrome::title_bar())
+        .flex_row()
+        .child(when(chrome::sidebar_open, sidebar))
         .child(
-            view().flex_1().flex_row().child(sidebar()).child(
-                nav_stack()
-                    .flex_1()
-                    .child(page::page_screen(Route::Home))
-                    .child(pushed()),
-            ),
+            view()
+                .flex_1()
+                .flex_col()
+                .child(
+                    nav_stack()
+                        .flex_1()
+                        .child(page::page_screen(Route::Home))
+                        .child(pushed()),
+                )
+                .child(status::status_bar()),
         )
-        .child(status::status_bar())
         .into_element()
 }
 
@@ -192,28 +199,43 @@ fn pushed() -> AnyElement {
     .into_element()
 }
 
-/// The desktop layout's sidebar: every page, the one on top selected.
+/// The desktop layout's sidebar: a draggable top lane for the window
+/// controls and the collapse toggle, then every page, the one on top
+/// selected.
 fn sidebar() -> impl IntoElement {
     view()
-        .w_64()
+        .w(px(232.0))
         .flex_col()
         .bg(move || theme().card)
         .border_r_1()
         .border_color(move || theme().border)
         .child(
+            view()
+                .h(px(chrome::TITLE_BAR))
+                .flex_row()
+                .items_center()
+                .justify_end()
+                .px_3()
+                .window_drag(true)
+                .child(icon_svg_button(
+                    icons::SIDEBAR,
+                    "Hide sidebar",
+                    chrome::toggle_sidebar,
+                )),
+        )
+        .child(
             scroll().flex_1().child(
                 view()
                     .px_2()
-                    .pt_3()
                     .pb_4()
-                    .gap_0p5()
+                    .gap(px(1.0))
                     .child(
                         text("Pages")
-                            .text_xs()
+                            .text_size(px(11.0))
                             .font_weight(FontWeight::SEMIBOLD)
                             .text_color(move || theme().muted_foreground)
                             .px_2()
-                            .pt_2()
+                            .pt_1()
                             .pb_1(),
                     )
                     .children(Route::ALL.iter().copied().map(sidebar_row)),
@@ -221,20 +243,58 @@ fn sidebar() -> impl IntoElement {
         )
 }
 
-/// A sidebar row: the ui row's selected fill while its page is on top.
-/// Hover is softened to half the accent at the call site: the default
-/// theme's `accent` and `secondary` are the same gray, so a full hover
-/// fill on another row read as a second selected pill in the vision pass
-/// (exactly one row carries the full pill at any time).
+/// A sidebar row: the route's icon and label, the selected fill while its
+/// page is on top. Hover is half the accent so exactly one row ever
+/// carries the full pill (the default theme's `accent` and `secondary`
+/// are the same gray).
 fn sidebar_row(route: Route) -> AnyElement {
     let selected = move || nav::current() == route;
-    nav_row(
-        route.label_str(),
-        None,
-        selected,
-        route.nav_row_id(),
-        move || nav::open(route),
-    )
-    .hover(|s| s.bg(move || theme().accent.opacity(0.5)))
-    .into_element()
+    let tint = move || {
+        if selected() {
+            theme().foreground
+        } else {
+            theme().muted_foreground
+        }
+    };
+    nsh_base::button()
+        .on_press(move || nav::open(route))
+        .accessibility_label(route.label_str())
+        .selected(selected)
+        .w_full()
+        .h(px(30.0))
+        .px_2()
+        .flex_row()
+        .items_center()
+        .gap_2()
+        .rounded(px(6.0))
+        .transition_colors()
+        .hover(|s| s.bg(move || theme().accent.opacity(0.5)))
+        .selected_style(|s| s.bg(move || theme().accent))
+        .focus(|s| {
+            s.outline(px(2.0))
+                .outline_offset(px(-2.0))
+                .outline_color(move || theme().ring)
+        })
+        .child(
+            view()
+                .test_id(route.nav_row_id())
+                .flex_1()
+                .flex_row()
+                .items_center()
+                .gap_2()
+                .child(
+                    svg(ImageSrc::svg_markup(route.tab_svg()))
+                        .size(px(16.0))
+                        .text_color(tint),
+                )
+                .child(
+                    text(route.label_str())
+                        .flex_1()
+                        .text_size(px(13.0))
+                        .font_weight(FontWeight::MEDIUM)
+                        .number_of_lines(1)
+                        .text_color(move || theme().foreground),
+                ),
+        )
+        .into_element()
 }

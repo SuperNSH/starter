@@ -17,6 +17,7 @@
 //! | `undo_and_redo_retrace_navigation` | `nav.rs`: `push` took no undo snapshot |
 //! | `the_palette_opens_and_navigates` | `palette.rs`: `dispatch` ignored destination ids |
 //! | `the_desktop_width_takes_the_sidebar` | `mod.rs`: `desktop()` thresholds 7000/9000 |
+//! | `the_sidebar_collapses_and_comes_back` | `chrome::toggle_sidebar` left the state as it was |
 //! | `keys_are_stable_per_route` (lib) | `routes.rs`: `DataDetail`'s key dropped the id |
 //! | `undo_returns_to_the_recorded_state` (lib) | `undo.rs`: `record` pushed nothing |
 //! | `the_stack_is_bounded` (lib) | the `LIMIT + 10` trim |
@@ -241,7 +242,7 @@ fn undo_and_redo_retrace_navigation() {
 #[test]
 fn the_desktop_width_takes_the_sidebar() {
     let mut app = desktop();
-    app.wait_for("text:Boilerplate for Native Shell").unwrap();
+    app.wait_for("label:Hide sidebar").unwrap();
     // The pane beside it still shows Home, the status bar under both.
     app.wait_for("text:Home").unwrap();
     app.wait_for("text:Active").unwrap();
@@ -252,10 +253,27 @@ fn the_desktop_width_takes_the_sidebar() {
 
     let mut narrow = phone();
     narrow.wait_for("text:Home").unwrap();
-    assert!(
-        !narrow.shows("Boilerplate for Native Shell"),
+    assert_eq!(
+        narrow.screen().count("label:Hide sidebar"),
+        Ok(0),
         "the phone shell has no sidebar"
     );
+}
+
+#[test]
+fn the_sidebar_collapses_and_comes_back() {
+    let mut app = desktop();
+    app.wait_for("id:nav-forms").unwrap();
+    app.press("label:Hide sidebar").unwrap();
+    app.wait_for_gone("id:nav-forms", Duration::from_secs(1))
+        .unwrap();
+    // The toolbar takes the toggle while the sidebar is away.
+    app.press("label:Show sidebar").unwrap();
+    app.wait_for("id:nav-forms").unwrap();
+    // The platform shortcut does the same.
+    app.press_key("ctrl+mod+s").unwrap();
+    app.wait_for_gone("id:nav-forms", Duration::from_secs(1))
+        .unwrap();
 }
 
 #[test]
