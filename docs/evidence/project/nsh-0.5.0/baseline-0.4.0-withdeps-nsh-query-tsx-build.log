@@ -1,0 +1,3 @@
+$ (cd /Users/hmziq/fo/nsh-query/packages/nsh-query) /opt/homebrew/bin/nsh build
+✓ built App.tsx into .nsh/out (271.8 KB js, 551.7 KB bytecode, 29ms)
+[exit 0]

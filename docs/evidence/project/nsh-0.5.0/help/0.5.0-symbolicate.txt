@@ -1,0 +1,11 @@
+Map the positions in a reported error stack (`bundle.js:LINE:COL`) to the app's sources, with a package's source map
+
+Usage: nsh symbolicate [OPTIONS] <MAP> [INPUT]
+
+Arguments:
+  <MAP>    The source map (`<package>.map`, `bundle.js.map`) or a package (`.nshpkg`) that holds one
+  [INPUT]  The error text (default: standard input)
+
+Options:
+  -v, --verbose  Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+  -h, --help     Print help

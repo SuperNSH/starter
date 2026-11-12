@@ -1,0 +1,59 @@
+Run an app's tests headless: its test files (`*.test.tsx`, `*.test.ts`, importing `nsh/test`), each test opening the app on an engine of its own, after the `cargo test` of its Rust crates (`nsh.json` `"rust"`) in the directory; or, given the app's entry, open it and take the steps standard input gives (`await app.press("Add")`)
+
+Usage: nsh test [OPTIONS] [PATH]
+
+Arguments:
+  [PATH]
+          A test file, a directory whose test files to run (default: the current one), or an app's entry
+          
+          [default: .]
+
+Options:
+      --filter <FILTER>
+          Run only the tests whose name contains this (`cargo test`'s too)
+
+  -v, --verbose
+          Show everything: log lines with their targets, cargo's output and the hosts' own
+          
+          [env: NSH_VERBOSE=]
+
+      --trace
+          Print every mount batch of the apps the tests open, under the step it came in, and the time of every commit
+
+      --fps
+          Log the performance monitor's readings of the apps the tests open, once a second: frame rate, frame and commit costs, CPU, memory (`--target linux`, `macos`, `windows` or `ios`; shown with `-v`)
+
+      --junit <FILE>
+          Also write the results to this file as a JUnit XML report, the format CI services read
+
+      --target <TARGET>
+          Run the apps the tests open on this platform's development host instead of headless: the steps act with the platform's own input (macos, linux, windows, gpui, tui, web, ios and android; tui uses an in-memory terminal; web runs them in a headless Chrome, Edge or Chromium, ios in a simulator, android on the first device adb lists)
+
+          Possible values:
+          - catalyst: The Mac Catalyst development host (an iPhone-sized window)
+          - ios:      The development host in an iOS simulator
+          - android:  The development host on an Android device or emulator
+          - linux:    The Linux (GTK) development host, in a window on this machine
+          - macos:    The macOS (AppKit) development host, in a window on this machine
+          - windows:  The Windows development host, in a window on this machine
+          - web:      The web development host, in the browser (the dev server serves its page)
+          - gpui:     The GPUI development host, in a window on this machine (macOS, Windows or Linux): the app as GPUI apps that embed it show it
+          - tui:      The development host in this terminal
+
+      --browser <PATH>
+          The Chrome, Edge or Chromium executable `--target web` runs the apps in (default: the one installed on this machine)
+
+      --web-host <JS>
+          The web page's host module (default: `nsh.json` `web.host`), which exports `createHost(player)`: in headless runs it answers the `nsh/host` calls of each app the tests open and sends its events
+
+      --device <DEVICE>
+          With `--target ios`: the simulator the apps run in (name or UDID); default: a booted one, else the newest iPhone
+
+      --display <N>
+          With `--target macos`: the display the apps' windows open on, centered: 1 is the primary display (the one with the menu bar), 2 the next, and so on; the main one when there is no such display. Default: the first display besides the primary one (not a mirror of it), so that a run keeps off the screen in use; the primary one when there is no other
+
+      --foreground
+          With `--target macos`: lets the apps become the active app, as they would run for a user. By default they run in the background: their windows show but never take the keyboard from the app in use, and the tests' input goes to them directly
+
+  -h, --help
+          Print help (see a summary with '-h')

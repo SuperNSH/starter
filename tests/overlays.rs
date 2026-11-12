@@ -99,7 +99,10 @@ fn the_dialog_closes_on_a_scrim_press() {
     app.wait_for("role:button[Rename file…]").unwrap();
     app.press("role:button[Rename file…]").unwrap();
     app.wait_for("text:Rename file").unwrap();
-    app.press("label:Dismiss").unwrap();
+    // Since 0.5.0 a press lands where the view is drawn: the scrim's
+    // center is under the dialog, so press its uncovered corner.
+    app.press_at("label:Dismiss", point(Points(8.0), Points(8.0)))
+        .unwrap();
     app.wait_for("text:Closed with the scrim").unwrap();
     app.wait_for_gone("text:Rename file", Duration::from_secs(2))
         .unwrap();
@@ -154,14 +157,22 @@ fn the_sheet_opens_as_a_side_panel_on_desktop_width() {
 fn the_sheet_opens_as_a_bottom_sheet_on_phone_width() {
     let mut app = phone();
     reveal(&mut app, "role:button[Notification settings…]");
-    app.press("role:button[Notification settings…]").unwrap();
-    app.wait_for("text:Opened as a bottom panel").unwrap();
     // The detents are the section's data; the panel's popup style follows,
-    // and the tall detent alone shows the extra rows.
+    // and the tall detent alone shows the extra rows. The page's detent
+    // buttons sit under the open sheet's scrim (0.5.0 presses where a view
+    // is drawn), so each detent is picked while the sheet is closed.
     app.press("role:button[Tall]").unwrap();
     app.wait_for("text:Detent step 2 of 0–2").unwrap();
+    app.press("role:button[Notification settings…]").unwrap();
+    app.wait_for("text:Opened as a bottom panel").unwrap();
     app.wait_for("id:sheet-tall-marker").unwrap();
+    app.press("role:button[Done]").unwrap();
+    app.wait_for("text:Closed (Done)").unwrap();
     app.press("role:button[Short]").unwrap();
+    app.wait_for("text:Detent step 0 of 0–2").unwrap();
+    app.press("role:button[Notification settings…]").unwrap();
+    app.wait_for("text:Opened as a bottom panel").unwrap();
+    app.wait_for("text:Done").unwrap();
     app.wait_for_gone("id:sheet-tall-marker", Duration::from_secs(2))
         .unwrap();
 }

@@ -132,7 +132,7 @@ fn column(
     let mut column = ui_column(key, title, width);
     column.align = align;
     column.sortable = sortable;
-    column.fixed = key == "symbol";
+    column.fixed = (key == "symbol").into();
     column
 }
 

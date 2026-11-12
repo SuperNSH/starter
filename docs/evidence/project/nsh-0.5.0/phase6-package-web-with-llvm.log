@@ -1,0 +1,6 @@
+$ AR_wasm32_unknown_unknown=/opt/homebrew/opt/llvm/bin/llvm-ar CC_wasm32_unknown_unknown=/opt/homebrew/opt/llvm/bin/clang nsh package --target web   (llvm-ar is not on PATH on this Mac; nsh sets AR to a bare 'llvm-ar' otherwise, in 0.4.0 as in 0.5.0)
+✓ built the Rust crate nsh-starter (686ms)
+warn app id `com.example.nshstarter` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+✓ built the web runtime of nsh-starter (6m 18s)
+[exit 143]
+[stopped by me after 60 min: 'cargo metadata' waited on ~/.cargo/.package-cache-mutate, held by two other agents' cargo processes in ~/fo/nsh-upstream-back-swipe (pids 38118, 99805, running 2h+); not killed, not mine]

@@ -1,0 +1,12 @@
+Type check an app with TypeScript's native compiler (TypeScript 7, downloaded once from the npm registry; no Node needed); an app with Rust crates (`nsh.json` `"rust"`): `cargo check` them first, and a Rust app (`"root"`) without a `tsconfig.json` only that
+
+Usage: nsh check [OPTIONS] [ENTRY] [-- <ARGS>...]
+
+Arguments:
+  [ENTRY]    The entry module, or the app's directory (default: the current one), whose `App.tsx` is the entry [default: .]
+  [ARGS]...  Further arguments for `tsc` (after `--`)
+
+Options:
+      --tsc <TSC>  The `tsc` to run instead of the pinned TypeScript 7 [env: NSH_TSC=]
+  -v, --verbose    Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+  -h, --help       Print help

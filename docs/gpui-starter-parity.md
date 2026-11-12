@@ -16,7 +16,7 @@ Legend: **ported** — a real implementation exists in this app; **adapted** —
 | Custom title bar with drag regions | **adapted**: the desktop shell builds its title bar area and every page's `header` slot; mobile gets the system header through `NavPage` instead of a hand-rolled bar. |
 | Status bar (route, tasks, degraded state, last error) | **ported** in `src/shell`. |
 | Application menus, keyboard shortcuts | **ported**: `nsh/desktop` `Menu` plus the shared command registry; shortcuts through the keymap. |
-| Single-instance guard + IPC deep-link forwarding | **out**: a desktop-process concern. NSH apps ship as packaged apps on four targets; the boilerplate's shell covers deep links at the app layer, and the packaging model has no second-instance IPC surface on 0.4.0. |
+| Single-instance guard + IPC deep-link forwarding | **out**: a desktop-process concern. NSH apps ship as packaged apps on four targets; the boilerplate's shell covers deep links at the app layer, and the packaging model had no second-instance IPC surface on 0.4.0. 0.5.0 adds single-instance mode (`next_second_instance`); adopting it is a follow-up. |
 | Android back order | **adapted** (gpui-starter has no mobile story): back order through the nav stack with `pop_on_back` and the dirty-form guard. |
 
 ## State, persistence, data
@@ -41,16 +41,16 @@ Legend: **ported** — a real implementation exists in this app; **adapted** —
 | Background task manager with drain-on-shutdown | **ported** in `src/foundation`; the status bar shows running tasks. |
 | Capability registry (supported/enabled/degraded/reason) | **ported** in `src/foundation`, backed by `nsh.json` capabilities — NSH already gates native surfaces (network, webview, clipboard, picker, speech, host) at the manifest level, so the registry tracks the app's own seams on top. |
 | Frame-time debugger | **adapted**: `nsh run --fps` / `nsh test --fps` and `--trace` give mount budgets and frame costs; `trace/` holds the recorded runs (data area, planned until it lands). |
-| Crash report generation | **adapted**: panics land in the file log with lifecycle context; there is no separate crash-store surface on 0.4.0. |
+| Crash report generation | **adapted**: panics land in the file log with lifecycle context; there is no separate crash-store surface on 0.4.0 or 0.5.0. |
 | Error boundary | **ported**: the root wraps pages in an `ErrorBoundary` (TSX) / `catch_error` (Rust) so a broken page degrades to the error surface. |
 
 ## Desktop platform surfaces
 
 | gpui-starter | Here |
 |---|---|
-| macOS tray icon | **out**: 0.4.0 exposes no tray surface; the boilerplate does not fake one. |
-| Global hotkey (Alt+Space) | **out**: no global-hotkey API on 0.4.0; in-app shortcuts cover the same registry. |
-| Native local notifications + inbox + toast fallback | **adapted**: 0.4.0 has no `Notifications` module (unreleased upstream has one), so the in-app inbox and toasts are real and the system notification sits behind a trait whose stub says exactly that. Swapping in the released module is one file. |
+| macOS tray icon | **out**: 0.4.0 exposed no tray surface. 0.5.0 adds trays (`Tray`, `set_tray`); building one is a follow-up, not part of the 0.5.0 port. |
+| Global hotkey (Alt+Space) | **out**: no global-hotkey API on 0.4.0; in-app shortcuts cover the same registry. 0.5.0 adds `register_global_shortcut`; using it is a follow-up. |
+| Native local notifications + inbox + toast fallback | **adapted**: the in-app inbox and toasts are real and the system notification sits behind a trait whose stub says notifications are unavailable. That reason is stale: 0.4.0 had no `Notifications` module, 0.5.0 ships one (`show_notification`, `set_badge`). Swapping it in behind the trait is a follow-up. |
 | Native file/folder pickers, clipboard, opener | **ported** on `src/platform` over NSH's `picker`, `Clipboard`, `openUrl`/`open_path`, with capability keys declared tightly in `nsh.json`. |
 | Connectivity probe (reqwest) + interface diagnostics | **adapted**: connectivity is a state signal fed by the http seam's probe against the fake API; the offline banner on the feed is the demo. |
 | Web contents (`web_view`) | **ported** on the canvas page with messaging, behind the `webview` capability. |

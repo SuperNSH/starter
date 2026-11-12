@@ -1,0 +1,102 @@
+# NDK 29's llvm-ar on this Mac is a shell script that execs itself (loops forever); NDK 28's real llvm-ar is used instead.
+$ CC_aarch64_linux_android=/Users/hmziq/Library/Android/sdk/ndk/29.0.14206865/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android26-clang AR_aarch64_linux_android=/Users/hmziq/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar cargo check --lib --target aarch64-linux-android
+warning: (arm64) build/serde_core-2ec7436a82eb9986/build_script_build-2ec7436a82eb9986.build_script_build.cc19e27832aaa20c-cgu.0.rcgu.o unable to open object file: No such file or directory
+   Compiling ring v0.17.14
+warning: (arm64) build/rust-i18n-fe76e3e549ad9c12/build_script_build-fe76e3e549ad9c12.build_script_build.29e3e44f579bf8df-cgu.0.rcgu.o unable to open object file: No such file or directory
+warning: (arm64) deps/libglobwalk-d034e757fd9af576.rlib(globwalk-d034e757fd9af576.globwalk.9bb9f9640efd7fb6-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.00.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.02.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.03.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.04.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.05.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.06.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.07.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.08.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.09.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.10.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.11.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.12.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.13.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.14.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libignore-0b95bede408a6771.rlib(ignore-0b95bede408a6771.ignore.71651ae6782afba3-cgu.15.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libwalkdir-4656f6548b0bf8c6.rlib(walkdir-4656f6548b0bf8c6.walkdir.be818007c93b7322-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libwalkdir-4656f6548b0bf8c6.rlib(walkdir-4656f6548b0bf8c6.walkdir.be818007c93b7322-cgu.1.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libsame_file-1605d0e4ac840960.rlib(same_file-1605d0e4ac840960.same_file.54a7e7710f7a925c-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libcrossbeam_utils-a15a730b8c6bb369.rlib(crossbeam_utils-a15a730b8c6bb369.crossbeam_utils.3ceb1a8d1fe9013f-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libglobset-e994252675e7e94b.rlib(globset-e994252675e7e94b.globset.83388f655d87247b-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libglobset-e994252675e7e94b.rlib(globset-e994252675e7e94b.globset.83388f655d87247b-cgu.1.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libglobset-e994252675e7e94b.rlib(globset-e994252675e7e94b.globset.83388f655d87247b-cgu.2.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libglobset-e994252675e7e94b.rlib(globset-e994252675e7e94b.globset.83388f655d87247b-cgu.3.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libglobset-e994252675e7e94b.rlib(globset-e994252675e7e94b.globset.83388f655d87247b-cgu.4.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libglobset-e994252675e7e94b.rlib(globset-e994252675e7e94b.globset.83388f655d87247b-cgu.5.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/liblog-ea86a2748794131d.rlib(log-ea86a2748794131d.log.3d2b1eefd3af3e70-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libbstr-ca8692d0028534dc.rlib(bstr-ca8692d0028534dc.bstr.b5b00748d0734973-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex-92ddd01a9169d8f2.rlib(regex-92ddd01a9169d8f2.regex.2338a4501035d864-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.00.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.01.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.02.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.03.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.04.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.05.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.06.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.07.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.08.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.09.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.10.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.11.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.12.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.13.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.14.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_automata-578ec8ea1893a3e4.rlib(regex_automata-578ec8ea1893a3e4.regex_automata.41bc7d14355befb8-cgu.15.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.00.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.01.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.02.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.03.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.04.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.05.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.06.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.07.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.08.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.09.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.10.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.11.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.12.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.13.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.14.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libaho_corasick-a9035378ec0655fb.rlib(aho_corasick-a9035378ec0655fb.aho_corasick.df1f85dc86db0a6e-cgu.15.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libmemchr-3587c2de3dd9dd68.rlib(memchr-3587c2de3dd9dd68.memchr.2810482f6277259d-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.00.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.01.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.02.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.03.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.04.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.05.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.06.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.07.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.08.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.09.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.10.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.11.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.12.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.13.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.14.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libregex_syntax-d8cc39f205dd1748.rlib(regex_syntax-d8cc39f205dd1748.regex_syntax.9f0579d746b2abc0-cgu.15.rcgu.o) unable to open object file: No such file or directory
+   Compiling onig_sys v69.9.3
+warning: (arm64) build/ahash-ff5c6e65a972a31a/build_script_build-ff5c6e65a972a31a.build_script_build.e3dc2a41e9f16dd6-cgu.0.rcgu.o unable to open object file: No such file or directory
+warning: (arm64) deps/libversion_check-5136faba293a8a1a.rlib(version_check-5136faba293a8a1a.version_check.e6cdbafc072a5e06-cgu.0.rcgu.o) unable to open object file: No such file or directory
+warning: (arm64) deps/libversion_check-5136faba293a8a1a.rlib(version_check-5136faba293a8a1a.version_check.e6cdbafc072a5e06-cgu.1.rcgu.o) unable to open object file: No such file or directory
+   Compiling rustls v0.23.46
+    Checking rustls-webpki v0.103.16
+    Checking tungstenite v0.28.0
+    Checking tokio-rustls v0.26.6
+    Checking tokio-tungstenite v0.28.0
+    Checking nsh-core v0.5.0
+    Checking nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+    Checking onig v6.5.3
+    Checking syntect v5.3.0
+    Checking two-face v0.4.5
+    Checking nsh-base v0.5.0
+    Checking nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+    Checking nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9m 27s
+[exit 0]

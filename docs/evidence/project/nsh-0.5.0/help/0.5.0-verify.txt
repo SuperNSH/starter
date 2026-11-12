@@ -1,0 +1,12 @@
+Verify a package as an app trusting the given roots would (without roots: only its signature)
+
+Usage: nsh verify [OPTIONS] <PACKAGE>
+
+Arguments:
+  <PACKAGE>  The package (`.nshpkg`)
+
+Options:
+      --root <ROOT>                A trusted root's public key (`.pub`; repeatable)
+  -v, --verbose                    Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+      --revocations <REVOCATIONS>  A revocation list to apply
+  -h, --help                       Print help

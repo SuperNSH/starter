@@ -1,0 +1,2 @@
+$ (cd /Users/hmziq/fo/nsh-query/packages/nsh-query) /Users/hmziq/.nsh/bin/nsh check
+[exit 0]

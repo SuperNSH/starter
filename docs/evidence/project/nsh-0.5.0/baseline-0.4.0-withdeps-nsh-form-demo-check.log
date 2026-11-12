@@ -1,0 +1,8 @@
+App.tsx(10,27): error TS2558: Expected 12 type arguments, but got 1.
+App.tsx(12,20): error TS7006: Parameter 'values' implicitly has an 'any' type.
+App.tsx(16,24): error TS2551: Property 'field' does not exist on type 'FormWithExtras<SignIn, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, FormAsyncValidateOrFn<...> | undefined, ... 7 more ..., unknown>'. Did you mean 'Field'?
+App.tsx(17,25): error TS2551: Property 'field' does not exist on type 'FormWithExtras<SignIn, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, FormAsyncValidateOrFn<...> | undefined, ... 7 more ..., unknown>'. Did you mean 'Field'?
+App.tsx(25,28): error TS2339: Property 'isDirty' does not exist on type 'FormWithExtras<SignIn, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, FormAsyncValidateOrFn<...> | undefined, ... 7 more ..., unknown>'.
+App.tsx(25,53): error TS2339: Property 'isValid' does not exist on type 'FormWithExtras<SignIn, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, FormAsyncValidateOrFn<...> | undefined, ... 7 more ..., unknown>'.
+App.tsx(26,47): error TS2339: Property 'submit' does not exist on type 'FormWithExtras<SignIn, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, FormAsyncValidateOrFn<...> | undefined, ... 7 more ..., unknown>'.
+error type check failed (exit status: 1)

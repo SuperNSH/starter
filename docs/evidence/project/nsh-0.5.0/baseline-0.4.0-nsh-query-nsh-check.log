@@ -1,0 +1,128 @@
+$ (cd packages/nsh-query) /opt/homebrew/bin/nsh check
+App.tsx(4,3): error TS2305: Module '"./src"' has no exported member 'dehydrate'.
+App.tsx(5,3): error TS2305: Module '"./src"' has no exported member 'experimental_createQueryPersister'.
+App.tsx(6,3): error TS2305: Module '"./src"' has no exported member 'experimental_streamedQuery'.
+App.tsx(10,3): error TS2305: Module '"./src"' has no exported member 'persistQueryClient'.
+App.tsx(11,3): error TS2724: '"./src"' has no exported member named 'persistQueryClientRestore'. Did you mean 'PersistQueryClientProvider'?
+App.tsx(13,3): error TS2305: Module '"./src"' has no exported member 'QueryObserver'.
+App.tsx(22,3): error TS2305: Module '"./src"' has no exported member 'onlineManager'.
+App.tsx(23,3): error TS2724: '"./src"' has no exported member named 'QueryClient'. Did you mean 'useQueryClient'?
+App.tsx(28,3): error TS2305: Module '"./src"' has no exported member 'keepPreviousData'.
+App.tsx(31,3): error TS2305: Module '"./src"' has no exported member 'skipToken'.
+App.tsx(66,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(74,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(98,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(117,17): error TS7031: Binding element 'queryKey' implicitly has an 'any' type.
+App.tsx(135,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(139,24): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(156,23): error TS7031: Binding element 'queryKey' implicitly has an 'any' type.
+App.tsx(173,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(179,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(186,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(203,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(208,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(224,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(228,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(243,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(266,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(282,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(286,22): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(292,15): error TS7006: Parameter '_error' implicitly has an 'any' type.
+App.tsx(292,23): error TS7006: Parameter '_value' implicitly has an 'any' type.
+App.tsx(292,31): error TS7006: Parameter 'context' implicitly has an 'any' type.
+App.tsx(296,17): error TS7006: Parameter '_data' implicitly has an 'any' type.
+App.tsx(296,24): error TS7006: Parameter '_error' implicitly has an 'any' type.
+App.tsx(296,32): error TS7006: Parameter '_value' implicitly has an 'any' type.
+App.tsx(296,40): error TS7006: Parameter 'context' implicitly has an 'any' type.
+App.tsx(313,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(324,90): error TS7006: Parameter 'r' implicitly has an 'any' type.
+App.tsx(389,17): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(389,28): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(390,24): error TS7006: Parameter 'last' implicitly has an 'any' type.
+App.tsx(391,28): error TS7006: Parameter 'first' implicitly has an 'any' type.
+App.tsx(396,46): error TS7006: Parameter 'p' implicitly has an 'any' type.
+App.tsx(453,47): error TS7006: Parameter 'old' implicitly has an 'any' type.
+App.tsx(472,123): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(491,64): error TS7006: Parameter 'old' implicitly has an 'any' type.
+App.tsx(506,23): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(522,23): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(531,23): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(566,54): error TS7006: Parameter 'q' implicitly has an 'any' type.
+App.tsx(577,23): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(595,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(631,17): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(700,96): error TS7006: Parameter 'v' implicitly has an 'any' type.
+App.tsx(731,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(765,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(770,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(775,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(796,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(801,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(827,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(832,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(849,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(866,17): error TS7031: Binding element 'meta' implicitly has an 'any' type.
+App.tsx(911,56): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(930,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(971,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(976,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(982,17): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(988,17): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(1007,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1017,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1060,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1095,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1126,17): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+App.tsx(1126,28): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1127,24): error TS7006: Parameter 'last' implicitly has an 'any' type.
+App.tsx(1131,67): error TS7006: Parameter 'p' implicitly has an 'any' type.
+App.tsx(1148,39): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1159,38): error TS2339: Property 'data' does not exist on type '{}'.
+App.tsx(1172,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1301,156): error TS7006: Parameter 'query' implicitly has an 'any' type.
+App.tsx(1322,21): error TS7006: Parameter 'persisted' implicitly has an 'any' type.
+App.tsx(1332,36): error TS7031: Binding element 'pending' implicitly has an 'any' type.
+App.tsx(1332,45): error TS7031: Binding element 'errorCount' implicitly has an 'any' type.
+App.tsx(1352,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+App.tsx(1369,17): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+src/HydrationBoundary.ts(1,68): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/QueryClientProvider.ts(1,34): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/focus.ts(1,30): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/focus.ts(10,34): error TS7006: Parameter 'setFocused' implicitly has an 'any' type.
+src/index.ts(3,15): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/index.ts(4,15): error TS2307: Cannot find module '@tanstack/query-persist-client-core' or its corresponding type declarations.
+src/index.ts(5,71): error TS2307: Cannot find module '@tanstack/query-async-storage-persister' or its corresponding type declarations.
+src/nsh.ts(1,51): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/options.ts(8,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/persist.ts(1,45): error TS2307: Cannot find module '@tanstack/query-async-storage-persister' or its corresponding type declarations.
+src/persist.ts(6,8): error TS2307: Cannot find module '@tanstack/query-persist-client-core' or its corresponding type declarations.
+src/persist.ts(7,34): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/types.ts(13,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useBaseQuery.ts(9,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useBaseQuery.ts(52,39): error TS7006: Parameter 'next' implicitly has an 'any' type.
+src/useInfiniteQuery.ts(8,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useIsFetching.ts(1,48): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useIsMutating.ts(1,51): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useMutation.ts(9,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useMutation.ts(29,43): error TS7006: Parameter 'next' implicitly has an 'any' type.
+src/useMutationState.ts(7,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useMutationState.ts(30,41): error TS7006: Parameter 'mutation' implicitly has an 'any' type.
+src/usePrefetch.ts(1,72): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useQueries.ts(7,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useQueries.ts(57,39): error TS7006: Parameter 'raw' implicitly has an 'any' type.
+src/useQuery.ts(1,142): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useQueryDiagnostics.ts(1,51): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/useQueryDiagnostics.ts(2,34): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+tests/direct.test.tsx(4,3): error TS2305: Module '"../src"' has no exported member 'environmentManager'.
+tests/direct.test.tsx(5,3): error TS2305: Module '"../src"' has no exported member 'isServer'.
+tests/direct.test.tsx(7,3): error TS2305: Module '"../src"' has no exported member 'MutationObserver'.
+tests/direct.test.tsx(8,3): error TS2724: '"../src"' has no exported member named 'QueryClient'. Did you mean 'useQueryClient'?
+tests/direct.test.tsx(9,3): error TS2305: Module '"../src"' has no exported member 'removeOldestQuery'.
+tests/direct.test.tsx(20,17): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+tests/direct.test.tsx(28,60): error TS7006: Parameter 'query' implicitly has an 'any' type.
+tests/direct.test.tsx(44,17): error TS7031: Binding element 'pageParam' implicitly has an 'any' type.
+tests/direct.test.tsx(45,24): error TS7006: Parameter 'page' implicitly has an 'any' type.
+tests/direct.test.tsx(81,44): error TS7006: Parameter 'q' implicitly has an 'any' type.
+tests/direct.test.tsx(97,17): error TS7006: Parameter 'value' implicitly has an 'any' type.
+error type check failed (exit status: 1)
+[exit 1]

@@ -1,0 +1,462 @@
+$ cargo test --no-fail-fast (nsh=/Users/hmziq/.local/bin/nsh nsh 0.5.0 (f4d68f7))
+   Compiling const-oid v0.10.3
+   Compiling syn v2.0.119
+   Compiling syn v3.0.10
+   Compiling cpufeatures v0.3.1
+   Compiling crc32fast v1.5.5
+   Compiling arc-swap v1.9.5
+   Compiling clang-sys v1.9.1
+   Compiling annotate-snippets v0.12.18
+   Compiling getrandom v0.4.3
+   Compiling brotli-decompressor v6.3.1
+   Compiling serde_json v1.0.154
+   Compiling sha2 v0.10.9
+   Compiling sha1 v0.10.7
+   Compiling http v1.5.0
+   Compiling serde_derive v1.0.229
+   Compiling synstructure v0.14.0
+   Compiling zerovec-derive v0.11.7
+   Compiling zeroize_derive v1.5.0
+   Compiling zerocopy-derive v0.8.63
+   Compiling displaydoc v0.2.7
+   Compiling der_derive v0.8.0
+   Compiling flate2 v1.1.11
+   Compiling thiserror-impl v2.0.21
+   Compiling prettyplease v0.2.37
+   Compiling tokio-macros v2.7.2
+   Compiling serde-saphyr v1.3.0
+   Compiling futures-macro v0.3.34
+   Compiling zopfli v0.8.4
+   Compiling curve25519-dalek v5.0.0
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling serde v1.0.229
+   Compiling zeroize v1.9.1
+   Compiling zerocopy v0.8.63
+   Compiling thiserror v2.0.21
+   Compiling bindgen v0.72.1
+   Compiling tokio v1.54.1
+   Compiling wuff v0.2.10
+   Compiling futures-util v0.3.34
+   Compiling taffy v0.15.1
+   Compiling png v0.17.16
+   Compiling usvg v0.46.0
+   Compiling triomphe v0.1.17
+   Compiling zerofrom v0.1.8
+   Compiling toml_edit v0.25.19+spec-1.1.0
+   Compiling hybrid-array v0.4.15
+   Compiling der v0.8.3
+   Compiling rustls-pki-types v1.16.0
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling ppv-lite86 v0.2.21
+   Compiling half v2.7.1
+   Compiling curve25519-dalek v4.1.3
+   Compiling tiny-skia v0.11.4
+   Compiling quickjs-jit-sys v0.14.2
+   Compiling yoke v0.8.4
+   Compiling rust-i18n-support v4.2.4
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling block-padding v0.4.2
+   Compiling crypto-bigint v0.7.11
+   Compiling spki v0.8.1
+   Compiling rustls-webpki v0.103.16
+   Compiling toml_edit v0.22.27
+   Compiling rand_chacha v0.9.0
+   Compiling webpki-roots v1.0.12
+   Compiling sec1 v0.8.1
+   Compiling ed25519-dalek v2.2.0
+   Compiling zip v9.5.1
+   Compiling zerovec v0.11.9
+   Compiling resvg v0.46.0
+   Compiling universal-hash v0.6.1
+   Compiling digest v0.11.3
+   Compiling inout v0.2.6
+   Compiling pkcs8 v0.11.0
+   Compiling rustls v0.23.46
+   Compiling toml v0.8.23
+   Compiling rand v0.9.5
+   Compiling primefield v0.14.0
+   Compiling webpki-roots v0.26.11
+   Compiling naga v29.0.4
+   Compiling nsh-macros v0.5.0
+   Compiling zerotrie v0.2.5
+   Compiling tinystr v0.8.5
+   Compiling potential_utf v0.1.6
+   Compiling cipher v0.5.2
+   Compiling keccak v0.2.2
+   Compiling wnaf v0.14.1
+   Compiling aead v0.6.1
+   Compiling nsh-updater v0.5.0
+   Compiling polyval v0.7.3
+   Compiling tokio-rustls v0.26.6
+   Compiling tungstenite v0.28.0
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling icu_locale_core v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling chacha20 v0.10.2
+   Compiling proc-macro-crate v3.5.0
+   Compiling crc32c v0.6.9
+   Compiling value-trait v0.12.3
+   Compiling string_cache v0.8.9
+   Compiling ghash v0.6.0
+   Compiling rust-i18n-macro v4.2.4
+   Compiling ctr v0.10.1
+   Compiling aes v0.9.4
+   Compiling tokio-tungstenite v0.28.0
+   Compiling phf_macros v0.14.0
+   Compiling poly1305 v0.9.1
+   Compiling icu_provider v2.4.0
+   Compiling crypto-primes v0.7.2
+   Compiling pkcs1 v0.8.0
+   Compiling rand v0.10.3
+   Compiling simd-json v0.18.1
+   Compiling markup5ever v0.12.1
+   Compiling cbc v0.2.1
+   Compiling aes-gcm v0.11.1
+   Compiling rust-i18n v4.2.4
+   Compiling aes-kw v0.3.1
+   Compiling phf v0.14.0
+   Compiling chacha20poly1305 v0.11.0
+   Compiling brotli v9.1.1
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling html5ever v0.27.0
+   Compiling objc2-core-graphics v0.3.2
+   Compiling bincode v1.3.3
+   Compiling nsh-i18n v0.5.0
+   Compiling xml5ever v0.18.1
+   Compiling oxc_sourcemap v9.0.0
+   Compiling objc2-foundation v0.3.2
+   Compiling objc2-io-surface v0.3.2
+   Compiling ahash v0.8.12
+   Compiling dispatch2 v0.3.1
+   Compiling hmac v0.13.0
+   Compiling signature v3.0.0
+   Compiling sha2 v0.11.1
+   Compiling sha3 v0.12.0
+   Compiling cshake v0.2.1
+   Compiling md-5 v0.11.0
+   Compiling shake v0.1.0
+   Compiling sha1 v0.11.0
+   Compiling idna_adapter v1.2.2
+   Compiling pbkdf2 v0.13.0
+   Compiling syntect v5.3.0
+   Compiling hkdf v0.13.0
+   Compiling rfc6979 v0.6.0
+   Compiling ed25519 v3.0.0
+   Compiling rsa v0.10.0-rc.19
+   Compiling x25519-dalek v3.0.0
+   Compiling jiff-core v0.1.5
+   Compiling gpui-query v0.3.1
+   Compiling objc2-io-kit v0.3.2
+   Compiling idna v1.1.0
+   Compiling elliptic-curve v0.14.3
+   Compiling ed25519-dalek v3.0.0
+   Compiling two-face v0.4.5
+   Compiling markup5ever_rcdom v0.3.0
+   Compiling jiff v0.2.43
+   Compiling url v2.5.8
+   Compiling ecdsa v0.17.0
+   Compiling primeorder v0.14.0
+   Compiling env_logger v0.11.11
+   Compiling quickjs-jit-core v0.14.2
+   Compiling p384 v0.14.0
+   Compiling p521 v0.14.0
+   Compiling p256 v0.14.0
+   Compiling nsh-core v0.5.0
+   Compiling objc2-quartz-core v0.3.2
+   Compiling objc2-image-io v0.3.2
+   Compiling objc2-core-text v0.3.2
+   Compiling quickjs-jit-macro v0.14.2
+   Compiling objc2-app-kit v0.3.2
+   Compiling quickjs-jit v0.14.2
+   Compiling nsh-package v0.5.0
+   Compiling nsh-base v0.5.0
+   Compiling nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+   Compiling quickjs-jit-stdlib v0.14.2
+   Compiling nsh-js v0.5.0
+   Compiling nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+   Compiling nsh-engine v0.5.0
+   Compiling nsh-platform-apple v0.5.0
+   Compiling nsh-testing v0.5.0
+   Compiling nsh-platform-macos v0.5.0
+   Compiling nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+warning: linker stderr: ld: __eh_frame section too large (max 16MB) to encode dwarf unwind offsets in compact unwind table, performance of exception handling might be affected
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `nsh-starter` (test "shell") generated 1 warning (1 duplicate)
+warning: `nsh-starter` (bin "nsh-starter") generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6m 38s
+     Running unittests src/lib.rs (target/debug/deps/nsh_starter-78301f936f9ec1f4)
+
+running 17 tests
+test foundation::id::tests::counter_ids_increase ... ok
+test foundation::capabilities::tests::every_known_key_is_listed_once ... ok
+test foundation::time::tests::formats_utc_wall_time ... ok
+test foundation::validation::tests::password_and_phone_have_floors ... ok
+test foundation::validation::tests::email_rules_match_what_forms_need ... ok
+test foundation::validation::tests::strength_scores_length_kinds ... ok
+test shell::command_bar::tests::an_empty_query_keeps_the_list_order ... ok
+test shell::command_bar::tests::a_prefix_ranks_above_a_word_start_and_letters_in_order ... ok
+test shell::command_bar::tests::every_route_and_action_is_a_command ... ok
+test shell::undo::tests::undo_returns_to_the_recorded_state ... ok
+test shell::undo::tests::the_stack_is_bounded ... ok
+test foundation::capabilities::tests::the_manifest_is_read_as_declared ... ok
+test state::event_bus::tests::topics_are_stable_names ... ok
+test shell::routes::tests::keys_are_stable_per_route ... ok
+test state::history::tests::undo_redo_and_limit_order_states ... ok
+test ui::tokens::tests::every_custom_token_is_declared ... ok
+test foundation::logging::tests::truncates_the_file_back_to_a_bound ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s
+
+     Running unittests src/main.rs (target/debug/deps/nsh_starter-a7e17d1532f97c15)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/canvas.rs (target/debug/deps/canvas-1f4cba839a06530b)
+
+running 13 tests
+test the_text_and_image_specimens_draw_and_report_their_canvas ... ok
+test posting_to_the_web_view_page_records_the_message ... ok
+test the_shader_compiles_and_its_children_draw_over_it ... ok
+test the_charts_redraw_when_the_data_changes ... ok
+test the_bezier_editor_drags_a_control_point_and_reset_restores_it ... ok
+test the_drawing_survives_a_re_layout ... ok
+test a_dragged_stroke_stays_and_undo_removes_it ... ok
+test the_shape_editor_selects_moves_and_resizes ... ok
+test the_node_graph_moves_a_node_and_marquee_selects_two ... ok
+test the_world_board_pans_zooms_and_selects_a_node_at_zoom ... ok
+test the_shared_board_peers_ride_the_clock_and_a_drag_selects_a_card ... ok
+test the_frame_loop_advances_on_the_manual_clock_and_a_pause_holds_it ... ok
+test the_particle_field_advances_on_the_clock_and_a_pause_holds_it ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+     Running tests/data.rs (target/debug/deps/data-2de90619b090720f)
+
+running 7 tests
+test an_optimistic_like_rolls_back_when_the_write_fails ... ok
+test the_devtools_list_the_keys_the_feature_loaded ... ok
+test the_offline_banner_shows_and_writes_fail_while_offline ... ok
+test posting_a_comment_invalidates_the_detail_queries ... ok
+test a_stale_detail_serves_its_cache_and_then_revalidates ... ok
+test pagination_loads_more_pages ... ok
+test retry_recovers_a_failed_feed ... FAILED
+
+failures:
+
+---- retry_recovers_a_failed_feed stdout ----
+
+thread 'retry_recovers_a_failed_feed' (52715466) panicked at tests/data.rs:206:49:
+called `Result::unwrap()` on an `Err` value: "`text:Couldn't load the feed` showing never happened in 5000 ms; on screen: [\"Remount feed\", \"Shipping a Rust shell\", \"One turn of the app's code becomes one commit, and the commit is what the screen shows.\", \"Ada Lovelace\", \"No comments yet\", \"♥ 3\", \"Why cells recycle\", \"A cell is handed another row, and only the bindings that read the position run again.\", \"Grace Hopper\", \"1 comment\", \"♡ 10\", \"Signals over snapshots\", \"A value read in a body is a photograph; a closure where a value goes stays current.\", \"Alan Kay\", \"2 comments\", \"♡ 17\", \"The five-minute query\", \"Serve yesterday's answer while today's is on its way, and nobody watches a spinner.\", \"Barbara Liskov\", \"3 comments\", \"♡ 24\", \"Pull to refresh, properly\", \"The spinner is the platform's; the state is one bool the app owns.\", \"Dennis Ritchie\", \"No comments yet\", \"♡ 31\", \"Optimistic hearts\", \"Show the like at once, take it back if the write fails, and never block the tap.\", \"Margaret Hamilton\", \"1 comment\", \"♥ 38\", \"A tracer's notebook\", \"Mount items are the honest number: deterministic, small, and easy to defend.\", \"Ada Lovelace\", \"2 comments\", \"♡ 5\", \"Latency you can hold\", \"Two hundred milliseconds is enough to see every state a screen can be in.\", \"Grace Hopper\", \"3 comments\", \"♡ 12\", \"The fake API's knobs and the query cache: keys, states and timings.\", \"Fake API\", \"Latency\", \"How long every response waits\", \"0 ms\", \"100 ms\", \"400 ms\", \"Failures\", \"Which requests the fake API rejects\", \"Never\", \"Every 2nd\", \"All\", \"Offline\", \"Requests fail at once while it is on\", \"1 requests, 0 failed, 0 in flight\", \"Query cache\", \"feed\", \"loaded\", \"10 posts, more true\", \"0s ago\"]"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    retry_recovers_a_failed_feed
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.20s
+
+error: test failed, to rerun pass `--test data`
+     Running tests/forms.rs (target/debug/deps/forms-38259749907cf29e)
+
+running 12 tests
+test the_seeded_draft_restores_the_pickers ... ok
+test a_failed_submit_scrolls_the_first_failing_row_into_view ... ok
+test submitting_focuses_the_first_invalid_field ... ok
+test a_taken_username_reports_after_the_check ... ok
+test settings_loads_saves_and_guards ... ok
+test the_username_check_debounces_and_drops_stale_answers ... ok
+test the_dirty_guard_blocks_back_until_discarded ... ok
+test a_taken_answer_shows_while_the_field_keeps_focus ... ok
+test the_draft_autosaves_and_restores ... ok
+test errors_wait_for_submit_then_follow_edits ... ok
+test submitting_creates_the_account ... ok
+test a_server_error_lands_on_its_field_and_clears_on_edit ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.64s
+
+     Running tests/foundation.rs (target/debug/deps/foundation-de91bd4ec9761089)
+
+running 7 tests
+test migrate_maps_schema_zero_fields ... ok
+test config_migration_roundtrip ... ok
+test event_bus_ordering ... ok
+test first_run_once_only ... ok
+test error_surface_shows_and_dismisses ... ok
+test task_manager_cancel ... ok
+test task_manager_runs_to_done_and_drains ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.31s
+
+     Running tests/lists.rs (target/debug/deps/lists-1c609f5877d81e90)
+
+running 7 tests
+test chat_pages_stay_contiguous_with_the_window ... ok
+test choosing_a_page_shows_its_rows ... ok
+test picking_a_day_selects_it_and_weekends_refuse ... ok
+test sorting_a_column_orders_the_rows ... ok
+test the_start_loader_brings_new_messages_without_jumping ... ok
+test loading_older_messages_appends_at_the_top ... ok
+test a_scroll_past_the_screen_keeps_the_stars_with_their_cards ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.26s
+
+     Running tests/motion.rs (target/debug/deps/motion-0f624d2e19682487)
+
+running 14 tests
+test reduced_motion_swaps_the_springs_for_instant_states ... ok
+test the_layout_section_records_its_new_order ... ok
+test the_page_shows_every_section ... ok
+test the_calm_preference_swaps_the_springs_without_the_system_setting ... ok
+test restoring_brings_the_dismissed_rows_back ... ok
+test pan_activation_hands_the_scrubber_the_horizontal_drag ... ok
+test a_tween_reports_the_same_settled_position ... ok
+test the_header_demo_scrolls_to_rest_and_back ... ok
+test a_swipe_recovers_and_a_fling_dismisses_the_row ... ok
+test the_transform_readout_follows_the_drag_and_resets ... ok
+test a_route_flip_leaves_after_the_exit_and_enters ... ok
+test a_drop_moves_the_item_in_the_data ... ok
+test a_composite_stagger_runs_to_its_end ... ok
+test a_spring_settles_at_its_target_and_stays ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.17s
+
+     Running tests/overlays.rs (target/debug/deps/overlays-d1404ac42f750771)
+
+running 16 tests
+test the_dialog_closes_on_escape_and_returns_focus ... ok
+test the_alert_dialog_deletes_the_draft_from_the_flow ... ok
+test the_resizable_panel_steps_from_the_keyboard_path ... ok
+test the_context_menu_opens_on_a_right_click ... ok
+test the_dialog_closes_on_a_scrim_press ... FAILED
+test the_action_sheet_reports_the_cancel_answer ... ok
+test the_popover_closes_on_a_press_outside ... ok
+test the_hover_card_opens_on_a_hover ... ok
+test the_dock_drag_lands_in_the_layout_data ... ok
+test the_tooltip_opens_from_the_app_on_touch ... ok
+test the_sheet_opens_as_a_bottom_sheet_on_phone_width ... FAILED
+test the_menu_selects_items_and_toggles_the_checkable_one ... ok
+test the_dialog_keeps_escape_out_when_the_prop_says_so ... ok
+test the_sheet_opens_as_a_side_panel_on_desktop_width ... ok
+test the_menu_opens_as_a_sheet_on_a_phone ... ok
+test toasts_queue_in_order_and_dismiss_on_the_clock ... ok
+
+failures:
+
+---- the_dialog_closes_on_a_scrim_press stdout ----
+
+thread 'the_dialog_closes_on_a_scrim_press' (52786591) panicked at tests/overlays.rs:102:32:
+called `Result::unwrap()` on an `Err` value: "`label:Dismiss` is covered: a press there reaches `id:rename-field`; on screen: [\"Overlays\", \"Dialogs, popups, menus, toasts and desktop surfaces, each in a flow.\", \"Dialog\", \"Rename file…\", \"release-notes.md\", \"Escape closes\", \"Escape, the back button and the scrim close it (when allowed); the dialog takes the focus while it is up.\", \"Opened\", \"Focus: page\", \"Rename file\", \"Cancel\", \"Save\", \"Alert dialog\", \"Delete draft…\", \"Share options…\", \"The platform draws the alert (an action sheet for Share options); the answer reaches the app's data.\", \"No alert yet\", \"Draft: kept\", \"Sheet\", \"Notification settings…\", \"Short\", \"Half\", \"Tall\", \"Push notifications\", \"Mentions only\", \"A side panel at desktop width, a bottom sheet with three detents and swipe-to-close on the phone; the tall detent reveals rows the shorter ones hide.\", \"Detent step 1 of 0–2\", \"Closed\", \"Popover\", \"Copy link\", \"Share the link with the panel, or copy it directly.\", \"Share\", \"Anchored, kept inside the safe area; a press outside closes it and still reaches what you hit — try Copy link while it is open.\", \"Closed\", \"Menu\", \"Document actions\", \"A popup at the trigger with a cascading submenu; a sheet at the bottom on phones. The checkmark and the choice history outlive the menu.\", \"No choice yet\", \"Line numbers: on\", \"Context menu\", \"quarterly-report.md\", \"Right-click here, or hold a finger.\", \"The menu opens where the pointer was; on touch screens it is a sheet.\", \"No command yet\", \"Hover card\", \"@mchen\", \"MC\", \"mentioned you in Q3 roadmap\", \"Opens on a short hover or keyboard focus; moving onto the card keeps it open.\", \"Closed\", \"Not following\", \"Tooltip\", \"Save\", \"Toggle hint\", \"Hover the Save button for the hint; touch screens show it only when the app opens it.\", \"Hint hidden\", \"Toasts\", \"Save the draft\", \"Sync now\", \"Announce\", \"Newest nearest the corner; the queue line reads oldest to newest, each toast with its own timeout — or none, until its action.\", \"Queue: (empty)\", \"Dock area\", \"Reset layout\", \"Toggle files\", \"Toggle terminal\", \"Drag a tab onto another group or a group's edge; the line below is the layout as data, updated by every edit and by Reset.\", \"Files\", \"Files\", \"src/\", \"src/app.rs\", \"src/lib.rs\", \"Cargo.toml\", \"Readme\", \"main.rs\", \"fn main() { run(app); }\", \"A dockable panel; drag its tab onto another group.\", \"Preview\", \"Live preview\", \"Follows the editor beside it\", \"Terminal\", \"Terminal\", \"$ cargo test\", \"   Compiling nsh-starter v0.1.0\", \"        Finished in 1.9s\", \"Showing Terminal\", \"Layout: row([Readme, main.rs] [Preview])\", \"Resizable panels\", \"Wider\", \"Narrower\", \"Explorer\", \"The files of the workspace.\", \"Viewer\", \"Takes the rest of the row.\", \"Handles are adjustable for screen readers: one increment or decrement moves a panel 10 points.\", \"Drag the divider, or step it by 10 pt.\", \"Editor\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"// The pipeline's retry policy.\", \"pub fn retries(plan: &Plan) -> usize {\", \"    match plan.kind {\", \"        Kind::Interactive => 0,\", \"        Kind::Nightly => 3,\", \"    }\", \"}\", \"Edits: 0\", \"Highlighting, folding and the active line come with the editor; the app styles its parts.\", \"Diff view\", \"Side by side\", \"Unified\", \"1\", \"2\", \"\", \"\", \"\", \"3\", \"4\", \"5\", \"6\", \"7\", \"// The pipeline's retry policy.\", \"pub fn retries(plan: &Plan) -> usize {\", \"    match plan.kind {\", \"        Kind::Interactive => 0,\", \"        Kind::Nightly => 3,\", \"    }\", \"}\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"// The pipeline's retry policy.\", \"pub fn retries(plan: &Plan) -> usize {\", \"    if plan.disabled {\", \"        return 0;\", \"    }\", \"    match plan.kind {\", \"        Kind::Interactive => 1,\", \"        Kind::Nightly => 3,\", \"    }\", \"}\", \"+4 −1 in 2 changes\", \"Changed words are highlighted within the lines; unchanged runs collapse until expanded.\", \"Text view\", \"Style guide\", \"This document exercises the text view: bold, emphasis, inline\\ncode, a link, and a list.\", \"Writing\", \"Name the object.\", \"1.\", \"Say the consequence.\", \"2.\", \"Offer the way back.\", \"3.\", \"✓\", \"Ship the dialog\", \"Review the diff\", \"A rule with one decis…\", … (293 more characters, 11 more texts)]"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- the_sheet_opens_as_a_bottom_sheet_on_phone_width stdout ----
+
+thread 'the_sheet_opens_as_a_bottom_sheet_on_phone_width' (52786600) panicked at tests/overlays.rs:161:36:
+called `Result::unwrap()` on an `Err` value: "`role:button[Tall]` is covered: a press there reaches `Notification settings`; on screen: [\"Dialogs, popups, menus, toasts and desktop surfaces, each in a flow.\", \"Dialog\", \"Rename file…\", \"release-notes.md\", \"Escape closes\", \"Escape, the back button and the scrim close it (when allowed); the dialog takes the focus while it is up.\", \"Closed\", \"Focus: page\", \"Alert dialog\", \"Delete draft…\", \"Share options…\", \"The platform draws the alert (an action sheet for Share options); the answer reaches the app's data.\", \"No alert yet\", \"Draft: kept\", \"Sheet\", \"Notification settings…\", \"Short\", \"Half\", \"Tall\", \"Push notifications\", \"Mentions only\", \"A side panel at desktop width, a bottom sheet with three detents and swipe-to-close on the phone; the tall detent reveals rows the shorter ones hide.\", \"Detent step 1 of 0–2\", \"Opened as a bottom panel\", \"Popover\", \"Copy link\", \"Share the link with the panel, or copy it directly.\", \"Share\", \"Anchored, kept inside the safe area; a press outside closes it and still reaches what you hit — try Copy link while it is open.\", \"Closed\", \"Menu\", \"Document actions\", \"A popup at the trigger with a cascading submenu; a sheet at the bottom on phones. The checkmark and the choice history outlive the menu.\", \"No choice yet\", \"Line numbers: on\", \"Context menu\", \"quarterly-report.md\", \"Right-click here, or hold a finger.\", \"The menu opens where the pointer was; on touch screens it is a sheet.\", \"No command yet\", \"Hover card\", \"@mchen\", \"MC\", \"mentioned you in Q3 roadmap\", \"Opens on a short hover or keyboard focus; moving onto the card keeps it open.\", \"Closed\", \"Not following\", \"Tooltip\", \"Save\", \"Toggle hint\", \"Hover the Save button for the hint; touch screens show it only when the app opens it.\", \"Hint hidden\", \"Toasts\", \"Save the draft\", \"Sync now\", \"Announce\", \"Newest nearest the corner; the queue line reads oldest to newest, each toast with its own timeout — or none, until its action.\", \"Queue: (empty)\", \"Dock area\", \"Reset layout\", \"Toggle files\", \"Toggle terminal\", \"Drag a tab onto another group or a group's edge; the line below is the layout as data, updated by every edit and by Reset.\", \"Readme\", \"main.rs\", \"Preview\", \"fn main() { run(app); }\", \"A dockable panel; drag its tab onto another group.\", \"Showing Terminal\", \"Layout: row([Readme, main.rs] [Preview])\", \"Resizable panels\", \"Wider\", \"Narrower\", \"Explorer\", \"The files of the workspace.\", \"Viewer\", \"Takes the rest of the row.\", \"Handles are adjustable for screen readers: one increment or decrement moves a panel 10 points.\", \"Drag the divider, or step it by 10 pt.\", \"Editor\", \"1\", \"2\", \"\", \"3\", \"4\", \"5\", \"6\", \"7\", \"// The pipeline's retry policy.\", \"pub fn retries(plan: &Plan) -> usize \", \"{\", \"    match plan.kind {\", \"        Kind::Interactive => 0,\", \"        Kind::Nightly => 3,\", \"    }\", \"}\", \"Edits: 0\", \"Highlighting, folding and the active line come with the editor; the app styles its parts.\", \"Diff view\", \"Side by side\", \"Unified\", \"1\", \"2\", \"\", \"\", \"\", \"3\", \"4\", \"5\", \"6\", \"7\", \"// The pipeline's retry policy.\", \"pub fn retries(plan: &Plan) -> usize {\", \"    match plan.kind {\", \"        Kind::Interactive => 0,\", \"        Kind::Nightly => 3,\", \"    }\", \"}\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"// The pipeline's retry policy.\", \"pub fn retries(plan: &Plan) -> usize {\", \"    if plan.disabled {\", \"        return 0;\", \"    }\", \"    match plan.kind {\", \"        Kind::Interactive => 1,\", \"        Kind::Nightly => 3,\", \"    }\", \"}\", \"+4 −1 in 2 changes\", \"Changed words are highlighted within the lines; unchanged runs collapse until expanded.\", \"Text view\", \"Style guide\", \"This document exercises the text view: bold, emphasis, inline\\ncode, a link, and a list.\", \"Writing\", \"Name the object.\", \"1.\", \"Say the consequence.\", \"2.\", \"Offer the way back.\", \"3.\", \"✓\", \"Ship the dialog\", \"Review the diff\", \"A rule with one decision per line reads faster than a paragraph.\", \"let theme = Theme::of(tokens);\", \"Surface\", \"Token\", \"Popup\", \"popover\", \"Card\", \"card\", \"i\", \"Alerts come from GitHub's Markdown, and this one is styled through the alert note part.\", \"No li…\", … (164 more characters, 6 more texts)]"
+
+
+failures:
+    the_dialog_closes_on_a_scrim_press
+    the_sheet_opens_as_a_bottom_sheet_on_phone_width
+
+test result: FAILED. 14 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s
+
+error: test failed, to rerun pass `--test overlays`
+     Running tests/platform.rs (target/debug/deps/platform-c4b50309c0698e15)
+
+running 6 tests
+test device_page_renders_its_sections ... ok
+test locale_switch_re_renders_strings ... ok
+test picker_shows_the_picked_file_name ... ok
+test keyboard_height_updates_the_page ... ok
+test speech_transcribes_a_heard_phrase ... ok
+test clipboard_roundtrips_through_the_ui ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/remote_screen.rs (target/debug/deps/remote_screen-8282444c39c68485)
+
+running 2 tests
+test the_status_page_reports_the_delivery_and_its_revocation_flips ... ok
+test the_signed_package_verifies_runs_and_then_refuses_after_revocation ... FAILED
+
+failures:
+
+---- the_signed_package_verifies_runs_and_then_refuses_after_revocation stdout ----
+
+thread 'the_signed_package_verifies_runs_and_then_refuses_after_revocation' (52816022) panicked at tests/remote_screen.rs:19:5:
+nsh publish failed:  warn app id `com.example.nshstarter.remote` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+error building packages/remote-screen/App.tsx failed
+[31m[MISSING_EXPORT] [0m"noRetries" is not exported by "../../../nsh-query/packages/nsh-query/src/index.ts".
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/Dashboard.tsx:2:23 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0m[38;5;249mc[0m[38;5;249mr[0m[38;5;249me[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mQ[0m[38;5;249mu[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249my[0m[38;5;249m,[0m[38;5;249m [0mnoRetries[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249mn[0m[38;5;249ms[0m[38;5;249mh[0m[38;5;249m-[0m[38;5;249mq[0m[38;5;249mu[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249my[0m[38;5;249m"[0m[38;5;249m;[0m
+ [38;5;240m  │[0m                       ────┬────  
+ [38;5;240m  │[0m                           ╰────── Missing export
+[38;5;246m───╯[0m
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    the_signed_package_verifies_runs_and_then_refuses_after_revocation
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+error: test failed, to rerun pass `--test remote_screen`
+     Running tests/shell.rs (target/debug/deps/shell-c17b6da1a27552aa)
+
+running 10 tests
+test the_back_order_is_overlays_pages_then_the_exit_ask ... ok
+test the_lifecycle_machine_follows_the_engine_events ... ok
+test deep_links_parse_into_routes ... ok
+test undo_history_is_bounded ... ok
+test the_lifecycle_watch_follows_the_environment ... ok
+test undo_and_redo_retrace_navigation ... ok
+test the_sidebar_collapses_and_comes_back ... ok
+test back_pops_a_page_then_asks_to_exit ... ok
+test the_desktop_width_takes_the_sidebar ... ok
+test the_palette_opens_and_navigates ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.41s
+
+     Running tests/ui.rs (target/debug/deps/ui-d5acb7d2bb3a18c5)
+
+running 16 tests
+test the_gallery_renders_at_desktop_width ... ok
+test a_nav_row_press_selects_it ... ok
+test the_gallery_sections_render ... ok
+test the_radio_group_picks_one ... ok
+test typing_reaches_the_text_field ... ok
+test tabs_move_the_selection ... ok
+test the_dialog_card_opens_and_cancels ... ok
+test the_tri_state_checkbox_selects_all_or_none ... ok
+test the_native_controls_fall_back_to_the_apps_own ... ok
+test a_press_flips_the_switch ... ok
+test the_page_sheet_opens_and_closes_on_back ... ok
+test the_full_dialog_closes_from_its_own_button ... ok
+test the_context_menu_opens_on_a_right_click ... ok
+test the_dialog_card_confirms_the_deletion ... ok
+test pagination_moves_the_page ... ok
+test a_notify_shows_a_toast_that_times_out ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.53s
+
+   Doc-tests nsh_starter
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: 3 targets failed:
+    `--test data`
+    `--test overlays`
+    `--test remote_screen`
+[exit 101]

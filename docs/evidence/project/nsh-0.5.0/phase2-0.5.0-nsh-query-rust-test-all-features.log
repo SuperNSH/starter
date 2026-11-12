@@ -1,0 +1,247 @@
+$ cargo test --all-features --no-fail-fast
+   Compiling gpui-query-http v0.1.0
+   Compiling nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4m 01s
+     Running unittests src/lib.rs (target/debug/deps/nsh_query-515abad5fc681398)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/client.rs (target/debug/deps/client-afd8730118b79a53)
+
+running 9 tests
+test use_queries_with_combine ... ok
+test set_queries_data_and_get_queries_data ... ok
+test update_query_data_uses_the_updater ... ok
+test fetch_query_and_ensure_query_data ... ok
+test use_is_fetching_and_is_mutating_count ... ok
+test use_mutation_state_lists_calls ... ok
+test reset_queries_goes_back_to_initial ... ok
+test query_filters_exact_type_stale_predicate ... ok
+test query_defaults_apply_by_key_prefix ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/compat.rs (target/debug/deps/compat-c2939f3d81f7ae8b)
+
+running 1 test
+test existing_public_names_still_work ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/fields.rs (target/debug/deps/fields-9b21df56b8ac2515)
+
+running 2 tests
+test mutation_fields_report_the_call ... ok
+test result_fields_report_the_load_state ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/fine_grained.rs (target/debug/deps/fine_grained-5a3cf3306d4c6b61)
+
+running 3 tests
+test a_binding_on_one_mutation_field_wakes_only_for_that_field ... ok
+test a_binding_on_one_infinite_field_wakes_only_for_that_field ... ok
+test a_binding_on_one_query_field_wakes_only_for_that_field ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/finish.rs (target/debug/deps/finish-e7a83376cdfa9b17)
+
+running 10 tests
+test match_query_and_hash_key_follow_tanstack ... ok
+test use_prefetch_query_loads_for_a_later_observer ... ok
+test structural_sharing_keeps_a_binding_quiet_for_an_equal_answer ... ok
+test client_infinite_query_reloads_like_fetch_infinite_query ... ok
+test mutate_with_callbacks_run_for_the_latest_call_only ... ok
+test mutate_async_replaced_call_resolves_with_its_own_result ... ok
+test subscribed_false_reads_the_cache_and_never_fetches ... ok
+test skip_token_maps_to_enabled_false ... ok
+test use_queries_results_are_fine_grained_per_index ... ok
+test mutation_gc_time_keeps_a_settled_call_listed_then_removes_it ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/gpui_names.rs (target/debug/deps/gpui_names-938d28f3f94ec08e)
+
+running 15 tests
+test all_infinite_queries_lists_only_the_page_type_asked_for ... ok
+test use_query_unsignalled_loads_with_a_fetcher_that_takes_no_signal ... ok
+test with_query_data_reads_a_value_that_is_not_clone ... ok
+test fetch_query_with_policy_applies_the_returned_policy ... ok
+test mutate_by_ref_and_mutate_arc_run_with_their_variables ... ok
+test diagnostics_report_queries_and_mutations_after_a_load_and_a_call ... ok
+test request_policy_latest_wins_replaces_a_load_and_ignore_while_loading_keeps_it ... ok
+test use_query_select_binding_wakes_only_when_the_selection_changes ... ok
+test mutation_cache_subscribe_stops_and_remove_drops_settled_calls ... ok
+test use_query_manual_starts_no_fetch_until_asked ... ok
+test unsubscribed_entry_leaves_the_cache_while_its_component_lives ... ok
+test unbounded_pages_keeps_every_page_past_the_default_limit ... ok
+test use_query_with_policy_sets_the_freshness_the_server_returns ... ok
+test an_unobserved_seeded_entry_leaves_after_its_gc_time ... ok
+test an_unobserved_infinite_entry_leaves_after_its_gc_time ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.53s
+
+     Running tests/http_cache.rs (target/debug/deps/http_cache-bb947841e6ef98a7)
+
+running 1 test
+test http_cache_feeds_a_query_through_a_fake_backend ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/infinite.rs (target/debug/deps/infinite-03a01943d81f6209)
+
+running 3 tests
+test a_failed_page_keeps_the_loaded_pages_and_can_be_asked_for_again ... ok
+test max_pages_drops_from_the_far_end ... ok
+test pages_load_in_both_directions_and_stop_at_the_ends ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/infinite_cache.rs (target/debug/deps/infinite_cache-4e3484dad9073230)
+
+running 3 tests
+test infinite_shared_between_observers ... ok
+test infinite_refetch_reloads_all_pages ... ok
+test infinite_survives_remount_within_gc ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/mutation.rs (target/debug/deps/mutation-2681fa0153390e2c)
+
+running 3 tests
+test an_optimistic_write_rolls_back_after_the_last_attempt_fails ... ok
+test a_success_invalidates_and_the_query_loads_the_new_value ... ok
+test a_mutation_in_flight_finishes_after_its_component_goes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/mutations.rs (target/debug/deps/mutations-0c2b133bedd982bf)
+
+running 2 tests
+test mutation_context_reaches_error_and_settled ... ok
+test mutation_scope_runs_in_series ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/network.rs (target/debug/deps/network-1fdbb6a15d35ecb4)
+
+running 3 tests
+test reconnect_refetches_when_asked ... ok
+test mutation_pauses_offline_and_resumes ... ok
+test offline_pauses_and_online_resumes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/persist.rs (target/debug/deps/persist-3ed2f0d2f69912f4)
+
+running 1 test
+test dehydrate_and_hydrate_round_trip ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/persist_options.rs (target/debug/deps/persist_options-4c91d413981dc09e)
+
+running 1 test
+test persistence_options_select_restore_and_expire ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/query.rs (target/debug/deps/query-85449632d910186c)
+
+running 10 tests
+test seeded_data_counts_as_fresh ... ok
+test a_disabled_query_waits_for_its_condition ... ok
+test a_failure_with_no_retries_left_reports_the_error ... ok
+test a_tracked_key_moves_to_the_new_entry_and_back_to_its_cache ... ok
+test two_observers_of_one_key_share_one_load ... ok
+test retries_stay_loading_and_end_in_success ... ok
+test invalidating_replaces_a_load_in_flight_and_drops_its_late_answer ... ok
+test an_unobserved_entry_is_dropped_after_its_gc_time ... ok
+test a_refetch_interval_keeps_loading_while_observed ... ok
+test a_fresh_entry_skips_the_load_and_an_expired_one_reloads ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/round3.rs (target/debug/deps/round3-c25c36863b8104f5)
+
+running 14 tests
+test match_mutation_matches_the_cached_state ... ok
+test use_prefetch_infinite_query_serves_a_later_observer ... ok
+test fetcher_context_carries_meta_client_and_direction ... ok
+test client_query_ignores_enabled_as_tanstack_does ... ok
+test query_selected_applies_select_before_returning ... ok
+test client_query_returns_fresh_cached_data_without_fetching ... ok
+test query_cache_callbacks_fire_for_success_error_and_settled ... ok
+test mutation_cache_callbacks_fire_for_each_point_of_a_call ... ok
+test mutation_throw_on_error_reaches_catch_error ... ok
+test throw_on_error_reaches_catch_error_and_the_reset_boundary_recovers ... ok
+test query_cache_finds_lists_subscribes_and_removes ... ok
+test unsubscribed_entries_leave_the_cache_after_gc_time ... ok
+test unsubscribed_key_change_releases_the_entry_it_left ... ok
+test client_query_is_not_retried_unless_retry_is_set ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/status.rs (target/debug/deps/status-8f91a754db5df632)
+
+running 12 tests
+test initial_data_counts_as_fresh_with_updated_at ... ok
+test retry_delay_function_is_honored ... ok
+test status_and_fetch_status_follow_a_load ... ok
+test refetch_on_mount_trigger_is_honored ... ok
+test is_loading_is_fetching_and_pending ... ok
+test placeholder_data_and_keep_previous_data_flag_placeholder ... ok
+test failure_count_and_reason_track_retries ... ok
+test retry_if_stops_early ... ok
+test stale_time_and_gc_time_synonyms_work ... ok
+test refetch_interval_keeps_running_while_inactive ... ok
+test refetch_on_foreground_when_stale ... ok
+test refetch_interval_stops_in_background ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/surface.rs (target/debug/deps/surface-1377be9b1d0c40a9)
+
+running 29 tests
+test get_query_defaults_reads_back_a_prefix_default ... ok
+test get_query_data_and_get_query_state_read_the_cache ... ok
+test meta_reaches_the_fetcher_context ... ok
+test mutation_data_is_success_and_is_pending_follow_the_call ... ok
+test mutation_network_mode_always_runs_while_offline ... ok
+test get_mutation_defaults_and_set_mutation_defaults_apply_retry ... ok
+test is_initial_loading_and_fetched_after_mount_follow_tanstack ... ok
+test mutate_async_resolves_with_the_result_or_the_error ... ok
+test ensure_infinite_query_data_returns_cache_then_loads ... ok
+test fetch_infinite_query_always_reloads_the_pages ... ok
+test is_success_and_is_pending_follow_tanstack_status ... ok
+test cancel_queries_keeps_data_and_drops_the_late_answer ... ok
+test infinite_fetching_flags_and_page_params_follow_tanstack ... ok
+test prefetch_infinite_query_loads_once_for_a_later_observer ... ok
+test mutation_on_success_ctx_receives_the_context ... ok
+test fetch_previous_page_error_flag_is_set_for_previous_only ... ok
+test mutation_reset_returns_to_idle ... ok
+test mutation_retry_delay_gets_the_failures_before_this_one ... ok
+test fetch_next_page_error_flag_is_set_for_next_only ... ok
+test network_mode_always_runs_while_offline ... ok
+test select_maps_the_data ... ok
+test resume_paused_mutations_runs_mutations_but_not_queries ... ok
+test retry_on_mount_false_skips_a_mount_after_an_error ... ok
+test mutation_network_mode_offline_first_runs_once_then_waits_for_retries ... ok
+test network_mode_offline_first_runs_the_first_attempt_then_pauses_retries ... ok
+test get_default_options_and_set_default_options_apply_to_new_queries ... ok
+test refetch_interval_in_background_keeps_ticking ... ok
+test refetch_on_window_focus_alias_sets_the_foreground_trigger ... ok
+test refetch_interval_fn_stops_when_it_returns_none ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+   Doc-tests nsh_query
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[exit 0]

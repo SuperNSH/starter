@@ -1,0 +1,9 @@
+$ nsh test --target macos smoke/pages.test.tsx
+✓ built the Rust crate nsh-starter (1.0s)
+✓ built the development host for macOS (6m 16s, 1 warning: -v shows it)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✗ smoke/pages.test.tsx › every page opens from the shell (30.8s)
+    the test did not end in 30 s
+    on screen: "Pages", "Home", "UI gallery", "Native vs app", "Forms", "Data", "Query devtools", "Lists", "Canvas", "Motion", "Overlays", "Platform", "Device", "Remote screen", "Diagnostics", "Device", "Device", "Device", "OS", "macos", "OS version", "27.2", "Idiom", "Desktop", "Locale", "en-US", "Appearance", "dark", "Text size", "1.00×", "Pixel ratio", "2.00×", "Screen reader", "no", "Reduce motion", "no", "Lifecycle", "inactive", "Window", "1280 × 800 pt", "Mac Catalyst", "no", "Safe area", "Top inset", "0 pt", "Right inset", "0 pt", "Bottom inset", "0 pt", "Left inset", "0 pt", "The page keeps its content inside every inset; a test pins them.", "Not exposed on 0.5.0", "Model", "not exposed on NSH 0.5.0", "nsh-starter", "Device", "Inactive"
+error 1 test: 0 passed, 1 failed (6m 46s)
+[exit 1]

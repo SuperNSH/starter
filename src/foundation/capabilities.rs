@@ -6,16 +6,19 @@ use std::sync::LazyLock;
 
 use nsh_core::element::SharedString;
 
-/// The capability keys NSH 0.4.0 knows, in the order the sandbox page
-/// documents them. A key missing from the build's error list breaks
-/// `nsh build`, so this list is the honest one.
+/// The capability keys NSH 0.5.0 knows, in the order of the runtime's
+/// own list (`KNOWN` in `nsh-core/src/access.rs`). Since 0.5.0 an unknown
+/// key is only a build warning, so this list is checked against the source.
 pub const KNOWN_CAPABILITIES: &[&str] = &[
+    "windows",
     "network",
     "webview",
     "statusBar",
     "clipboard",
     "picker",
     "speech",
+    "notifications",
+    "audio",
     "openUrl",
     "process",
     "fs",

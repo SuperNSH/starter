@@ -1,0 +1,7 @@
+$ nsh build  (nsh.json capabilities: { "clipbord": true })
+warn nsh.json: capabilities.clipbord, not granted (one of a newer NSH, or a typo)
+✓ built App.tsx into .nsh/out (541 B js, 932 B bytecode, 9ms)
+[exit 0]
+$ nsh check
+error /private/tmp/claude-501/-Users-hmziq--claude-spares-spare-P3IRUr/8a0164d2-b4c8-4d2e-85c0-a22407a9f04a/scratchpad/signapp has no tsconfig.json: `nsh init /private/tmp/claude-501/-Users-hmziq--claude-spares-spare-P3IRUr/8a0164d2-b4c8-4d2e-85c0-a22407a9f04a/scratchpad/signapp` adds one
+[exit 1]

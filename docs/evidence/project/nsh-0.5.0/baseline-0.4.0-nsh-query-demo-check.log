@@ -1,0 +1,3 @@
+$ (cd examples/demo) /opt/homebrew/bin/nsh check
+error /Users/hmziq/fo/nsh-query/examples/demo has no tsconfig.json: `nsh init /Users/hmziq/fo/nsh-query/examples/demo` adds one
+[exit 1]

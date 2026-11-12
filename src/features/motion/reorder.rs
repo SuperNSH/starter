@@ -20,7 +20,7 @@ const TILES: [u32; 5] = [1, 2, 3, 4, 5];
 /// The reorder layouts to pick from, and their tab labels.
 const PRESETS: [LayoutAnimation; 3] = [
     LayoutAnimation::all(LayoutTransition::new(
-        LayoutCurve::Spring { damping: 0.7 },
+        LayoutCurve::FittedSpring { damping_ratio: 0.7 },
         420.0,
     )),
     LayoutAnimation::EASE_IN_EASE_OUT,

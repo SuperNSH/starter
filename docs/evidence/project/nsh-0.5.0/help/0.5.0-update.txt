@@ -1,0 +1,20 @@
+Update this nsh to the latest release, or to the latest nightly build of `main` (`nsh update nightly`, as `rustup update nightly`); it stays on the channel it was installed from unless one is named
+
+Usage: nsh update [OPTIONS] [CHANNEL]
+
+Arguments:
+  [CHANNEL]
+          `stable` (the releases) or `nightly` (every night `main` changes); default: the channel this nsh is on
+
+          Possible values:
+          - stable:  The releases (`vX.Y.Z`)
+          - nightly: The latest `main`, built every night it changes
+
+Options:
+  -v, --verbose
+          Show everything: log lines with their targets, cargo's output and the hosts' own
+          
+          [env: NSH_VERBOSE=]
+
+  -h, --help
+          Print help (see a summary with '-h')

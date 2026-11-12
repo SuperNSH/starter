@@ -25,7 +25,7 @@ const PAGES: Array<{ id: string; marker: string }> = [
   { id: "page-diagnostics", marker: "Diagnostics" },
 ];
 
-// What the web target does not have on 0.4.0, asserted so a silently
+// What the web target does not have on 0.5.0, asserted so a silently
 // missing feature cannot pass unnoticed. Page navigation itself works
 // everywhere (every page is Rust).
 const SKIPPED_ON_WEB = [

@@ -1,7 +1,7 @@
 //! App-level composition owned by the shell area: the window assembly
 //! around the shell. Providers for the app's stores land here as the
 //! foundation area's exports do; the shell keeps its own state in
-//! globals, as the gallery's 0.4.0 pattern does.
+//! globals, as NSH's own gallery example does.
 
 use nsh_core::prelude::*;
 

@@ -3,6 +3,28 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed: NSH 0.5.0
+
+- All NSH crates move from 0.4.0 to 0.5.0 (`nsh-core`, `nsh-base`, `nsh-platform-{ios,linux,macos,windows}`, `nsh-engine`, `nsh-testing`); the sibling `nsh-query` and `nsh-form` crates move with them, so one NSH version resolves. The CLI must be 0.5.0 too: install it with the release's `install.sh` (README); Homebrew still ships 0.4.0.
+- Desktop windows use 0.5.0's `WindowRef` model: `main_window().set(..)` for the title bar and title, `set_mode` for maximize, `set_bounds` for the frame, `close()` to close (`src/ui/desktop.rs`, `src/shell/chrome.rs`, `src/platform/desktop_card.rs`). Behavior is meant to be unchanged.
+- The Reorder demo's layout spring is `LayoutCurve::FittedSpring { damping_ratio: 0.7 }`, the same 0.7 damping ratio over 420 ms as before; 0.5.0's layout springs are physics-timed, so the motion may feel slightly different.
+- The Quotes table's symbol column is fixed with `ColumnFixed::Left` (was `fixed: true`).
+- Modules that call `t!` import rust-i18n's explicitly: 0.5.0's prelude brings its own `t!`.
+- The device page names the new `Terminal` idiom.
+- The diagnostics page's capability registry lists 0.5.0's thirteen keys (`windows`, `notifications` and `audio` are new; none is declared).
+- The "not exposed" notes on the device and speech cards now say 0.5.0 (the device model and reading aloud are still not exposed).
+- Two overlay tests press what a user can reach: the dialog's scrim at an uncovered corner, and the sheet's detents while the sheet is closed. 0.5.0's headless `press` lands where a view is drawn and fails on a covered view.
+
+### Behavior changes from NSH 0.5.0 you may notice
+
+- `focus-visible:` styles in `nsh_base` components show for keyboard focus only, no longer after a click or tap. This app's own wrappers use `focus:`.
+- `scrollbar(false)` on the gallery's horizontal rail now also hides the horizontal indicator on desktop.
+- An inverted list at its start shows rows inserted above it instead of keeping the first row in place (the chat page).
+- Back no longer pops a stack in an unselected tab.
+- An unknown or misspelled capability in `nsh.json` is a build warning, not an error.
+
 ## [0.1.0] - 2026-11-07
 
 ### Added

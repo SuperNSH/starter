@@ -1,0 +1,2 @@
+$ cargo fmt --all -- --check (nsh=/Users/hmziq/.local/bin/nsh nsh 0.5.0 (f4d68f7))
+[exit 0]

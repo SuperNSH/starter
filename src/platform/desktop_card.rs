@@ -6,11 +6,14 @@
 use nsh_base::theme;
 use nsh_core::{
     desktop::{MenuRole, WindowFrame},
-    element::desktop::{
-        MenuItem, popup_menu, set_application_menu, set_frame, set_title, toggle_maximize,
-    },
+    element::desktop::{MenuItem, main_window, popup_menu, set_application_menu},
     prelude::*,
 };
+
+// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+use rust_i18n::t;
+
+use crate::ui::desktop::{set_window_title, toggle_maximize};
 
 use super::{
     locale,
@@ -73,7 +76,11 @@ fn WindowCard() -> impl IntoElement {
                     localized("platform.desktop.title_button"),
                     {
                         move || {
-                            set_title(format!("{} — {}", t!("app.name"), t!("platform.title")));
+                            set_window_title(format!(
+                                "{} — {}",
+                                t!("app.name"),
+                                t!("platform.title")
+                            ));
                             picks.update(|count| *count += 1);
                         }
                     },
@@ -104,7 +111,7 @@ fn WindowCard() -> impl IntoElement {
                     localized("platform.desktop.frame"),
                     {
                         move || {
-                            set_frame(WindowFrame {
+                            main_window().set_bounds(WindowFrame {
                                 width: Some(px(480.0)),
                                 height: Some(px(720.0)),
                                 ..WindowFrame::default()

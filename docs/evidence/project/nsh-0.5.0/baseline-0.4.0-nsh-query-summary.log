@@ -1,0 +1,8 @@
+fmt: 0
+clippy: 0
+test: 0
+nsh-check: 1
+nsh-build: 1
+nsh-test: 1
+demo-check: 1
+DONE

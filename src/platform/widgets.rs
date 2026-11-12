@@ -5,6 +5,9 @@
 use nsh_base::{button, input, theme};
 use nsh_core::prelude::*;
 
+// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+use rust_i18n::t;
+
 use super::locale;
 
 /// `t!` looked up on every run, so a locale switch re-renders it: reading the

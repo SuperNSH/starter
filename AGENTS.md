@@ -44,4 +44,4 @@ Subagents do not commit, branch, stash or reset; the orchestrator commits. Edit 
 
 ## Facts that bite
 
-`docs/PROMPT.md` section "Facts that bite on 0.4.0" overrides any docs, including upstream skills, when they disagree. Verify every nsh subcommand and flag against `nsh --help` and the 0.4.0 source before documenting it.
+`docs/PROMPT.md` section "Facts that bite" overrides any docs, including upstream skills, when they disagree. Verify every nsh subcommand and flag against `nsh --help` and the 0.5.0 source (`~/fo/.refs/nsh-v0.5.0`) before documenting it.

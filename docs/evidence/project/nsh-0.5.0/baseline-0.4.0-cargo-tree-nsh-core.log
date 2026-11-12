@@ -1,0 +1,24 @@
+nsh-core v0.4.0
+├── nsh-base v0.4.0
+│   ├── nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+│   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   ├── nsh-platform-macos v0.4.0
+│   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+├── nsh-engine v0.4.0
+│   ├── nsh-platform-macos v0.4.0 (*)
+│   └── nsh-testing v0.4.0
+│       [dev-dependencies]
+│       └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   [dev-dependencies]
+│   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+├── nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form) (*)
+├── nsh-js v0.4.0
+│   └── nsh-engine v0.4.0 (*)
+├── nsh-package v0.4.0
+│   └── nsh-engine v0.4.0 (*)
+├── nsh-platform-macos v0.4.0 (*)
+├── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+│   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+├── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+└── nsh-testing v0.4.0 (*)

@@ -1,0 +1,215 @@
+$ (cd packages/nsh-form) /opt/homebrew/bin/nsh check
+App.tsx(41,8): error TS2305: Module '"./src"' has no exported member 'AnyFieldApi'.
+App.tsx(42,8): error TS2305: Module '"./src"' has no exported member 'AnyFieldLikeMeta'.
+App.tsx(43,3): error TS2305: Module '"./src"' has no exported member 'defaultValidationLogic'.
+App.tsx(44,3): error TS2305: Module '"./src"' has no exported member 'revalidateLogic'.
+App.tsx(45,8): error TS2305: Module '"./src"' has no exported member 'ValidationLogicFn'.
+App.tsx(55,3): error TS2305: Module '"./src"' has no exported member 'formOptions'.
+App.tsx(63,3): error TS2305: Module '"./src"' has no exported member 'mergeForm'.
+App.tsx(73,8): error TS2305: Module '"./src"' has no exported member 'StandardSchemaV1'.
+App.tsx(109,24): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(110,22): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(113,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(124,23): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(125,24): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(128,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(152,35): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(159,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(176,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(182,24): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(182,31): error TS7031: Binding element 'fieldApi' implicitly has an 'any' type.
+App.tsx(186,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(203,20): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(205,31): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(214,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(224,35): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(227,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(234,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(235,11): error TS7006: Parameter 'errors' implicitly has an 'any' type.
+App.tsx(249,14): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(261,14): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(276,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(284,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(304,18): error TS7031: Binding element 'meta' implicitly has an 'any' type.
+App.tsx(315,36): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(317,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(321,20): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(338,11): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(401,50): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(402,50): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(406,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(414,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(443,36): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(444,38): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(449,54): error TS18046: 'state' is of type 'unknown'.
+App.tsx(457,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(460,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(462,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(463,11): error TS7006: Parameter 'email' implicitly has an 'any' type.
+App.tsx(478,49): error TS18046: 'state' is of type 'unknown'.
+App.tsx(485,15): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(489,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(489,67): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+App.tsx(490,11): error TS7006: Parameter 'names' implicitly has an 'any' type.
+App.tsx(493,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(496,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(498,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(499,11): error TS7006: Parameter 'nested' implicitly has an 'any' type.
+App.tsx(530,14): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(545,36): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(547,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(565,69): error TS7006: Parameter 'm' implicitly has an 'any' type.
+App.tsx(631,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(640,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(655,18): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(666,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(674,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(710,3): error TS2353: Object literal may only specify known properties, and 'defaultValues' does not exist in type 'WithFormProps<{ email: string; age: string; }, { title: string; }, { readonly TextField: (props: { testID: string; label: string; }) => Element; }, {}>'.
+App.tsx(716,36): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(718,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(736,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(738,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(739,11): error TS7006: Parameter 'age' implicitly has an 'any' type.
+App.tsx(742,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(751,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(752,11): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(755,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(771,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(772,11): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(787,60): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(790,59): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(791,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(793,60): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(794,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(824,17): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(841,18): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(847,58): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(848,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(862,3): error TS2353: Object literal may only specify known properties, and 'defaultValues' does not exist in type 'WithFieldGroupProps<unknown, {}>'.
+App.tsx(877,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(879,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(880,11): error TS7006: Parameter 'city' implicitly has an 'any' type.
+App.tsx(883,11): error TS7006: Parameter 'group' implicitly has an 'any' type.
+App.tsx(886,39): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(905,16): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(914,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(985,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(994,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1033,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(1034,11): error TS7006: Parameter 'values' implicitly has an 'any' type.
+App.tsx(1037,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1044,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1051,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1058,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1070,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1082,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1094,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1107,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1110,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1121,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1124,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1134,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1141,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1169,19): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1170,18): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1172,29): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1184,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1192,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1204,33): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1211,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1220,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1226,22): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1226,29): error TS7031: Binding element 'fieldApi' implicitly has an 'any' type.
+App.tsx(1230,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1254,21): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1256,32): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1263,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1271,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1282,25): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1284,36): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1290,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1305,42): error TS7006: Parameter 'props' implicitly has an 'any' type.
+App.tsx(1322,21): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1338,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1340,35): error TS7006: Parameter 's' implicitly has an 'any' type.
+App.tsx(1341,11): error TS7006: Parameter 'json' implicitly has an 'any' type.
+App.tsx(1343,35): error TS7006: Parameter 's' implicitly has an 'any' type.
+App.tsx(1344,11): error TS7006: Parameter 'errors' implicitly has an 'any' type.
+App.tsx(1346,64): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1347,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1354,60): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1355,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1362,59): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1363,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1387,38): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1389,13): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1413,36): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1415,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1439,41): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1440,39): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(1441,13): error TS7006: Parameter 'city' implicitly has an 'any' type.
+App.tsx(1443,39): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1456,32): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(1457,9): error TS7006: Parameter 'title' implicitly has an 'any' type.
+App.tsx(1470,24): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(1480,24): error TS7006: Parameter 'value' implicitly has an 'any' type.
+App.tsx(1488,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1494,98): error TS7006: Parameter 'r' implicitly has an 'any' type.
+App.tsx(1497,101): error TS7006: Parameter 'r' implicitly has an 'any' type.
+App.tsx(1514,55): error TS18046: 'state' is of type 'unknown'.
+App.tsx(1515,31): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(1521,33): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1539,59): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1540,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1547,62): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1548,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1555,58): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1556,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1563,56): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1564,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1572,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1582,24): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1585,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1592,58): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1593,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1602,36): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1604,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1639,31): error TS7031: Binding element 'value' implicitly has an 'any' type.
+App.tsx(1648,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1651,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1654,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1657,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1664,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1671,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1677,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(1678,11): error TS7006: Parameter 'errors' implicitly has an 'any' type.
+App.tsx(1698,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1701,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1704,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1711,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1718,11): error TS7006: Parameter 'field' implicitly has an 'any' type.
+App.tsx(1724,34): error TS7006: Parameter 'state' implicitly has an 'any' type.
+App.tsx(1725,11): error TS7006: Parameter 'notes' implicitly has an 'any' type.
+src/bind.ts(1,46): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+src/bind.ts(291,25): error TS2339: Property 'instance' does not exist on type '{}'.
+src/createField.ts(11,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+src/createField.ts(171,31): error TS2345: Argument of type 'Accessor<unknown>' is not assignable to parameter of type 'Accessor<object>'.
+  Type 'unknown' is not assignable to type 'object'.
+src/createFieldGroup.ts(11,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+src/createForm.ts(8,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+src/createFormGroup.ts(1,61): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+src/createFormHook.ts(1,112): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+src/createFormHook.ts(139,31): error TS2339: Property 'defaultValues' does not exist on type 'WithFieldGroupProps<TFieldGroupData, TRenderProps>'.
+src/extras.ts(1,33): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+src/index.ts(1,15): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+tests/types.test.tsx(15,36): error TS7006: Parameter 'field' implicitly has an 'any' type.
+tests/types.test.tsx(16,8): error TS2578: Unused '@ts-expect-error' directive.
+tests/types.test.tsx(22,40): error TS7006: Parameter 'group' implicitly has an 'any' type.
+tests/types.test.tsx(23,8): error TS2578: Unused '@ts-expect-error' directive.
+tests/types.test.tsx(38,3): error TS2353: Object literal may only specify known properties, and 'defaultValues' does not exist in type 'WithFieldGroupProps<unknown, {}>'.
+tests/types.test.tsx(48,8): error TS2578: Unused '@ts-expect-error' directive.
+tests/types.test.tsx(58,9): error TS7006: Parameter 'field' implicitly has an 'any' type.
+tests/types.test.tsx(77,35): error TS7006: Parameter 'field' implicitly has an 'any' type.
+tests/types.test.tsx(78,8): error TS2578: Unused '@ts-expect-error' directive.
+error type check failed (exit status: 1)
+[exit 1]

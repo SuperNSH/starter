@@ -1,0 +1,4 @@
+$ cargo clippy --all-targets --all-features -- -D warnings
+    Checking nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 18.04s
+[exit 0]

@@ -1,0 +1,32 @@
+Create an app: in TSX, in Rust, or in TSX with a Rust crate of its own (`--template`). Generates the app's entry points, configuration and editor declarations
+
+Usage: nsh init [OPTIONS] [DIR]
+
+Arguments:
+  [DIR]
+          Directory of the app (created if missing)
+          
+          [default: .]
+
+Options:
+      --name <NAME>
+          Display name (default: the directory's name)
+
+  -v, --verbose
+          Show everything: log lines with their targets, cargo's output and the hosts' own
+          
+          [env: NSH_VERBOSE=]
+
+      --template <TEMPLATE>
+          What the app is written in (asked on a terminal; else `ts`)
+
+          Possible values:
+          - ts:    A TSX app: `App.tsx`, on QuickJS
+          - rust:  An app written in Rust: a Cargo project whose root component `nsh.json` names (`"root"`), with no QuickJS
+          - mixed: A TSX app with a Rust crate of its own at its root (`Cargo.toml` and `src/lib.rs` beside `App.tsx`), which exports a component, a module and a class to it
+
+      --nsh-source <DIR>
+          With `--template rust` or `mixed`: depend on the nsh crates of this checkout by path, instead of crates.io's at this CLI's version (the app's hosts build from the same place)
+
+  -h, --help
+          Print help (see a summary with '-h')

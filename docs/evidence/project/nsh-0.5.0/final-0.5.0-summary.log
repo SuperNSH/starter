@@ -1,0 +1,8 @@
+fmt: 0
+clippy: 0
+test: 101
+nsh-test-app: 0
+nsh-test-pages: 0
+nsh-check-root: 1
+trace: 0
+DONE

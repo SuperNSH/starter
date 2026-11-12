@@ -1,0 +1,49 @@
+Run an app in this system’s native host with hot reload
+
+Usage: nsh dev [OPTIONS] [ENTRY]
+
+Arguments:
+  [ENTRY]
+          The entry module, or the app's directory (default: the current one), whose `App.tsx` is the entry
+          
+          [default: .]
+
+Options:
+      --port <PORT>
+          Dev server port (replaces the previous NSH development session on it). Default: the port this app had last, else the first free one from 8790; with --server-only, 8790
+
+  -v, --verbose
+          Show everything: log lines with their targets, cargo's output and the hosts' own
+          
+          [env: NSH_VERBOSE=]
+
+      --release
+          Minify and strip debug info
+
+      --limits [<LIMITS>]
+          Run the app as an app embedded in another one would, with the VM limits such an app sets: `memory` and `stack` (`KB`, `MB`, `GB`), `load` and `call` (`ms`, `s`) and `nodes`, as in `--limits memory=128MB,call=500ms`; the rest keep the embedding defaults (256 MB, 4 MB, 10 s, 2 s, 200000), which `--limits` alone runs with. Without it the app runs on its own, with none
+
+      --target <TARGET>
+          Where to run; defaults to this system's native desktop host
+
+          Possible values:
+          - catalyst: The Mac Catalyst development host (an iPhone-sized window)
+          - ios:      The development host in an iOS simulator
+          - android:  The development host on an Android device or emulator
+          - linux:    The Linux (GTK) development host, in a window on this machine
+          - macos:    The macOS (AppKit) development host, in a window on this machine
+          - windows:  The Windows development host, in a window on this machine
+          - web:      The web development host, in the browser (the dev server serves its page)
+          - gpui:     The GPUI development host, in a window on this machine (macOS, Windows or Linux): the app as GPUI apps that embed it show it
+          - tui:      The development host in this terminal
+          
+          [default: macos]
+
+      --device <DEVICE>
+          iOS simulator to use (name or UDID)
+
+      --server-only
+          Serve hot reload to hosts you start yourself
+
+  -h, --help
+          Print help (see a summary with '-h')

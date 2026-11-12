@@ -1,6 +1,6 @@
 # Architecture
 
-nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.4.0 application boilerplate. One Rust crate at the repo root is the UI and most features; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. All async state runs on `nsh-query`, all forms on `nsh-form`, both as path dependencies from `../nsh-query` and `../nsh-form`. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
+nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.5.0 application boilerplate. One Rust crate at the repo root is the UI and most features; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. All async state runs on `nsh-query`, all forms on `nsh-form`, both as path dependencies from `../nsh-query` and `../nsh-form`. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
 
 ## Mode and entry points
 
@@ -66,7 +66,7 @@ Each seam is a trait with a local implementation, so the real library from the p
 | `services/analytics.rs` — event sink | recording sink the diagnostics page can show | analytics backend |
 | `services/monitoring.rs` — error/trace sink | in-memory sink | monitoring backend |
 
-0.4.0 has no `Notifications` module (unreleased upstream has one), so system notifications sit behind a trait whose stub reports exactly that, while the inbox and toast surfaces are real. The capability registry records every seam's status, and the diagnostics page renders it — nothing degrades silently.
+System notifications sit behind a trait whose stub reports them unavailable, while the inbox and toast surfaces are real. The stub dates from 0.4.0, which had no `Notifications` module; 0.5.0 ships one, and wiring it in behind the trait is a follow-up. The capability registry records every seam's status, and the diagnostics page renders it — nothing degrades silently.
 
 ## i18n
 
@@ -82,7 +82,7 @@ Each seam is a trait with a local implementation, so the real library from the p
 4. **Deliver** — the app verifies with `nsh verify` semantics against its trusted root and loads the package on demand. Bytecode loads only from the app bundle, the APK or a verified package. `nsh revoke` signs a revocation list; the app shows the revocation path.
 5. **Fail closed** — host calls reject with `ERR_ACCESS_DENIED` when the capability is undeclared, `ERR_NSH_HOST_ERROR` when unhandled or thrown, and `ERR_FEATURE_UNAVAILABLE_ON_PLATFORM` with no host.
 
-Capability keys declared in `nsh.json` are the real 0.4.0 set: `network`, `webview`, `statusBar`, `clipboard`, `picker`, `speech`, `openUrl`, `process`, `fs`, `host` — kept tight, because a typo fails `nsh build` and passes `nsh check`.
+Capability keys declared in `nsh.json` come from the real 0.5.0 set: `windows`, `network`, `webview`, `statusBar`, `clipboard`, `picker`, `speech`, `notifications`, `audio`, `openUrl`, `process`, `fs`, `host` — kept tight. Since 0.5.0 a typo is only a warning from `nsh build` (the key is not granted), so read the build output.
 
 ## Testing
 

@@ -1,0 +1,75 @@
+Package an installable app from the prebuilt runtime (no Rust needed). Metadata comes from `nsh.json` next to the entry, overridden by the flags below
+
+Usage: nsh package [OPTIONS] --target <TARGET> [ENTRY]
+
+Arguments:
+  [ENTRY]
+          The entry module, or the app's directory (default: the current one), whose `App.tsx` is the entry
+          
+          [default: .]
+
+Options:
+      --target <TARGET>
+          What to build for
+
+          Possible values:
+          - ios:           iOS devices: a signed `.ipa` (or an unsigned `.app` without `--sign`)
+          - ios-simulator: The iOS simulator: an ad hoc signed `.app`
+          - android:       Android: a signed `.apk`
+          - linux:         Linux (GTK): a directory with the runner, the bundle and a `.desktop` file, and the same as a `.tar.gz`
+          - macos:         macOS (AppKit): an ad hoc signed `.app`
+          - windows:       Windows: a directory with the runner as `<name>.exe` (the app's icon embedded) and the bundle, and the same as a `.zip`
+          - web:           The web: a static site (`index.html` and files named by their content) for any web server or CDN
+
+  -v, --verbose
+          Show everything: log lines with their targets, cargo's output and the hosts' own
+          
+          [env: NSH_VERBOSE=]
+
+  -o, --out <OUT>
+          Output directory
+          
+          [default: .nsh/out]
+
+      --name <NAME>
+          Display name
+
+      --id <ID>
+          Bundle identifier, e.g. `com.example.app`
+
+      --app-version <VERSION>
+          Version, e.g. `1.2.0`
+
+      --build <BUILD>
+          Build number
+
+      --icon <ICON>
+          App icon: a square PNG, ideally 1024×1024
+
+      --sign <SIGN>
+          Code signing identity for devices, e.g. "Apple Development: …"
+
+      --profile <PROFILE>
+          Provisioning profile for devices (`.mobileprovision`)
+
+      --keystore <KEYSTORE>
+          Android release keystore (default: the debug key)
+
+      --key-alias <KEY_ALIAS>
+          Key alias in the keystore
+
+      --keystore-password <KEYSTORE_PASSWORD>
+          Keystore password (also `NSH_KEYSTORE_PASSWORD`)
+          
+          [env: NSH_KEYSTORE_PASSWORD]
+
+      --abi <ABI>
+          Android ABIs of the APK, repeated or separated by commas (default: arm64-v8a and armeabi-v7a; with --run also the device's)
+          
+          [possible values: arm64-v8a, armeabi-v7a, x86_64]
+
+      --run
+          Install and launch the app in the simulator or on the Android device afterwards (Linux, macOS, Windows: launch it; web: serve it on this machine at the address it prints)
+
+  -h, --help
+          Print help (see a summary with '-h')

@@ -1,0 +1,84 @@
+$ cargo test
+warning: linker stderr: ld: __eh_frame section too large (max 16MB) to encode dwarf unwind offsets in compact unwind table, performance of exception handling might be affected
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+   Compiling nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+warning: `nsh-starter` (test "shell") generated 1 warning
+warning: `nsh-starter` (bin "nsh-starter") generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 05s
+     Running unittests src/lib.rs (target/debug/deps/nsh_starter-49c528450dcd1f64)
+
+running 17 tests
+test state::event_bus::tests::topics_are_stable_names ... ok
+test shell::undo::tests::undo_returns_to_the_recorded_state ... ok
+test foundation::id::tests::counter_ids_increase ... ok
+test foundation::validation::tests::strength_scores_length_kinds ... ok
+test shell::command_bar::tests::every_route_and_action_is_a_command ... ok
+test foundation::validation::tests::password_and_phone_have_floors ... ok
+test foundation::time::tests::formats_utc_wall_time ... ok
+test state::history::tests::undo_redo_and_limit_order_states ... ok
+test foundation::validation::tests::email_rules_match_what_forms_need ... ok
+test shell::undo::tests::the_stack_is_bounded ... ok
+test shell::routes::tests::keys_are_stable_per_route ... ok
+test shell::command_bar::tests::a_prefix_ranks_above_a_word_start_and_letters_in_order ... ok
+test shell::command_bar::tests::an_empty_query_keeps_the_list_order ... ok
+test foundation::capabilities::tests::the_manifest_is_read_as_declared ... ok
+test foundation::capabilities::tests::every_known_key_is_listed_once ... ok
+test ui::tokens::tests::every_custom_token_is_declared ... ok
+test foundation::logging::tests::truncates_the_file_back_to_a_bound ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running unittests src/main.rs (target/debug/deps/nsh_starter-6c82c4b71d8530e7)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/canvas.rs (target/debug/deps/canvas-36c04f970b3b04e7)
+
+running 13 tests
+test the_text_and_image_specimens_draw_and_report_their_canvas ... ok
+test posting_to_the_web_view_page_records_the_message ... ok
+test the_shader_compiles_and_its_children_draw_over_it ... ok
+test the_charts_redraw_when_the_data_changes ... ok
+test the_bezier_editor_drags_a_control_point_and_reset_restores_it ... ok
+test the_drawing_survives_a_re_layout ... ok
+test a_dragged_stroke_stays_and_undo_removes_it ... ok
+test the_shape_editor_selects_moves_and_resizes ... ok
+test the_node_graph_moves_a_node_and_marquee_selects_two ... ok
+test the_shared_board_peers_ride_the_clock_and_a_drag_selects_a_card ... ok
+test the_world_board_pans_zooms_and_selects_a_node_at_zoom ... ok
+test the_particle_field_advances_on_the_clock_and_a_pause_holds_it ... ok
+test the_frame_loop_advances_on_the_manual_clock_and_a_pause_holds_it ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/data.rs (target/debug/deps/data-1064581f0fb60f81)
+
+running 7 tests
+test an_optimistic_like_rolls_back_when_the_write_fails ... ok
+test the_offline_banner_shows_and_writes_fail_while_offline ... ok
+test the_devtools_list_the_keys_the_feature_loaded ... ok
+test posting_a_comment_invalidates_the_detail_queries ... ok
+test pagination_loads_more_pages ... ok
+test a_stale_detail_serves_its_cache_and_then_revalidates ... ok
+test retry_recovers_a_failed_feed ... FAILED
+
+failures:
+
+---- retry_recovers_a_failed_feed stdout ----
+
+thread 'retry_recovers_a_failed_feed' (42993535) panicked at tests/data.rs:206:49:
+called `Result::unwrap()` on an `Err` value: "`text:Couldn't load the feed` showing never happened in 5000 ms; on screen: [\"Remount feed\", \"Shipping a Rust shell\", \"One turn of the app's code becomes one commit, and the commit is what the screen shows.\", \"Ada Lovelace\", \"No comments yet\", \"♥ 3\", \"Why cells recycle\", \"A cell is handed another row, and only the bindings that read the position run again.\", \"Grace Hopper\", \"1 comment\", \"♡ 10\", \"Signals over snapshots\", \"A value read in a body is a photograph; a closure where a value goes stays current.\", \"Alan Kay\", \"2 comments\", \"♡ 17\", \"The five-minute query\", \"Serve yesterday's answer while today's is on its way, and nobody watches a spinner.\", \"Barbara Liskov\", \"3 comments\", \"♡ 24\", \"Pull to refresh, properly\", \"The spinner is the platform's; the state is one bool the app owns.\", \"Dennis Ritchie\", \"No comments yet\", \"♡ 31\", \"Optimistic hearts\", \"Show the like at once, take it back if the write fails, and never block the tap.\", \"Margaret Hamilton\", \"1 comment\", \"♥ 38\", \"A tracer's notebook\", \"Mount items are the honest number: deterministic, small, and easy to defend.\", \"Ada Lovelace\", \"2 comments\", \"♡ 5\", \"Latency you can hold\", \"Two hundred milliseconds is enough to see every state a screen can be in.\", \"Grace Hopper\", \"3 comments\", \"♡ 12\", \"The fake API's knobs and the query cache: keys, states and timings.\", \"Fake API\", \"Latency\", \"How long every response waits\", \"0 ms\", \"100 ms\", \"400 ms\", \"Failures\", \"Which requests the fake API rejects\", \"Never\", \"Every 2nd\", \"All\", \"Offline\", \"Requests fail at once while it is on\", \"1 requests, 0 failed, 0 in flight\", \"Query cache\", \"feed\", \"loaded\", \"10 posts, more true\", \"0s ago\"]"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    retry_recovers_a_failed_feed
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.04s
+
+error: test failed, to rerun pass `--test data`
+[exit 101]

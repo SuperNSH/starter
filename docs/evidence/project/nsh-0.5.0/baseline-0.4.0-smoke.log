@@ -1,0 +1,68 @@
+$ PATH=/opt/homebrew/bin:$PATH just smoke  (nsh resolves to: /opt/homebrew/bin/nsh nsh 0.4.0 (e626a8d))
+nsh test App.test.tsx
+✓ built the Rust crate nsh-starter (346ms)
+✓ built the headless runner of nsh-starter (28.1s, 1 warning: -v shows it)
+✓ App.test.tsx › the root mounts (18ms)
+✓ App.test.tsx › the shell navigates from Home (71ms)
+✓ 2 tests: 2 passed, 0 failed (30.9s)
+nsh test smoke/pages.test.tsx
+✓ built the Rust crate nsh-starter (187ms)
+✓ built the headless runner of nsh-starter (216ms, 1 warning: -v shows it)
+✓ smoke/pages.test.tsx › every page opens from the shell (284ms)
+✓ 1 test: 1 passed, 0 failed (6.5s)
+just test-tsx
+cd packages/remote-screen && nsh check && nsh build && nsh test
+../../../nsh-form/packages/nsh-form/src/bind.ts(1,46): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-form/packages/nsh-form/src/bind.ts(291,25): error TS2339: Property 'instance' does not exist on type '{}'.
+../../../nsh-form/packages/nsh-form/src/createField.ts(11,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-form/packages/nsh-form/src/createField.ts(171,31): error TS2345: Argument of type 'Accessor<unknown>' is not assignable to parameter of type 'Accessor<object>'.
+  Type 'unknown' is not assignable to type 'object'.
+../../../nsh-form/packages/nsh-form/src/createFieldGroup.ts(11,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-form/packages/nsh-form/src/createForm.ts(8,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-form/packages/nsh-form/src/createFormGroup.ts(1,61): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-form/packages/nsh-form/src/createFormHook.ts(1,112): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-form/packages/nsh-form/src/createFormHook.ts(139,31): error TS2339: Property 'defaultValues' does not exist on type 'WithFieldGroupProps<TFieldGroupData, TRenderProps>'.
+../../../nsh-form/packages/nsh-form/src/extras.ts(1,33): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-form/packages/nsh-form/src/index.ts(1,15): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/HydrationBoundary.ts(1,68): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/QueryClientProvider.ts(1,34): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/focus.ts(1,30): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/focus.ts(10,34): error TS7006: Parameter 'setFocused' implicitly has an 'any' type.
+../../../nsh-query/packages/nsh-query/src/index.ts(3,15): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/index.ts(4,15): error TS2307: Cannot find module '@tanstack/query-persist-client-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/index.ts(5,71): error TS2307: Cannot find module '@tanstack/query-async-storage-persister' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/nsh.ts(1,51): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/options.ts(8,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/persist.ts(1,45): error TS2307: Cannot find module '@tanstack/query-async-storage-persister' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/persist.ts(6,8): error TS2307: Cannot find module '@tanstack/query-persist-client-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/persist.ts(7,34): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/types.ts(13,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useBaseQuery.ts(9,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useBaseQuery.ts(52,39): error TS7006: Parameter 'next' implicitly has an 'any' type.
+../../../nsh-query/packages/nsh-query/src/useInfiniteQuery.ts(8,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useIsFetching.ts(1,48): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useIsMutating.ts(1,51): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useMutation.ts(9,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useMutation.ts(29,43): error TS7006: Parameter 'next' implicitly has an 'any' type.
+../../../nsh-query/packages/nsh-query/src/useMutationState.ts(7,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useMutationState.ts(30,41): error TS7006: Parameter 'mutation' implicitly has an 'any' type.
+../../../nsh-query/packages/nsh-query/src/usePrefetch.ts(1,72): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useQueries.ts(7,8): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useQueries.ts(57,39): error TS7006: Parameter 'raw' implicitly has an 'any' type.
+../../../nsh-query/packages/nsh-query/src/useQuery.ts(1,142): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useQueryDiagnostics.ts(1,51): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+../../../nsh-query/packages/nsh-query/src/useQueryDiagnostics.ts(2,34): error TS2307: Cannot find module '@tanstack/query-core' or its corresponding type declarations.
+src/Dashboard.tsx(2,23): error TS2305: Module '"nsh-query"' has no exported member 'noRetries'.
+src/Dashboard.tsx(12,15): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+src/Dashboard.tsx(28,58): error TS18046: 'metric' is of type 'unknown'.
+src/Dashboard.tsx(29,36): error TS2571: Object is of type 'unknown'.
+src/Dashboard.tsx(29,59): error TS2571: Object is of type 'unknown'.
+src/RegisterForm.tsx(11,14): error TS7006: Parameter 'name' implicitly has an 'any' type.
+src/RegisterForm.tsx(11,22): error TS7031: Binding element 'signal' implicitly has an 'any' type.
+src/RegisterForm.tsx(14,5): error TS2353: Object literal may only specify known properties, and 'initial' does not exist in type '() => FormOptions<TFormData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, ... 4 more ..., TSubmitMeta>'.
+src/RegisterForm.tsx(15,22): error TS7006: Parameter 'values' implicitly has an 'any' type.
+src/ui.tsx(39,79): error TS2749: 'Field' refers to a value, but is being used as a type here. Did you mean 'typeof Field'?
+error type check failed (exit status: 1)
+error: Recipe `test-tsx` failed on line 24 with exit code 1
+error: Recipe `smoke` failed on line 33 with exit code 1
+[exit 1]

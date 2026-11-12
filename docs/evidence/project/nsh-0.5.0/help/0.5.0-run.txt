@@ -1,0 +1,64 @@
+Run an app in a development host with hot reload. Defaults to AppKit on macOS, GTK on Linux and Win32 on Windows; select mobile hosts, Mac Catalyst, GPUI, a terminal or a browser with --target
+
+Usage: nsh run [OPTIONS] [ENTRY]
+
+Arguments:
+  [ENTRY]
+          The entry module, or the app's directory (default: the current one), whose `App.tsx` is the entry
+          
+          [default: .]
+
+Options:
+      --port <PORT>
+          Dev server port (replaces the previous NSH development session on it). Default: the port this app had last, else the first free one from 8790; with --server-only, 8790
+
+  -v, --verbose
+          Show everything: log lines with their targets, cargo's output and the hosts' own
+          
+          [env: NSH_VERBOSE=]
+
+      --release
+          Minify and strip debug info
+
+      --limits [<LIMITS>]
+          Run the app as an app embedded in another one would, with the VM limits such an app sets: `memory` and `stack` (`KB`, `MB`, `GB`), `load` and `call` (`ms`, `s`) and `nodes`, as in `--limits memory=128MB,call=500ms`; the rest keep the embedding defaults (256 MB, 4 MB, 10 s, 2 s, 200000), which `--limits` alone runs with. Without it the app runs on its own, with none
+
+      --trace
+          Log per-commit timings
+
+      --fps
+          Show the performance monitor over the app: frame rate, frame and commit costs, CPU, GPU, memory (`--target macos` and `linux`; on `macos`, `linux`, `windows` and `ios` the host also logs its readings once a second, shown with `-v`). On `tui`, show FPS/idle, frame p95, apply/draw/flush times, bytes and changed Cells; C-h p toggles the line
+
+      --target <TARGET>
+          Where to run
+
+          Possible values:
+          - catalyst: The Mac Catalyst development host (an iPhone-sized window)
+          - ios:      The development host in an iOS simulator
+          - android:  The development host on an Android device or emulator
+          - linux:    The Linux (GTK) development host, in a window on this machine
+          - macos:    The macOS (AppKit) development host, in a window on this machine
+          - windows:  The Windows development host, in a window on this machine
+          - web:      The web development host, in the browser (the dev server serves its page)
+          - gpui:     The GPUI development host, in a window on this machine (macOS, Windows or Linux): the app as GPUI apps that embed it show it
+          - tui:      The development host in this terminal
+          
+          [default: macos]
+
+      --device <DEVICE>
+          iOS simulator to use (name or UDID); default: a booted one, else the newest iPhone
+
+      --points-per-cell <WIDTHxHEIGHT>
+          Points per terminal Cell, overriding nsh.json tui.pointsPerCell (default: 8x16)
+
+      --name <NAME>
+          The app's name in the host (the menu bar, the window title; `nsh.json`'s name by default; `--target macos` only)
+
+      --window-size <WIDTHxHEIGHT>
+          The window's initial size, `WxH` in points (the host's default by default; the desktop hosts: `--target macos`, `linux`, `windows`, `gpui`)
+
+      --display <N>
+          The display the window opens on, centered: 1 is the primary display (the one with the menu bar), 2 the next, and so on; the main one when there is no such display (`--target macos` only)
+
+  -h, --help
+          Print help (see a summary with '-h')

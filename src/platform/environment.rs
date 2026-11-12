@@ -1,6 +1,6 @@
-//! The device and environment page: what NSH 0.4.0 exposes about the surface,
+//! The device and environment page: what NSH 0.5.0 exposes about the surface,
 //! read in bindings so a change (a rotation, an appearance switch, a test's
-//! pin) re-renders it. The device model is not exposed on 0.4.0 and says so.
+//! pin) re-renders it. The device model is not exposed on 0.5.0 and says so.
 //! Word values translate with the locale; the system's numbers and tags stay
 //! as reported.
 
@@ -9,6 +9,9 @@ use nsh_core::{
     platform::{Idiom, Lifecycle},
     prelude::*,
 };
+
+// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+use rust_i18n::t;
 
 use super::{
     locale,
@@ -49,6 +52,7 @@ fn idiom_value() -> impl Fn() -> String {
             Idiom::Mac => "platform.idiom.mac",
             Idiom::Tv => "platform.idiom.tv",
             Idiom::Desktop => "platform.idiom.desktop",
+            Idiom::Terminal => "platform.idiom.terminal",
         };
         t!(key).to_string()
     }
@@ -127,7 +131,7 @@ fn safe_area_card() -> AnyElement {
     )
 }
 
-/// What the platform keeps to itself on 0.4.0, so a missing read reads as a
+/// What the platform keeps to itself on 0.5.0, so a missing read reads as a
 /// boundary, not a bug.
 fn limits_card() -> AnyElement {
     panel(

@@ -1,0 +1,7 @@
+$ cargo clippy --all-targets -- -D warnings (nsh=/Users/hmziq/.local/bin/nsh nsh 0.5.0 (f4d68f7))
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Checking nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 49s
+[exit 0]

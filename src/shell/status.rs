@@ -4,10 +4,18 @@
 use nsh_base::theme;
 use nsh_core::prelude::*;
 
+// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+use rust_i18n::t;
+
 use crate::shell::{lifecycle, nav};
 
 pub fn status_bar() -> impl IntoElement {
+    // macOS: the window's title bar material behind the row, as AppKit's
+    // own bars; elsewhere the card fill.
+    let material = crate::ui::native_kit::native_material("titlebar");
+    let native = material.is_some();
     view()
+        .children(material)
         .flex_row()
         .items_center()
         .justify_between()
@@ -19,7 +27,7 @@ pub fn status_bar() -> impl IntoElement {
         .pb_safe_area_plus(px(4.0))
         .border_t_1()
         .border_color(move || theme().border)
-        .bg(move || theme().card)
+        .when(!native, |bar| bar.bg(move || theme().card))
         .child(
             text(t!("app.name").to_string())
                 .text_xs()

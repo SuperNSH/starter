@@ -57,12 +57,12 @@ All of these hold, each with evidence in `docs/STATUS.md`:
 
 ## Environment, as measured on this Mac
 
-- `nsh` 0.4.0 (e626a8d), from Homebrew. Do not upgrade it. Embedding frameworks: `$(brew --prefix nsh)/libexec/embed/ios/{NativeShell,NativeShellDev}.xcframework` and `$(brew --prefix nsh)/libexec/embed/android/{nsh,nsh-dev}.aar`.
+- `nsh` 0.5.0 (f4d68f7), installed by the release's `install.sh` into `~/.nsh`, linked at `~/.local/bin/nsh`, which comes before Homebrew on this Mac's `PATH`. Homebrew's `nsh` 0.4.0 (e626a8d) stays installed at `/opt/homebrew/bin/nsh`; do not uninstall or upgrade it. Platform runtimes are components (`nsh component list`); `android`, `ios` and `web` are installed. The release archives no longer bundle the embedding SDKs (`nsh-embed-ios.zip`, `nsh-embed-android.zip` are separate release assets); the 0.4.0 frameworks under `$(brew --prefix nsh)/libexec/embed/` are 0.4.0's.
 - Rust stable with `aarch64-apple-ios`, `aarch64-apple-ios-sim`, `aarch64-linux-android`, `armv7-linux-androideabi`, `x86_64-linux-android` and `wasm32-unknown-unknown` installed.
 - Xcode with an iOS 27 simulator runtime. Android SDK at `$ANDROID_HOME`, NDK 29, one AVD named `indopak-audit`.
 - `/usr/bin/java` is a stub with no runtime behind it. Use Android Studio's JDK: `export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"`.
 - `bun` and `node` 24 exist. Installing dev tools with them inside this repository is fine.
-- Reference source, read-only: `~/fo/.refs/nsh-v0.4.0` is exactly what is installed, including its `examples/` (`gallery`, `gallery-rs`, `embed-ios`, `embed-android`, `embed-gpui`, `rust-exports`, `host-echo`). `~/fo/.refs/nsh-main` is unreleased. `~/fo/.refs/react-native-firebase` and `~/fo/.refs/flutterfire` are the Firebase references.
+- Reference source, read-only: `~/fo/.refs/nsh-v0.5.0` (a shallow clone of the v0.5.0 tag, f4d68f7) is exactly what is installed, including its `examples/`. `~/fo/.refs/nsh-v0.4.0` is the previous release. `~/fo/.refs/nsh-main` dates from 2026-11-07 and is not a release. `~/fo/.refs/react-native-firebase` and `~/fo/.refs/flutterfire` are the Firebase references.
 - Sibling libraries, already built and tested by someone else: `~/fo/nsh-query` and `~/fo/nsh-form`. Each has a Rust crate and a TypeScript package with the same behavior. Read their READMEs. Do not edit them. If one has a bug, write it up in `docs/upstream-issues.md`, and work around it.
 - Installed for this repository: the `z-nsh-engineer` agent and the skills under `.agents/skills`, by `z-project-init`. Start with `nsh`, `nsh-testing` and `nsh-design-guides`.
 
@@ -85,24 +85,28 @@ Other agents are building `nsh-starter`, `nsh-firebase`, `nsh-http` and `nsh-aut
 - Prefer capture that does not take over the screen: `xcrun simctl io <udid> screenshot`, `adb -s <serial> exec-out screencap -p`, `nsh test --target ... ` with `app.screenshot(path)`. Use whole-screen computer-use only when nothing else can do the step, and keep it short.
 - If a build is slow because the machine is busy, wait. Do not lower a check because of it.
 
-## Facts that bite on 0.4.0
+## Facts that bite
 
-Each of these was hit by a real run. Trust them over the docs.
+Each of these was hit by a real run. Trust them over the docs. They were first measured on 0.4.0; the 0.5.0 migration (2026-11-11) re-checked them, and each entry says how far: "re-checked on 0.5.0" means a run or the 0.5.0 source confirmed it, "carried over" means it was not re-run and is unverified on 0.5.0.
 
-- The upstream `nsh` skill follows NSH's `main` and is ahead of 0.4.0. Not in 0.4.0: `nsh update-manifest`, `nsh/updater`, the `Notifications` module, and the `notifications` capability. Check `.nsh/types` for TSX and the crate source in `~/.cargo/registry/src/*/nsh-core-0.4.0` for Rust.
-- Real capability keys, from the build's own error: `network`, `webview`, `statusBar`, `clipboard`, `picker`, `speech`, `openUrl`, `process`, `fs`, `host`. A typo fails `nsh build` and passes `nsh check`. Run both.
-- `If` and `Each` are globals in TSX. Importing them from `nsh` is a type error.
-- `nsh check` needs an `App.tsx` at the package root, or an entry passed to it. Generated files in `.nsh/` are git-ignored, and `nsh` writes them.
-- The docs' `nsh-engine = "0.1"` samples are stale. Dev-dependencies must be `0.4.0`, as all NSH crates must come from one place. The generated `Cargo.toml` has no `log` crate.
-- `Headless::start` can return before the first frame, so `wait_for` something first or a step sees `on screen: []`.
-- `Headless::shows` takes plain text. `wait_for`, `press` and TypeScript's `app.shows` take selectors. `wait_for_gone` also takes a timeout. `screen().count` returns a `Result`.
-- `Signal::update` needs `T: Clone`. For state machines holding user types, pair `stored(..)` with a version `signal`. See `~/fo/nsh-query/crates/nsh-query/src/tracked.rs`.
-- A component's signals are already disposed when its `cleanup` runs, so reading one there panics. Capture what cleanup needs in an `Rc<Cell<..>>`. `create_root` gives an owner that outlives the component, which suits caches and in-flight writes.
-- `open`'s host handlers need annotated parameters: `async ({ id }: { id: number }) => ...`. Selector regexes use Rust's `regex` syntax, so no look-ahead. On a manual clock, `open(entry, { clock: {} })`, a test that took 13.7 s took 18 ms.
-- A TSX app consumes a sibling package through `node_modules`, with `mkdir -p node_modules && ln -s <path> node_modules/<name>`. The bundler and `nsh check` both read it, and `tsconfig.json` needs no change. Overriding `compilerOptions.paths` there breaks the `nsh` types.
-- `nsh package` needs no Xcode project and no Gradle, and has no setting for extra native SDKs, URL schemes or entitlements beyond the provisioning profile. Anything needing those goes through an embedding host: `NshAppView` with `app.handle(..)` on iOS, and `NshView` with `nsh.handle(..)` on Android, as `examples/embed-ios` and `examples/embed-android` do. The app talks to it with `host.call`, `host.post` and `host.on`, and must list the names in `capabilities.host`.
-- Failed host calls reject with `ERR_ACCESS_DENIED` when undeclared, `ERR_NSH_HOST_ERROR` when unhandled or thrown, and `ERR_FEATURE_UNAVAILABLE_ON_PLATFORM` with no host.
-- Bytecode loads only from the app bundle, the APK or a verified package.
+- Check `.nsh/types` for TSX and the crate source in `~/.cargo/registry/src/*/nsh-core-0.5.0` (or `~/fo/.refs/nsh-v0.5.0`) for Rust. On 0.4.0 the upstream skill was ahead of the release; 0.5.0 now ships `nsh update-manifest`, the updater, the `Notifications` module and the `notifications` capability (re-checked on 0.5.0: `nsh --help`, `nsh-core/src/element/`).
+- Capability keys in 0.5.0, from `nsh-core/src/access.rs`: `windows`, `network`, `webview`, `statusBar`, `clipboard`, `picker`, `speech`, `notifications`, `audio`, `openUrl`, `process`, `fs`, `host`. A typo no longer fails `nsh build`: it prints `warn nsh.json: capabilities.<key>, not granted` and exits 0, so read the build output (re-checked on 0.5.0: `docs/evidence/project/nsh-0.5.0/phase7-fact-capability-typo-0.5.0.log`).
+- `nsh_core::prelude::*` exports a `t!` of its own since 0.5.0, which collides with rust-i18n's `#[macro_use]` `t!`: a module that globs the prelude and calls `t!` needs `use rust_i18n::t;` (re-checked on 0.5.0: the migration's compile errors).
+- A headless `press` lands where the view is drawn since 0.5.0: a press on a view covered by another (a scrim's center under its dialog, page buttons under an open sheet) fails with "is covered". Use `press_at` for an uncovered point, or do what a user could do. A step can also move the manual clock by a display frame while native animations finish, so measure debounces from the event itself, not from the step (re-checked on 0.5.0: `tests/overlays.rs`, nsh-form `tests/rows2.test.tsx`).
+- `If` and `Each` are globals in TSX. Importing them from `nsh` is a type error (carried over).
+- `nsh check` needs an `App.tsx` and a `tsconfig.json` at the package root, or an entry passed to it. Generated files in `.nsh/` are git-ignored, and `nsh` writes them (re-checked on 0.5.0 for the `tsconfig.json` half).
+- The docs' `nsh-engine = "0.1"` samples are stale. Dev-dependencies must be `0.5.0`, as all NSH crates must come from one place. The generated `Cargo.toml` has no `log` crate (carried over).
+- `Headless::start` can return before the first frame, so `wait_for` something first or a step sees `on screen: []` (carried over).
+- `Headless::shows` takes plain text. `wait_for`, `press` and TypeScript's `app.shows` take selectors. `wait_for_gone` also takes a timeout. `screen().count` returns a `Result` (carried over).
+- `Signal::update` needs `T: Clone`. For state machines holding user types, pair `stored(..)` with a version `signal`. See `~/fo/nsh-query/crates/nsh-query/src/tracked.rs` (carried over).
+- A component's signals are already disposed when its `cleanup` runs, so reading one there panics. Capture what cleanup needs in an `Rc<Cell<..>>`. `create_root` gives an owner that outlives the component, which suits caches and in-flight writes (carried over).
+- `open`'s host handlers need annotated parameters: `async ({ id }: { id: number }) => ...`. Selector regexes use Rust's `regex` syntax, so no look-ahead. On a manual clock, `open(entry, { clock: {} })`, a test that took 13.7 s took 18 ms (carried over).
+- A TSX app consumes a sibling package through `node_modules`, with `mkdir -p node_modules && ln -s <path> node_modules/<name>`. The bundler and `nsh check` both read it, and `tsconfig.json` needs no change. Overriding `compilerOptions.paths` there breaks the `nsh` types. The sibling packages need their own `bun install` first, or `@tanstack/*` does not resolve (re-checked on 0.5.0).
+- On 0.4.0, `nsh package` had no setting for extra native SDKs, URL schemes or entitlements, so anything needing those went through an embedding host (`NshAppView`/`app.handle(..)` on iOS, `NshView`/`nsh.handle(..)` on Android, as `examples/embed-ios` and `examples/embed-android` do; the app talks to it with `host.call`, `host.post` and `host.on`, listing the names in `capabilities.host`). 0.5.0's release notes add Info.plist keys, entitlements and URL schemes to packaging; this repo has not adopted them, and the embedding path is unchanged (carried over).
+- Failed host calls reject with `ERR_ACCESS_DENIED` when undeclared, `ERR_NSH_HOST_ERROR` when unhandled or thrown, and `ERR_FEATURE_UNAVAILABLE_ON_PLATFORM` with no host (carried over).
+- Bytecode loads only from the app bundle, the APK or a verified package (carried over).
+- `nsh package --target web` and `nsh test --target web` build C code (zstd) for wasm with `AR_wasm32_unknown_unknown=llvm-ar`, and `llvm-ar` is not on this Mac's `PATH`: pass `AR_wasm32_unknown_unknown=/opt/homebrew/opt/llvm/bin/llvm-ar CC_wasm32_unknown_unknown=/opt/homebrew/opt/llvm/bin/clang` (re-checked on 0.5.0: `docs/evidence/project/nsh-0.5.0/phase6-package-web-with-llvm.log`).
+- On this Mac, NDK 29's (and 27's) `llvm-ar` is a shell script that execs itself and never returns, so a C build for Android (the `ring` crate) hangs. `AR_aarch64_linux_android` pointed at NDK 28's real `llvm-ar` works (measured 2026-11-11; machine state, not NSH).
 
 ## How to run this
 
@@ -117,7 +121,7 @@ Set this session's goal to the goal above, and keep working until the satisfacti
 - Do not publish to crates.io or npm, do not change repository visibility, and do not push. Commit on `main` as each milestone passes, using Conventional Commits with the reason in the body.
 - Comments are 1-2 lines and state a non-obvious constraint. Never narrate the next line. Dead code is deleted. No speculative abstractions.
 - Docs read like a competent human wrote them: direct, concrete, no marketing filler. The `antislop-copy` and `code-comments` skills apply.
-- Never invent an API. Look the name up, in the source for 0.4.0.
+- Never invent an API. Look the name up, in the source for 0.5.0.
 - A Rust gate is `cargo fmt --all -- --check`, `cargo clippy --all-targets -- -D warnings` and `cargo test`. A TSX gate is `nsh check`, `nsh build` with every warning fixed, and `nsh test`. No check is weakened, skipped or deleted to get a pass.
 - Tests go through the UI on a manual clock, with no real network and no real time, except the labelled sandbox runs below. Every new test is seen to fail once, by breaking the code on purpose. Use `test-quality-guardrails`.
 - `docs/STATUS.md` stays current with what is done, what was verified how, and what was not verified. A claim with no evidence is reported as unverified.

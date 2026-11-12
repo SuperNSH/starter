@@ -1,5 +1,6 @@
 //! Deep links: [`route_from_deep_link`](crate::shell::routes) parses the
-//! path. 0.4.0 has no deep-link delivery of its own, so the entries are a
+//! path. NSH 0.4.0 had no deep-link delivery of its own; 0.5.0's URL
+//! schemes are not adopted yet (a follow-up), so the entries are a
 //! desktop launch argument (set before the engine runs) and this seam for
 //! an embedding host, which calls [`open`] from its `host.on` wiring.
 

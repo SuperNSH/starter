@@ -1,0 +1,7 @@
+$ cargo clippy --all-targets --all-features -- -D warnings
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Checking nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.72s
+[exit 0]

@@ -1,0 +1,523 @@
+$ (cd .) cargo test
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling unicode-ident v1.0.27
+   Compiling cfg-if v1.0.5
+   Compiling zeroize v1.9.1
+   Compiling typenum v1.20.1
+   Compiling subtle v2.6.1
+   Compiling rand_core v0.10.1
+   Compiling cmov v0.5.4
+   Compiling const-oid v0.10.2
+   Compiling log v0.4.35
+   Compiling foldhash v0.2.0
+   Compiling equivalent v1.0.3
+   Compiling allocator-api2 v0.2.21
+   Compiling libc v0.2.191
+   Compiling libm v0.2.16
+   Compiling siphasher v1.0.4
+   Compiling smallvec v1.16.4
+   Compiling cpubits v0.1.1
+   Compiling stable_deref_trait v1.2.1
+   Compiling base64ct v1.8.3
+   Compiling serde_core v1.0.229
+   Compiling pin-project-lite v0.2.17
+   Compiling simd-adler32 v0.3.10
+   Compiling proc-macro2 v1.0.107
+   Compiling memchr v2.8.3
+   Compiling rustc-hash v2.1.3
+   Compiling hybrid-array v0.4.15
+   Compiling ctutils v0.4.8
+   Compiling jobserver v0.1.35
+   Compiling cpufeatures v0.3.1
+   Compiling hashbrown v0.17.1
+   Compiling itoa v1.0.18
+   Compiling num-traits v0.2.19
+   Compiling adler2 v2.0.1
+   Compiling pem-rfc7468 v1.0.0
+   Compiling generic-array v0.14.7
+   Compiling bytes v1.12.1
+   Compiling quote v1.0.47
+   Compiling once_cell v1.21.4
+   Compiling rustls-pki-types v1.15.1
+   Compiling cc v1.11.1
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling block-padding v0.4.2
+   Compiling writeable v0.6.4
+   Compiling utf_types v1.0.0
+   Compiling alloc-no-stdlib v3.0.0
+   Compiling litemap v0.8.3
+   Compiling crypto-bigint v0.7.10
+   Compiling miniz_oxide v0.9.1
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling getrandom v0.2.17
+   Compiling utf-8 v0.7.6
+   Compiling syn v3.0.9
+   Compiling syn v2.0.119
+   Compiling untrusted v0.9.0
+   Compiling digest v0.11.3
+   Compiling ring v0.17.14
+   Compiling inout v0.2.5
+   Compiling crc32fast v1.5.4
+   Compiling utf8_iter v1.1.0
+   Compiling ff v0.14.0
+   Compiling phf_shared v0.11.3
+   Compiling libloading v0.8.9
+   Compiling getrandom v0.3.4
+   Compiling icu_normalizer_data v2.4.0
+   Compiling digest v0.10.7
+   Compiling icu_properties_data v2.4.0
+   Compiling cpufeatures v0.2.17
+   Compiling synstructure v0.14.0
+   Compiling zerovec-derive v0.11.7
+   Compiling der_derive v0.8.0
+   Compiling zerocopy-derive v0.8.63
+   Compiling displaydoc v0.2.7
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.21
+   Compiling hmac v0.13.0
+   Compiling flate2 v1.1.11
+   Compiling clang-sys v1.9.1
+   Compiling cipher v0.5.2
+   Compiling prettyplease v0.2.37
+   Compiling hashbrown v0.16.1
+   Compiling bitflags v2.13.2
+   Compiling rand_core v0.9.5
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling der v0.8.3
+   Compiling group v0.14.0
+   Compiling zerocopy v0.8.63
+   Compiling serde v1.0.229
+   Compiling signature v3.0.0
+   Compiling thiserror v2.0.21
+   Compiling tokio-macros v2.7.2
+   Compiling httparse v1.10.1
+   Compiling bindgen v0.72.1
+   Compiling alloc-stdlib v0.3.0
+   Compiling http v1.5.0
+   Compiling mio v1.2.4
+   Compiling socket2 v0.6.5
+   Compiling zerofrom v0.1.8
+   Compiling errno v0.3.14
+   Compiling base16ct v1.0.0
+   Compiling spki v0.8.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling half v2.7.1
+   Compiling percent-encoding v2.3.2
+   Compiling hkdf v0.13.0
+   Compiling phf_generator v0.11.3
+   Compiling brotli-decompressor v6.3.0
+   Compiling quickjs-jit-sys v0.14.1
+   Compiling tokio v1.54.1
+   Compiling io-lifetimes v3.0.1
+   Compiling io-lifetimes v2.0.4
+   Compiling yoke v0.8.4
+   Compiling rustix v1.1.6
+   Compiling sec1 v0.8.1
+   Compiling pkcs8 v0.11.0
+   Compiling rand_chacha v0.9.0
+   Compiling webpki-roots v1.0.11
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+   Compiling form_urlencoded v1.2.2
+   Compiling zmij v1.0.23
+   Compiling sha1 v0.10.7
+   Compiling io-extras v0.19.0
+   Compiling primefield v0.14.0
+   Compiling sha2 v0.11.1
+   Compiling zerovec v0.11.9
+   Compiling zerotrie v0.2.5
+   Compiling fs-set-times v0.20.3
+   Compiling elliptic-curve v0.14.3
+   Compiling rand v0.9.5
+   Compiling futures-macro v0.3.34
+   Compiling universal-hash v0.6.1
+   Compiling unicode-width v0.2.3
+   Compiling maybe-owned v0.3.4
+   Compiling ambient-authority v0.0.2
+   Compiling futures-task v0.3.34
+   Compiling ipnet v2.12.2
+   Compiling futures-core v0.3.34
+   Compiling tinystr v0.8.5
+   Compiling potential_utf v0.1.6
+   Compiling data-encoding v2.11.1
+   Compiling bit-vec v0.9.1
+   Compiling futures-sink v0.3.34
+   Compiling scopeguard v1.2.0
+   Compiling slab v0.4.12
+   Compiling unicode-segmentation v1.13.3
+   Compiling new_debug_unreachable v1.0.6
+   Compiling codespan-reporting v0.13.1
+   Compiling cap-primitives v4.0.3
+   Compiling wuff v0.2.10
+   Compiling wnaf v0.14.1
+   Compiling icu_locale_core v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling serde_json v1.0.154
+   Compiling bit-set v0.9.1
+   Compiling webpki-roots v0.26.11
+   Compiling lock_api v0.4.14
+   Compiling futures-util v0.3.34
+   Compiling string_cache_codegen v0.5.4
+   Compiling phf_codegen v0.11.3
+   Compiling parking_lot_core v0.9.12
+   Compiling rfc6979 v0.6.0
+   Compiling sha2 v0.10.9
+   Compiling indexmap v2.14.2
+   Compiling icu_provider v2.4.0
+   Compiling aho-corasick v1.1.5
+   Compiling event-listener v5.4.2
+   Compiling imagesize v0.15.0
+   Compiling mac v0.1.1
+   Compiling rustc-hash v1.1.0
+   Compiling regex-syntax v0.8.11
+   Compiling hexf-parse v0.2.1
+   Compiling arrayvec v0.7.8
+   Compiling ecdsa v0.17.0
+   Compiling parking_lot v0.12.5
+   Compiling markup5ever v0.12.1
+   Compiling icu_normalizer v2.4.0
+   Compiling icu_properties v2.4.0
+   Compiling event-listener-strategy v0.5.4
+   Compiling toml_edit v0.25.19+spec-1.1.0
+   Compiling nsh-macros v0.4.0
+   Compiling futf v0.1.5
+   Compiling cap-std v4.0.3
+   Compiling regex-automata v0.4.18
+   Compiling primeorder v0.14.0
+   Compiling naga v29.0.4
+   Compiling ordered-float v5.5.1
+   Compiling idna_adapter v1.2.2
+   Compiling keccak v0.2.2
+   Compiling phf_shared v0.14.0
+   Compiling taffy v0.15.1
+   Compiling unicode-properties v0.1.5
+   Compiling precomputed-hash v0.1.1
+   Compiling httpdate v1.0.3
+   Compiling vsimd v0.8.0
+   Compiling unicode-linebreak v0.1.5
+   Compiling outref v0.5.2
+   Compiling sponge-cursor v0.1.0
+   Compiling tendril v0.4.3
+   Compiling idna v1.1.0
+   Compiling proc-macro-crate v3.5.0
+   Compiling phf_generator v0.14.0
+   Compiling async-lock v3.5.0
+   Compiling string_cache v0.8.9
+   Compiling curve25519-dalek v5.0.0
+   Compiling convert_case v0.12.0
+   Compiling polyval v0.7.3
+   Compiling halfbrown v0.4.0
+   Compiling chacha20 v0.10.2
+   Compiling phf v0.11.3
+   Compiling aead v0.6.1
+   Compiling float-cmp v0.10.0
+   Compiling url v2.5.8
+   Compiling ryu v1.0.23
+   Compiling relative-path v2.0.3
+   Compiling bit-vec v0.8.0
+   Compiling phf_macros v0.14.0
+   Compiling base64-simd v0.8.0
+   Compiling ghash v0.6.0
+   Compiling getrandom v0.4.3
+   Compiling poly1305 v0.9.1
+   Compiling ed25519 v3.0.0
+   Compiling pkcs1 v0.8.0
+   Compiling aes v0.9.4
+   Compiling value-trait v0.12.3
+   Compiling ctr v0.10.1
+   Compiling html5ever v0.27.0
+   Compiling bit-set v0.8.0
+   Compiling crypto-primes v0.7.2
+   Compiling signature v2.2.0
+   Compiling tracing-core v0.1.36
+   Compiling simdutf8 v0.1.5
+   Compiling same-file v1.0.6
+   Compiling ed25519-dalek v3.0.0
+   Compiling chacha20poly1305 v0.11.0
+   Compiling rand v0.10.3
+   Compiling aes-kw v0.3.1
+   Compiling aes-gcm v0.11.1
+   Compiling phf v0.14.0
+   Compiling fancy-regex v0.16.2
+   Compiling rsa v0.10.0-rc.19
+   Compiling ed25519 v2.2.3
+   Compiling tracing v0.1.44
+   Compiling simd-json v0.18.1
+   Compiling walkdir v2.5.0
+   Compiling crc32c v0.6.9
+   Compiling curve25519-dalek v4.1.3
+   Compiling x25519-dalek v3.0.0
+   Compiling cshake v0.2.1
+   Compiling shake v0.1.0
+   Compiling sha3 v0.12.0
+   Compiling hex-simd v0.8.0
+   Compiling p521 v0.14.0
+   Compiling p384 v0.14.0
+   Compiling p256 v0.14.0
+   Compiling brotli v9.1.1
+   Compiling bincode v1.3.3
+   Compiling cbc v0.2.1
+   Compiling sha1 v0.11.0
+   Compiling md-5 v0.11.0
+   Compiling pbkdf2 v0.13.0
+   Compiling quickjs-jit-core v0.14.1
+   Compiling escape-simd v0.1.1
+   Compiling fnv v1.0.7
+   Compiling foldhash v0.1.5
+   Compiling core-foundation-sys v0.8.7
+   Compiling ed25519-dalek v2.2.0
+   Compiling crossbeam-utils v0.8.23
+   Compiling xml5ever v0.18.1
+   Compiling regex v1.13.1
+   Compiling unicode-id v0.3.7
+   Compiling base64 v0.23.1
+   Compiling base64 v0.22.1
+   Compiling quickjs-jit-macro v0.14.1
+   Compiling json-escape-simd v3.1.3
+   Compiling hashbrown v0.15.5
+   Compiling syntect v5.3.0
+   Compiling iana-time-zone v0.1.65
+   Compiling str_indices v0.4.4
+   Compiling crossbeam-channel v0.5.17
+   Compiling utf8-zero v0.8.1
+   Compiling markup5ever_rcdom v0.3.0
+   Compiling freeoxide-gpui-form-core v0.11.0
+   Compiling ureq-proto v0.7.1
+   Compiling oxc_sourcemap v9.0.0
+   Compiling imara-diff v0.2.0
+   Compiling chrono v0.4.45
+   Compiling quickjs-jit v0.14.1
+   Compiling ropey v1.6.1
+   Compiling two-face v0.4.5
+   Compiling markdown v1.0.0
+   Compiling zstd-safe v8.2.0
+   Compiling zstd v0.14.3
+   Compiling quickjs-jit-stdlib v0.14.1
+   Compiling rustls v0.23.46
+   Compiling rustls-webpki v0.103.16
+   Compiling tungstenite v0.28.0
+   Compiling tokio-rustls v0.26.6
+   Compiling ureq v3.5.1
+   Compiling tokio-tungstenite v0.28.0
+   Compiling nsh-core v0.4.0
+   Compiling nsh-package v0.4.0
+   Compiling nsh-js v0.4.0
+   Compiling nsh-base v0.4.0
+   Compiling nsh-engine v0.4.0
+   Compiling nsh-testing v0.4.0
+   Compiling nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 25m 06s
+     Running unittests src/lib.rs (target/debug/deps/nsh_form-692f9959cc1ceeab)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/arrays.rs (target/debug/deps/arrays-4198a7f516baa23e)
+
+running 5 tests
+test array_keys_are_stable_through_moves ... ok
+test array_row_errors_stay_with_their_row_after_removal ... ok
+test row_field_reads_and_writes_one_part_of_a_row ... ok
+test rows_rendered_in_each_outlive_a_removal_and_a_clear ... ok
+test array_push_insert_replace_remove_swap_move_clear ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/bindings.rs (target/debug/deps/bindings-8f871f12ef4d1508)
+
+running 3 tests
+test bind_switch_and_checkbox ... ok
+test bind_number_input_writes_the_number ... ok
+test bind_select ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/bindings_more.rs (target/debug/deps/bindings_more-b37f1cc8e104e6cd)
+
+running 3 tests
+test bind_toggle_follows_a_press ... ok
+test bind_combobox_follows_a_chosen_item ... ok
+test bind_editor_follows_typed_text ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/compat.rs (target/debug/deps/compat-d0c94c0015620b7d)
+
+running 1 test
+test every_existing_public_name_still_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/controls.rs (target/debug/deps/controls-f33f81c329a07227)
+
+running 9 tests
+test bind_radio_pressing_a_radio_sets_its_option ... ok
+test bind_toggle_item_each_item_toggles_its_own_value ... ok
+test bind_time_field_typed_digits_set_the_time ... ok
+test bind_otp_input_takes_typed_digits ... ok
+test bind_color_picker_a_hue_drag_changes_the_colour ... ok
+test bind_slider_a_drag_changes_the_value ... ok
+test bind_calendar_a_press_on_a_day_sets_the_date ... ok
+test bind_date_picker_two_picks_set_the_range ... ok
+test bind_rich_editor_typing_stores_the_document ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
+     Running tests/fine_grained.rs (target/debug/deps/fine_grained-c3c8c8bb19de7228)
+
+running 4 tests
+test editing_one_row_does_not_wake_the_length_or_another_row ... ok
+test typing_in_one_field_does_not_wake_bindings_of_another ... ok
+test form_flags_wake_only_when_they_change ... ok
+test one_fields_bindings_wake_only_for_what_they_read ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/finish.rs (target/debug/deps/finish-4c087b2503688092)
+
+running 5 tests
+test form_id_is_read_back ... ok
+test submit_checks_run_together ... ok
+test on_submit_meta_is_the_default_meta ... ok
+test get_field_value_reads_a_typed_value_by_path ... ok
+test pattern_rejects_a_value_that_does_not_match ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/form.rs (target/debug/deps/form-7a1b5cff756c88c7)
+
+running 10 tests
+test load_replaces_values_and_baseline ... ok
+test reset_goes_back_to_the_baseline ... ok
+test nested_paths_write_and_report_dirty_alone ... ok
+test numeric_text_uses_the_gpui_form_check ... ok
+test errors_wait_for_a_submit ... ok
+test a_rule_can_read_other_values ... ok
+test an_async_rule_debounces_and_keeps_the_form_invalid_meanwhile ... ok
+test a_valid_submit_makes_the_values_the_baseline ... ok
+test a_form_level_error_shows_on_the_form ... ok
+test server_errors_land_on_their_field_and_clear_on_edit ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/form_async.rs (target/debug/deps/form_async-7f1604895bb78dbb)
+
+running 2 tests
+test form_blur_async_reports_on_the_field_it_names ... ok
+test form_dynamic_async_reruns_after_a_submit_and_reports_on_the_form ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/gpui_form.rs (target/debug/deps/gpui_form-6a02b59d543f02a8)
+
+running 3 tests
+test submit_tracker_accessors_set_take_and_clear_the_error ... ok
+test changed_paths_list_only_the_fields_that_differ_from_the_baseline ... ok
+test url_slug_uuid_and_required_when_report_their_messages ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/inspect.rs (target/debug/deps/inspect-c5457565961f8d90)
+
+running 1 test
+test inspection_reads_report_pending_linked_and_base_state ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/meta.rs (target/debug/deps/meta-58d74892aa3e7738)
+
+running 3 tests
+test was_changed_stays_true_after_returning_to_default ... ok
+test field_meta_tracks_touched_blurred_pristine_changed ... ok
+test is_default_value_follows_the_baseline ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/parity.rs (target/debug/deps/parity-87c124fd4006d654)
+
+running 11 tests
+test standard_rules_min_max_and_one_of_fail_outside_their_bounds ... ok
+test form_level_dynamic_validators_report_on_the_form ... ok
+test async_always_runs_async_after_a_sync_failure ... ok
+test set_with_an_equal_value_changes_nothing ... ok
+test linked_field_revalidates_when_its_source_is_blurred ... ok
+test dynamic_async_validators_run_after_submit ... ok
+test validate_from_revalidates_touched_rows ... ok
+test form_async_debounce_applies_to_validators_without_their_own ... ok
+test form_async_change_validator_debounces ... ok
+test field_blur_and_submit_async_checks_run_at_their_events ... ok
+test form_writers_and_selectors_round_trip ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/schema.rs (target/debug/deps/schema-55169704e5528f8c)
+
+running 6 tests
+test parse_values_with_schema_reports_issues_now ... ok
+test parse_value_with_schema_checks_one_field ... ok
+test field_schema_runs_on_change ... ok
+test parse_value_with_schema_async_checks_one_field_after_a_delay ... ok
+test form_schema_puts_issues_on_fields_on_submit ... ok
+test parse_values_with_schema_async_waits_for_the_server ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/state.rs (target/debug/deps/state-d9a7928808a7e1ef)
+
+running 8 tests
+test shared_options_are_reusable ... ok
+test default_state_restores_values_errors_and_submission_state ... ok
+test merge_form_replaces_the_values ... ok
+test transform_changes_the_initial_state ... ok
+test handle_change_with_an_equal_value_counts_as_a_change ... ok
+test field_update_replaces_validators ... ok
+test form_update_changes_validators_at_run_time ... ok
+test save_state_captures_values_and_flags ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/validation.rs (target/debug/deps/validation-01c0f9b4f075aa28)
+
+running 26 tests
+test form_on_mount_runs_when_the_form_is_made ... ok
+test form_options_on_submit_runs_with_options ... ok
+test handle_submit_with_meta_passes_meta ... ok
+test form_validator_puts_errors_on_fields ... ok
+test can_submit_is_false_while_a_mount_error_stands ... ok
+test on_blur_runs_on_blur_only ... ok
+test form_and_field_listeners_fire_on_blur_submit_and_mount ... ok
+test can_submit_when_invalid_allows_a_submit ... ok
+test failed_submit_focuses_the_first_invalid_input ... ok
+test listeners_run_with_debounce ... ok
+test delete_field_removes_value_and_meta ... ok
+test linked_field_revalidates_when_its_source_changes ... ok
+test error_map_is_keyed_by_cause_and_clears_on_pass ... ok
+test can_submit_matches_tanstack_rules ... ok
+test async_validator_debounces_once_and_drops_old_answers ... ok
+test form_on_submit_async_gives_server_errors ... ok
+test on_mount_runs_when_the_field_mounts ... ok
+test on_change_runs_on_edit_only ... ok
+test on_submit_invalid_runs_with_the_values ... ok
+test on_submit_runs_on_submit_only ... ok
+test revalidate_logic_runs_dynamic_validators_after_submit ... ok
+test reset_field_restores_one_field ... ok
+test submission_state_flags_follow_a_submit ... ok
+test reset_with_values_sets_a_new_baseline ... ok
+test validate_all_fields_shows_every_error ... ok
+test select_reruns_only_for_its_slice ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+   Doc-tests nsh_form
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[exit 0]

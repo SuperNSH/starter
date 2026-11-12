@@ -1,0 +1,6 @@
+android          not installed  Android runtime (`--target android`, `nsh package --target android`)
+android-symbols  not installed  Android runtime's symbols (crash reports, `ndk-stack`)
+ios              not installed  iOS runtimes (`--target ios`, `catalyst`, `nsh package --target ios`)
+web              not installed  web runtime (`--target web`, `nsh package --target web`)
+gpui             not installed  GPUI development host (`--target gpui`)
+tui              not installed  terminal development host (`--target tui`)

@@ -3,7 +3,7 @@
 //! never rewrite it. One finger pans (or drags a node in world space);
 //! a pinch scales the board natively (`pinch_value` + `bind_scale`) and
 //! folds into the camera on `on_pinch_end` — `GestureEvent` carries no
-//! centroid on 0.4.0, so the pinch anchors at the view's center. The
+//! centroid on 0.5.0, so the pinch anchors at the view's center. The
 //! board's own hit test runs in world space, at any zoom.
 
 use nsh_base::theme;

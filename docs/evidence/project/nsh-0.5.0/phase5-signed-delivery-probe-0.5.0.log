@@ -1,0 +1,23 @@
++(eval):8> /Users/hmziq/.nsh/bin/nsh keygen k/root
+key ecd5fb15a04bc241: k/root.secret (keep it secret), k/root.pub
++(eval):8> /Users/hmziq/.nsh/bin/nsh keygen k/release
+key 71b347153668a92c: k/release.secret (keep it secret), k/release.pub
++(eval):8> /Users/hmziq/.nsh/bin/nsh certify --root k/root.secret --key k/release.pub --apps 'com.example.nshstarter.*' --days 90 -o k/release.cert
+k/release.cert: key 71b347153668a92c certified by root ecd5fb15a04bc241 for com.example.nshstarter.* until 90 days from now
++(eval):8> /Users/hmziq/.nsh/bin/nsh publish App.tsx --key k/release.secret --cert k/release.cert -o out/p.nshpkg
+warn app id `com.example.nshstarter.remote` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+✓ built App.tsx (313 B js, 479 B bytecode, 5ms)
+out/p.nshpkg: com.example.nshstarter.remote 1.0.0 (build 1), 0 assets, 3 KB, signed by 71b347153668a92c, for runtime 0.5.0 or newer
++(eval):8> /Users/hmziq/.nsh/bin/nsh verify out/p.nshpkg --root k/root.pub
+valid: com.example.nshstarter.remote 1.0.0 (build 1), release key 71b347153668a92c, sha256 bda3bd331f48e6f3539c552f61f52bd22c2d4047f952c33395748251e0c1d6a3, 0 assets, bytecode for this runtime
++(eval):8> SHA=+(eval):8> /Users/hmziq/.nsh/bin/nsh verify out/p.nshpkg --root k/root.pub
++(eval):8> SHA=+(eval):8> sed -n 's/.*sha256 \([0-9a-f]\{64\}\).*/\1/p'
++(eval):8> SHA=+(eval):8> tail -1
++(eval):8> SHA=bda3bd331f48e6f3539c552f61f52bd22c2d4047f952c33395748251e0c1d6a3 
++(eval):8> /Users/hmziq/.nsh/bin/nsh revoke --root k/root.secret --sequence 1 --package bda3bd331f48e6f3539c552f61f52bd22c2d4047f952c33395748251e0c1d6a3 -o out/revocations.json
+out/revocations.json: list 1, 0 release keys and 1 packages revoked
++(eval):8> /Users/hmziq/.nsh/bin/nsh verify out/p.nshpkg --root k/root.pub --revocations out/revocations.json
+error revoked: package bda3bd331f48e6f3539c552f61f52bd22c2d4047f952c33395748251e0c1d6a3
++(eval):8> echo 'final verify exit: 1'
+final verify exit: 1
++(eval):8> set +x

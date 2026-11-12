@@ -1,0 +1,13 @@
+Sign a revocation list: release keys and packages that must not load any more
+
+Usage: nsh revoke [OPTIONS] --root <ROOT> --out <OUT>
+
+Options:
+      --root <ROOT>          The root's secret key (`.secret`)
+  -v, --verbose              Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+      --extend <EXTEND>      Keep the entries of this list (the last one published)
+      --sequence <SEQUENCE>  The list's number: higher than any published before (default with `--extend`: that list's plus one)
+      --key <KEYS>           A release key id to revoke (repeatable)
+      --package <PACKAGES>   A package SHA-256 to revoke (repeatable; `nsh verify` prints it)
+  -o, --out <OUT>            The list to write
+  -h, --help                 Print help

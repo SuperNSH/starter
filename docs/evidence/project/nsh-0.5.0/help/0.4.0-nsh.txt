@@ -1,0 +1,24 @@
+Build and run nsh apps
+
+Usage: nsh [OPTIONS] <COMMAND>
+
+Commands:
+  init         Create an app: in TSX, in Rust, or in TSX with a Rust crate of its own (`--template`). Generates the app's entry points, configuration and editor declarations
+  build        Bundle an app and compile it to QuickJS bytecode; a Rust app (`nsh.json` `"root"`): build its crates and gather the files they ship
+  test         Run an app's tests headless: its test files (`*.test.tsx`, `*.test.ts`, importing `nsh/test`), each test opening the app on an engine of its own, after the `cargo test` of its Rust crates (`nsh.json` `"rust"`) in the directory; or, given the app's entry, open it and take the steps standard input gives (`await app.press("Add")`)
+  check        Type check an app with TypeScript's native compiler (TypeScript 7, downloaded once from the npm registry; no Node needed); an app with Rust crates (`nsh.json` `"rust"`): `cargo check` them first, and a Rust app (`"root"`) without a `tsconfig.json` only that
+  dev          Run an app in this system’s native host with hot reload
+  package      Package an installable app from the prebuilt runtime (no Rust needed). Metadata comes from `nsh.json` next to the entry, overridden by the flags below
+  run          Run an app in a development host with hot reload. Defaults to AppKit on macOS, GTK on Linux and Win32 on Windows; select mobile hosts, Mac Catalyst, GPUI or a browser with --target
+  keygen       Create a signing key: `<name>.secret` (keep it offline for a root) and `<name>.pub` (what apps trust, for a root)
+  certify      Certify a release key with a root key, for some app ids and a time window; packages carry the certificate
+  publish      Build an app in release mode and sign it into a package (`.nshpkg`) for apps that embed nsh to verify and run. Metadata comes from `nsh.json` next to the entry, overridden by the flags below. Given a package instead of an app, signs it again with this key: only its certificate, signing time and signature change
+  symbolicate  Map the positions in a reported error stack (`bundle.js:LINE:COL`) to the app's sources, with a package's source map
+  verify       Verify a package as an app trusting the given roots would (without roots: only its signature)
+  revoke       Sign a revocation list: release keys and packages that must not load any more
+  help         Print this message or the help of the given subcommand(s)
+
+Options:
+  -v, --verbose  Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+  -h, --help     Print help
+  -V, --version  Print version

@@ -1,0 +1,97 @@
+=== build
+=== check
+=== test
+30c30
+<           Run the apps the tests open on this platform's development host instead of headless: the steps act with the platform's own input (macos, linux, windows, gpui, web, ios and android; web runs them in a headless Chrome, Edge or Chromium, ios in a simulator, android on the first device adb lists)
+---
+>           Run the apps the tests open on this platform's development host instead of headless: the steps act with the platform's own input (macos, linux, windows, gpui, tui, web, ios and android; tui uses an in-memory terminal; web runs them in a headless Chrome, Edge or Chromium, ios in a simulator, android on the first device adb lists)
+40a41
+>           - tui:      The development host in this terminal
+47a49,51
+>       --device <DEVICE>
+>           With `--target ios`: the simulator the apps run in (name or UDID); default: a booted one, else the newest iPhone
+> 
+50a55,57
+>       --foreground
+>           With `--target macos`: lets the apps become the active app, as they would run for a user. By default they run in the background: their windows show but never take the keyboard from the app in use, and the tests' input goes to them directly
+> 
+=== run
+1c1
+< Run an app in a development host with hot reload. Defaults to AppKit on macOS, GTK on Linux and Win32 on Windows; select mobile hosts, Mac Catalyst, GPUI or a browser with --target
+---
+> Run an app in a development host with hot reload. Defaults to AppKit on macOS, GTK on Linux and Win32 on Windows; select mobile hosts, Mac Catalyst, GPUI, a terminal or a browser with --target
+13,15c13
+<           Dev server port (replaces the previous NSH development session)
+<           
+<           [default: 8790]
+---
+>           Dev server port (replaces the previous NSH development session on it). Default: the port this app had last, else the first free one from 8790; with --server-only, 8790
+32c30
+<           Show the performance monitor over the app: frame rate, frame and commit costs, CPU, GPU, memory (`--target macos`, which also logs its readings once a second; `--target linux`, `windows` and `ios` log them)
+---
+>           Show the performance monitor over the app: frame rate, frame and commit costs, CPU, GPU, memory (`--target macos` and `linux`; on `macos`, `linux`, `windows` and `ios` the host also logs its readings once a second, shown with `-v`). On `tui`, show FPS/idle, frame p95, apply/draw/flush times, bytes and changed Cells; C-h p toggles the line
+45a44
+>           - tui:      The development host in this terminal
+51a51,53
+>       --points-per-cell <WIDTHxHEIGHT>
+>           Points per terminal Cell, overriding nsh.json tui.pointsPerCell (default: 8x16)
+> 
+=== package
+70a71,87
+>       --format <FORMAT>
+>           Android: what to write, an APK (installed directly) or an Android App Bundle (`aab`, uploaded to Google Play)
+> 
+>           Possible values:
+>           - apk: An APK: installed directly (`adb install`, sideloading)
+>           - aab: An Android App Bundle: uploaded to Google Play, which builds the APKs each device installs
+>           
+>           [default: apk]
+> 
+>       --arch <ARCH>
+>           macOS: the processors the app runs on, `arm64` (Apple silicon), `x86_64` (Intel) or `universal` (both, in one executable). Default: this Mac's
+> 
+>           Possible values:
+>           - arm64:     Apple silicon
+>           - x86_64:    Intel
+>           - universal: Apple silicon and Intel: one universal executable of both builds
+> 
+73a91,93
+>       --asset-url <URL>
+>           Web: the http(s) URL the site's files are served from, a CDN (`https://cdn.example.com/app/`), as the page names them; `index.html` stays at the page's address. Default: next to the page, named relatively, so the site runs from any directory
+> 
+=== keygen
+=== publish
+1c1
+< Build an app in release mode and sign it into a package (`.nshpkg`) for apps that embed nsh to verify and run. Metadata comes from `nsh.json` next to the entry, overridden by the flags below. Given a package instead of an app, signs it again with this key: only its certificate, signing time and signature change
+---
+> Upload to a store, or build and sign a package (`.nshpkg`) for apps that embed nsh to verify and run. Metadata comes from `nsh.json` next to the entry, overridden by the flags below. Given a package instead of an app, signs it again with this key: only its certificate, signing time and signature change. `nsh publish ios` / `nsh publish android` uploads to a store instead
+3a4
+>        nsh publish <COMMAND>
+4a6,10
+> Commands:
+>   ios      Upload an App Store-signed IPA to App Store Connect for TestFlight
+>   android  Upload an Android App Bundle (`.aab`) to Google Play's internal testing track, with a service account's JSON key
+>   help     Print this message or the help of the given subcommand(s)
+> 
+12,14d17
+<       --key <KEY>
+<           The release key's secret key (`.secret`)
+< 
+19a23,25
+>       --key <KEY>
+>           The release key's secret key (`.secret`)
+> 
+=== verify
+=== revoke
+=== certify
+=== symbolicate
+=== dev
+13,15c13
+<           Dev server port (replaces the previous NSH development session)
+<           
+<           [default: 8790]
+---
+>           Dev server port (replaces the previous NSH development session on it). Default: the port this app had last, else the first free one from 8790; with --server-only, 8790
+39a38
+>           - tui:      The development host in this terminal
+=== init

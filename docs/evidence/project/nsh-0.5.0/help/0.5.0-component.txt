@@ -1,0 +1,13 @@
+Add, remove or list the runtimes installed beside this nsh: those of other platforms than this machine's (`android`, `ios`, `web`, `gpui`, `tui`), which a command that needs one also adds itself
+
+Usage: nsh component [OPTIONS] <COMMAND>
+
+Commands:
+  list    The components of this machine's release, installed or not
+  add     Download and install components of this nsh's release
+  remove  Remove installed components
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+  -v, --verbose  Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+  -h, --help     Print help

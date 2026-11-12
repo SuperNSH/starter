@@ -1,24 +1,53 @@
-//! Desktop chrome: the app's own title bar and the application menu
-//! (`nsh/desktop`'s `Window` and `Menu`). Everything here no-ops off the
+//! Desktop chrome: the hidden system title bar, the sidebar's open state
+//! and the application menu (`nsh/desktop`'s `Window` and `Menu`). Everything here no-ops off the
 //! desktops, so it is installed unconditionally. One owner per keystroke:
 //! the shortcuts are keymap bindings (`shell::install`); the menu items
 //! show them and carry no `shortcut` of their own.
 
-use nsh_base::theme;
 use nsh_core::{
     desktop::{MenuRole, TitleBarStyle},
     element::desktop::{
-        MenuItem, close_window, set_application_menu, set_title_bar, title_bar as title_bar_insets,
+        MenuItem, main_window, set_application_menu, title_bar as title_bar_insets,
     },
     prelude::*,
 };
 
-use crate::shell::{nav, palette, routes::Route, undo};
+// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+use rust_i18n::t;
 
-/// The title bar's height: the platform's window controls center in it
-/// (`set_title_bar` caps at 200 points; a platform boundary, not a scale
-/// step).
-const TITLE_BAR: f32 = 48.0;
+use crate::shell::{nav, palette, routes::Route, undo};
+use crate::ui::desktop::set_title_bar;
+
+/// The unified toolbar's height, as macOS draws one: the window controls
+/// center in it, and the sidebar's top and each page's toolbar match it.
+pub const TITLE_BAR: f32 = 52.0;
+
+/// Whether the desktop sidebar shows; the toolbar toggle and `ctrl+mod+s`
+/// flip it.
+#[derive(Clone, Copy, PartialEq)]
+pub struct SidebarOpen(pub bool);
+
+impl Default for SidebarOpen {
+    fn default() -> Self {
+        Self(true)
+    }
+}
+
+/// Whether the sidebar shows. Tracked.
+pub fn sidebar_open() -> bool {
+    global::<SidebarOpen>().get().0
+}
+
+/// Shows or hides the sidebar.
+pub fn toggle_sidebar() {
+    global::<SidebarOpen>().update(|open| open.0 = !open.0);
+}
+
+/// The window controls' lane on the toolbar's leading edge, for a toolbar
+/// with no sidebar beside it. Tracked: full screen gives the lane back.
+pub fn controls_inset() -> nsh_core::Points {
+    title_bar_insets().left
+}
 
 /// The desktop shell's wiring: the hidden system title bar under the one
 /// the shell draws, and the application menu. Undone when the desktop
@@ -38,7 +67,7 @@ pub fn install() {
 /// Closes the window as the platform does (the exit ask's command on the
 /// desktops).
 pub fn close() {
-    close_window();
+    main_window().close();
 }
 
 /// The application menu: the shell's commands, every route, the window.
@@ -62,6 +91,13 @@ fn menus(is_dark: bool) -> Vec<MenuItem> {
                 MenuItem::role(MenuRole::Quit),
             ],
         ),
+        MenuItem::submenu(
+            "View",
+            [
+                MenuItem::new(format!("Toggle Sidebar  {}", key_label("ctrl+mod+s")))
+                    .on_select(toggle_sidebar),
+            ],
+        ),
         MenuItem::submenu("Go", Route::ALL.iter().copied().map(go).collect::<Vec<_>>()),
         MenuItem::submenu(
             "Window",
@@ -72,35 +108,4 @@ fn menus(is_dark: bool) -> Vec<MenuItem> {
             ],
         ),
     ]
-}
-
-/// The bar the shell draws under the hidden system one: draggable, with
-/// the native window controls' lane kept free at its end.
-pub fn title_bar() -> impl IntoElement {
-    // The native controls' lanes (macOS: left, Windows: right); reading
-    // them subscribes, so entering full screen gives the lane back.
-    view()
-        .h(px(TITLE_BAR))
-        .flex_row()
-        .items_center()
-        .gap_3()
-        .pl(move || title_bar_insets().left + px(12.0))
-        .pr(move || title_bar_insets().right + px(12.0))
-        .border_b_1()
-        .border_color(move || theme().border)
-        .bg(move || theme().card)
-        .window_drag(true)
-        .child(
-            text(t!("app.name").to_string())
-                .text_sm()
-                .font_weight(FontWeight::SEMIBOLD)
-                .text_color(move || theme().card_foreground),
-        )
-        .child(
-            text("Boilerplate for Native Shell")
-                .flex_1()
-                .text_xs()
-                .number_of_lines(1)
-                .text_color(move || theme().muted_foreground),
-        )
 }

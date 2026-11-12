@@ -1,0 +1,6 @@
+macos: 0
+web: 1
+test-web: 1
+test-macos: 1
+ios-simulator: 0
+DONE

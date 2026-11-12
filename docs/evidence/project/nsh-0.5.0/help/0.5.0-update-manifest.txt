@@ -1,0 +1,17 @@
+Write an app's update manifest (`latest.json`, signed with `--key`) from the archives `nsh package` made for each platform; publish them together
+
+Usage: nsh update-manifest [OPTIONS] [ARCHIVES]...
+
+Arguments:
+  [ARCHIVES]...  The archives named `<name>-<version>-<os>-<arch>.<ext>`
+
+Options:
+      --package <PACKAGE>    A signed package of the app's code (`nsh publish`'s `.nshpkg`), which apps trusting its root (`updater.packages.roots`) run without a new app
+  -v, --verbose              Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+      --entry <ENTRY>        The app's directory or entry, whose `nsh.json` has the id and version [default: .]
+      --key <KEY>            The secret key (`nsh keygen`'s `.secret`) of the app's `updater.publicKey`
+      --notes <NOTES>        A text file with what changed
+      --link <LINKS>         Where iOS or Android users get it: `ios=<url>`, `android=<url>` (repeatable)
+      --base-url <BASE_URL>  Prefix of the archives' URLs (default: next to the manifest)
+  -o, --out <OUT>            The directory the manifest is written to [default: .]
+  -h, --help                 Print help

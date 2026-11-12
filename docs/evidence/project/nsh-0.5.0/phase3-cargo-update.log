@@ -1,0 +1,314 @@
+    Updating crates.io index
+     Locking 84 packages to highest Rust 1.99.1 compatible versions
+    Updating annotate-snippets v0.12.17 -> v0.12.18
+    Updating arc-swap v1.9.3 -> v1.9.5
+    Removing ash v0.38.0+1.3.281
+      Adding atomic_refcell v0.1.14
+    Updating brotli-decompressor v6.3.0 -> v6.3.1
+    Removing bytemuck_derive v1.12.1
+      Adding combine v4.6.9
+    Updating const-oid v0.10.2 -> v0.10.3
+      Adding constant_time_eq v0.6.1
+      Adding core-foundation v0.10.1
+      Adding core_maths v0.1.1
+    Updating crc32fast v1.5.4 -> v1.5.5
+    Updating crypto-bigint v0.7.10 -> v0.7.11
+    Removing defmt v1.2.0
+    Removing defmt-macros v1.2.0
+    Removing defmt-parser v1.1.0
+    Removing dlib v0.5.3
+    Removing document-features v0.2.12
+    Removing fancy-regex v0.14.0
+      Adding filetime v0.2.29
+      Adding fontconfig-parser v0.5.8
+      Adding fontdb v0.23.0
+    Removing gl_generator v0.14.0
+    Removing glow v0.17.0
+    Removing glutin_wgl_sys v0.6.1
+    Removing gpu-allocator v0.28.0
+    Removing gpu-descriptor v0.3.2
+    Removing gpu-descriptor-types v0.2.0
+      Adding gstreamer v0.25.4
+      Adding gstreamer-app v0.25.2
+      Adding gstreamer-app-sys v0.25.4
+      Adding gstreamer-audio v0.25.4
+      Adding gstreamer-audio-sys v0.25.4
+      Adding gstreamer-base v0.25.4
+      Adding gstreamer-base-sys v0.25.4
+      Adding gstreamer-sys v0.25.4
+    Updating inout v0.2.5 -> v0.2.6
+      Adding itertools v0.15.0
+    Updating itoa v1.0.18 -> v1.0.19
+    Updating jiff v0.2.39 -> v0.2.43
+    Updating jiff-core v0.1.2 -> v0.1.5
+    Updating jiff-static v0.2.39 -> v0.2.43
+      Adding jni v0.22.4
+      Adding jni-macros v0.22.4
+    Removing jni-sys v0.3.1
+    Removing khronos-egl v6.0.0
+    Removing khronos_api v3.1.0
+      Adding kstring v2.0.5
+    Removing litrs v1.0.1
+      Adding memmap2 v0.9.12
+      Adding muldiv v1.0.1
+    Removing ndk-sys v0.6.0+11769913
+      Adding nix v0.31.3
+    Updating nsh-base v0.4.0 -> v0.5.0
+    Updating nsh-core v0.4.0 -> v0.5.0
+    Updating nsh-engine v0.4.0 -> v0.5.0
+      Adding nsh-i18n v0.5.0
+    Updating nsh-js v0.4.0 -> v0.5.0
+    Updating nsh-macros v0.4.0 -> v0.5.0
+    Updating nsh-package v0.4.0 -> v0.5.0
+      Adding nsh-platform-apple v0.5.0
+    Updating nsh-platform-ios v0.4.0 -> v0.5.0
+    Updating nsh-platform-linux v0.4.0 -> v0.5.0
+    Updating nsh-platform-macos v0.4.0 -> v0.5.0
+    Updating nsh-platform-windows v0.4.0 -> v0.5.0
+    Updating nsh-testing v0.4.0 -> v0.5.0
+      Adding nsh-updater v0.5.0
+      Adding num-integer v0.1.47
+      Adding num-rational v0.4.2
+    Removing objc2-metal v0.3.2
+      Adding onig v6.5.3
+      Adding onig_sys v69.9.3
+      Adding openssl-probe v0.2.2
+      Adding option-operations v0.6.1
+      Adding pastey v0.2.3
+    Removing phf_macros v0.11.3
+    Removing pollster v0.4.0
+    Removing presser v0.3.1
+    Removing profiling v1.0.18
+    Updating quickjs-jit v0.14.1 -> v0.14.2
+    Updating quickjs-jit-core v0.14.1 -> v0.14.2
+    Updating quickjs-jit-macro v0.14.1 -> v0.14.2
+    Updating quickjs-jit-stdlib v0.14.1 -> v0.14.2
+    Updating quickjs-jit-sys v0.14.1 -> v0.14.2
+    Removing range-alloc v0.1.5
+    Removing ratex-font v0.1.15
+    Removing ratex-layout v0.1.15
+    Removing ratex-lexer v0.1.15
+    Removing ratex-parser v0.1.15
+    Removing ratex-types v0.1.15
+    Removing raw-window-handle v0.6.2
+    Removing raw-window-metal v1.1.0
+    Removing regex-lite v0.1.9
+    Removing renderdoc-sys v1.1.0
+      Adding roxmltree v0.20.0
+      Adding rustls-native-certs v0.8.5
+    Updating rustls-pki-types v1.15.1 -> v1.16.0
+      Adding rustls-platform-verifier v0.7.1
+      Adding rustls-platform-verifier-android v0.2.0
+      Adding rustybuzz v0.20.1
+      Adding schannel v0.1.30
+      Adding security-framework v3.7.0
+      Adding security-framework-sys v2.17.0
+      Adding simd_cesu8 v1.2.0
+    Removing spirv v0.4.0+sdk-1.4.341.0
+    Updating syn v3.0.9 -> v3.0.10
+      Adding tar v0.4.46
+    Removing thiserror v1.0.69
+    Removing thiserror-impl v1.0.69
+      Adding typed-path v0.13.0
+      Adding unicode-bidi v0.3.18
+      Adding unicode-bidi-mirroring v0.4.0
+      Adding unicode-ccc v0.4.0
+    Removing unicode-normalization v0.1.26
+      Adding unicode-script v0.5.9
+      Adding unicode-vo v0.1.0
+      Adding vte v0.15.0
+    Removing wasm-bindgen-futures v0.4.80
+    Removing wayland-sys v0.31.11
+    Removing web-sys v0.3.107
+      Adding webpki-root-certs v1.0.12
+    Updating webpki-roots v1.0.11 -> v1.0.12
+    Removing wgpu v29.0.4
+    Removing wgpu-core v29.0.4
+    Removing wgpu-core-deps-apple v29.0.4
+    Removing wgpu-core-deps-emscripten v29.0.4
+    Removing wgpu-core-deps-windows-linux-android v29.0.4
+    Removing wgpu-hal v29.0.4
+    Removing wgpu-naga-bridge v29.0.4
+    Removing wgpu-types v29.0.4
+    Removing xml-rs v0.8.29
+      Adding zeroize_derive v1.5.0
+      Adding zip v9.5.1
+      Adding zopfli v0.8.4
+note: pass `--verbose` to see 2 unchanged dependencies behind latest
+--- nsh versions
+   2 "0.1.0" 
+   6 "0.5.0" 
+   1 "nsh-base" "0.5.0"
+   1 "nsh-engine" "0.5.0"
+   1 "nsh-i18n" "0.5.0"
+   1 "nsh-macros" "0.5.0"
+   1 "nsh-platform-apple" "0.5.0"
+   1 "nsh-platform-linux" "0.5.0"
+   1 "nsh-platform-windows" "0.5.0"
+   1 "nsh-starter" "0.1.0"
+   1 "nsh-updater" "0.5.0"
+   8 = 
+--- cargo tree -d | grep nsh
+  Downloaded nsh-platform-apple v0.5.0
+  Downloaded nsh-platform-macos v0.5.0
+│                       ├── nsh-core v0.5.0
+│                       │   ├── nsh-base v0.5.0
+│                       │   │   ├── nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+│                       │   │   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│                       │   │   ├── nsh-platform-macos v0.5.0
+│                       │   │   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│                       │   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│                       │   ├── nsh-engine v0.5.0
+│                       │   │   ├── nsh-platform-apple v0.5.0
+│                       │   │   │   └── nsh-platform-macos v0.5.0 (*)
+│                       │   │   ├── nsh-platform-macos v0.5.0 (*)
+│                       │   │   └── nsh-testing v0.5.0
+│                       │   │       └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│                       │   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│                       │   ├── nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form) (*)
+│                       │   ├── nsh-js v0.5.0
+│                       │   │   └── nsh-engine v0.5.0 (*)
+│                       │   ├── nsh-package v0.5.0
+│                       │   │   └── nsh-engine v0.5.0 (*)
+│                       │   ├── nsh-platform-apple v0.5.0 (*)
+│                       │   ├── nsh-platform-macos v0.5.0 (*)
+│                       │   ├── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+│                       │   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│                       │   ├── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│                       │   └── nsh-testing v0.5.0 (*)
+│                       └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   │       │       ├── nsh-js v0.5.0 (*)
+│   │       │           └── nsh-js v0.5.0 (*)
+│   │       └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   ├── nsh-base v0.5.0 (*)
+│   ├── nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form) (*)
+│   └── nsh-testing v0.5.0 (*)
+    │       ├── nsh-base v0.5.0 (*)
+    │           └── nsh-base v0.5.0 (*)
+├── nsh-package v0.5.0 (*)
+├── nsh-updater v0.5.0
+│   ├── nsh-core v0.5.0 (*)
+│   └── nsh-engine v0.5.0 (*)
+        └── nsh-core v0.5.0 (*)
+    └── nsh-core v0.5.0 (*)
+│   ├── nsh-platform-apple v0.5.0 (*)
+│   └── nsh-platform-macos v0.5.0 (*)
+│       └── nsh-updater v0.5.0 (*)
+│   ├── nsh-platform-apple v0.5.0 (*)
+│   └── nsh-platform-macos v0.5.0 (*)
+│   ├── nsh-platform-macos v0.5.0 (*)
+│   │   ├── nsh-platform-macos v0.5.0 (*)
+│   │   │   └── nsh-platform-macos v0.5.0 (*)
+│   │   │   └── nsh-platform-macos v0.5.0 (*)
+│   │       ├── nsh-platform-macos v0.5.0 (*)
+│   │   ├── nsh-platform-apple v0.5.0 (*)
+│   │   ├── nsh-platform-macos v0.5.0 (*)
+│   │   └── nsh-platform-macos v0.5.0 (*)
+│   │   ├── nsh-engine v0.5.0 (*)
+│   │   └── nsh-platform-macos v0.5.0 (*)
+│   │       └── nsh-core v0.5.0 (*)
+        └── nsh-core v0.5.0 (*)
+    │       ├── nsh-package v0.5.0 (*)
+    │       └── nsh-updater v0.5.0 (*)
+    │           ├── nsh-core v0.5.0 (*)
+    │           └── nsh-js v0.5.0 (*)
+        ├── nsh-core v0.5.0 (*)
+        ├── nsh-package v0.5.0 (*)
+        └── nsh-updater v0.5.0 (*)
+    ├── nsh-core v0.5.0 (*)
+    └── nsh-macros v0.5.0 (proc-macro)
+        └── nsh-core v0.5.0 (*)
+│   ├── nsh-core v0.5.0 (*)
+│   ├── nsh-engine v0.5.0 (*)
+│   ├── nsh-js v0.5.0 (*)
+│   ├── nsh-core v0.5.0 (*)
+│   ├── nsh-updater v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+        └── nsh-base v0.5.0 (*)
+    │   ├── nsh-core v0.5.0 (*)
+│       └── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query) (*)
+├── nsh-package v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+└── nsh-macros v0.5.0 (proc-macro) (*)
+│       └── nsh-updater v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+├── nsh-engine v0.5.0 (*)
+├── nsh-js v0.5.0 (*)
+├── nsh-platform-apple v0.5.0 (*)
+├── nsh-platform-macos v0.5.0 (*)
+│               │   │   └── nsh-base v0.5.0 (*)
+│               │   └── nsh-base v0.5.0 (*)
+│   ├── nsh-platform-apple v0.5.0 (*)
+├── nsh-base v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+├── nsh-engine v0.5.0 (*)
+├── nsh-js v0.5.0 (*)
+├── nsh-platform-apple v0.5.0 (*)
+├── nsh-platform-macos v0.5.0 (*)
+├── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+├── nsh-testing v0.5.0 (*)
+│   ├── nsh-core v0.5.0 (*)
+│   ├── nsh-base v0.5.0 (*)
+│   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+    └── nsh-core v0.5.0 (*)
+├── nsh-base v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+├── nsh-engine v0.5.0 (*)
+├── nsh-js v0.5.0 (*)
+├── nsh-platform-macos v0.5.0 (*)
+    └── nsh-engine v0.5.0 (*)
+│   ├── nsh-base v0.5.0 (*)
+│   ├── nsh-core v0.5.0 (*)
+│   ├── nsh-js v0.5.0 (*)
+│   ├── nsh-package v0.5.0 (*)
+│   ├── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   ├── nsh-updater v0.5.0 (*)
+    ├── nsh-base v0.5.0 (*)
+    ├── nsh-core v0.5.0 (*)
+    ├── nsh-engine v0.5.0 (*)
+    ├── nsh-js v0.5.0 (*)
+    ├── nsh-package v0.5.0 (*)
+    ├── nsh-platform-apple v0.5.0 (*)
+    ├── nsh-platform-macos v0.5.0 (*)
+    ├── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+    ├── nsh-updater v0.5.0 (*)
+│               ├── nsh-core v0.5.0 (*)
+│               ├── nsh-js v0.5.0 (*)
+│   └── nsh-base v0.5.0 (*)
+    └── nsh-core v0.5.0 (*)
+├── nsh-macros v0.5.0 (proc-macro) (*)
+│       ├── nsh-core v0.5.0 (*)
+│       ├── nsh-js v0.5.0 (*)
+│       ├── nsh-js v0.5.0 (*)
+│       ├── nsh-package v0.5.0 (*)
+│       ├── nsh-updater v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+└── nsh-macros v0.5.0 (proc-macro) (*)
+--- tree -i nsh-core
+nsh-core v0.5.0
+├── nsh-base v0.5.0
+│   ├── nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+│   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   ├── nsh-platform-macos v0.5.0
+│   │   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+├── nsh-engine v0.5.0
+│   ├── nsh-platform-apple v0.5.0
+│   │   └── nsh-platform-macos v0.5.0 (*)
+│   ├── nsh-platform-macos v0.5.0 (*)
+│   └── nsh-testing v0.5.0
+│       [dev-dependencies]
+│       └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+│   [dev-dependencies]
+│   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+├── nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form) (*)
+├── nsh-js v0.5.0
+│   └── nsh-engine v0.5.0 (*)
+├── nsh-package v0.5.0
+│   └── nsh-engine v0.5.0 (*)
+├── nsh-platform-apple v0.5.0 (*)
+├── nsh-platform-macos v0.5.0 (*)
+├── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+│   └── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+├── nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+└── nsh-testing v0.5.0 (*)

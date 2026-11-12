@@ -1,0 +1,17 @@
+$ (cd examples/demo) /opt/homebrew/bin/nsh check
+App.tsx(10,27): error TS2558: Expected 12 type arguments, but got 1.
+App.tsx(12,20): error TS7006: Parameter 'values' implicitly has an 'any' type.
+../../packages/nsh-form/src/bind.ts(1,46): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../packages/nsh-form/src/bind.ts(291,25): error TS2339: Property 'instance' does not exist on type '{}'.
+../../packages/nsh-form/src/createField.ts(11,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../packages/nsh-form/src/createField.ts(171,31): error TS2345: Argument of type 'Accessor<unknown>' is not assignable to parameter of type 'Accessor<object>'.
+  Type 'unknown' is not assignable to type 'object'.
+../../packages/nsh-form/src/createFieldGroup.ts(11,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../packages/nsh-form/src/createForm.ts(8,8): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../packages/nsh-form/src/createFormGroup.ts(1,61): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../packages/nsh-form/src/createFormHook.ts(1,112): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../packages/nsh-form/src/createFormHook.ts(139,31): error TS2339: Property 'defaultValues' does not exist on type 'WithFieldGroupProps<TFieldGroupData, TRenderProps>'.
+../../packages/nsh-form/src/extras.ts(1,33): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+../../packages/nsh-form/src/index.ts(1,15): error TS2307: Cannot find module '@tanstack/form-core' or its corresponding type declarations.
+error type check failed (exit status: 1)
+[exit 1]

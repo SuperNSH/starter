@@ -1,0 +1,258 @@
+$ cargo test --all-features --no-fail-fast
+   Compiling serde v1.0.229
+   Compiling minimal-lexical v0.2.1
+   Compiling serde-saphyr v1.3.0
+   Compiling serde_json v1.0.154
+   Compiling heapless v0.7.17
+   Compiling byteorder v1.5.0
+   Compiling cobs v0.3.0
+   Compiling quick-xml v0.41.0
+   Compiling linked-hash-map v0.5.6
+   Compiling strum_macros v0.27.2
+   Compiling oncemutex v0.1.1
+   Compiling regex-syntax v0.6.29
+   Compiling either v1.19.0
+   Compiling nom v7.1.3
+   Compiling hash32 v0.2.1
+   Compiling lru-cache v0.1.2
+   Compiling serde_spanned v0.6.9
+   Compiling toml_datetime v0.6.11
+   Compiling triomphe v0.1.17
+   Compiling strum v0.27.2
+   Compiling regex-cache v0.2.1
+   Compiling toml_edit v0.22.27
+   Compiling cexpr v0.6.0
+   Compiling bindgen v0.72.1
+   Compiling postcard v1.1.3
+   Compiling toml v0.8.23
+   Compiling phonenumber v0.3.10+9.0.33
+   Compiling rust-i18n-support v4.2.4
+   Compiling quickjs-jit-sys v0.14.2
+   Compiling rust-i18n-macro v4.2.4
+   Compiling rust-i18n v4.2.4
+   Compiling freeoxide-gpui-form-core v0.11.0
+   Compiling nsh-core v0.5.0
+   Compiling nsh-package v0.5.0
+   Compiling nsh-base v0.5.0
+   Compiling quickjs-jit-core v0.14.2
+   Compiling quickjs-jit-macro v0.14.2
+   Compiling nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+   Compiling quickjs-jit v0.14.2
+   Compiling quickjs-jit-stdlib v0.14.2
+   Compiling nsh-js v0.5.0
+   Compiling nsh-engine v0.5.0
+   Compiling nsh-testing v0.5.0
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4m 43s
+     Running unittests src/lib.rs (target/debug/deps/nsh_form-35d7ca7d1ffb1bb7)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/arrays.rs (target/debug/deps/arrays-52f79be2e0edaefa)
+
+running 5 tests
+test array_keys_are_stable_through_moves ... ok
+test array_row_errors_stay_with_their_row_after_removal ... ok
+test row_field_reads_and_writes_one_part_of_a_row ... ok
+test rows_rendered_in_each_outlive_a_removal_and_a_clear ... ok
+test array_push_insert_replace_remove_swap_move_clear ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/bindings.rs (target/debug/deps/bindings-0507b9d3a32d59be)
+
+running 3 tests
+test bind_switch_and_checkbox ... ok
+test bind_number_input_writes_the_number ... ok
+test bind_select ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/bindings_more.rs (target/debug/deps/bindings_more-d0f730c779a2f099)
+
+running 3 tests
+test bind_toggle_follows_a_press ... ok
+test bind_combobox_follows_a_chosen_item ... ok
+test bind_editor_follows_typed_text ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/compat.rs (target/debug/deps/compat-667683d25aeacce9)
+
+running 1 test
+test every_existing_public_name_still_works ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/controls.rs (target/debug/deps/controls-dc4d17d725c12267)
+
+running 9 tests
+test bind_radio_pressing_a_radio_sets_its_option ... ok
+test bind_time_field_typed_digits_set_the_time ... ok
+test bind_toggle_item_each_item_toggles_its_own_value ... ok
+test bind_otp_input_takes_typed_digits ... ok
+test bind_slider_a_drag_changes_the_value ... ok
+test bind_color_picker_a_hue_drag_changes_the_colour ... ok
+test bind_calendar_a_press_on_a_day_sets_the_date ... ok
+test bind_date_picker_two_picks_set_the_range ... ok
+test bind_rich_editor_typing_stores_the_document ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running tests/fine_grained.rs (target/debug/deps/fine_grained-7c52770aa3f58a77)
+
+running 4 tests
+test editing_one_row_does_not_wake_the_length_or_another_row ... ok
+test typing_in_one_field_does_not_wake_bindings_of_another ... ok
+test form_flags_wake_only_when_they_change ... ok
+test one_fields_bindings_wake_only_for_what_they_read ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/finish.rs (target/debug/deps/finish-5264ea276bffcf5a)
+
+running 5 tests
+test form_id_is_read_back ... ok
+test on_submit_meta_is_the_default_meta ... ok
+test get_field_value_reads_a_typed_value_by_path ... ok
+test submit_checks_run_together ... ok
+test pattern_rejects_a_value_that_does_not_match ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/form.rs (target/debug/deps/form-48f67e0403c35e33)
+
+running 10 tests
+test errors_wait_for_a_submit ... ok
+test numeric_text_uses_the_gpui_form_check ... ok
+test nested_paths_write_and_report_dirty_alone ... ok
+test reset_goes_back_to_the_baseline ... ok
+test load_replaces_values_and_baseline ... ok
+test a_rule_can_read_other_values ... ok
+test a_form_level_error_shows_on_the_form ... ok
+test a_valid_submit_makes_the_values_the_baseline ... ok
+test server_errors_land_on_their_field_and_clear_on_edit ... ok
+test an_async_rule_debounces_and_keeps_the_form_invalid_meanwhile ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/form_async.rs (target/debug/deps/form_async-0106672732788468)
+
+running 2 tests
+test form_dynamic_async_reruns_after_a_submit_and_reports_on_the_form ... ok
+test form_blur_async_reports_on_the_field_it_names ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/gpui_form.rs (target/debug/deps/gpui_form-1a0f3c35acce51fc)
+
+running 7 tests
+test changed_paths_list_only_the_fields_that_differ_from_the_baseline ... ok
+test submit_tracker_accessors_set_take_and_clear_the_error ... ok
+test a_pending_save_is_dropped_when_the_form_goes ... ok
+test persist_restores_saved_values_and_saves_changes ... ok
+test persist_debounce_writes_once_and_save_and_restore_hold ... ok
+test url_slug_uuid_and_required_when_report_their_messages ... ok
+test phone_rule_uses_gpui_forms_phone_check ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.73s
+
+     Running tests/inspect.rs (target/debug/deps/inspect-82ccede7803d8571)
+
+running 1 test
+test inspection_reads_report_pending_linked_and_base_state ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/meta.rs (target/debug/deps/meta-c324fd69ef06ea7c)
+
+running 3 tests
+test was_changed_stays_true_after_returning_to_default ... ok
+test field_meta_tracks_touched_blurred_pristine_changed ... ok
+test is_default_value_follows_the_baseline ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/parity.rs (target/debug/deps/parity-603efa860bbc621d)
+
+running 11 tests
+test standard_rules_min_max_and_one_of_fail_outside_their_bounds ... ok
+test set_with_an_equal_value_changes_nothing ... ok
+test form_level_dynamic_validators_report_on_the_form ... ok
+test async_always_runs_async_after_a_sync_failure ... ok
+test validate_from_revalidates_touched_rows ... ok
+test linked_field_revalidates_when_its_source_is_blurred ... ok
+test dynamic_async_validators_run_after_submit ... ok
+test form_async_debounce_applies_to_validators_without_their_own ... ok
+test form_async_change_validator_debounces ... ok
+test field_blur_and_submit_async_checks_run_at_their_events ... ok
+test form_writers_and_selectors_round_trip ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/schema.rs (target/debug/deps/schema-626d64cf2028bf4a)
+
+running 6 tests
+test parse_value_with_schema_checks_one_field ... ok
+test parse_values_with_schema_reports_issues_now ... ok
+test field_schema_runs_on_change ... ok
+test form_schema_puts_issues_on_fields_on_submit ... ok
+test parse_value_with_schema_async_checks_one_field_after_a_delay ... ok
+test parse_values_with_schema_async_waits_for_the_server ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/state.rs (target/debug/deps/state-54bef2d6b9ee971d)
+
+running 8 tests
+test shared_options_are_reusable ... ok
+test default_state_restores_values_errors_and_submission_state ... ok
+test transform_changes_the_initial_state ... ok
+test merge_form_replaces_the_values ... ok
+test handle_change_with_an_equal_value_counts_as_a_change ... ok
+test field_update_replaces_validators ... ok
+test form_update_changes_validators_at_run_time ... ok
+test save_state_captures_values_and_flags ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/validation.rs (target/debug/deps/validation-7b62f77cec59904f)
+
+running 26 tests
+test form_on_mount_runs_when_the_form_is_made ... ok
+test form_validator_puts_errors_on_fields ... ok
+test form_options_on_submit_runs_with_options ... ok
+test handle_submit_with_meta_passes_meta ... ok
+test failed_submit_focuses_the_first_invalid_input ... ok
+test can_submit_is_false_while_a_mount_error_stands ... ok
+test form_and_field_listeners_fire_on_blur_submit_and_mount ... ok
+test linked_field_revalidates_when_its_source_changes ... ok
+test on_blur_runs_on_blur_only ... ok
+test on_mount_runs_when_the_field_mounts ... ok
+test on_change_runs_on_edit_only ... ok
+test can_submit_when_invalid_allows_a_submit ... ok
+test delete_field_removes_value_and_meta ... ok
+test listeners_run_with_debounce ... ok
+test revalidate_logic_runs_dynamic_validators_after_submit ... ok
+test on_submit_invalid_runs_with_the_values ... ok
+test on_submit_runs_on_submit_only ... ok
+test error_map_is_keyed_by_cause_and_clears_on_pass ... ok
+test reset_field_restores_one_field ... ok
+test reset_with_values_sets_a_new_baseline ... ok
+test form_on_submit_async_gives_server_errors ... ok
+test submission_state_flags_follow_a_submit ... ok
+test select_reruns_only_for_its_slice ... ok
+test validate_all_fields_shows_every_error ... ok
+test can_submit_matches_tanstack_rules ... ok
+test async_validator_debounces_once_and_drops_old_answers ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+   Doc-tests nsh_form
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[exit 0]

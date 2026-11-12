@@ -1,0 +1,4 @@
+$ (cd packages/nsh-form) /opt/homebrew/bin/nsh build
+error building App.tsx failed
+chunk bundle.js: Error: could not load module '@tanstack/form-core' (only registered native modules and bundle chunks can be imported at run time)
+[exit 1]

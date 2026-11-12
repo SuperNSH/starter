@@ -2,7 +2,7 @@
 
 ## Setup
 
-Follow [README.md](README.md) — nsh 0.4.0, the Rust targets, Xcode and the Android SDK, and `../nsh-query` and `../nsh-form` checked out beside this repo.
+Follow [README.md](README.md) — nsh 0.5.0, the Rust targets, Xcode and the Android SDK, and `../nsh-query` and `../nsh-form` checked out beside this repo.
 
 Work happens in disjoint file areas so parallel changes cannot collide; the map of who owns what is in [AGENTS.md](AGENTS.md). Do not edit files outside your area, including other areas' tests.
 
@@ -42,7 +42,7 @@ nsh test
 - Prose reads like a competent human wrote it: direct, concrete, no marketing filler. No "seamless", no "leverage", no rule-of-three padding.
 - Code comments are 1-2 lines and state a non-obvious constraint — why the code is shaped this way, a workaround, an invariant. Never narrate the next line. Never explain a diff in code; that belongs in the commit message.
 - Dead code is deleted, not commented out. No speculative abstractions; write the second implementation when the second use case exists.
-- Every API name in docs is verified against nsh 0.4.0 (`nsh <cmd> --help`, the `.nsh/types` declarations, or the crate source). Never invent an API.
+- Every API name in docs is verified against nsh 0.5.0 (`nsh <cmd> --help`, the `.nsh/types` declarations, or the crate source). Never invent an API.
 - `docs/STATUS.md` stays current: what is done, what was verified how (command + evidence path), what is unverified. A claim with no evidence is unverified.
 
 ## Commits

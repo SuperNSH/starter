@@ -1,0 +1,12 @@
+Certify a release key with a root key, for some app ids and a time window; packages carry the certificate
+
+Usage: nsh certify [OPTIONS] --root <ROOT> --key <KEY> --apps <APPS> --out <OUT>
+
+Options:
+      --root <ROOT>  The root's secret key (`.secret`)
+  -v, --verbose      Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+      --key <KEY>    The release key's public key (`.pub`)
+      --apps <APPS>  App ids it may sign for: `*`, `com.example.*` or an id (repeatable)
+      --days <DAYS>  How long it may sign, from now [default: 365]
+  -o, --out <OUT>    The certificate to write
+  -h, --help         Print help

@@ -49,7 +49,7 @@ test("phone width, light: both pages, plus the cards the fold hides", async () =
   await app.press("id:page-device");
   await app.waitFor("Pixel ratio");
   await capture(app, "device-en-phone-light");
-  // The "Not exposed on 0.4.0" card fully in frame; a short layout that
+  // The "Not exposed on 0.5.0" card fully in frame; a short layout that
   // already shows it has no scroll range and the step rejects — fine here.
   try {
     await app.scroll("id:device-page-scroll", 900);

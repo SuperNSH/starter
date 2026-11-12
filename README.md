@@ -1,6 +1,6 @@
 # nsh-starter
 
-A production-grade application boilerplate for [Native Shell](https://nsh.dev) (NSH): clone it, rename it, ship it on macOS, iOS, Android and the web. It is also the living reference for what NSH 0.4.0 can do — every element and base component ships in a real screen, all async state runs on [`nsh-query`](../nsh-query) and every form on [`nsh-form`](../nsh-form).
+A production-grade application boilerplate for [Native Shell](https://nsh.dev) (NSH): clone it, rename it, ship it on macOS, iOS, Android and the web. It is also the living reference for what NSH 0.5.0 can do — every element and base component ships in a real screen, all async state runs on [`nsh-query`](../nsh-query) and every form on [`nsh-form`](../nsh-form).
 
 The app is Rust-first: one crate at the repo root is the UI, and `packages/remote-screen` is a TypeScript (TSX) feature published as a signed package and loaded on demand, proving the mixed path. There is no server and no account anywhere; a local fake API backs the data screens.
 
@@ -23,7 +23,12 @@ The app is Rust-first: one crate at the repo root is the UI, and `packages/remot
 ## Prerequisites
 
 - **macOS** with Xcode and an iOS simulator runtime (tested against iOS 27).
-- **nsh 0.4.0** from Homebrew (`brew install nsh`). Newer CLI versions drift from the APIs this repo pins; check `nsh --version`.
+- **nsh 0.5.0**, from the release's installer (Homebrew's tap still ships 0.4.0):
+  ```sh
+  curl -fsSL https://github.com/longbridge/nsh/releases/download/v0.5.0/install.sh | NSH_VERSION=v0.5.0 sh
+  nsh component add android ios web
+  ```
+  It installs into `~/.nsh` and links `~/.local/bin/nsh`. `nsh --version` must print 0.5.0: if an older Homebrew `nsh` comes first on your `PATH`, put `~/.local/bin` before it. The Rust crates pin 0.5.0, and the CLI must match them. Platform runtimes are components since 0.5.0; a command that needs one also adds it on demand.
 - **Rust stable** with the cross-compile targets:
   ```sh
   rustup target add aarch64-apple-ios aarch64-apple-ios-sim \
@@ -95,7 +100,7 @@ The script replaces the name and id everywhere they live: `nsh.json`, the Cargo 
 ## Documentation
 
 - [docs/architecture.md](docs/architecture.md) — crate layout, shell routing, the state and query layers, the ui wrapper policy, service seams, the signed package path.
-- [docs/coverage.md](docs/coverage.md) — every `nsh_base` and `nsh_core` element export on 0.4.0, where it is used, why anything is not.
+- [docs/coverage.md](docs/coverage.md) — every `nsh_base` and `nsh_core` element export on 0.4.0, where it is used, why anything is not, and what 0.5.0 added.
 - [docs/gpui-starter-parity.md](docs/gpui-starter-parity.md) — feature-by-feature against the GPUI starter this repo mirrors.
 - [docs/upstream-issues.md](docs/upstream-issues.md) — known `nsh-query`/`nsh-form` bugs and their workarounds.
 - [docs/STATUS.md](docs/STATUS.md) — what is done, what was verified how, what is not verified.

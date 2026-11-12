@@ -1,0 +1,10 @@
+$ (cd /Users/hmziq/fo/nsh-starter/packages/remote-screen) /opt/homebrew/bin/nsh build
+error building App.tsx failed
+[31m[MISSING_EXPORT] [0m"noRetries" is not exported by "../../../nsh-query/packages/nsh-query/src/index.ts".
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/Dashboard.tsx:2:23 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0m[38;5;249mc[0m[38;5;249mr[0m[38;5;249me[0m[38;5;249ma[0m[38;5;249mt[0m[38;5;249me[0m[38;5;249mQ[0m[38;5;249mu[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249my[0m[38;5;249m,[0m[38;5;249m [0mnoRetries[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249mn[0m[38;5;249ms[0m[38;5;249mh[0m[38;5;249m-[0m[38;5;249mq[0m[38;5;249mu[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249my[0m[38;5;249m"[0m[38;5;249m;[0m
+ [38;5;240m  │[0m                       ────┬────  
+ [38;5;240m  │[0m                           ╰────── Missing export
+[38;5;246m───╯[0m
+[exit 1]

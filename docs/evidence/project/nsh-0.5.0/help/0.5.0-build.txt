@@ -1,0 +1,13 @@
+Bundle an app and compile it to QuickJS bytecode; a Rust app (`nsh.json` `"root"`): build its crates and gather the files they ship
+
+Usage: nsh build [OPTIONS] [ENTRY]
+
+Arguments:
+  [ENTRY]  The entry module, or the app's directory (default: the current one), whose `App.tsx` is the entry [default: .]
+
+Options:
+  -o, --out <OUT>  Output directory [default: .nsh/out]
+  -v, --verbose    Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+      --release    Minify and strip debug info
+      --split      Split what `import()` loads into chunk files next to the bundle (`Screen.js`, ...), loaded on demand: how web apps are published
+  -h, --help       Print help

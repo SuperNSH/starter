@@ -1,0 +1,2 @@
+$ (cd /Users/hmziq/fo/nsh-form/packages/nsh-form) /Users/hmziq/.nsh/bin/nsh check
+[exit 0]

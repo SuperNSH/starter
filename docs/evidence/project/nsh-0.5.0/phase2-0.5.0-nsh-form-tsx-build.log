@@ -1,0 +1,3 @@
+$ (cd /Users/hmziq/fo/nsh-form/packages/nsh-form) /Users/hmziq/.nsh/bin/nsh build
+✓ built App.tsx into .nsh/out (239.0 KB js, 771.1 KB bytecode, 41ms)
+[exit 0]

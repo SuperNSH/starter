@@ -1,0 +1,512 @@
+$ (cd .) cargo test
+   Compiling unicode-ident v1.0.27
+   Compiling zeroize v1.9.1
+   Compiling typenum v1.20.1
+   Compiling subtle v2.6.1
+   Compiling cfg-if v1.0.5
+   Compiling rand_core v0.10.1
+   Compiling cmov v0.5.4
+   Compiling const-oid v0.10.2
+   Compiling memchr v2.8.3
+   Compiling log v0.4.35
+   Compiling foldhash v0.2.0
+   Compiling libc v0.2.191
+   Compiling libm v0.2.16
+   Compiling equivalent v1.0.3
+   Compiling cpubits v0.1.1
+   Compiling allocator-api2 v0.2.21
+   Compiling proc-macro2 v1.0.107
+   Compiling stable_deref_trait v1.2.1
+   Compiling hybrid-array v0.4.15
+   Compiling ctutils v0.4.8
+   Compiling base64ct v1.8.3
+   Compiling pin-project-lite v0.2.17
+   Compiling rustc-hash v2.1.3
+   Compiling hashbrown v0.17.1
+   Compiling itoa v1.0.18
+   Compiling jobserver v0.1.35
+   Compiling cpufeatures v0.3.1
+   Compiling generic-array v0.14.7
+   Compiling once_cell v1.21.4
+   Compiling num-traits v0.2.19
+   Compiling bytes v1.12.1
+   Compiling quote v1.0.47
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling pem-rfc7468 v1.0.0
+   Compiling block-padding v0.4.2
+   Compiling rustls-pki-types v1.15.1
+   Compiling simd-adler32 v0.3.10
+   Compiling litemap v0.8.3
+   Compiling cc v1.11.1
+   Compiling crypto-bigint v0.7.10
+   Compiling alloc-no-stdlib v3.0.0
+   Compiling adler2 v2.0.1
+   Compiling writeable v0.6.4
+   Compiling utf_types v1.0.0
+   Compiling nom v7.1.3
+   Compiling digest v0.11.3
+   Compiling block-buffer v0.10.4
+   Compiling syn v2.0.119
+   Compiling syn v3.0.9
+   Compiling inout v0.2.5
+   Compiling utf8_iter v1.1.0
+   Compiling miniz_oxide v0.9.1
+   Compiling crypto-common v0.1.7
+   Compiling ff v0.14.0
+   Compiling untrusted v0.9.0
+   Compiling ring v0.17.14
+   Compiling smallvec v1.16.4
+   Compiling icu_properties_data v2.4.0
+   Compiling icu_normalizer_data v2.4.0
+   Compiling cexpr v0.6.0
+   Compiling hmac v0.13.0
+   Compiling signature v3.0.0
+   Compiling digest v0.10.7
+   Compiling synstructure v0.14.0
+   Compiling cipher v0.5.2
+   Compiling group v0.14.0
+   Compiling zerovec-derive v0.11.7
+   Compiling displaydoc v0.2.7
+   Compiling cpufeatures v0.2.17
+   Compiling hashbrown v0.16.1
+   Compiling bitflags v2.13.2
+   Compiling base16ct v1.0.0
+   Compiling thiserror-impl v2.0.21
+   Compiling zerocopy-derive v0.8.63
+   Compiling der_derive v0.8.0
+   Compiling libloading v0.8.9
+   Compiling getrandom v0.3.4
+   Compiling getrandom v0.2.17
+   Compiling prettyplease v0.2.37
+   Compiling hkdf v0.13.0
+   Compiling crc32fast v1.5.4
+   Compiling tokio-macros v2.7.2
+   Compiling serde_core v1.0.229
+   Compiling httparse v1.10.1
+   Compiling alloc-stdlib v0.3.0
+   Compiling http v1.5.0
+   Compiling socket2 v0.6.5
+   Compiling zerocopy v0.8.63
+   Compiling der v0.8.3
+   Compiling clang-sys v1.9.1
+   Compiling rand_core v0.9.5
+   Compiling errno v0.3.14
+   Compiling mio v1.2.4
+   Compiling percent-encoding v2.3.2
+   Compiling brotli-decompressor v6.3.0
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+   Compiling flate2 v1.1.11
+   Compiling thiserror v2.0.21
+   Compiling sha2 v0.11.1
+   Compiling io-lifetimes v2.0.4
+   Compiling spki v0.8.1
+   Compiling half v2.7.1
+   Compiling bindgen v0.72.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling sec1 v0.8.1
+   Compiling tokio v1.54.1
+   Compiling rustix v1.1.6
+   Compiling io-lifetimes v3.0.1
+   Compiling serde_derive v1.0.229
+   Compiling primefield v0.14.0
+   Compiling webpki-roots v1.0.11
+   Compiling universal-hash v0.6.1
+   Compiling pkcs8 v0.11.0
+   Compiling form_urlencoded v1.2.2
+   Compiling io-extras v0.19.0
+   Compiling wnaf v0.14.1
+   Compiling fs-set-times v0.20.3
+   Compiling zmij v1.0.23
+   Compiling sha1 v0.10.7
+   Compiling serde v1.0.229
+   Compiling rand_chacha v0.9.0
+   Compiling rfc6979 v0.6.0
+   Compiling futures-macro v0.3.34
+   Compiling quickjs-jit-sys v0.14.1
+   Compiling elliptic-curve v0.14.3
+   Compiling indexmap v2.14.2
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling event-listener v5.4.2
+   Compiling data-encoding v2.11.1
+   Compiling futures-sink v0.3.34
+   Compiling utf-8 v0.7.6
+   Compiling unicode-width v0.2.3
+   Compiling slab v0.4.12
+   Compiling rand v0.9.5
+   Compiling maybe-owned v0.3.4
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling zerofrom v0.1.8
+   Compiling bit-vec v0.9.1
+   Compiling futures-task v0.3.34
+   Compiling siphasher v1.0.4
+   Compiling futures-core v0.3.34
+   Compiling codespan-reporting v0.13.1
+   Compiling event-listener-strategy v0.5.4
+   Compiling toml_edit v0.25.19+spec-1.1.0
+   Compiling wuff v0.2.10
+   Compiling serde_json v1.0.154
+   Compiling webpki-roots v0.26.11
+   Compiling cap-primitives v4.0.3
+   Compiling yoke v0.8.4
+   Compiling bit-set v0.9.1
+   Compiling phf_shared v0.14.0
+   Compiling futures-util v0.3.34
+   Compiling sha2 v0.10.9
+   Compiling keccak v0.2.2
+   Compiling vsimd v0.8.0
+   Compiling arrayvec v0.7.8
+   Compiling outref v0.5.2
+   Compiling imagesize v0.15.0
+   Compiling sponge-cursor v0.1.0
+   Compiling zerovec v0.11.9
+   Compiling zerotrie v0.2.5
+   Compiling rustc-hash v1.1.0
+   Compiling hexf-parse v0.2.1
+   Compiling phf_generator v0.14.0
+   Compiling cap-std v4.0.3
+   Compiling proc-macro-crate v3.5.0
+   Compiling async-lock v3.5.0
+   Compiling curve25519-dalek v5.0.0
+   Compiling polyval v0.7.3
+   Compiling nsh-macros v0.4.0
+   Compiling tinystr v0.8.5
+   Compiling potential_utf v0.1.6
+   Compiling naga v29.0.4
+   Compiling halfbrown v0.4.0
+   Compiling chacha20 v0.10.2
+   Compiling taffy v0.15.1
+   Compiling aead v0.6.1
+   Compiling ordered-float v5.5.1
+   Compiling float-cmp v0.10.0
+   Compiling primeorder v0.14.0
+   Compiling ecdsa v0.17.0
+   Compiling unicode-linebreak v0.1.5
+   Compiling relative-path v2.0.3
+   Compiling icu_locale_core v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling ryu v1.0.23
+   Compiling unicode-properties v0.1.5
+   Compiling httpdate v1.0.3
+   Compiling ghash v0.6.0
+   Compiling phf_macros v0.14.0
+   Compiling base64-simd v0.8.0
+   Compiling getrandom v0.4.3
+   Compiling ed25519 v3.0.0
+   Compiling poly1305 v0.9.1
+   Compiling pkcs1 v0.8.0
+   Compiling aes v0.9.4
+   Compiling icu_provider v2.4.0
+   Compiling value-trait v0.12.3
+   Compiling ctr v0.10.1
+   Compiling crypto-primes v0.7.2
+   Compiling signature v2.2.0
+   Compiling tracing-core v0.1.36
+   Compiling simdutf8 v0.1.5
+   Compiling phf v0.14.0
+   Compiling rand v0.10.3
+   Compiling ed25519-dalek v3.0.0
+   Compiling chacha20poly1305 v0.11.0
+   Compiling aes-kw v0.3.1
+   Compiling p384 v0.14.0
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling ed25519 v2.2.3
+   Compiling rsa v0.10.0-rc.19
+   Compiling tracing v0.1.44
+   Compiling aes-gcm v0.11.1
+   Compiling simd-json v0.18.1
+   Compiling p256 v0.14.0
+   Compiling p521 v0.14.0
+   Compiling crc32c v0.6.9
+   Compiling curve25519-dalek v4.1.3
+   Compiling x25519-dalek v3.0.0
+   Compiling shake v0.1.0
+   Compiling cshake v0.2.1
+   Compiling sha3 v0.12.0
+   Compiling hex-simd v0.8.0
+   Compiling brotli v9.1.1
+   Compiling cbc v0.2.1
+   Compiling md-5 v0.11.0
+   Compiling sha1 v0.11.0
+   Compiling idna_adapter v1.2.2
+   Compiling pbkdf2 v0.13.0
+   Compiling escape-simd v0.1.1
+   Compiling ed25519-dalek v2.2.0
+   Compiling crossbeam-utils v0.8.23
+   Compiling aho-corasick v1.1.5
+   Compiling regex-syntax v0.8.11
+   Compiling base64 v0.23.1
+   Compiling base64 v0.22.1
+   Compiling ahash v0.8.12
+   Compiling utf8-zero v0.8.1
+   Compiling idna v1.1.0
+   Compiling json-escape-simd v3.1.3
+   Compiling crossbeam-channel v0.5.17
+   Compiling ureq-proto v0.7.1
+   Compiling regex-automata v0.4.18
+   Compiling gpui-query v0.3.1
+   Compiling url v2.5.8
+   Compiling oxc_sourcemap v9.0.0
+   Compiling quickjs-jit-core v0.14.1
+   Compiling regex v1.13.1
+   Compiling quickjs-jit-macro v0.14.1
+   Compiling quickjs-jit v0.14.1
+   Compiling zstd-safe v8.2.0
+   Compiling zstd v0.14.3
+   Compiling quickjs-jit-stdlib v0.14.1
+   Compiling rustls v0.23.46
+   Compiling rustls-webpki v0.103.16
+   Compiling tungstenite v0.28.0
+   Compiling tokio-rustls v0.26.6
+   Compiling ureq v3.5.1
+   Compiling tokio-tungstenite v0.28.0
+   Compiling nsh-core v0.4.0
+   Compiling nsh-package v0.4.0
+   Compiling nsh-js v0.4.0
+   Compiling nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+   Compiling nsh-engine v0.4.0
+   Compiling nsh-testing v0.4.0
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8m 57s
+     Running unittests src/lib.rs (target/debug/deps/nsh_query-54a684d2dc931966)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/client.rs (target/debug/deps/client-860af911fb2be1fb)
+
+running 9 tests
+test use_queries_with_combine ... ok
+test set_queries_data_and_get_queries_data ... ok
+test update_query_data_uses_the_updater ... ok
+test fetch_query_and_ensure_query_data ... ok
+test use_mutation_state_lists_calls ... ok
+test use_is_fetching_and_is_mutating_count ... ok
+test reset_queries_goes_back_to_initial ... ok
+test query_filters_exact_type_stale_predicate ... ok
+test query_defaults_apply_by_key_prefix ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/compat.rs (target/debug/deps/compat-b03180b8cca24bbd)
+
+running 1 test
+test existing_public_names_still_work ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/fields.rs (target/debug/deps/fields-10c5b58bd578eee4)
+
+running 2 tests
+test mutation_fields_report_the_call ... ok
+test result_fields_report_the_load_state ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/fine_grained.rs (target/debug/deps/fine_grained-32522d8671cbe251)
+
+running 3 tests
+test a_binding_on_one_infinite_field_wakes_only_for_that_field ... ok
+test a_binding_on_one_mutation_field_wakes_only_for_that_field ... ok
+test a_binding_on_one_query_field_wakes_only_for_that_field ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/finish.rs (target/debug/deps/finish-86f2fac24a61fd62)
+
+running 10 tests
+test use_prefetch_query_loads_for_a_later_observer ... ok
+test match_query_and_hash_key_follow_tanstack ... ok
+test structural_sharing_keeps_a_binding_quiet_for_an_equal_answer ... ok
+test client_infinite_query_reloads_like_fetch_infinite_query ... ok
+test mutate_async_replaced_call_resolves_with_its_own_result ... ok
+test mutate_with_callbacks_run_for_the_latest_call_only ... ok
+test subscribed_false_reads_the_cache_and_never_fetches ... ok
+test use_queries_results_are_fine_grained_per_index ... ok
+test skip_token_maps_to_enabled_false ... ok
+test mutation_gc_time_keeps_a_settled_call_listed_then_removes_it ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/gpui_names.rs (target/debug/deps/gpui_names-fd1da2e552b7e201)
+
+running 15 tests
+test all_infinite_queries_lists_only_the_page_type_asked_for ... ok
+test use_query_unsignalled_loads_with_a_fetcher_that_takes_no_signal ... ok
+test fetch_query_with_policy_applies_the_returned_policy ... ok
+test with_query_data_reads_a_value_that_is_not_clone ... ok
+test diagnostics_report_queries_and_mutations_after_a_load_and_a_call ... ok
+test mutate_by_ref_and_mutate_arc_run_with_their_variables ... ok
+test use_query_select_binding_wakes_only_when_the_selection_changes ... ok
+test mutation_cache_subscribe_stops_and_remove_drops_settled_calls ... ok
+test request_policy_latest_wins_replaces_a_load_and_ignore_while_loading_keeps_it ... ok
+test use_query_manual_starts_no_fetch_until_asked ... ok
+test unsubscribed_entry_leaves_the_cache_while_its_component_lives ... ok
+test unbounded_pages_keeps_every_page_past_the_default_limit ... ok
+test use_query_with_policy_sets_the_freshness_the_server_returns ... ok
+test an_unobserved_infinite_entry_leaves_after_its_gc_time ... ok
+test an_unobserved_seeded_entry_leaves_after_its_gc_time ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.32s
+
+     Running tests/http_cache.rs (target/debug/deps/http_cache-58331b391c63325d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/infinite.rs (target/debug/deps/infinite-63f8c0c0e0b0ed3b)
+
+running 3 tests
+test max_pages_drops_from_the_far_end ... ok
+test a_failed_page_keeps_the_loaded_pages_and_can_be_asked_for_again ... ok
+test pages_load_in_both_directions_and_stop_at_the_ends ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/infinite_cache.rs (target/debug/deps/infinite_cache-f6b93bf2f15bcdf2)
+
+running 3 tests
+test infinite_shared_between_observers ... ok
+test infinite_refetch_reloads_all_pages ... ok
+test infinite_survives_remount_within_gc ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/mutation.rs (target/debug/deps/mutation-5a4c6d3b6c066eaf)
+
+running 3 tests
+test a_success_invalidates_and_the_query_loads_the_new_value ... ok
+test an_optimistic_write_rolls_back_after_the_last_attempt_fails ... ok
+test a_mutation_in_flight_finishes_after_its_component_goes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/mutations.rs (target/debug/deps/mutations-3bf3651399f19458)
+
+running 2 tests
+test mutation_context_reaches_error_and_settled ... ok
+test mutation_scope_runs_in_series ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/network.rs (target/debug/deps/network-58a7532b96867f7b)
+
+running 3 tests
+test reconnect_refetches_when_asked ... ok
+test mutation_pauses_offline_and_resumes ... ok
+test offline_pauses_and_online_resumes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/persist.rs (target/debug/deps/persist-6d6aea2c942e0754)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/persist_options.rs (target/debug/deps/persist_options-ea0175e0290e945f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/query.rs (target/debug/deps/query-a57c056c2f03bbeb)
+
+running 10 tests
+test seeded_data_counts_as_fresh ... ok
+test a_disabled_query_waits_for_its_condition ... ok
+test a_failure_with_no_retries_left_reports_the_error ... ok
+test two_observers_of_one_key_share_one_load ... ok
+test a_tracked_key_moves_to_the_new_entry_and_back_to_its_cache ... ok
+test retries_stay_loading_and_end_in_success ... ok
+test invalidating_replaces_a_load_in_flight_and_drops_its_late_answer ... ok
+test an_unobserved_entry_is_dropped_after_its_gc_time ... ok
+test a_refetch_interval_keeps_loading_while_observed ... ok
+test a_fresh_entry_skips_the_load_and_an_expired_one_reloads ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/round3.rs (target/debug/deps/round3-c6c78358025a78da)
+
+running 14 tests
+test match_mutation_matches_the_cached_state ... ok
+test fetcher_context_carries_meta_client_and_direction ... ok
+test use_prefetch_infinite_query_serves_a_later_observer ... ok
+test client_query_returns_fresh_cached_data_without_fetching ... ok
+test client_query_ignores_enabled_as_tanstack_does ... ok
+test query_selected_applies_select_before_returning ... ok
+test query_cache_callbacks_fire_for_success_error_and_settled ... ok
+test mutation_cache_callbacks_fire_for_each_point_of_a_call ... ok
+test mutation_throw_on_error_reaches_catch_error ... ok
+test query_cache_finds_lists_subscribes_and_removes ... ok
+test throw_on_error_reaches_catch_error_and_the_reset_boundary_recovers ... ok
+test unsubscribed_key_change_releases_the_entry_it_left ... ok
+test unsubscribed_entries_leave_the_cache_after_gc_time ... ok
+test client_query_is_not_retried_unless_retry_is_set ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/status.rs (target/debug/deps/status-84e70335699a56a4)
+
+running 12 tests
+test initial_data_counts_as_fresh_with_updated_at ... ok
+test retry_delay_function_is_honored ... ok
+test status_and_fetch_status_follow_a_load ... ok
+test refetch_on_mount_trigger_is_honored ... ok
+test is_loading_is_fetching_and_pending ... ok
+test placeholder_data_and_keep_previous_data_flag_placeholder ... ok
+test failure_count_and_reason_track_retries ... ok
+test retry_if_stops_early ... ok
+test stale_time_and_gc_time_synonyms_work ... ok
+test refetch_interval_keeps_running_while_inactive ... ok
+test refetch_on_foreground_when_stale ... ok
+test refetch_interval_stops_in_background ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/surface.rs (target/debug/deps/surface-344a5200943f9115)
+
+running 29 tests
+test get_query_data_and_get_query_state_read_the_cache ... ok
+test get_mutation_defaults_and_set_mutation_defaults_apply_retry ... ok
+test mutation_data_is_success_and_is_pending_follow_the_call ... ok
+test is_initial_loading_and_fetched_after_mount_follow_tanstack ... ok
+test meta_reaches_the_fetcher_context ... ok
+test get_query_defaults_reads_back_a_prefix_default ... ok
+test mutation_network_mode_always_runs_while_offline ... ok
+test ensure_infinite_query_data_returns_cache_then_loads ... ok
+test mutate_async_resolves_with_the_result_or_the_error ... ok
+test fetch_infinite_query_always_reloads_the_pages ... ok
+test is_success_and_is_pending_follow_tanstack_status ... ok
+test prefetch_infinite_query_loads_once_for_a_later_observer ... ok
+test infinite_fetching_flags_and_page_params_follow_tanstack ... ok
+test cancel_queries_keeps_data_and_drops_the_late_answer ... ok
+test fetch_previous_page_error_flag_is_set_for_previous_only ... ok
+test mutation_on_success_ctx_receives_the_context ... ok
+test mutation_reset_returns_to_idle ... ok
+test fetch_next_page_error_flag_is_set_for_next_only ... ok
+test network_mode_always_runs_while_offline ... ok
+test mutation_retry_delay_gets_the_failures_before_this_one ... ok
+test select_maps_the_data ... ok
+test resume_paused_mutations_runs_mutations_but_not_queries ... ok
+test retry_on_mount_false_skips_a_mount_after_an_error ... ok
+test mutation_network_mode_offline_first_runs_once_then_waits_for_retries ... ok
+test network_mode_offline_first_runs_the_first_attempt_then_pauses_retries ... ok
+test get_default_options_and_set_default_options_apply_to_new_queries ... ok
+test refetch_interval_in_background_keeps_ticking ... ok
+test refetch_on_window_focus_alias_sets_the_foreground_trigger ... ok
+test refetch_interval_fn_stops_when_it_returns_none ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+   Doc-tests nsh_query
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[exit 0]

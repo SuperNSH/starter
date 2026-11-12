@@ -1,5 +1,5 @@
 //! The app's lifecycle state machine, driven by the engine's `lifecycle()`
-//! (0.4.0 exposes the engine's phases; `Starting` is the shell's own,
+//! (NSH exposes the engine's phases; `Starting` is the shell's own,
 //! until the first phase arrives).
 
 use nsh_core::{platform::Lifecycle, prelude::*};

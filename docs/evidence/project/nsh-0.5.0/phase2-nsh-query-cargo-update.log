@@ -1,0 +1,177 @@
+    Blocking waiting for file lock on package cache
+    Updating crates.io index
+     Locking 94 packages to highest Rust 1.99.1 compatible versions
+      Adding annotate-snippets v0.12.18
+      Adding anstyle v1.0.14
+      Adding arc-swap v1.9.5
+      Adding arraydeque v0.5.1
+      Adding base62 v2.2.6
+      Adding bitflags v1.3.2
+    Updating brotli-decompressor v6.3.0 -> v6.3.1
+      Adding bstr v1.13.1
+      Adding bumpalo v3.20.3
+      Adding combine v4.6.9
+    Updating const-oid v0.10.2 -> v0.10.3
+      Adding constant_time_eq v0.6.1
+      Adding core-foundation v0.10.1
+      Adding core-foundation-sys v0.8.7
+      Adding core_detect v1.0.0
+    Updating crc32fast v1.5.4 -> v1.5.5
+      Adding crossbeam-deque v0.8.8
+      Adding crossbeam-epoch v0.9.21
+    Updating crypto-bigint v0.7.10 -> v0.7.11
+      Adding dispatch2 v0.3.1
+      Adding encoding_rs v0.8.44
+      Adding encoding_rs_io v0.1.8
+      Adding filetime v0.2.29
+      Adding globset v0.4.21
+      Adding globwalk v0.8.1
+      Adding granit-parser v1.3.0
+      Adding ignore v0.4.34
+    Updating inout v0.2.5 -> v0.2.6
+      Adding itertools v0.11.0
+    Updating itoa v1.0.18 -> v1.0.19
+      Adding jni v0.22.4
+      Adding jni-macros v0.22.4
+      Adding jni-sys v0.4.1
+      Adding jni-sys-macros v0.4.1
+      Adding js-sys v0.3.107
+      Adding multiversion_no_op v1.0.0
+      Adding nix v0.31.3
+      Adding nohash-hasher v0.2.0
+      Adding normpath v1.5.2
+    Updating nsh-core v0.4.0 -> v0.5.0
+    Updating nsh-engine v0.4.0 -> v0.5.0
+      Adding nsh-i18n v0.5.0
+    Updating nsh-js v0.4.0 -> v0.5.0
+    Updating nsh-macros v0.4.0 -> v0.5.0
+    Updating nsh-package v0.4.0 -> v0.5.0
+    Updating nsh-testing v0.4.0 -> v0.5.0
+      Adding nsh-updater v0.5.0
+      Adding objc2 v0.6.5
+      Adding objc2-core-foundation v0.3.2
+      Adding objc2-encode v4.1.0
+      Adding objc2-io-surface v0.3.2
+      Adding openssl-probe v0.2.2
+    Updating quickjs-jit v0.14.1 -> v0.14.2
+    Updating quickjs-jit-core v0.14.1 -> v0.14.2
+    Updating quickjs-jit-macro v0.14.1 -> v0.14.2
+    Updating quickjs-jit-stdlib v0.14.1 -> v0.14.2
+    Updating quickjs-jit-sys v0.14.1 -> v0.14.2
+      Adding rust-i18n v4.2.4
+      Adding rust-i18n-macro v4.2.4
+      Adding rust-i18n-support v4.2.4
+      Adding rustls-native-certs v0.8.5
+    Updating rustls-pki-types v1.15.1 -> v1.16.0
+      Adding rustls-platform-verifier v0.7.1
+      Adding rustls-platform-verifier-android v0.2.0
+      Adding rustversion v1.0.23
+      Adding same-file v1.0.6
+      Adding schannel v0.1.30
+      Adding scopeguard v1.2.0
+      Adding security-framework v3.7.0
+      Adding security-framework-sys v2.17.0
+      Adding serde-saphyr v1.3.0
+      Adding serde_spanned v0.6.9
+      Adding simd_cesu8 v1.2.0
+    Updating smallvec v1.16.4 -> v1.16.5
+    Updating syn v3.0.9 -> v3.0.10
+      Adding tar v0.4.46
+      Adding toml v0.8.23
+      Adding toml_datetime v0.6.11
+      Adding toml_edit v0.22.27
+      Adding toml_write v0.1.2
+      Adding triomphe v0.1.17
+      Adding typed-path v0.13.0
+      Adding walkdir v2.5.0
+      Adding wasm-bindgen v0.2.130
+      Adding wasm-bindgen-macro v0.2.130
+      Adding wasm-bindgen-macro-support v0.2.130
+      Adding wasm-bindgen-shared v0.2.130
+      Adding webpki-root-certs v1.0.12
+    Updating webpki-roots v1.0.11 -> v1.0.12
+      Adding winapi-util v0.1.11
+      Adding winnow v0.7.15
+      Adding zeroize_derive v1.5.0
+      Adding zip v9.5.1
+      Adding zopfli v0.8.4
+note: pass `--verbose` to see 2 unchanged dependencies behind latest
+  Downloaded nsh-i18n v0.5.0
+  Downloaded nsh-package v0.5.0
+  Downloaded nsh-testing v0.5.0
+  Downloaded nsh-engine v0.5.0
+  Downloaded nsh-js v0.5.0
+├── nsh-package v0.5.0
+│   └── nsh-engine v0.5.0
+│       └── nsh-testing v0.5.0
+│           └── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+│       └── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+└── nsh-updater v0.5.0
+    ├── nsh-core v0.5.0
+    │   ├── nsh-engine v0.5.0 (*)
+    │   ├── nsh-js v0.5.0
+    │   │   └── nsh-engine v0.5.0 (*)
+    │   ├── nsh-package v0.5.0 (*)
+    │   ├── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+    │   └── nsh-testing v0.5.0 (*)
+    └── nsh-engine v0.5.0 (*)
+                └── nsh-core v0.5.0 (*)
+│   └── nsh-testing v0.5.0 (*)
+        │       ├── nsh-js v0.5.0 (*)
+        │           └── nsh-js v0.5.0 (*)
+│   └── nsh-core v0.5.0 (*)
+│       └── nsh-updater v0.5.0 (*)
+│   └── nsh-engine v0.5.0 (*)
+│   │       └── nsh-core v0.5.0 (*)
+        ├── nsh-core v0.5.0 (*)
+    │       ├── nsh-package v0.5.0 (*)
+    │       └── nsh-updater v0.5.0 (*)
+    │           ├── nsh-core v0.5.0 (*)
+    │           └── nsh-js v0.5.0 (*)
+        ├── nsh-core v0.5.0 (*)
+        ├── nsh-package v0.5.0 (*)
+        └── nsh-updater v0.5.0 (*)
+    ├── nsh-core v0.5.0 (*)
+    └── nsh-macros v0.5.0 (proc-macro)
+        └── nsh-core v0.5.0 (*)
+│   ├── nsh-core v0.5.0 (*)
+│   ├── nsh-engine v0.5.0 (*)
+│   ├── nsh-js v0.5.0 (*)
+└── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+│   ├── nsh-updater v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+    │   ├── nsh-core v0.5.0 (*)
+│       └── nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+├── nsh-package v0.5.0 (*)
+│       └── nsh-updater v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+├── nsh-engine v0.5.0 (*)
+├── nsh-js v0.5.0 (*)
+    └── nsh-core v0.5.0 (*)
+├── nsh-core v0.5.0 (*)
+├── nsh-engine v0.5.0 (*)
+├── nsh-js v0.5.0 (*)
+    └── nsh-engine v0.5.0 (*)
+│   ├── nsh-core v0.5.0 (*)
+│   ├── nsh-js v0.5.0 (*)
+│   ├── nsh-package v0.5.0 (*)
+│   ├── nsh-updater v0.5.0 (*)
+    ├── nsh-core v0.5.0 (*)
+    ├── nsh-engine v0.5.0 (*)
+    ├── nsh-js v0.5.0 (*)
+    ├── nsh-package v0.5.0 (*)
+    ├── nsh-updater v0.5.0 (*)
+│               ├── nsh-core v0.5.0 (*)
+│               ├── nsh-js v0.5.0 (*)
+    └── nsh-core v0.5.0 (*)
+├── nsh-macros v0.5.0 (proc-macro) (*)
+│       ├── nsh-core v0.5.0 (*)
+│       ├── nsh-js v0.5.0 (*)
+│       ├── nsh-js v0.5.0 (*)
+│       ├── nsh-package v0.5.0 (*)
+│       ├── nsh-updater v0.5.0 (*)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+nsh-core v0.5.0
+├── nsh-engine v0.5.0

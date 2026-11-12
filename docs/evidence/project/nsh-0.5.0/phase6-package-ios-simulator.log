@@ -1,0 +1,6 @@
+$ nsh package --target ios-simulator
+✓ built the Rust crate nsh-starter (825ms)
+warn app id `com.example.nshstarter` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+✓ built the iOS simulator runner of nsh-starter (6m 42s)
+✓ packaged .nsh/out/nsh-starter.app
+[exit 0]

@@ -1,0 +1,2 @@
+$ (cd /Users/hmziq/fo/nsh-query/packages/nsh-query) /opt/homebrew/bin/nsh check
+[exit 0]

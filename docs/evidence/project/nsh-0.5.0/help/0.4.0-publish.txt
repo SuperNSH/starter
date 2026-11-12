@@ -1,0 +1,50 @@
+Build an app in release mode and sign it into a package (`.nshpkg`) for apps that embed nsh to verify and run. Metadata comes from `nsh.json` next to the entry, overridden by the flags below. Given a package instead of an app, signs it again with this key: only its certificate, signing time and signature change
+
+Usage: nsh publish [OPTIONS] --key <KEY> --cert <CERT> [ENTRY]
+
+Arguments:
+  [ENTRY]
+          The entry module, the app's directory (default: the current one), whose `App.tsx` is the entry, or a package (`.nshpkg`) to sign again
+          
+          [default: .]
+
+Options:
+      --key <KEY>
+          The release key's secret key (`.secret`)
+
+  -v, --verbose
+          Show everything: log lines with their targets, cargo's output and the hosts' own
+          
+          [env: NSH_VERBOSE=]
+
+      --cert <CERT>
+          Its certificate (`nsh certify`)
+
+  -o, --out <OUT>
+          The package to write (default: `.nsh/out/<id>-<build>.nshpkg`); a package signed again may name the one read
+
+      --id <ID>
+          App id, e.g. `com.example.app`
+
+      --app-version <VERSION>
+          Version, e.g. `1.2.0`
+
+      --build <BUILD>
+          Build number: must grow with every release
+
+      --source-map <SOURCE_MAP>
+          Where the source map goes: into the package (devices report errors at app source positions), into a file next to it (`<package>.map`, for `nsh symbolicate`), or nowhere (default: into the package)
+
+          Possible values:
+          - package: In the package: devices map error stacks to the app's sources
+          - file:    In `<package>.map`, next to the package
+          - none:    Nowhere
+
+      --strip-debug
+          Leave the line and column tables out of the bytecode: a smaller package whose error stacks have no positions
+
+      --min-runtime <VERSION>
+          The lowest runtime that runs the package, e.g. `0.2.0` (default: this CLI's version); older runtimes refuse it
+
+  -h, --help
+          Print help (see a summary with '-h')

@@ -1,9 +1,12 @@
 //! The speech card: dictation through `recognize_speech`, with its
-//! availability shown. Reading text aloud is not exposed on 0.4.0 and the
+//! availability shown. Reading text aloud is not exposed on 0.5.0 and the
 //! card says so.
 
 use nsh_base::theme;
 use nsh_core::{prelude::*, speech::SpeechRequest};
+
+// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+use rust_i18n::t;
 
 use super::{
     locale,

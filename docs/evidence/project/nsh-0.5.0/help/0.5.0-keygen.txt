@@ -1,0 +1,10 @@
+Create a signing key: `<name>.secret` (keep it offline for a root) and `<name>.pub` (what apps trust, for a root)
+
+Usage: nsh keygen [OPTIONS] <NAME>
+
+Arguments:
+  <NAME>  Path and name of the key files, e.g. `keys/root`
+
+Options:
+  -v, --verbose  Show everything: log lines with their targets, cargo's output and the hosts' own [env: NSH_VERBOSE=]
+  -h, --help     Print help
