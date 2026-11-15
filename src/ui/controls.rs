@@ -107,16 +107,22 @@ pub fn checkbox_row(label: impl Into<SharedString>, checked: Signal<bool>) -> im
 
 /// A checkbox without its label, for rows that compose their own content
 /// beside the indicator. `checked` may be reactive (the row's task state);
-/// the flip goes to `on_change`; `name` is what screen readers hear.
+/// the flip goes to `on_change`; `name` is what screen readers hear. On
+/// touch screens the 18pt indicator sits centered in a 40pt tappable box
+/// (the button system's Small floor), so a row's toggle is as reachable
+/// as its buttons; the pointer frames keep the tight box.
 pub fn checkbox_control(
     checked: impl IntoReactive<bool>,
     on_change: impl Fn(bool) + 'static,
     name: impl Into<SharedString>,
 ) -> impl IntoElement {
+    // 11pt around the 18pt indicator makes the 40pt box.
+    let touch_floor = if is_desktop() { 0.0 } else { 11.0 };
     checkbox()
         .checked(checked.into_reactive())
         .accessibility_label(name.into())
         .on_change(move |next: &bool| on_change(*next))
+        .p(px(touch_floor))
         .rounded_sm()
         .focus(|s| {
             s.outline(px(2.0))

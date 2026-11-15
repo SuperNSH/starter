@@ -6,7 +6,8 @@
 //! - `store`: the task list as the engine's global signal, persisted to
 //!   `Storage` on every change (the settings pattern: one JSON document
 //!   under one key).
-//! - `page`: the screen — add, toggle, edit, delete, filter.
+//! - `page`: the screen — add, toggle, edit, delete, filter; one column
+//!   at phone widths, the summary rail beside it on wide windows.
 
 pub mod model;
 pub mod page;

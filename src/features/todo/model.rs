@@ -64,6 +64,11 @@ pub fn remaining(items: &[TodoItem]) -> usize {
     items.iter().filter(|item| !item.completed).count()
 }
 
+/// How many tasks are done.
+pub fn completed(items: &[TodoItem]) -> usize {
+    items.iter().filter(|item| item.completed).count()
+}
+
 /// The tasks `filter` shows, in list order.
 pub fn visible(items: &[TodoItem], filter: TodoFilter) -> Vec<&TodoItem> {
     items.iter().filter(|item| filter.matches(item)).collect()
@@ -119,6 +124,16 @@ mod tests {
             remaining(&[task(1, "a", false), task(2, "b", true), task(3, "c", false)]),
             2
         );
+    }
+
+    #[test]
+    fn completed_counts_the_done() {
+        assert_eq!(completed(&[]), 0);
+        assert_eq!(completed(&[task(1, "a", true)]), 1);
+        assert_eq!(completed(&[task(1, "a", false), task(2, "b", true)]), 1);
+        // The two counts add up to the list.
+        let items = vec![task(1, "a", false), task(2, "b", true), task(3, "c", false)];
+        assert_eq!(remaining(&items) + completed(&items), items.len());
     }
 
     #[test]

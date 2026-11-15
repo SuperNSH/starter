@@ -112,6 +112,13 @@ pub fn remove(id: u64) {
     save();
 }
 
+/// Removes every finished task at once (the summary rail's and the filter
+/// row's clear action).
+pub fn clear_completed() {
+    items().update(|items| items.retain(|item| !item.completed));
+    save();
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
