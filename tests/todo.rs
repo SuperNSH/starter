@@ -1,6 +1,7 @@
 //! The to-do list's headless tests: add by Enter, toggle, rename inline,
-//! delete, the filters with their empty states, and the restart, through
-//! the real page on a manual clock.
+//! delete, the filters with their empty states, the restart, and the
+//! responsive column — the summary rail against the window's width —
+//! through the real page on a manual clock.
 //!
 //! Seen-to-fail record: every test below was seen failing once by
 //! breaking the code on purpose, then restored. Breaks, one row per test
@@ -14,11 +15,16 @@
 //! | `deleting_removes_the_task`, `the_list_survives_a_restart` | `store.rs`: `remove` retained every id |
 //! | `a_seeded_list_renders_its_tasks`, `the_list_survives_a_restart` | `store.rs`: `load` set an empty list over the document |
 //! | `an_empty_list_shows_its_empty_state` | `model.rs`: `TodoFilter::All` matched nothing (the empty state's `visible` under All) |
+//! | `clearing_done_removes_the_finished_tasks`, `the_summary_rail_follows_the_window_width` | `store.rs`: `clear_completed` retained everything |
+//! | `the_summary_rail_follows_the_window_width`, `a_mid_width_holds_the_single_column` | `page.rs`: `RAIL_WIDTH` 0.0, so the rail showed at every width |
 
 use std::sync::Arc;
 use std::time::SystemTime;
 
-use nsh_core::prelude::*;
+use nsh_core::{
+    geometry::{Points, Size},
+    prelude::*,
+};
 use nsh_engine::{Clock, EngineConfig, Root};
 use nsh_testing::{Headless, MemoryStorage};
 use todo_sample::features::todo::page::todo_page;
@@ -36,6 +42,21 @@ fn start(storage: Arc<MemoryStorage>) -> Headless {
         ..EngineConfig::new(Root::of::<Harness>())
     })
     .unwrap();
+    app.first_render().unwrap();
+    app
+}
+
+/// The page at a window of `width` by `height`: the rail reads the
+/// width, so the engine must open at one. `start` stays with the
+/// headless default (a phone-sized window) for the behavior tests.
+fn start_sized(storage: Arc<MemoryStorage>, width: f32, height: f32) -> Headless {
+    let mut config = EngineConfig {
+        clock: Clock::manual(SystemTime::UNIX_EPOCH),
+        storage: Some(storage),
+        ..EngineConfig::new(Root::of::<Harness>())
+    };
+    config.viewport = Size::new(Points(width), Points(height));
+    let mut app = Headless::start(config).unwrap();
     app.first_render().unwrap();
     app
 }
@@ -215,5 +236,62 @@ fn the_list_survives_a_restart() -> Result<(), String> {
     third.wait_for("text:Kept done")?;
     third.wait_for_gone("text:Kept active", std::time::Duration::from_secs(1))?;
     assert!(third.shows("No tasks left"));
+    Ok(())
+}
+
+#[test]
+fn clearing_done_removes_the_finished_tasks() -> Result<(), String> {
+    let mut app = start(MemoryStorage::new(vec![]));
+    add(&mut app, "Stays")?;
+    add(&mut app, "Goes")?;
+    app.wait_for("text:Goes")?;
+    app.press("id:todo-toggle-2 >> role:checkbox")?;
+    app.wait_for("1 task left")?;
+
+    // The filter row's clear action, the compact width's home for it.
+    app.press("id:todo-clear >> label:Clear completed tasks")?;
+    app.wait_for_gone("text:Goes", std::time::Duration::from_secs(1))?;
+    app.wait_for("text:Stays")?;
+    assert!(app.shows("1 task left"));
+    Ok(())
+}
+
+#[test]
+fn the_summary_rail_follows_the_window_width() -> Result<(), String> {
+    let mut app = start_sized(MemoryStorage::new(vec![]), 1280.0, 800.0);
+    // The wide window puts the rail beside the list.
+    app.wait_for("text:Summary")?;
+    app.wait_for("text:What needs doing?")?;
+
+    add(&mut app, "Wide one")?;
+    add(&mut app, "Wide two")?;
+    app.press("id:todo-toggle-2 >> role:checkbox")?;
+    app.wait_for("1 task left")?;
+
+    // The rail's own clear action removes the finished task.
+    app.press("id:todo-rail-clear >> label:Clear completed tasks")?;
+    app.wait_for_gone("text:Wide two", std::time::Duration::from_secs(1))?;
+    app.wait_for("text:Wide one")?;
+    assert!(app.shows("1 task left"));
+
+    // Narrowing the window puts the rail away without losing the page.
+    app.set_environment("the window narrows", |environment| {
+        environment.window = Size::new(Points(390.0), Points(844.0));
+    })?;
+    app.wait_for_gone("text:Summary", std::time::Duration::from_secs(1))?;
+    app.wait_for("text:What needs doing?")?;
+    app.wait_for("text:Wide one")?;
+    Ok(())
+}
+
+#[test]
+fn a_mid_width_holds_the_single_column() -> Result<(), String> {
+    // Between the two layouts: the desktop shell's width, no rail yet.
+    let mut app = start_sized(MemoryStorage::new(vec![]), 860.0, 700.0);
+    app.wait_for("text:What needs doing?")?;
+    assert!(!app.shows("Summary"), "the rail is for wide windows alone");
+    // The list still works between the two layouts.
+    add(&mut app, "Mid one")?;
+    app.wait_for("text:Mid one")?;
     Ok(())
 }

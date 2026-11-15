@@ -32,6 +32,7 @@ smoke:
     nsh test App.test.tsx
     nsh test smoke/pages.test.tsx
     nsh test smoke/todo.test.tsx
+    nsh test smoke/todo-responsive.test.tsx
     just test-tsx
 
 # Desktop run in the AppKit development host, with hot reload.
