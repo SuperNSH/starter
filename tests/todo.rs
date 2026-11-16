@@ -140,7 +140,7 @@ fn editing_renames_via_enter_and_an_emptied_field_removes() -> Result<(), String
     add(&mut app, "First draft")?;
     app.wait_for("text:First draft")?;
 
-    app.press("id:todo-item-1 >> label:Edit task")?;
+    app.press("id:todo-item-1 >> label:Edit task: First draft")?;
     app.wait_for("id:todo-edit-1")?;
     app.clear("id:todo-edit-1")?;
     app.type_text("id:todo-edit-1", "Renamed\n")?;
@@ -148,7 +148,7 @@ fn editing_renames_via_enter_and_an_emptied_field_removes() -> Result<(), String
     app.wait_for_gone("text:First draft", std::time::Duration::from_secs(1))?;
 
     // An edit that empties the field removes the task (TodoMVC's rule).
-    app.press("id:todo-item-1 >> label:Edit task")?;
+    app.press("id:todo-item-1 >> label:Edit task: First draft")?;
     app.wait_for("id:todo-edit-1")?;
     app.clear("id:todo-edit-1")?;
     app.type_text("id:todo-edit-1", "\n")?;
@@ -163,7 +163,7 @@ fn deleting_removes_the_task() -> Result<(), String> {
     add(&mut app, "Remove me")?;
     app.wait_for("text:Remove me")?;
 
-    app.press("id:todo-delete-2 >> label:Delete task")?;
+    app.press("id:todo-delete-2 >> label:Delete task: Remove me")?;
     app.wait_for_gone("text:Remove me", std::time::Duration::from_secs(1))?;
     app.wait_for("text:Keep me")?;
     assert!(app.shows("1 task left"));
@@ -228,7 +228,7 @@ fn the_list_survives_a_restart() -> Result<(), String> {
     assert!(second.shows("1 task left"));
 
     // A change in the new session reaches the one after it.
-    second.press("id:todo-delete-1 >> label:Delete task")?;
+    second.press("id:todo-delete-1 >> label:Delete task: Kept active")?;
     second.wait_for_gone("text:Kept active", std::time::Duration::from_secs(1))?;
     drop(second);
 
