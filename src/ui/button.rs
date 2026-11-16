@@ -64,14 +64,15 @@ pub fn button(
 }
 
 /// The app's button with every choice open: variant, size, disabled, and
-/// `name` (what screen readers hear when the label alone is not enough;
-/// `None` names it from its label).
+/// `name` (what screen readers hear when the label alone is not enough —
+/// a row's action names the row's content; `None` names it from its
+/// label).
 pub fn button_with(
     label: impl IntoReactive<SharedString>,
     variant: ButtonVariant,
     size: ButtonSize,
     disabled: impl IntoReactive<bool>,
-    name: Option<&'static str>,
+    name: Option<String>,
     on_press: impl Fn() + 'static,
 ) -> ButtonElement {
     let small = size == ButtonSize::Small;
@@ -79,8 +80,8 @@ pub fn button_with(
     // The frame is decided once; the variants only add fill and a label.
     let base = move || {
         let named = base_button().on_press(on_press).disabled(disabled);
-        let named = match name {
-            Some(name) => named.accessibility_label(name),
+        let named = match &name {
+            Some(name) => named.accessibility_label(name.clone()),
             None => named,
         };
         named
@@ -139,7 +140,7 @@ pub fn button_with(
 /// readers hear.
 pub fn choice_button(
     label: impl IntoReactive<SharedString>,
-    name: &'static str,
+    name: impl Into<SharedString>,
     selected: impl IntoReactive<bool>,
     disabled: impl IntoReactive<bool>,
     on_press: impl Fn() + 'static,
@@ -149,7 +150,7 @@ pub fn choice_button(
         ButtonVariant::Outline,
         ButtonSize::Small,
         disabled,
-        Some(name),
+        Some(name.into().as_str().to_owned()),
         on_press,
     )
     .selected(selected.into_reactive())
@@ -160,15 +161,16 @@ pub fn choice_button(
 }
 
 /// A compact glyph-only action, for well-known symbols: `name` is what
-/// screen readers hear and tests press.
+/// screen readers hear and tests press — a row's action names the row's
+/// content, so it may be built per row.
 pub fn icon_button(
     glyph: &'static str,
-    name: &'static str,
+    name: impl Into<SharedString>,
     on_press: impl Fn() + 'static,
 ) -> ButtonElement {
     base_button()
         .on_press(on_press)
-        .accessibility_label(name)
+        .accessibility_label(name.into())
         .min_h(min_height(ButtonSize::Small))
         .min_w(min_height(ButtonSize::Small))
         .px_2()

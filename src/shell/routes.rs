@@ -24,9 +24,13 @@ impl Route {
         }
     }
 
-    /// What the sidebar, the tabs, the palette and the tests call it.
+    /// What the sidebar, the tabs and the system header call it: the
+    /// route's title in the app's locale (`todo.title`), read where the
+    /// label renders.
     pub fn label(self) -> String {
-        self.label_str().into()
+        match self {
+            Route::Home => t!("todo.title").to_string(),
+        }
     }
 
     /// The label of a root route, as a literal (static contexts: the

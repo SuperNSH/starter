@@ -147,7 +147,7 @@ pub(crate) fn composites() -> impl IntoElement {
                         ui::button::ButtonVariant::Secondary,
                         ui::button::ButtonSize::Small,
                         false,
-                        Some("Stagger"),
+                        Some("Stagger".to_owned()),
                         run_stagger,
                     ))
                     .child(ui::button::button_with(
@@ -155,7 +155,7 @@ pub(crate) fn composites() -> impl IntoElement {
                         ui::button::ButtonVariant::Secondary,
                         ui::button::ButtonSize::Small,
                         false,
-                        Some("Sequence"),
+                        Some("Sequence".to_owned()),
                         run_jump,
                     ))
                     .child(ui::button::button_with(
@@ -163,7 +163,7 @@ pub(crate) fn composites() -> impl IntoElement {
                         ui::button::ButtonVariant::Secondary,
                         ui::button::ButtonSize::Small,
                         false,
-                        Some("Pulse twice"),
+                        Some("Pulse twice".to_owned()),
                         run_blink,
                     )),
             )

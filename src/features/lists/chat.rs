@@ -236,7 +236,7 @@ pub fn ChatDemo() -> impl IntoElement {
                     ButtonVariant::Secondary,
                     ButtonSize::Small,
                     false,
-                    Some("Receive a message"),
+                    Some("Receive a message".to_owned()),
                     move || receive(&()),
                 ))
                 .child(button_with(
@@ -244,7 +244,7 @@ pub fn ChatDemo() -> impl IntoElement {
                     ButtonVariant::Outline,
                     ButtonSize::Small,
                     false,
-                    Some("Latest message"),
+                    Some("Latest message".to_owned()),
                     move || list.scroll_to_index(0, percentage(0.0), px(0.0), false),
                 ))
                 .child(
@@ -261,7 +261,7 @@ pub fn ChatDemo() -> impl IntoElement {
                     ButtonVariant::Primary,
                     ButtonSize::Small,
                     false,
-                    Some("Send"),
+                    Some("Send".to_owned()),
                     send,
                 )),
         )

@@ -12,11 +12,13 @@ pub fn title(label: impl IntoReactive<SharedString>) -> impl IntoElement {
         .text_color(move || theme().foreground)
 }
 
-/// A section header inside a page: 16pt semibold.
+/// A section header inside a page: 16pt semibold, a header role so screen
+/// readers can jump to it.
 pub fn section_title(label: impl IntoReactive<SharedString>) -> impl IntoElement {
     text(label.into_reactive())
         .text_base()
         .font_weight(FontWeight::SEMIBOLD)
+        .role(AccessibilityRole::Header)
         .text_color(move || theme().foreground)
 }
 

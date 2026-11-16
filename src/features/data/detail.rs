@@ -410,7 +410,7 @@ fn comment_form(
             crate::ui::button::ButtonSize::Medium,
             move || form.is_submitting(),
             // A stable name while the label alternates with "Posting…".
-            Some("Post"),
+            Some("Post".to_owned()),
             move || {
                 form.submit(move |values: CommentDraft| async move {
                     match add_comment.mutate_async(values.body).await {

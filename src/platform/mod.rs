@@ -21,7 +21,7 @@ mod widgets;
 use nsh_base::theme;
 use nsh_core::prelude::*;
 
-use widgets::localized;
+pub(crate) use widgets::{localized, localized_text};
 
 /// One page of the platform area: its content in a scroll view that sits
 /// inside the safe area on every edge, and lifts above the keyboard. The

@@ -88,7 +88,7 @@ pub(crate) fn layout_reorder() -> impl IntoElement {
             variant,
             ui::button::ButtonSize::Medium,
             false,
-            Some(label),
+            Some(label.to_owned()),
             move || reorder(f, what),
         )
     };

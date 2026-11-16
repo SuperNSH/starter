@@ -171,7 +171,7 @@ pub fn error_surface() -> impl IntoElement {
                             ButtonVariant::Secondary,
                             ButtonSize::Small,
                             false,
-                            Some("Dismiss"),
+                            Some("Dismiss".to_owned()),
                             move || {
                                 let id = errors
                                     .with_untracked(|queue| queue.last().map(|error| error.id));

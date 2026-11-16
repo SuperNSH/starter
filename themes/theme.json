@@ -9,7 +9,7 @@
     "light": {
       "primary": "#4f46e5",
       "primary-foreground": "#ffffff",
-      "ring": "#818cf8",
+      "ring": "#6366f1",
       "destructive": "#dc2626",
       "success": "#16a34a",
       "success-foreground": "#ffffff",

@@ -89,7 +89,7 @@ pub(crate) fn pinch_rotate() -> impl IntoElement {
                 ui::button::ButtonVariant::Secondary,
                 ui::button::ButtonSize::Medium,
                 false,
-                Some("Reset"),
+                Some("Reset".to_owned()),
                 reset,
             ))
             .child(api_line(

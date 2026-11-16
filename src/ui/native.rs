@@ -147,7 +147,7 @@ pub fn native_segmented(items: &'static [&'static str], selected: Signal<usize>)
             .children(items.iter().enumerate().map(|(at, item)| {
                 choice_button(
                     *item,
-                    item,
+                    *item,
                     move || selected.get() == at,
                     false,
                     move || selected.set(at),

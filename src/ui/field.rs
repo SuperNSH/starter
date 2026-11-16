@@ -48,13 +48,29 @@ fn frame(input: Input) -> Input {
         .caret_color(move || color(theme().foreground))
 }
 
-/// A single-line field bound to `value`; typing writes the signal.
+/// A single-line field bound to `value`; typing writes the signal. The
+/// placeholder is the field's accessibility label too — an unnamed field
+/// is a blank line to a screen reader (the platform pages' convention).
 pub fn text_field(value: Signal<String>, placeholder: impl Into<String>) -> Input {
+    let placeholder = placeholder.into();
+    text_field_labeled(value, placeholder.clone(), placeholder.as_str().to_owned())
+}
+
+/// A single-line field whose placeholder and accessibility label are set
+/// apart: the inline edit holds the task's title, so its name says what
+/// it edits while its placeholder stays quiet; a localized field reads
+/// both from the locale as bindings.
+pub fn text_field_labeled(
+    value: Signal<String>,
+    placeholder: impl IntoReactive<String>,
+    label: impl IntoReactive<SharedString>,
+) -> Input {
     frame(
         input()
             .value(move || value.get())
             .on_change(move |text: &str| value.set(text.to_owned()))
-            .placeholder(placeholder.into()),
+            .placeholder(placeholder)
+            .label(label),
     )
 }
 

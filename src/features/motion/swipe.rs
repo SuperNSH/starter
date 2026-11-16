@@ -171,7 +171,7 @@ pub(crate) fn swipe_rows() -> impl IntoElement {
                         ui::button::ButtonVariant::Secondary,
                         ui::button::ButtonSize::Medium,
                         false,
-                        Some("Restore rows"),
+                        Some("Restore rows".to_owned()),
                         {
                             let rows = rows;
                             move || {

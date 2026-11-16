@@ -7,13 +7,18 @@ use nsh_core::prelude::*;
 
 use super::locale;
 
-/// `t!` looked up on every run, so a locale switch re-renders it: reading the
-/// locale signal subscribes the binding, and `t!` answers in that language.
+/// `t!` in the app's current locale, with the read of the locale signal
+/// that subscribes the caller: called inside a binding, the binding
+/// re-runs when the locale switches.
+pub(crate) fn localized_text(key: &'static str) -> String {
+    locale::app_locale().get();
+    t!(key).to_string()
+}
+
+/// [`localized_text`] as a binding: `t!` looked up on every run, so a
+/// locale switch re-renders it. The one way screens render a string.
 pub(crate) fn localized(key: &'static str) -> impl Fn() -> String {
-    move || {
-        locale::app_locale().get();
-        t!(key).to_string()
-    }
+    move || localized_text(key)
 }
 
 /// A hairline between rows of a card.

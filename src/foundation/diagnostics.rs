@@ -389,7 +389,7 @@ fn action(label: &'static str, on_press: impl Fn() + 'static) -> ButtonElement {
         ButtonVariant::Outline,
         ButtonSize::Small,
         false,
-        Some(label),
+        Some(label.to_owned()),
         on_press,
     )
 }

@@ -31,12 +31,23 @@ impl TodoFilter {
     /// The filters in the order the page offers them.
     pub const ALL: [TodoFilter; 3] = [TodoFilter::All, TodoFilter::Active, TodoFilter::Completed];
 
-    /// The filter's chip label.
+    /// The filter's literal name, for screen readers and tests (NSH 0.4.0
+    /// sets an accessibility label once, at build). The chip's visible
+    /// text is [`TodoFilter::label_key`], localized.
     pub fn label(self) -> &'static str {
         match self {
             TodoFilter::All => "All",
             TodoFilter::Active => "Active",
             TodoFilter::Completed => "Completed",
+        }
+    }
+
+    /// The filter's chip label as an i18n key: what the page renders.
+    pub fn label_key(self) -> &'static str {
+        match self {
+            TodoFilter::All => "todo.filter.all",
+            TodoFilter::Active => "todo.filter.active",
+            TodoFilter::Completed => "todo.filter.completed",
         }
     }
 
@@ -72,16 +83,6 @@ pub fn completed(items: &[TodoItem]) -> usize {
 /// The tasks `filter` shows, in list order.
 pub fn visible(items: &[TodoItem], filter: TodoFilter) -> Vec<&TodoItem> {
     items.iter().filter(|item| filter.matches(item)).collect()
-}
-
-/// The count as the page words it: "No tasks left", "1 task left",
-/// "3 tasks left".
-pub fn remaining_label(items: &[TodoItem]) -> String {
-    match remaining(items) {
-        0 => "No tasks left".to_owned(),
-        1 => "1 task left".to_owned(),
-        count => format!("{count} tasks left"),
-    }
 }
 
 #[cfg(test)]
@@ -134,15 +135,5 @@ mod tests {
         // The two counts add up to the list.
         let items = vec![task(1, "a", false), task(2, "b", true), task(3, "c", false)];
         assert_eq!(remaining(&items) + completed(&items), items.len());
-    }
-
-    #[test]
-    fn the_remaining_label_words_its_counts() {
-        assert_eq!(remaining_label(&[]), "No tasks left");
-        assert_eq!(remaining_label(&[task(1, "a", false)]), "1 task left");
-        assert_eq!(
-            remaining_label(&[task(1, "a", true), task(2, "b", false), task(3, "c", false)]),
-            "2 tasks left"
-        );
     }
 }
