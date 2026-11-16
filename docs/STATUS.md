@@ -147,3 +147,37 @@ is unverified. Every area updates its own section as it lands work.
   - Controls: Lists chips and Platform buttons had labels stuck to the top-left; they are now centered. Off-state switch tracks are visible in light and dark. Badges and pills hug their text. Primary buttons no longer stretch full width on desktop. The gallery's popup triggers sit in one row at one size. The motion drawer hides when shut. Overlays flows sit in titled cards. Diagnostics shows undeclared capabilities in a neutral color instead of red.
 - Verified: `nsh test --target macos|ios|android .audit/capture2.test.tsx` (a throwaway capture script kept out of git) passed on each target. Its 52 screenshots per target are in `docs/evidence/shell/ui-pass/{macos,ios,android}/`, and the key ones were looked at after the fixes. `cargo fmt --check`, `cargo clippy --all-targets -D warnings`, `cargo test` (all suites), `nsh check`, `nsh test App.test.tsx` and `nsh test smoke/pages.test.tsx` all pass. Test updates: `tests/shell.rs` (the lifecycle test now runs at desktop width, where the status bar lives; the back-order test uses the "Sign up" marker) and `App.test.tsx` (the root check uses Home's own text). Each failed before its update.
 - Not verified: the web target; widths between phone and desktop (tablet); `vision/*.test.tsx` was not re-run, and its saved screenshots predate this pass.
+
+## To-do polish: i18n, accessibility, docs (2026-11-16)
+
+- Done: the to-do page's user-facing strings moved into the i18n catalogs
+  (`en`, `zh-CN`): placeholder, filter chips, remaining count (none/one/many
+  keys with a `%{count}` interpolation), clear actions, the rail, the empty
+  states, the Edit label, and the route's title (`todo.title`). Rendered
+  strings follow the locale through `platform::localized` bindings; the
+  a11y names of controls stay literal (NSH 0.4.0 sets an accessibility
+  label once, at build — recorded in `page.rs`).
+- Done: accessibility pass. Every row control's name carries the task's
+  title ("Toggle/Edit/Delete task: <title>") instead of a repeated generic
+  name; the add field and the inline edit are named (placeholder as the
+  label, the platform pages' convention — `ui::field::text_field_labeled`);
+  `section_title` gained the Header role; the light theme's `ring` moved
+  from `#818cf8` (2.98:1 on white) to `#6366f1` (4.47:1), the value the
+  dark theme already used. Contrast audited by computing WCAG ratios for
+  every text/surface pair the page uses, both themes — all text pairs
+  pass 4.5:1 (see the issue summary for the table). The light `input`
+  border (1.26:1) is left as the design system ships it (the field is
+  identified by its placeholder and focus ring, not the border alone).
+- Verified: `tests/todo_i18n.rs` renders the page under `zh-CN` and waits
+  on catalog strings (seen to fail: the add field's placeholder replaced
+  with its English literal); `smoke/todo.test.tsx`'s new keyboard test
+  proves the desktop auto-focus flow (typing from the first keystroke,
+  Enter adds) on real targets, skipping where focus is withheld by design
+  (headless/phones); full gates `just check`, `just test` (16 suites),
+  `just smoke` green; real-target runs: macOS (`todo`, `todo-responsive`
+  with refreshed `docs/evidence/todo/` captures) and web (`todo`); iOS
+  pages smoke on the simulator.
+- Not verified: Android this pass (the 20 GB AVD was not booted; Stage 3's
+  evidence and the unchanged touch-floor machinery stand); a locale switch
+  inside the shipped app — no route reaches the language card, so zh-CN is
+  proven by the test harness setting the process locale.

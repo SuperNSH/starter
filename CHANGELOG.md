@@ -3,6 +3,25 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+
+- The to-do page's strings render from the i18n catalogs (`en`, `zh-CN`):
+  placeholder, filters, remaining count, clear actions, the summary rail,
+  the empty states, and the route title.
+- Accessibility: row controls name their task ("Edit task: <title>"), the
+  add and edit fields carry labels, section titles are header roles, and
+  the light theme's focus ring meets 3:1 (`#818cf8` → `#6366f1`).
+- README: a run note for the shipped to-do app on desktop, web, iOS and
+  Android, and the clone URL corrected to this repository.
+
+### Added
+
+- `tests/todo_i18n.rs`: the page rendered under `zh-CN`, waiting on catalog
+  strings. A keyboard smoke test proves the desktop auto-focus flow on
+  real targets and skips where focus is withheld by design.
+
 ## [0.1.0] - 2026-11-07
 
 ### Added

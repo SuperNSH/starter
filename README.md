@@ -4,6 +4,19 @@ A production-grade application boilerplate for [Native Shell](https://nsh.dev) (
 
 The app is Rust-first: one crate at the repo root is the UI, and `packages/remote-screen` is a TypeScript (TSX) feature published as a signed package and loaded on demand, proving the mixed path. There is no server and no account anywhere; a local fake API backs the data screens.
 
+## The app you run
+
+What ships is a responsive to-do list — add, edit inline, complete, delete, filter (all / active / completed), clear finished, persist across restarts — one page that stands as a single column at phone widths and gains a summary rail beside the list on wide windows, themed light and dark, worded from the i18n catalogs (`en`, `zh-CN`). The boilerplate's demo pages stay in the crate — their own tests mount them directly — but no route reaches them: the app a user sees is the to-do app alone.
+
+```sh
+just run-macos     # desktop: AppKit dev host, hot reload; the field takes the focus, Enter adds
+just run-web       # the browser: drag between phone and desktop widths, the layout follows live
+just run-ios       # a simulator: safe areas, system header, floating tab bar
+just run-android   # the first device adb lists (a 20 GB AVD data partition; docs/upstream-issues.md)
+```
+
+`just package` ships all four targets into `.nsh/out`. The full gate is `just check && just test && just smoke`.
+
 ## What the app demonstrates
 
 | Page | Area | What it shows |
@@ -48,7 +61,7 @@ The first build compiles the whole NSH crate graph and takes a while; builds aft
 ## From a clean clone to a running app
 
 ```sh
-git clone https://github.com/freeoxide/todo-sample.git
+git clone https://github.com/supernsh/starter.git
 cd todo-sample
 
 just check         # rustfmt + clippy -D warnings
