@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-auth/examples/host-android
+$ export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home' ANDROID_HOME=$HOME/Library/Android/sdk ANDROID_NDK_HOME=$HOME/Library/Android/sdk/ndk/28.2.13676358 ANDROID_NDK_ROOT=$HOME/Library/Android/sdk/ndk/28.2.13676358; bash build-gate.sh
+# 2026-11-17 06:00:30 nsh=nsh 0.5.1 (224d9a7)
+error: need nsh 0.5.0 (upstream installer, ~/.nsh/bin); /Users/hmziq/.nsh/bin/nsh is nsh 0.5.1 (224d9a7)
+# exit 1 (0s)

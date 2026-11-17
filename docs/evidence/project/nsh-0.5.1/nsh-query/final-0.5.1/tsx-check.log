@@ -1,0 +1,4 @@
+$ cd /Users/hmziq/fo/nsh-query/packages/nsh-query
+$ nsh check
+# 2026-11-17 03:42:11 nsh=nsh 0.5.1 (224d9a7)
+# exit 0 (0s)

@@ -1,0 +1,55 @@
+$ cd /Users/hmziq/fo/nsh-auth/examples/demo
+$ nsh test
+# 2026-11-17 05:44:41 nsh=nsh 0.5.1 (224d9a7)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled App.tsx (342160 B in 127.5 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+STORE-VALUE {"provider":"mock","accessToken":"at-first","refreshToken":"rt-first","idToken":"eyJhbGciOiJSUzI1NiIsImtpZCI6InNhbmRib3gta2V5IiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjg3NTUvbW9jayIsInN1YiI6InVzZXItMSIsImF1ZCI6Im5zaC1hdXRoLXNhbmRib3gtY2xpZW50IiwibmFtZSI6IlNhbmRib3ggVXNlciIsImVtYWlsIjoic2FuZGJveEBleGFtcGxlLmNvbSIsImV4cCI6MzYwMCwibm9uY2UiOiJjWWsxYTZManU0cUdBNS1ZWXJPcktnIn0.ZjT5p26isqW1UldgwEozzq_U8V_egUSY2tXdXyMaPzWcOq61dtb0PhFIVB8sujB2gwgqytW2-5WIy1ojfP-JvAUTzILeZRDKb4dyO3oED7WghUFDaFTiI41UyUvagOBYOYznerl1DDro3IpIz-FObjUbenVbPV-FwTgd1GYylwG3JtbqOq2XvI_1IlI_r3CmEKcwRq60OYwSUGODMKm1O0OnZE1kswHgy9sxmvNYEkE1jnv5LXTefZ9ILXAFBDQi5zxL5qeg5QQMfCqPy_vpNEwoE3L4F672nLLlSoRJD_xPHljjJQmR0IpjE8yEfvA8kKjLbpot11T3xi_Aw3j5zg","expiresAt":3600000,"scope":"openid profile email offline_access"}
+✓ App.test.tsx › mock sign-in: authorize URL, exchange, session screen (269ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › no host: the authorize URL opens, and the paste-back finishes the loop (74ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a denied authorization shows the access_denied banner (13ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a callback whose state does not match is refused (34ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › an id token with a foreign nonce does not sign anyone in (34ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › an expired code is reported as expired_code, not as a session (47ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › refresh updates the session and reloads the profile (106ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › eight parallel refreshes reach the token endpoint once (108ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a revoked refresh drops the session (100ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › sign-out revokes the token and clears the session screen (79ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › the saved contact email shows as the account's contact (67ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a bare relaunch reuses the persisted mock base (31ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › host params and auth.config drive mockBaseUrl and autoStart (52ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled preview.tsx (292504 B in 75.2 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+look: skipped, screenshots need --target
+✓ look.test.tsx › the demo UI pieces in both appearances (148ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ preview.test.tsx › every provider button renders with its label (52ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ preview.test.tsx › pressing a provider button reports which one (80ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ preview.test.tsx › the paste-back fallback renders on a hostless surface (50ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ preview.test.tsx › the contact email form validates before it saves (58ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ preview.test.tsx › userinfo renders through the query, with the bearer token sent (14ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ preview.test.tsx › a failed userinfo shows the error, and the claims readout still renders (15ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ preview.test.tsx › switching the provider realm reloads the profile, not the cache (67ms)
+✓ preview.test.tsx › claims rows format epoch claims as dates and aud lists joined (8ms)
+✓ 22 tests: 22 passed, 0 failed (1.6s)
+# exit 0 (2s)

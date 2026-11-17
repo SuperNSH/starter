@@ -1,0 +1,28 @@
+fmt: (cd /Users/hmziq/fo/nsh-http && cargo fmt --all -- --check && cargo fmt --manifest-path examples/demo-rs/Cargo.toml -- --check) -> exit 0 (0s)
+clippy: (cd /Users/hmziq/fo/nsh-http && cargo clippy --all-targets -- -D warnings) -> exit 0 (511s)
+clippy-all-features: (cd /Users/hmziq/fo/nsh-http && cargo clippy -p nsh-http --all-targets --all-features -- -D warnings) -> exit 0 (0s)
+test: (cd /Users/hmziq/fo/nsh-http && cargo test --all-features --no-fail-fast) -> exit 0 (406s)
+cargo-tree-nsh: (cd /Users/hmziq/fo/nsh-http && cargo tree --locked -e normal,dev,build --prefix none --all-features | grep -E '^nsh-' | sort -u) -> exit 0 (0s)
+echo-server-test: (cd /Users/hmziq/fo/nsh-http && bun --cwd tools/echo-server test) -> exit 0 (2s)
+echo-server-start: (cd /Users/hmziq/fo/nsh-http/tools/echo-server && rm -f .runtime.json; PORT=$(for p in $(seq 8123 8132); do lsof -nP -iTCP:$p -sTCP:LISTEN >/dev/null 2>&1 || { echo $p; break; }; done); echo port $PORT; (ECHO_PORT=$PORT nohup bun run src/server.ts > /Users/hmziq/fo/nsh-starter/docs/evidence/project/nsh-0.5.1/nsh-http/baseline-0.5.0/echo-server.out 2>&1 & echo $! > /Users/hmziq/fo/nsh-starter/docs/evidence/project/nsh-0.5.1/nsh-http/baseline-0.5.0/echo.pid); for i in $(seq 1 30); do [ -f .runtime.json ] && cat .runtime.json && exit 0; sleep 1; done; cat /Users/hmziq/fo/nsh-starter/docs/evidence/project/nsh-0.5.1/nsh-http/baseline-0.5.0/echo-server.out; exit 1) -> exit 0 (2s)
+test-live: (cd /Users/hmziq/fo/nsh-http && cargo test -p nsh-http --all-features --no-fail-fast -- --include-ignored) -> exit 0 (10s)
+demo-rs-clippy: (cd /Users/hmziq/fo/nsh-http && cargo clippy --manifest-path examples/demo-rs/Cargo.toml --all-targets -- -D warnings) -> exit 0 (380s)
+demo-rs-test: (cd /Users/hmziq/fo/nsh-http && cargo test --manifest-path examples/demo-rs/Cargo.toml --no-fail-fast -- --include-ignored) -> exit 0 (330s)
+demo-rs-cargo-tree-nsh: (cd /Users/hmziq/fo/nsh-http && cargo tree --locked -e normal,dev,build --prefix none --manifest-path examples/demo-rs/Cargo.toml | grep -E '^nsh-' | sort -u) -> exit 0 (0s)
+capability-app-fmt: (cd /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app && cargo fmt --all -- --check) -> exit 1 (0s)
+capability-app-clippy: (cd /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app && cargo clippy --all-targets -- -D warnings) -> exit 101 (285s)
+capability-app-cargo-tree-nsh: (cd /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app && cargo tree --locked -e normal,dev,build --prefix none  | grep -E '^nsh-' | sort -u) -> exit 0 (24s)
+tsx-check: (cd /Users/hmziq/fo/nsh-http/packages/nsh-http && nsh check) -> exit 0 (0s)
+tsx-build: (cd /Users/hmziq/fo/nsh-http/packages/nsh-http && nsh build) -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test: (cd /Users/hmziq/fo/nsh-http/packages/nsh-http && nsh test) -> exit 0 (9s)
+monitor-app-check: (cd /Users/hmziq/fo/nsh-http && nsh check examples/monitor-app) -> exit 0 (0s)
+monitor-app-build: (cd /Users/hmziq/fo/nsh-http && nsh build examples/monitor-app) -> exit 0 (0s)
+monitor-app-build-warnings: 0 warning lines
+monitor-app-test: (cd /Users/hmziq/fo/nsh-http && nsh test examples/monitor-app) -> exit 0 (1s)
+demo-ts-check: (cd /Users/hmziq/fo/nsh-http && nsh check examples/demo-ts) -> exit 0 (0s)
+demo-ts-build: (cd /Users/hmziq/fo/nsh-http && nsh build examples/demo-ts) -> exit 0 (0s)
+demo-ts-build-warnings: 0 warning lines
+demo-ts-test: (cd /Users/hmziq/fo/nsh-http && nsh test examples/demo-ts) -> exit 0 (5s)
+echo server stopped
+DONE

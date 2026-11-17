@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-firebase/examples/demo
+$ nsh build App.tsx
+# 2026-11-17 01:09:28 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (231.7 KB js, 606.6 KB bytecode, 39ms)
+# exit 0 (0s)

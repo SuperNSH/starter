@@ -1,0 +1,32 @@
+$ cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack
+$ cargo clippy --all-targets --all-features -- -D warnings
+# 2026-11-17 06:53:39 nsh=nsh 0.5.1 (224d9a7)
+   Compiling serde_core v1.0.229
+   Compiling thiserror v2.0.21
+   Compiling strum_macros v0.27.2
+    Checking heapless v0.7.17
+    Checking cobs v0.3.0
+    Checking postcard v1.1.3
+    Checking strum v0.27.2
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.154
+   Compiling serde-saphyr v1.3.0
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling triomphe v0.1.17
+   Compiling toml_edit v0.22.27
+   Compiling phonenumber v0.3.10+9.0.33
+   Compiling toml v0.8.23
+   Compiling rust-i18n-support v4.2.4
+   Compiling rust-i18n-macro v4.2.4
+    Checking freeoxide-gpui-form-core v0.11.0
+    Checking rust-i18n v4.2.4
+    Checking nsh-core v0.5.1
+    Checking nsh-js v0.5.1
+    Checking nsh-package v0.5.1
+    Checking nsh-base v0.5.1
+    Checking nsh-engine v0.5.1
+    Checking nsh-testing v0.5.1
+    Checking nsh-form v0.1.0 (/Users/hmziq/fo/.worktrees/nsh-form-tanstack/crates/nsh-form)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 22.07s
+# exit 0 (22s)

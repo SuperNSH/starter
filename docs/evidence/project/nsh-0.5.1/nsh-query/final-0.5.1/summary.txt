@@ -1,0 +1,14 @@
+fmt: (cd /Users/hmziq/fo/nsh-query && cargo fmt --all -- --check) -> exit 0 (0s)
+clippy: (cd /Users/hmziq/fo/nsh-query && cargo clippy --all-targets -- -D warnings) -> exit 0 (12s)
+clippy-all-features: (cd /Users/hmziq/fo/nsh-query && cargo clippy --all-targets --all-features -- -D warnings) -> exit 0 (902s)
+test: (cd /Users/hmziq/fo/nsh-query && cargo test) -> exit 0 (406s)
+test-all-features: (cd /Users/hmziq/fo/nsh-query && cargo test --all-features) -> exit 0 (1844s)
+cargo-tree-nsh: (cd /Users/hmziq/fo/nsh-query && cargo tree --locked -e normal,dev,build --prefix none --all-features | grep -E '^nsh-' | sort -u) -> exit 0 (1s)
+tsx-check: (cd /Users/hmziq/fo/nsh-query/packages/nsh-query && nsh check) -> exit 0 (0s)
+tsx-build: (cd /Users/hmziq/fo/nsh-query/packages/nsh-query && nsh build) -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test: (cd /Users/hmziq/fo/nsh-query/packages/nsh-query && nsh test) -> exit 0 (14s)
+demo-check: (cd /Users/hmziq/fo/nsh-query/examples/demo && nsh check App.tsx) -> exit 1 (0s)
+demo-build: (cd /Users/hmziq/fo/nsh-query/examples/demo && nsh build App.tsx) -> exit 1 (0s)
+demo-build-warnings: 0 warning lines
+DONE

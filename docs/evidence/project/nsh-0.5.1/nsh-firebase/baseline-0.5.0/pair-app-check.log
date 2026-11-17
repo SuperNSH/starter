@@ -1,0 +1,36 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/app-check-app.tsx tests/app-check.test.tsx
+# 2026-11-17 01:30:22 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 6ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/app-check-app.tsx (13498 B in 3.5 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › the debug exchange request matches the wire and caches its ttl (6ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › the cache answers before expiry and refreshes once past it (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › a stored record restores and answers with no request (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › a corrupt or expired record is exchanged over (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › getToken without debug names the missing device attestors (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › an empty debug token fails before any request (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › a refusal maps to invalid-debug-token with the server's message (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › a 500 maps to exchange-failed and a bad ttl to invalid-response (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › a network failure keeps the core network code (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › the native tier routes the contract call with the debug flag (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › a native reply without a token is a host error (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › a native handler failure surfaces with its message (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/app-check.test.tsx › app-check › the default exchange URL pins the real endpoint (0ms)
+✓ 13 tests: 13 passed, 0 failed (29ms)
+# exit 0 (1s)

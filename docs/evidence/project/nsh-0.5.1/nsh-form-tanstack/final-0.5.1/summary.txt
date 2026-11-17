@@ -1,0 +1,16 @@
+fmt: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo fmt --all -- --check) -> exit 0 (0s)
+clippy: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo clippy --all-targets -- -D warnings) -> exit 0 (36s)
+clippy-all-features: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo clippy --all-targets --all-features -- -D warnings) -> exit 0 (22s)
+test: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo test) -> exit 0 (84s)
+test-all-features: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo test --all-features) -> exit 0 (84s)
+cargo-tree-nsh: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo tree --locked -e normal,dev,build --prefix none --all-features | grep -E '^nsh-' | sort -u) -> exit 0 (0s)
+tsx-check: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && nsh check) -> exit 0 (0s)
+tsx-build: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && nsh build) -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && nsh test) -> exit 1 (1s)
+DONE
+rows2-seen-to-fail: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && nsh test tests/rows2.test.tsx) -> exit 1 (0s)
+tsx-check-after-fix: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && nsh check) -> exit 0 (0s)
+tsx-build-after-fix: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && nsh build) -> exit 0 (0s)
+tsx-build-after-fix-warnings: 0 warning lines
+tsx-test-after-fix: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && nsh test) -> exit 0 (2s)

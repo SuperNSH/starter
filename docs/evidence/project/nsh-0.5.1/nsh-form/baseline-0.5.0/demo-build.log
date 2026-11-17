@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-form/examples/demo
+$ nsh build App.tsx
+# 2026-11-17 00:24:24 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (122.8 KB js, 334.5 KB bytecode, 15ms)
+# exit 0 (0s)

@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-auth/packages/nsh-auth
+$ nsh build
+# 2026-11-17 06:57:48 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (49.4 KB js, 120.3 KB bytecode, 9ms)
+# exit 0 (0s)

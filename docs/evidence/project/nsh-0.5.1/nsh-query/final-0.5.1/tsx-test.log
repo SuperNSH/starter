@@ -1,0 +1,176 @@
+$ cd /Users/hmziq/fo/nsh-query/packages/nsh-query
+$ nsh test
+# 2026-11-17 03:42:11 nsh=nsh 0.5.1 (224d9a7)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled App.tsx (278529 B in 80.5 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/access.test.tsx › a capability refusal (ERR_ACCESS_DENIED) reaches query.error, and does not retry forever (190ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/access.test.tsx › persistence: a query restored from Storage after reopening with the same storage option (85ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+error Error: corrupt
+          at restoreClient (bundle.js:6670:13)
+          at persistQueryClientRestore (bundle.js:5011:43)
+          at PersistQueryClientProvider (bundle.js:5746:28)
+          at component (native)
+          at persist-fail (bundle.js:7635:32)
+          at screenFor (bundle.js:7939:18)
+          at <anonymous> (bundle.js:7957:39)
+          at <anonymous> (native)
+          at set (native)
+          at <anonymous> (bundle.js:7946:19)
+warn Encountered an error attempting to restore client cache from persisted location. As a precaution, the persisted cache will be discarded.
+✓ tests/access.test.tsx › PersistQueryClientProvider's onError runs when restoring throws (23ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/direct.test.tsx › cache helpers: empty, contains, all_queries, all_mutations and all_infinite_queries read the caches (4ms)
+✓ tests/direct.test.tsx › with_config, with_gc_time and with_policies: a client keeps the default options it was made with (8ms)
+✓ tests/direct.test.tsx › unbounded_pages: an infinite query without maxPages keeps every page (12ms)
+✓ tests/direct.test.tsx › a persister over no storage (NoopPersister) saves nothing and restores nothing (10ms)
+✓ tests/direct.test.tsx › isServer: the exported constant reads true on NSH, while the core reads environmentManager, which says client (1ms)
+✓ tests/direct.test.tsx › useQueryClient outside a provider throws NshQueryError with ERR_NSH_QUERY_NO_CLIENT (0ms)
+✓ tests/direct.test.tsx › removeOldestQuery drops the query with the oldest data, and gives up when none are left (0ms)
+✓ tests/direct.test.tsx › mutate with per-call callbacks: onSuccess and onSettled given to mutate run after the mutation (0ms)
+✓ tests/direct.test.tsx › force: a fetch with staleTime 0 bypasses data that is still fresh (0ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/exports.test.tsx › every value export of query-core and every adapter name is reachable from the package (10ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/fine.test.tsx › useMutation: a binding on data does not wake when only status changes (150ms)
+✓ tests/fine.test.tsx › useInfiniteQuery: a binding on pages does not wake for a refetch, and does wake for a new page (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/fine.test.tsx › useQueries: a binding on queries[0].data does not wake when another query changes, and the list can grow (141ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/fine.test.tsx › useQueryDiagnostics reports queries and mutations, and wakes only when they change (314ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › unmount: a provider's client stops following focus when the provider goes (359ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › experimental_streamedQuery collects the chunks of a stream (18ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › networkMode always and offlineFirst run their first attempt offline; online waits (30ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › refetchOnMount false keeps stale data on remount; the default refetches (78ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › refetchOnReconnect refetches a stale query on reconnect unless turned off (124ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › notifyOnChangeProps: a fetch that changes only fetchStatus does not notify the screen (414ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › meta reaches the queryFn (19ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › suspense: true throws ERR_NSH_QUERY_NO_SUSPENSE to the nearest boundary (55ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › useSuspenseQuery, useSuspenseInfiniteQuery and useSuspenseQueries throw the same coded error (53ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › options as a plain object, and the client as a plain QueryClient (57ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › useIsFetching and useIsMutating take a filter accessor (396ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › throwOnError reaches the boundary, and a reset of the boundary retries the query (25ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › usePrefetchQuery and usePrefetchInfiniteQuery start the fetch before the query reads it (17ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › HydrationBoundary applies dehydrated state before its children read it (21ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/gaps.test.tsx › after a reset, a query that fails again shows its error as state, without throwing it to the boundary (55ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › useQueries with combine, useIsFetching, useIsMutating, useMutationState (468ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › setQueryData with an updater, getQueryData, getQueryState, prefetchQuery, fetchQuery, ensureQueryData, removeQueries, resetQueries, cancelQueries, setQueryDefaults (181ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › query filters: exact, type, stale, predicate (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › useQueries without combine reads each query by its index, and maps over them (9ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › queryOptions, infiniteQueryOptions and mutationOptions return their options unchanged (22ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › throwOnError hands the error to the nearest ErrorBoundary (9ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › every field of the query, infinite and mutation results is present (10ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/hooks.test.tsx › a query takes an explicit client, without a provider around it (9ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/mutations.test.tsx › onMutate context reaches onError and onSettled, for optimistic update and rollback (167ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/mutations.test.tsx › invalidateQueries from onSuccess, mutateAsync result and rejection, and reset (352ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/mutations.test.tsx › mutation retry, and scope running calls in series (286ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/mutations.test.tsx › a mutation in flight finishes after its component goes (241ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › buster: a stored client with another buster is discarded, not restored (16ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › maxAge: an expired stored client is discarded, not restored (13ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › dehydrateOptions: a query the filter excludes is not stored (13ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › hydrateOptions: deserializeData transforms restored data (107ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › createStoragePersister key: the client is saved under the given key only (91ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › createStoragePersister throttleTime: a second save waits for the interval (3.5s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › createStoragePersister serialize and deserialize: a custom format round-trips (168ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › createAsyncStoragePersister retry: a failed save is tried again, as the retry function asks (50ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › persistQueryClient saves on change, and its promise resolves after the restore (38ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › persistQueryClientRestore restores a stored client into a client (92ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/persist.test.tsx › experimental_createQueryPersister restores a query from storage (18ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › two observers of one key share one fetch (61ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › a fresh entry skips the fetch, and an expired staleTime refetches on mount (1.2s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › gcTime drops an unobserved entry (555ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › retries count in failureCount while status stays pending, then succeed (241ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › a failure after the last retry gives status error and failureReason (28ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › retry and retryDelay as functions are honored (114ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › invalidating reloads what is observed and replaces a load in flight, dropping its late answer (447ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › an AbortSignal passed to fetch fires when a query is cancelled (166ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › a tracked key moves to the new entry and back to its cache (84ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › enabled as a tracked value, and skipToken (124ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › select and keepPreviousData, with isPlaceholderData (356ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › initialData, initialDataUpdatedAt and placeholderData (130ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › refetchInterval, and it stops in the background unless refetchIntervalInBackground (174ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › 13b. an inactive app is still visible, so its refetchInterval keeps running (76ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › refetchOnWindowFocus on the lifecycle change, using app.setLifecycle (11ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › onlineManager.setOnline(false) pauses, and setting it back resumes (108ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › a binding on query.data does not rerun when only fetchStatus changes (516ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/queries.test.tsx › pages load in both directions, stop at the ends, honor maxPages, and refetch every page (15ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/smoke.test.tsx › the smoke screen renders with no options (294ms)
+✓ 74 tests: 74 passed, 0 failed (13.5s)
+# exit 0 (14s)

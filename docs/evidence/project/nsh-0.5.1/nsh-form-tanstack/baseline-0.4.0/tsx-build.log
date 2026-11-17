@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form
+$ /opt/homebrew/bin/nsh build
+# 2026-11-17 04:43:18 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (238.0 KB js, 768.6 KB bytecode, 128ms)
+# exit 0 (1s)

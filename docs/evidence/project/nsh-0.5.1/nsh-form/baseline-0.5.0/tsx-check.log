@@ -1,0 +1,4 @@
+$ cd /Users/hmziq/fo/nsh-form/packages/nsh-form
+$ nsh check
+# 2026-11-17 00:24:22 nsh=nsh 0.5.1 (224d9a7)
+# exit 0 (1s)

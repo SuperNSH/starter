@@ -1,0 +1,11 @@
+fmt: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack && cargo fmt --all -- --check) -> exit 0 (0s)
+clippy: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack && cargo clippy --all-targets -- -D warnings) -> exit 0 (283s)
+clippy-all-features: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack && cargo clippy --all-targets --all-features -- -D warnings) -> exit 0 (61s)
+test: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack && cargo test) -> exit 0 (3278s)
+test-all-features: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack && cargo test --all-features) -> exit 0 (1515s)
+tsx-check: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack/packages/nsh-query && /opt/homebrew/bin/nsh check) -> exit 0 (0s)
+tsx-build: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack/packages/nsh-query && /opt/homebrew/bin/nsh build) -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack/packages/nsh-query && /opt/homebrew/bin/nsh test) -> exit 0 (4s)
+DONE
+cargo-tree-nsh: (cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack && cargo tree --locked -e normal,dev,build --prefix none --all-features | grep -E '^nsh-' | sort -u) -> exit 0 (0s)

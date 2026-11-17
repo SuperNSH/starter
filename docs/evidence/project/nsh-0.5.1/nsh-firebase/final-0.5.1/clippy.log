@@ -1,0 +1,53 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ cargo clippy --all-targets -- -D warnings
+# 2026-11-17 03:05:07 nsh=nsh 0.5.1 (224d9a7)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling ring v0.17.14
+   Compiling nsh-macros v0.5.1
+    Checking nsh-updater v0.5.1
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+   Compiling quickjs-jit-sys v0.14.2
+    Checking nsh-i18n v0.5.1
+   Compiling onig_sys v69.9.3
+   Compiling rustls v0.23.46
+    Checking onig v6.5.3
+    Checking syntect v5.3.0
+    Checking rustls-webpki v0.103.16
+    Checking two-face v0.4.5
+   Compiling zstd-safe v8.2.0
+    Checking zstd v0.14.3
+    Checking quickjs-jit-core v0.14.2
+    Checking tokio-rustls v0.26.6
+    Checking rustls-platform-verifier v0.7.1
+    Checking tungstenite v0.28.0
+    Checking ureq v3.5.1
+    Checking tokio-tungstenite v0.28.0
+    Checking nsh-core v0.5.1
+   Compiling quickjs-jit-macro v0.14.2
+    Checking quickjs-jit v0.14.2
+    Checking quickjs-jit-stdlib v0.14.2
+    Checking nsh-firebase-core v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-core)
+    Checking nsh-js v0.5.1
+    Checking nsh-package v0.5.1
+    Checking nsh-base v0.5.1
+    Checking nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+    Checking nsh-firebase-auth v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-auth)
+    Checking nsh-firebase-analytics v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-analytics)
+    Checking nsh-firebase-storage v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-storage)
+    Checking nsh-firebase-messaging v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-messaging)
+    Checking nsh-firebase-perf v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-perf)
+    Checking nsh-firebase-functions v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-functions)
+    Checking nsh-firebase-installations v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-installations)
+    Checking nsh-firebase-firestore v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-firestore)
+    Checking nsh-firebase-crashlytics v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-crashlytics)
+    Checking nsh-firebase-remote-config v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-remote-config)
+    Checking nsh-firebase-app-check v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-app-check)
+    Checking nsh-engine v0.5.1
+    Checking nsh-testing v0.5.1
+    Checking nsh-firebase-database v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-database)
+    Checking nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+    Checking demo-rs v0.1.0 (/Users/hmziq/fo/nsh-firebase/examples/demo-rs)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 43.39s
+# exit 0 (398s)

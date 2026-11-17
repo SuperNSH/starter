@@ -1,0 +1,183 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ cargo test -p nsh-http --all-features --no-fail-fast -- --include-ignored
+# 2026-11-17 00:05:39 nsh=nsh 0.5.1 (224d9a7)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.29s
+     Running unittests src/lib.rs (target/debug/deps/nsh_http-2fdb7994508df941)
+
+running 16 tests
+test multipart::tests::generated_boundaries_are_legal_and_distinct ... ok
+test multipart::tests::boundaries_outside_the_rfc_set_are_rejected ... ok
+test multipart::tests::boundary_collisions_fail_fixed_and_reroll_generated ... ok
+test multipart::tests::names_and_filenames_are_escaped ... ok
+test multipart::tests::only_file_parts_carry_a_content_type ... ok
+test multipart::tests::the_content_type_names_the_boundary ... ok
+test multipart::tests::the_wire_format_is_exact_parts_in_order_with_a_close ... ok
+test sse::tests::a_bom_is_dropped_and_an_invalid_retry_is_ignored ... ok
+test sse::tests::an_id_with_a_nul_is_ignored ... ok
+test sse::tests::an_unterminated_line_waits_for_its_newline ... ok
+test sse::tests::backoff_grows_to_its_cap_and_the_server_retry_overrides_it ... ok
+test sse::tests::chunk_splits_inside_lines_and_utf8_scalars_are_safe ... ok
+test sse::tests::comments_unknown_fields_and_empty_events_stay_out ... ok
+test sse::tests::crlf_and_cr_line_endings_all_parse ... ok
+test sse::tests::id_event_data_and_retry_lines_build_events ... ok
+test streaming::tests::content_length_reads_the_header_case_insensitively_or_not_at_all ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/auth.rs (target/debug/deps/auth-69dca8ad8d0744fc)
+
+running 3 tests
+test a_failing_refresh_fails_the_request_without_looping ... ok
+test ten_parallel_requests_share_one_refresh_and_all_replay ... ok
+test a_dropped_lead_releases_the_followers_instead_of_hanging_them ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/core.rs (target/debug/deps/core-545d6b2123660b87)
+
+running 3 tests
+test typed_methods_decode_query_and_path_params ... ok
+test a_client_without_a_base_url_fails_its_calls_with_a_clear_network_error ... ok
+test send_request_carries_caller_headers_and_preserves_a_content_type ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/errors.rs (target/debug/deps/errors-73244f519244081e)
+
+running 3 tests
+test refusal_is_a_different_error_from_a_network_failure ... ok
+test a_streamed_request_body_fails_loudly_instead_of_sending_empty ... ok
+test every_error_lands_in_its_own_case ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/etag.rs (target/debug/deps/etag-7d3f79528d419b8d)
+
+running 3 tests
+test max_age_reads_the_fresh_window_and_refuses_to_cache_stories_that_ban_it ... ok
+test apply_to_stamps_the_stored_etag_and_304_recognition ... ok
+test a_conditional_request_gets_a_304_and_the_helper_sees_it ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/live_capability.rs (target/debug/deps/live_capability-01c67c431444eaa2)
+
+running 2 tests
+test the_undeclared_redirect_hop_is_documented_not_refused_on_0_4_0 ... ok
+test the_pipeline_reaches_the_real_echo_server_and_decodes ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/live_streams.rs (target/debug/deps/live_streams-97a8372199e59674)
+
+running 5 tests
+test a_non_event_stream_is_refused_without_a_reconnect ... ok
+test a_multipart_form_is_parsed_by_the_real_server ... ok
+test bytes_download_matches_its_content_length ... ok
+test the_stream_arrives_whole_with_one_progress_report ... ok
+test sse_reconnects_with_last_event_id_and_replays_from_it ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+     Running tests/middleware.rs (target/debug/deps/middleware-9760bb4d5f7f7f6c)
+
+running 3 tests
+test middleware_runs_first_installed_first_on_the_request_and_last_on_the_response ... ok
+test an_error_flows_back_through_the_chain_untouched ... ok
+test middleware_changes_reach_the_transport_and_the_decode ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/mock.rs (target/debug/deps/mock-9e6b47aa3b575aa7)
+
+running 2 tests
+test the_mock_answers_the_client_while_the_stub_answers_the_engine ... ok
+test a_fixed_mock_decodes_and_fails_classified ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/monitor.rs (target/debug/deps/monitor-7ce672bb90790858)
+
+running 10 tests
+test sampling_keeps_every_nth_attempt ... ok
+test ring_buffer_evicts_oldest_past_capacity ... ok
+test sampling_rate_bounds_hold_exactly ... ok
+test aggregates_use_nearest_rank_percentiles ... ok
+test redaction_is_on_by_default_and_the_opt_out_records_raw ... ok
+test the_recorded_event_serializes_to_the_frozen_wire_shape ... ok
+test a_token_in_the_url_never_reaches_a_recorded_event ... ok
+test the_instrumented_fetch_records_each_attempt ... ok
+test header_tokens_never_reach_a_recorded_event ... ok
+test client_attempts_feed_host_and_path_aggregates_on_the_manual_clock ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/multipart.rs (target/debug/deps/multipart-bea80aaf3093aaa7)
+
+running 2 tests
+test a_form_posts_its_content_type_and_exact_bytes_through_the_client ... ok
+test a_boundary_collision_fails_before_any_request_goes_out ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/observe.rs (target/debug/deps/observe-afc67ca9899de903)
+
+running 2 tests
+test the_event_serializes_with_the_frozen_camel_case_names ... ok
+test every_attempt_emits_one_honest_event ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/retry.rs (target/debug/deps/retry-fca724d1b365f9b9)
+
+running 7 tests
+test backoff_grows_and_jitter_stays_inside_the_policy ... ok
+test the_policy_only_retries_idempotent_methods_by_default_and_never_a_started_stream ... ok
+test retry_after_parses_seconds_and_http_dates ... ok
+test a_post_never_retries_by_default ... ok
+test a_get_retries_on_backoff_until_the_policy_runs_out ... ok
+test retries_honor_retry_after_as_an_http_date ... ok
+test retries_honor_retry_after_seconds_and_then_succeed ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+
+     Running tests/sse.rs (target/debug/deps/sse-bf1f14de90a021d4)
+
+running 7 tests
+test a_non_2xx_connect_ends_the_source_without_a_reconnect ... ok
+test a_json_body_is_refused_without_a_reconnect ... ok
+test a_cancel_during_the_backoff_stops_the_loop_before_the_next_connect ... ok
+test dropping_the_listen_task_leaves_no_orphan_connects ... ok
+test the_server_retry_field_sets_the_reconnect_delay ... ok
+test a_reconnect_carries_last_event_id_after_backoff_and_stops_on_cancel ... ok
+test failed_connects_back_off_and_exhaust_the_attempt_bound ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests/streaming.rs (target/debug/deps/streaming-61acae52bd73037c)
+
+running 4 tests
+test an_upload_sends_its_whole_body_and_reports_the_exact_size_once ... ok
+test a_non_2xx_download_is_a_status_error_and_never_reports_progress ... ok
+test without_a_content_length_the_total_is_none_and_the_byte_count_stands ... ok
+test a_download_reports_the_whole_body_once_with_the_content_length_total ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/timeout.rs (target/debug/deps/timeout-f38eb8a83e612ce6)
+
+running 2 tests
+test cancelling_the_task_stops_a_request_in_flight ... ok
+test the_deadline_wins_over_a_slow_response_and_a_patient_call_lets_it_land ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+   Doc-tests nsh_http
+
+running 1 test
+test crates/nsh-http/src/multipart.rs - multipart::MultipartForm (line 60) - compile ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 8.81s; merged doctests compilation took 8.32s
+# exit 0 (10s)

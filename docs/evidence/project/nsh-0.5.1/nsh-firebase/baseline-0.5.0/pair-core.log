@@ -1,0 +1,22 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/core-app.tsx tests/core.test.tsx
+# 2026-11-17 01:30:20 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 6ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled App.tsx (16769 B in 4.0 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/core.test.tsx › core › initializes with the demo config (7ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/core.test.tsx › core › the pure tier goes through the stubbed network (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn nsh/host: `other.ping` is not granted: add it to capabilities.host in nsh.json
+warn nsh/host: `other.post` is not granted: add it to capabilities.host in nsh.json
+✓ tests/core.test.tsx › core › a host call resolves, and failures map to stable codes (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/core.test.tsx › core › a config document loads with the emulator switch winning (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/core.test.tsx › core › the event bus fans out and off stops a listener (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/core.test.tsx › core › a refused network capability rejects with ERR_ACCESS_DENIED through the facade (1ms)
+✓ 6 tests: 6 passed, 0 failed (21ms)
+# exit 0 (0s)

@@ -1,0 +1,21 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ cargo tree --locked -e normal,dev,build --prefix none --manifest-path examples/demo-rs/Cargo.toml | grep -E '^nsh-' | sort -u
+# 2026-11-17 06:53:33 nsh=nsh 0.5.1 (224d9a7)
+nsh-app-demo-rs v0.1.0 (/Users/hmziq/fo/nsh-http/examples/demo-rs)
+nsh-base v0.5.1
+nsh-base v0.5.1 (*)
+nsh-core v0.5.1
+nsh-core v0.5.1 (*)
+nsh-engine v0.5.1
+nsh-engine v0.5.1 (*)
+nsh-http v0.1.0 (/Users/hmziq/fo/nsh-http/crates/nsh-http)
+nsh-i18n v0.5.1
+nsh-js v0.5.1
+nsh-macros v0.5.1 (proc-macro)
+nsh-package v0.5.1
+nsh-platform-apple v0.5.1
+nsh-platform-macos v0.5.1
+nsh-testing v0.5.1
+nsh-updater v0.5.1
+nsh-updater v0.5.1 (*)
+# exit 0 (0s)

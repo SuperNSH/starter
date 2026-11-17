@@ -1,0 +1,9 @@
+$ cd /Users/hmziq/fo/nsh-starter
+$ nsh test smoke/pages.test.tsx
+# 2026-11-17 06:52:34 nsh=nsh 0.5.1 (224d9a7)
+✓ built the Rust crate nsh-starter (394ms)
+✓ built the headless runner of nsh-starter (458ms, 1 warning: -v shows it)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ smoke/pages.test.tsx › every page opens from the shell (609ms)
+✓ 1 test: 1 passed, 0 failed (4.7s)
+# exit 0 (6s)

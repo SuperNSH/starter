@@ -1,0 +1,306 @@
+# NSH 0.5.0 -> 0.5.1 gate summary, generated 2026-11-17 06:59. Each line: gate -> exit code; logs beside each summary.txt.
+
+## nsh-query/baseline-0.5.0
+fmt -> exit 0 (0s)
+clippy -> exit 0 (511s)
+clippy-all-features -> exit 0 (33s)
+test -> exit 0 (382s)
+test-all-features -> exit 0 (99s)
+cargo-tree-nsh -> exit 0 (14s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (4s)
+demo-check -> exit 1 (0s)
+demo-build -> exit 1 (0s)
+demo-build-warnings: 0 warning lines
+
+## nsh-query/final-0.5.1
+fmt -> exit 0 (0s)
+clippy -> exit 0 (12s)
+clippy-all-features -> exit 0 (902s)
+test -> exit 0 (406s)
+test-all-features -> exit 0 (1844s)
+cargo-tree-nsh -> exit 0 (1s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (14s)
+demo-check -> exit 1 (0s)
+demo-build -> exit 1 (0s)
+demo-build-warnings: 0 warning lines
+
+## nsh-form/baseline-0.5.0
+fmt -> exit 0 (0s)
+clippy -> exit 0 (331s)
+clippy-all-features -> exit 0 (129s)
+test -> exit 0 (320s)
+test-all-features -> exit 0 (223s)
+cargo-tree-nsh -> exit 0 (0s)
+tsx-check -> exit 0 (1s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (1s)
+demo-check -> exit 1 (0s)
+demo-build -> exit 0 (0s)
+demo-build-warnings: 0 warning lines
+
+## nsh-form/final-0.5.1
+fmt -> exit 0 (1s)
+clippy -> exit 0 (1796s)
+clippy-all-features -> exit 0 (920s)
+test -> exit 0 (2728s)
+test-all-features -> exit 0 (1878s)
+cargo-tree-nsh -> exit 0 (1s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (2s)
+demo-check -> exit 1 (0s)
+demo-build -> exit 0 (0s)
+demo-build-warnings: 0 warning lines
+
+## nsh-http/baseline-0.5.0
+fmt -> exit 0 (0s)
+clippy -> exit 0 (511s)
+clippy-all-features -> exit 0 (0s)
+test -> exit 0 (406s)
+cargo-tree-nsh -> exit 0 (0s)
+echo-server-test -> exit 0 (2s)
+echo-server-start -> exit 0 (2s)
+test-live -> exit 0 (10s)
+demo-rs-clippy -> exit 0 (380s)
+demo-rs-test -> exit 0 (330s)
+demo-rs-cargo-tree-nsh -> exit 0 (0s)
+capability-app-fmt -> exit 1 (0s)
+capability-app-clippy -> exit 101 (285s)
+capability-app-cargo-tree-nsh -> exit 0 (24s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (9s)
+monitor-app-check -> exit 0 (0s)
+monitor-app-build -> exit 0 (0s)
+monitor-app-build-warnings: 0 warning lines
+monitor-app-test -> exit 0 (1s)
+demo-ts-check -> exit 0 (0s)
+demo-ts-build -> exit 0 (0s)
+demo-ts-build-warnings: 0 warning lines
+demo-ts-test -> exit 0 (5s)
+echo server stopped
+
+## nsh-http/final-0.5.1
+fmt -> exit 0 (0s)
+clippy -> exit 0 (24s)
+clippy-all-features -> exit 0 (9s)
+test -> exit 0 (81s)
+cargo-tree-nsh -> exit 0 (4s)
+echo-server-test -> exit 0 (3s)
+echo-server-start -> exit 0 (1s)
+test-live -> exit 0 (2s)
+demo-rs-clippy -> exit 0 (33s)
+demo-rs-test -> exit 0 (56s)
+demo-rs-cargo-tree-nsh -> exit 0 (0s)
+capability-app-fmt -> exit 1 (0s)
+capability-app-clippy -> exit 101 (25s)
+capability-app-cargo-tree-nsh -> exit 0 (0s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (10s)
+monitor-app-check -> exit 0 (1s)
+monitor-app-build -> exit 0 (0s)
+monitor-app-build-warnings: 0 warning lines
+monitor-app-test -> exit 0 (2s)
+demo-ts-check -> exit 0 (0s)
+demo-ts-build -> exit 0 (0s)
+demo-ts-build-warnings: 0 warning lines
+demo-ts-test -> exit 0 (5s)
+echo server stopped
+
+## nsh-auth/baseline-0.5.0
+fmt -> exit 0 (0s)
+clippy -> exit 0 (257s)
+test -> exit 0 (189s)
+cargo-tree-nsh -> exit 0 (7s)
+clippy-wasm32 -> exit 101 (105s)
+host-desktop-fmt -> exit 0 (0s)
+host-desktop-clippy -> exit 0 (5872s)
+host-desktop-build -> exit 0 (7733s)
+host-desktop-test -> exit 0 (1855s)
+host-desktop-cargo-tree-nsh -> exit 0 (0s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (4s)
+tsx-bun-test -> exit 0 (1s)
+demo-check -> exit 0 (0s)
+demo-build -> exit 0 (0s)
+demo-build-warnings: 0 warning lines
+demo-test -> exit 0 (2s)
+mock-oauth-test -> exit 0 (46s)
+broker-test -> exit 0 (1s)
+tools-test -> exit 1 (898s)
+no-secrets -> exit 0 (2s)
+host-ios-build-gate -> exit 1 (0s)
+host-android-build-gate -> exit 1 (0s)
+
+## nsh-auth/final-0.5.1
+fmt -> exit 0 (0s)
+clippy -> exit 0 (13s)
+test -> exit 0 (52s)
+cargo-tree-nsh -> exit 0 (0s)
+clippy-wasm32 -> exit 101 (4s)
+host-desktop-fmt -> exit 0 (1s)
+host-desktop-clippy -> exit 0 (29s)
+host-desktop-build -> exit 0 (55s)
+host-desktop-test -> exit 0 (57s)
+host-desktop-cargo-tree-nsh -> exit 0 (0s)
+tsx-check -> exit 0 (1s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (3s)
+tsx-bun-test -> exit 0 (0s)
+demo-check -> exit 0 (0s)
+demo-build -> exit 0 (0s)
+demo-build-warnings: 0 warning lines
+demo-test -> exit 0 (1s)
+mock-oauth-test -> exit 0 (7s)
+broker-test -> exit 0 (0s)
+tools-test -> exit 0 (7s)
+no-secrets -> exit 0 (2s)
+host-ios-build-gate -> exit 0 (23s)
+host-android-build-gate -> exit 0 (20s)
+
+## nsh-firebase/baseline-0.5.0
+fmt -> exit 0 (0s)
+clippy -> exit 0 (365s)
+test -> exit 0 (1571s)
+cargo-tree-nsh -> exit 0 (1s)
+test-packages -> exit 1 (909s)
+demo-check -> exit 1 (0s)
+demo-build -> exit 0 (0s)
+demo-build-warnings: 0 warning lines
+demo-test -> exit 1 (1s)
+pair-core -> exit 0 (0s)
+pair-auth -> exit 0 (0s)
+pair-database -> exit 0 (0s)
+pair-storage -> exit 0 (1s)
+pair-messaging -> exit 0 (0s)
+pair-analytics -> exit 0 (1s)
+pair-perf -> exit 0 (0s)
+pair-firestore -> exit 0 (0s)
+pair-remote-config -> exit 0 (0s)
+pair-crashlytics -> exit 0 (0s)
+pair-installations -> exit 0 (0s)
+pair-app-check -> exit 0 (1s)
+pair-functions -> exit 0 (0s)
+
+## nsh-firebase/final-0.5.1
+fmt -> exit 0 (1s)
+clippy -> exit 0 (398s)
+test -> exit 0 (3654s)
+cargo-tree-nsh -> exit 0 (0s)
+test-packages -> exit 0 (894s)
+pair-core -> exit 0 (0s)
+pair-auth -> exit 0 (2s)
+pair-database -> exit 0 (1s)
+pair-storage -> exit 0 (3s)
+pair-messaging -> exit 0 (1s)
+pair-analytics -> exit 0 (1s)
+pair-perf -> exit 0 (0s)
+pair-firestore -> exit 0 (2s)
+pair-remote-config -> exit 0 (1s)
+pair-crashlytics -> exit 0 (1s)
+pair-installations -> exit 0 (1s)
+pair-app-check -> exit 0 (1s)
+pair-functions -> exit 0 (1s)
+demo-check -> exit 1 (0s)
+demo-build -> exit 0 (0s)
+demo-build-warnings: 0 warning lines
+demo-test -> exit 1 (1s)
+
+## nsh-starter/baseline-0.5.0
+fmt -> exit 0 (1s)
+clippy -> exit 0 (562s)
+test -> exit 101 (458s)
+cargo-tree-nsh -> exit 0 (13s)
+nsh-check-root -> exit 1 (644s)
+nsh-build-root -> exit 0 (1s)
+nsh-build-root-warnings: 0 warning lines
+nsh-test-app -> exit 0 (214s)
+nsh-test-pages -> exit 0 (4s)
+trace -> exit 0 (4s)
+remote-screen-check -> exit 1 (0s)
+remote-screen-build -> exit 1 (0s)
+remote-screen-build-warnings: 0 warning lines
+remote-screen-test -> exit 1 (0s)
+
+## nsh-starter/final-0.5.1
+fmt -> exit 0 (1s)
+clippy -> exit 0 (958s)
+test -> exit 101 (2527s)
+cargo-tree-nsh -> exit 0 (0s)
+nsh-check-root -> exit 1 (508s)
+nsh-build-root -> exit 0 (1s)
+nsh-build-root-warnings: 0 warning lines
+nsh-test-app -> exit 0 (88s)
+nsh-test-pages -> exit 0 (6s)
+trace -> exit 0 (4s)
+remote-screen-check -> exit 1 (0s)
+remote-screen-build -> exit 1 (0s)
+remote-screen-build-warnings: 0 warning lines
+remote-screen-test -> exit 1 (0s)
+
+## nsh-query-tanstack/baseline-0.4.0
+fmt -> exit 0 (0s)
+clippy -> exit 0 (283s)
+clippy-all-features -> exit 0 (61s)
+test -> exit 0 (3278s)
+test-all-features -> exit 0 (1515s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (4s)
+cargo-tree-nsh -> exit 0 (0s)
+
+## nsh-query-tanstack/final-0.5.1
+fmt -> exit 0 (0s)
+clippy -> exit 0 (29s)
+clippy-all-features -> exit 0 (7s)
+test -> exit 0 (93s)
+test-all-features -> exit 0 (36s)
+cargo-tree-nsh -> exit 0 (14s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (5s)
+
+## nsh-form-tanstack/baseline-0.4.0
+fmt -> exit 0 (0s)
+clippy -> exit 0 (390s)
+clippy-all-features -> exit 0 (913s)
+test -> exit 0 (2767s)
+test-all-features -> exit 0 (1825s)
+cargo-tree-nsh -> exit 0 (12s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (1s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 0 (8s)
+
+## nsh-form-tanstack/final-0.5.1
+fmt -> exit 0 (0s)
+clippy -> exit 0 (36s)
+clippy-all-features -> exit 0 (22s)
+test -> exit 0 (84s)
+test-all-features -> exit 0 (84s)
+cargo-tree-nsh -> exit 0 (0s)
+tsx-check -> exit 0 (0s)
+tsx-build -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test -> exit 1 (1s)
+rows2-seen-to-fail -> exit 1 (0s)
+tsx-check-after-fix -> exit 0 (0s)
+tsx-build-after-fix -> exit 0 (0s)
+tsx-build-after-fix-warnings: 0 warning lines
+tsx-test-after-fix -> exit 0 (2s)

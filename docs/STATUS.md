@@ -148,6 +148,17 @@ is unverified. Every area updates its own section as it lands work.
 - Verified: `nsh test --target macos|ios|android .audit/capture2.test.tsx` (a throwaway capture script kept out of git) passed on each target. Its 52 screenshots per target are in `docs/evidence/shell/ui-pass/{macos,ios,android}/`, and the key ones were looked at after the fixes. `cargo fmt --check`, `cargo clippy --all-targets -D warnings`, `cargo test` (all suites), `nsh check`, `nsh test App.test.tsx` and `nsh test smoke/pages.test.tsx` all pass. Test updates: `tests/shell.rs` (the lifecycle test now runs at desktop width, where the status bar lives; the back-order test uses the "Sign up" marker) and `App.test.tsx` (the root check uses Home's own text). Each failed before its update.
 - Not verified: the web target; widths between phone and desktop (tablet); `vision/*.test.tsx` was not re-run, and its saved screenshots predate this pass.
 
+## 0.5.1 update (2026-11-17)
+
+NSH 0.5.1 (224d9a7, released 2026-11-14) is bug-fix only, with no API changes. Evidence: `docs/evidence/project/nsh-0.5.1/` (below, `E/`); `E/gate-summary.txt` lists every gate's exit code, baseline and after.
+
+- Changed: `Cargo.toml` pins 0.5.0 → 0.5.1; `cargo update -p` for each NSH crate only (`E/nsh-starter/cargo-update.log`; the lock diff is the 14 NSH crates' versions and checksums, nothing else); CI `NSH_VERSION` v0.5.1; README install line, `CONTRIBUTING.md`, `docs/PROMPT.md` environment, `docs/architecture.md` and `docs/coverage.md` say 0.5.1. No source or test change. `cargo tree` shows every NSH crate at 0.5.1, one version each (`E/nsh-starter/final-0.5.1/cargo-tree-nsh.log`). The `pub` lists in `nsh-core` and `nsh-base` `src/lib.rs` are the same in 0.5.0 and 0.5.1.
+- Baseline on 0.5.0 (`E/nsh-starter/baseline-0.5.0/`), run with the 0.5.1 CLI: fmt 0, clippy 0, `cargo test --no-fail-fast` 125 passed / 2 failed (the known `data::retry_recovers_a_failed_feed` and `remote_screen::the_signed_package_verifies_runs_and_then_refuses_after_revocation`), `nsh check` 1 (23 errors, all in `packages/remote-screen`), `nsh build` 0 with no warning, `nsh test App.test.tsx` 2/2, `nsh test smoke/pages.test.tsx` 1/1, `packages/remote-screen` check/build/test 1.
+- On 0.5.1 (`E/nsh-starter/final-0.5.1/`): the same exit codes, the same 125/2 split with the same two failures, and the same 23 type errors, line for line. Nothing regressed, so nothing was fixed.
+- Trace, `nsh test trace/feed.test.tsx --trace`: mount items per step identical on 0.5.0 and 0.5.1 (`open()` 527, like tap 1, scroll 42 per step while the pool fills), `nodes` flat at 479 on both.
+- Siblings, same method (`E/<repo>/`): `nsh-query` and `nsh-form` gates match their baselines (TSX 74/74 and 100/100). The `feat/tanstack` worktrees moved 0.4.0 → 0.5.1; `nsh-form`'s r3/r5 failed on 0.5.1 exactly as on master at 0.5.0, and took master's 0.5.0 change (the debounce is measured from the blur); seen to fail with the debounces broken (`E/nsh-form-tanstack/final-0.5.1/rows2-seen-to-fail.log`).
+- Not run: device and packaging runs, the vision pass, cross-target `cargo check`. 0.5.1 changed lists, focus and overlays on devices; none of that was looked at on a screen.
+
 ## 0.5.0 migration (2026-11-11)
 
 Plan: `docs/nsh-0.5.0-migration.md`. Evidence: `docs/evidence/project/nsh-0.5.0/` (below, `E/`). Load on this Mac reached 200+ during the run (other agents' builds); nothing was lowered for it.

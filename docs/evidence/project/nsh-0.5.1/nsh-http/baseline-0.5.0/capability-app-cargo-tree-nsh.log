@@ -1,0 +1,19 @@
+$ cd /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app
+$ cargo tree --locked -e normal,dev,build --prefix none  | grep -E '^nsh-' | sort -u
+# 2026-11-17 00:22:24 nsh=nsh 0.5.1 (224d9a7)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+nsh-app-capability v0.1.0 (/Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app)
+nsh-base v0.5.0
+nsh-base v0.5.0 (*)
+nsh-core v0.5.0
+nsh-core v0.5.0 (*)
+nsh-engine v0.5.0
+nsh-engine v0.5.0 (*)
+nsh-http v0.1.0 (/Users/hmziq/fo/nsh-http/crates/nsh-http)
+nsh-macros v0.5.0 (proc-macro)
+nsh-platform-apple v0.5.0
+nsh-platform-macos v0.5.0
+nsh-updater v0.5.0
+nsh-updater v0.5.0 (*)
+# exit 0 (24s)

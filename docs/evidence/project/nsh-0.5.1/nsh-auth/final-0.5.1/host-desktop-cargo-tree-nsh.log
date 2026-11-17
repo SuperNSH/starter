@@ -1,0 +1,20 @@
+$ cd /Users/hmziq/fo/nsh-auth/examples/host-desktop
+$ cargo tree --locked -e normal,dev,build --prefix none  | grep -E '^nsh-' | sort -u
+# 2026-11-17 06:57:47 nsh=nsh 0.5.1 (224d9a7)
+nsh-auth v0.1.0 (/Users/hmziq/fo/nsh-auth/crates/nsh-auth)
+nsh-auth v0.1.0 (/Users/hmziq/fo/nsh-auth/crates/nsh-auth) (*)
+nsh-auth-keyring v0.1.0 (/Users/hmziq/fo/nsh-auth/crates/nsh-auth-keyring)
+nsh-base v0.5.1
+nsh-base v0.5.1 (*)
+nsh-core v0.5.1
+nsh-core v0.5.1 (*)
+nsh-engine v0.5.1
+nsh-engine v0.5.1 (*)
+nsh-http v0.1.0 (/Users/hmziq/fo/nsh-http/crates/nsh-http)
+nsh-macros v0.5.1 (proc-macro)
+nsh-platform-apple v0.5.1
+nsh-platform-macos v0.5.1
+nsh-testing v0.5.1
+nsh-updater v0.5.1
+nsh-updater v0.5.1 (*)
+# exit 0 (0s)

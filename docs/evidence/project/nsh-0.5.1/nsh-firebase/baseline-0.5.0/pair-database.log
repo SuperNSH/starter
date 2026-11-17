@@ -1,0 +1,40 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/database-app.tsx tests/database.test.tsx
+# 2026-11-17 01:30:20 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/database-app.tsx (32224 B in 5.3 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › set then get round trips through the stubbed rest (9ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › update merges multi paths and get shows the merge (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › remove deletes and the read back is none (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › push ids stay ordered within and across milliseconds (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a transaction rebuilds on 412 and commits (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a queried get encodes the params and sorts children (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a request no route lists is a network failure (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › the listener receives then reconnects and resyncs from the put (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a patch in a later chunk re-renders the listener text (92ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a cancel stops the listener without reconnecting (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a listener on an invalid query fails at subscribe time (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a non-json 200 body is a network failure with the mapped message (2ms)
+✓ tests/database.test.tsx › database › a deep put and a patch yield a fresh cache reference (0ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › getDatabase hands back one database per app, carrying the token (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › a path with a space or a question mark is percent-encoded (1ms)
+✓ tests/database.test.tsx › database › the parser reads lf and crlf framed events alike (0ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/database.test.tsx › database › off during the backoff stops the reconnecting (1ms)
+✓ 17 tests: 17 passed, 0 failed (132ms)
+# exit 0 (0s)

@@ -1,0 +1,11 @@
+fmt: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo fmt --all -- --check) -> exit 0 (0s)
+clippy: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo clippy --all-targets -- -D warnings) -> exit 0 (390s)
+clippy-all-features: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo clippy --all-targets --all-features -- -D warnings) -> exit 0 (913s)
+test: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo test) -> exit 0 (2767s)
+test-all-features: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo test --all-features) -> exit 0 (1825s)
+cargo-tree-nsh: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack && cargo tree --locked -e normal,dev,build --prefix none --all-features | grep -E '^nsh-' | sort -u) -> exit 0 (12s)
+tsx-check: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && /opt/homebrew/bin/nsh check) -> exit 0 (0s)
+tsx-build: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && /opt/homebrew/bin/nsh build) -> exit 0 (1s)
+tsx-build-warnings: 0 warning lines
+tsx-test: (cd /Users/hmziq/fo/.worktrees/nsh-form-tanstack/packages/nsh-form && /opt/homebrew/bin/nsh test) -> exit 0 (8s)
+DONE

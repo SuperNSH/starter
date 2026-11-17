@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-query/examples/demo
+$ nsh check App.tsx
+# 2026-11-17 00:07:39 nsh=nsh 0.5.1 (224d9a7)
+error /Users/hmziq/fo/nsh-query/examples/demo has no tsconfig.json: `nsh init /Users/hmziq/fo/nsh-query/examples/demo` adds one
+# exit 1 (0s)

@@ -1,0 +1,14 @@
+$ cd /Users/hmziq/fo/nsh-auth/tools
+$ bun test
+# 2026-11-17 05:45:30 nsh=nsh 0.5.1 (224d9a7)
+bun test v1.4.4 (38afee6c8)
+
+mock-oauth/tests/errors.test.ts:
+(fail) binding and parameter mismatch errors > google: mismatched client_id is client_mismatch [884190.48ms]
+  ^ this test timed out after 5000ms.
+
+ 146 pass
+ 1 fail
+ 674 expect() calls
+Ran 147 tests across 13 files. [898.71s]
+# exit 1 (898s)

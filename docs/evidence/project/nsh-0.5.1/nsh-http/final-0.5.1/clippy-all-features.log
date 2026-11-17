@@ -1,0 +1,9 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ cargo clippy -p nsh-http --all-targets --all-features -- -D warnings
+# 2026-11-17 06:50:23 nsh=nsh 0.5.1 (224d9a7)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.56s
+# exit 0 (9s)

@@ -1,0 +1,10 @@
+$ cd /Users/hmziq/fo/nsh-auth/tools/mock-oauth
+$ bun test
+# 2026-11-17 05:44:43 nsh=nsh 0.5.1 (224d9a7)
+bun test v1.4.4 (38afee6c8)
+
+ 130 pass
+ 0 fail
+ 616 expect() calls
+Ran 130 tests across 11 files. [46.20s]
+# exit 0 (46s)

@@ -1,0 +1,50 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/auth-app.tsx tests/auth.test.tsx
+# 2026-11-17 04:27:34 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 174ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/auth-app.tsx (26134 B in 10.7 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › sign up signs in and persists the record on the manual clock (61ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › sign in maps the wire errors and keeps the user signed out (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › empty arguments fail before any request is made (17ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › anonymous sign in sends no email and no password (61ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a custom token signs in with the uid from the token claims (107ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a credential from a foreign id token posts verify custom token (35ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › the refresh schedule follows the moved clock (151ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a lost session maps to user token expired and signs out (53ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a network failure keeps the core network code (41ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › sign out clears the signal and the store (38ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a second auth restores the record another tier wrote (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › expiresIn parses like the Rust u64: plus sign and u64 ceiling (72ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a seeded null record restores as signed out, not a crash (12ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a deleted user signs out on refresh (46ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a non-JSON success reply is an auth/invalid-response (27ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a record with a negative timestamp restores as signed out (23ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › a JSON null success reply is an auth/invalid-response too (21ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › an expiresIn of zero is accepted and one past u64 is not (20ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › auth › sign up refuses an already registered email (35ms)
+✓ 19 tests: 19 passed, 0 failed (883ms)
+# exit 0 (2s)

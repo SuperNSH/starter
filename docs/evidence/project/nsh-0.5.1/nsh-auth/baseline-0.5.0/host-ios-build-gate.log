@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-auth/examples/host-ios
+$ bash build-gate.sh
+# 2026-11-17 06:00:30 nsh=nsh 0.5.1 (224d9a7)
+demo-bundle: need nsh 0.5.0 (upstream installer, ~/.nsh/bin); found: /Users/hmziq/.nsh/bin/nsh nsh 0.5.1 (224d9a7)
+# exit 1 (0s)

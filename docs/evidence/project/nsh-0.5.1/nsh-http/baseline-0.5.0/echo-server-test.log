@@ -1,0 +1,15 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ bun --cwd tools/echo-server test
+# 2026-11-17 00:05:35 nsh=nsh 0.5.1 (224d9a7)
+$ bun test
+bun test v1.4.4 (38afee6c8)
+
+tests/server.test.ts:
+echo-server listening on 127.0.0.1:58265 (pid 7921), runtime file disabled
+echo-server listening on 127.0.0.1:58267 (pid 7921), runtime file disabled
+
+ 43 pass
+ 0 fail
+ 155 expect() calls
+Ran 43 tests across 1 file. [2.41s]
+# exit 0 (2s)

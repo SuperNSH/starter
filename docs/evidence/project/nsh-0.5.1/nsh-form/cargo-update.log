@@ -1,0 +1,25 @@
+$ cargo update -p nsh-base -p nsh-core -p nsh-engine -p nsh-i18n -p nsh-js -p nsh-macros -p nsh-package -p nsh-testing -p nsh-updater
+    Blocking waiting for file lock on package cache
+    Updating crates.io index
+     Locking 9 packages to highest Rust 1.99.1 compatible versions
+    Updating nsh-base v0.5.0 -> v0.5.1
+    Updating nsh-core v0.5.0 -> v0.5.1
+    Updating nsh-engine v0.5.0 -> v0.5.1
+    Updating nsh-i18n v0.5.0 -> v0.5.1
+    Updating nsh-js v0.5.0 -> v0.5.1
+    Updating nsh-macros v0.5.0 -> v0.5.1
+    Updating nsh-package v0.5.0 -> v0.5.1
+    Updating nsh-testing v0.5.0 -> v0.5.1
+    Updating nsh-updater v0.5.0 -> v0.5.1
+note: pass `--verbose` to see 16 unchanged dependencies behind latest
+# exit 0
+-- nsh registry crates in lock after:
+nsh-base 0.5.1
+nsh-core 0.5.1
+nsh-engine 0.5.1
+nsh-i18n 0.5.1
+nsh-js 0.5.1
+nsh-macros 0.5.1
+nsh-package 0.5.1
+nsh-testing 0.5.1
+nsh-updater 0.5.1

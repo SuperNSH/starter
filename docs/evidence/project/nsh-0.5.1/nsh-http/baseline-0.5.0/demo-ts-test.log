@@ -1,0 +1,33 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ nsh test examples/demo-ts
+# 2026-11-17 00:22:58 nsh=nsh 0.5.1 (224d9a7)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled examples/demo-ts/App.tsx (173365 B in 12.1 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+SKIP (capture): this is the headless runner — the query-capture leg needs a real
+  network stack (the server's aborted line, docs/upstream-issues.md) and the PNGs need drawing:
+  nsh test examples/demo-ts/tests/capture/demo.test.ts --target macos
+✓ examples/demo-ts/tests/capture/demo.test.ts › captures the demo screens (1.5s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+SKIP (live): this is the headless runner, whose live network on 0.4.0 never tells the server about an abort — prove it on a real target:
+  nsh test examples/demo-ts/tests/live/abort.test.ts --target macos
+✓ examples/demo-ts/tests/live/abort.test.ts › replacing the query aborts the in-flight /slow request, and the server's log proves it (108ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/demo-ts/tests/live/demo.test.ts › the demo's fast and slow calls land with real timings (1.5s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/demo-ts/tests/live/demo.test.ts › three parallel 401s share one refresh and all three succeed (324ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/demo-ts/tests/unit/demo.test.ts › base discovery › when nothing in the port window answers, the screen says so (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/demo-ts/tests/unit/demo.test.ts › base discovery › the demo finds a server deeper in the window — the 8123-already-taken case (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/demo-ts/tests/unit/demo.test.ts › echo screen › fast and slow calls show their status and timings (222ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/demo-ts/tests/unit/demo.test.ts › query screen › replacing the query drops the in-flight load and starts the new key (505ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/demo-ts/tests/unit/demo.test.ts › auth screen › three parallel 401s share one refresh and all three succeed (113ms)
+✓ 9 tests: 9 passed, 0 failed (4.4s)
+# exit 0 (5s)

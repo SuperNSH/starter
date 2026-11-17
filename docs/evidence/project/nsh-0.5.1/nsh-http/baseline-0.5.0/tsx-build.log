@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-http/packages/nsh-http
+$ nsh build
+# 2026-11-17 00:22:48 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (37.1 KB js, 96.9 KB bytecode, 8ms)
+# exit 0 (0s)

@@ -1,0 +1,14 @@
+fmt: (cd /Users/hmziq/fo/nsh-form && cargo fmt --all -- --check) -> exit 0 (0s)
+clippy: (cd /Users/hmziq/fo/nsh-form && cargo clippy --all-targets -- -D warnings) -> exit 0 (331s)
+clippy-all-features: (cd /Users/hmziq/fo/nsh-form && cargo clippy --all-targets --all-features -- -D warnings) -> exit 0 (129s)
+test: (cd /Users/hmziq/fo/nsh-form && cargo test) -> exit 0 (320s)
+test-all-features: (cd /Users/hmziq/fo/nsh-form && cargo test --all-features) -> exit 0 (223s)
+cargo-tree-nsh: (cd /Users/hmziq/fo/nsh-form && cargo tree --locked -e normal,dev,build --prefix none --all-features | grep -E '^nsh-' | sort -u) -> exit 0 (0s)
+tsx-check: (cd /Users/hmziq/fo/nsh-form/packages/nsh-form && nsh check) -> exit 0 (1s)
+tsx-build: (cd /Users/hmziq/fo/nsh-form/packages/nsh-form && nsh build) -> exit 0 (0s)
+tsx-build-warnings: 0 warning lines
+tsx-test: (cd /Users/hmziq/fo/nsh-form/packages/nsh-form && nsh test) -> exit 0 (1s)
+demo-check: (cd /Users/hmziq/fo/nsh-form/examples/demo && nsh check App.tsx) -> exit 1 (0s)
+demo-build: (cd /Users/hmziq/fo/nsh-form/examples/demo && nsh build App.tsx) -> exit 0 (0s)
+demo-build-warnings: 0 warning lines
+DONE

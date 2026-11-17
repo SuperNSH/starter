@@ -1,0 +1,12 @@
+$ cd /Users/hmziq/fo/nsh-form
+$ cargo clippy --all-targets --all-features -- -D warnings
+# 2026-11-17 04:12:22 nsh=nsh 0.5.1 (224d9a7)
+    Checking nsh-core v0.5.1
+    Checking nsh-js v0.5.1
+    Checking nsh-package v0.5.1
+    Checking nsh-base v0.5.1
+    Checking nsh-engine v0.5.1
+    Checking nsh-testing v0.5.1
+    Checking nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 48.43s
+# exit 0 (920s)

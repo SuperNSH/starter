@@ -1,0 +1,10 @@
+$ cd /Users/hmziq/fo/nsh-starter
+$ nsh test App.test.tsx
+# 2026-11-17 06:51:06 nsh=nsh 0.5.1 (224d9a7)
+✓ built the Rust crate nsh-starter (399ms)
+✓ built the headless runner of nsh-starter (1m 24s, 1 warning: -v shows it)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › the root mounts (19ms)
+✓ App.test.tsx › the shell navigates from Home (96ms)
+✓ 2 tests: 2 passed, 0 failed (1m 27s)
+# exit 0 (88s)

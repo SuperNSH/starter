@@ -1,0 +1,17 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ nsh test examples/monitor-app
+# 2026-11-17 06:54:09 nsh=nsh 0.5.1 (224d9a7)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled examples/monitor-app/App.tsx (28789 B in 12.5 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+PNG not saved here: a screenshot needs a real platform, which draws the app: run the test with `--target`
+✓ examples/monitor-app/tests/capture/ready.capture.test.ts › the ready screen shows live slow and fast calls, slow on top, and captures per target (1.3s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/monitor-app/tests/unit/ready.test.ts › start records slow and fast, slow on top, with per-host aggregates (123ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/monitor-app/tests/unit/ready.test.ts › the filter narrows the calls by host or path (166ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ examples/monitor-app/tests/unit/ready.test.ts › when no echo server answers, the screen says so and records the failed probes (59ms)
+✓ 4 tests: 4 passed, 0 failed (1.6s)
+# exit 0 (2s)

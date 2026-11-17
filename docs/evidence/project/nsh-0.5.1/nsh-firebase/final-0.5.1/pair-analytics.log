@@ -1,0 +1,36 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/analytics-app.tsx tests/analytics.test.tsx
+# 2026-11-17 04:27:41 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 29ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/analytics-app.tsx (37131 B in 91.0 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › events batch at maxBatchSize without waiting for the interval (196ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › events flush on the interval and no earlier (138ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › denied consent blocks sends until it is reganted (16ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › a failed send retries after backoff and then succeeds (14ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › screen views carry the ga4 param names (7ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › user properties merge and the user id rides the batch (37ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › reserved names are refused with the stable code (24ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › the collector transport posts ndjson to /collect (131ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › the mp transport posts the ga4 body to the collect endpoint (108ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › a leftover full batch drains on the next tick without the interval (100ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › an explicit mp config overrides native routing (161ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › a throwing onSend hook does not stall the retry schedule (168ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › the native tier routes through the firebase.analytics.* handlers (152ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/analytics.test.tsx › analytics › without a host the native path refuses to build without a transport (6ms)
+✓ 14 tests: 14 passed, 0 failed (1.3s)
+# exit 0 (1s)

@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ nsh build examples/monitor-app
+# 2026-11-17 00:22:57 nsh=nsh 0.5.1 (224d9a7)
+✓ built examples/monitor-app/App.tsx into .nsh/out (28.1 KB js, 64.3 KB bytecode, 7ms)
+# exit 0 (0s)

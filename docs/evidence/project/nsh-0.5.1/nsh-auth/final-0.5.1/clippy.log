@@ -1,0 +1,19 @@
+$ cd /Users/hmziq/fo/nsh-auth
+$ cargo clippy --workspace --all-targets -- -D warnings
+# 2026-11-17 06:54:16 nsh=nsh 0.5.1 (224d9a7)
+   Compiling ring v0.17.14
+    Checking nsh-updater v0.5.1
+   Compiling nsh-macros v0.5.1
+   Compiling rustls v0.23.46
+    Checking rustls-webpki v0.103.16
+    Checking tokio-rustls v0.26.6
+    Checking tungstenite v0.28.0
+    Checking rustls-platform-verifier v0.7.1
+    Checking hyper-rustls v0.27.10
+    Checking tokio-tungstenite v0.28.0
+    Checking reqwest v0.12.28
+    Checking nsh-core v0.5.1
+    Checking nsh-auth v0.1.0 (/Users/hmziq/fo/nsh-auth/crates/nsh-auth)
+    Checking nsh-auth-keyring v0.1.0 (/Users/hmziq/fo/nsh-auth/crates/nsh-auth-keyring)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 13.09s
+# exit 0 (13s)

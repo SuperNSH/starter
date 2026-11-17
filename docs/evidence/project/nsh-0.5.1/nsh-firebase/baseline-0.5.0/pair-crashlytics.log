@@ -1,0 +1,20 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/crashlytics-app.tsx tests/crashlytics.test.tsx
+# 2026-11-17 01:30:22 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 6ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled src/crashlytics/app.tsx (9803 B in 4.2 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/crashlytics.test.tsx › crashlytics › the native tier routes every call, and the wire names and args match the contract (9ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/crashlytics.test.tsx › crashlytics › didCrashDuringPreviousExecution reports a clean previous run too (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/crashlytics.test.tsx › crashlytics › a reply without a crashed flag is a host error, not a silent false (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/crashlytics.test.tsx › crashlytics › a failing handler surfaces the host error with its message (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/crashlytics.test.tsx › crashlytics › a non-scalar custom key value is refused before the host (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/crashlytics.test.tsx › crashlytics › the pure tier rejects every call with the error naming what is missing (1ms)
+✓ 6 tests: 6 passed, 0 failed (24ms)
+# exit 0 (0s)

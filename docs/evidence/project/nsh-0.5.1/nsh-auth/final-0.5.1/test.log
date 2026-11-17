@@ -1,0 +1,125 @@
+$ cd /Users/hmziq/fo/nsh-auth
+$ cargo test --workspace --no-fail-fast
+# 2026-11-17 06:54:29 nsh=nsh 0.5.1 (224d9a7)
+   Compiling ring v0.17.14
+   Compiling nsh-macros v0.5.1
+   Compiling nsh-updater v0.5.1
+   Compiling rustls-webpki v0.103.16
+   Compiling rustls v0.23.46
+   Compiling tokio-rustls v0.26.6
+   Compiling tungstenite v0.28.0
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.12.28
+   Compiling tokio-tungstenite v0.28.0
+   Compiling nsh-core v0.5.1
+   Compiling nsh-auth v0.1.0 (/Users/hmziq/fo/nsh-auth/crates/nsh-auth)
+   Compiling nsh-auth-keyring v0.1.0 (/Users/hmziq/fo/nsh-auth/crates/nsh-auth-keyring)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 18.28s
+     Running unittests src/lib.rs (target/debug/deps/nsh_auth-660d77c48b4408c6)
+
+running 5 tests
+test flight::tests::a_cancelled_drivers_work_is_taken_over_by_a_waiter ... ok
+test flight::tests::a_registered_waiter_is_woken_and_answered_by_finish ... ok
+test flight::tests::a_flight_belongs_to_one_refresh_token ... ok
+test pkce::tests::s256_matches_the_rfc_7636_example ... ok
+test pkce::tests::tokens_are_url_safe_and_distinct ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/authorize.rs (target/debug/deps/authorize-bc03260d66429a61)
+
+running 3 tests
+test moved_endpoints_match_the_documented_catalog ... ok
+test redirect_kind_classifies_redirects ... ok
+test authorize_url_for_every_provider ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 19.16s
+
+     Running tests/flow.rs (target/debug/deps/flow-e31d77e8cf414fdd)
+
+running 13 tests
+test an_unconfigured_provider_is_refused ... ok
+test a_plain_http_redirect_off_loopback_accepts_no_callback ... ok
+test denial_maps_to_access_denied ... ok
+test expired_code_maps_to_expired_code_error ... ok
+test github_exchange_goes_through_the_broker_with_no_secret ... ok
+test broker_failures_split_by_status ... ok
+test wrong_state_is_rejected ... ok
+test wrong_nonce_is_rejected ... ok
+test a_5xx_userinfo_failure_is_transient_and_carries_no_body ... ok
+test id_token_with_a_good_signature_passes ... ok
+test success_loop_sets_session_user_and_persists ... ok
+test tampered_id_token_signature_is_rejected ... ok
+test wrong_origin_callback_is_rejected ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.34s
+
+     Running tests/refresh.rs (target/debug/deps/refresh-ef5f1a624eecd4c3)
+
+running 10 tests
+test retryability_classifies_transient_and_fatal_errors ... ok
+test refresh_without_a_session_or_token_fails_cleanly ... ok
+test a_network_failure_during_refresh_is_transient ... ok
+test revoked_refresh_token_signs_out ... ok
+test refresh_updates_the_session_and_the_store ... ok
+test eight_parallel_refreshes_share_one_token_request ... ok
+test a_server_error_during_refresh_is_transient_and_keeps_the_session ... ok
+test refresh_omitting_refresh_token_keeps_the_previous_one ... ok
+test a_stale_refresh_answer_is_not_applied_over_a_newer_session ... ok
+test an_orphaned_flight_is_not_joined_by_a_newer_session ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.37s
+
+     Running tests/signout.rs (target/debug/deps/signout-1983395cde1ac211)
+
+running 4 tests
+test sign_out_with_no_session_stays_clean ... ok
+test sign_out_revokes_clears_and_resets_the_signals ... ok
+test a_5xx_revoke_failure_is_transient_and_the_local_sign_out_stands ... ok
+test a_persisted_session_restores_into_a_fresh_service ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.49s
+
+     Running tests/store.rs (target/debug/deps/store-e2d7701f86cb57fb)
+
+running 4 tests
+test a_session_expiring_in_30s_counts_as_expired ... ok
+test memory_store_round_trips ... ok
+test session_expiry_follows_the_clock ... ok
+test json_file_store_round_trips_owner_only ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_auth_keyring-babb36a00317275d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/keyring.rs (target/debug/deps/keyring-8100c80430e78881)
+
+running 7 tests
+test real_keychain_round_trips_each_field_and_cleans_up ... ok
+test meta_without_an_access_token_is_a_clear_error ... ok
+test oversized_fields_are_rejected_before_the_store ... ok
+test a_torn_overwrite_never_reads_as_a_mixed_session ... ok
+test mock_store_round_trips_each_field ... ok
+test a_reachable_store_stays_on_the_keyring_and_leaves_no_probe ... ok
+test an_unreachable_store_falls_back_visibly_to_the_file ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_auth
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_auth_keyring
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+# exit 0 (52s)

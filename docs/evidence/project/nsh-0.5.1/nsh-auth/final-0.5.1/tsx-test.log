@@ -1,0 +1,97 @@
+$ cd /Users/hmziq/fo/nsh-auth/packages/nsh-auth
+$ nsh test
+# 2026-11-17 06:57:48 nsh=nsh 0.5.1 (224d9a7)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled App.tsx (50622 B in 5.7 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › each provider's authorize URL carries pkce, state, scopes and the redirect (12ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › mock sign-in completes the loop and lands on the session screen (91ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a denial at the provider lands in error, not a session (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a callback whose state does not match is refused (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a callback without a state parameter is rejected as state_mismatch (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an id token with a foreign nonce does not sign anyone in (5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an expired code is reported as expired, not as a session (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › eight parallel refreshes share one token request (15ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a revoked refresh token drops the session (5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a rotation response without a refresh token keeps the previous one (11ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › sign-out revokes the token and clears the session (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a transient refresh failure leaves the session for retry (5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a 5xx from the token endpoint is a retryable server_error and keeps the session (5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a sign-out during an in-flight refresh does not resurrect the session (211ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a sign-out during the code exchange does not resurrect the session (212ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a host drives the authorize surface and keeps the session in its secure store (6ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a stale host callback from a superseded sign-in is dropped and the active sign-in still completes (2.5s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › github's exchange goes through the broker and never carries a secret (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a session in the host's store restores on the next start (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a session expiring within the tolerance margin counts as expired at restore (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a parked authorize whose redirect already arrived completes the loop at boot (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a parked authorize with no redirect yet surfaces the interruption honestly (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a wantsNonce record whose url carries no nonce is refused, not exchanged (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a pkce record without its verifier is refused before the code is spent (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a record whose sealed url disagrees with its state is refused as unusable (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a host that replies an empty record boots without the interrupted banner (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a host without the pending channel boots and signs in exactly as before (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › google's iOS native leg exchanges the serverAuthCode directly and lands a session (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › google's native serverAuthCode is redeemed through the broker when one is configured (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › google's Android native leg verifies the id token for the server audience with the nonce verbatim (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an android google id token with a foreign nonce does not sign anyone in (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an android google id token without a configured audience is refused before any fetch (5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › apple's native leg verifies the identity token against Apple's rules and keeps the authorization code (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an apple identity token whose nonce claim is the raw nonce is refused (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an apple result echoing a foreign nonce is refused before any fetch (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › facebook's native leg wraps the access token and names the user from Graph (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a facebook native token with no host-reported expiry never expires locally (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › cancelling the native sheet leaves the state exactly as it was (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › cancelling a native sign-in over a restored session keeps that session (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a native SDK failure is an error, not a browser fallback (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › apple on an android-shaped host falls back to the browser, google stays native (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a channel-prefixed configuration failure is still an error, not a browser fallback (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › a host whose embedder predates the native channel falls back to the browser loop (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an explicit native-only signIn on a host without the channel reports no_launcher (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/auth.test.tsx › an explicit native-only signIn on a hostless surface reports no_launcher (1ms)
+✓ 45 tests: 45 passed, 0 failed (3.2s)
+# exit 0 (3s)

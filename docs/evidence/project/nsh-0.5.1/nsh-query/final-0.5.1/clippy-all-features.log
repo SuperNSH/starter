@@ -1,0 +1,6 @@
+$ cd /Users/hmziq/fo/nsh-query
+$ cargo clippy --all-targets --all-features -- -D warnings
+# 2026-11-17 02:49:38 nsh=nsh 0.5.1 (224d9a7)
+    Checking nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.36s
+# exit 0 (902s)

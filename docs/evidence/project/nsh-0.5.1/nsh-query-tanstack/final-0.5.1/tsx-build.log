@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack/packages/nsh-query
+$ nsh build
+# 2026-11-17 06:52:58 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (272.0 KB js, 551.8 KB bytecode, 30ms)
+# exit 0 (0s)

@@ -1,0 +1,39 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ cargo clippy --manifest-path examples/demo-rs/Cargo.toml --all-targets -- -D warnings
+# 2026-11-17 06:52:04 nsh=nsh 0.5.1 (224d9a7)
+   Compiling ring v0.17.14
+   Compiling quickjs-jit-sys v0.14.2
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+    Checking nsh-updater v0.5.1
+   Compiling nsh-macros v0.5.1
+   Compiling onig_sys v69.9.3
+    Checking nsh-i18n v0.5.1
+   Compiling nsh-platform-apple v0.5.1
+    Checking objc2-app-kit v0.3.2
+   Compiling rustls v0.23.46
+    Checking onig v6.5.3
+    Checking syntect v5.3.0
+    Checking rustls-webpki v0.103.16
+    Checking two-face v0.4.5
+   Compiling zstd-safe v8.2.0
+    Checking zstd v0.14.3
+   Compiling quickjs-jit-core v0.14.2
+    Checking tungstenite v0.28.0
+    Checking tokio-rustls v0.26.6
+    Checking rustls-platform-verifier v0.7.1
+    Checking ureq v3.5.1
+    Checking tokio-tungstenite v0.28.0
+    Checking nsh-core v0.5.1
+   Compiling quickjs-jit-macro v0.14.2
+    Checking quickjs-jit v0.14.2
+    Checking quickjs-jit-stdlib v0.14.2
+    Checking nsh-package v0.5.1
+    Checking nsh-js v0.5.1
+    Checking nsh-base v0.5.1
+    Checking nsh-http v0.1.0 (/Users/hmziq/fo/nsh-http/crates/nsh-http)
+    Checking nsh-engine v0.5.1
+    Checking nsh-testing v0.5.1
+    Checking nsh-platform-macos v0.5.1
+    Checking nsh-app-demo-rs v0.1.0 (/Users/hmziq/fo/nsh-http/examples/demo-rs)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 33.19s
+# exit 0 (33s)

@@ -1,0 +1,5 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ cargo clippy -p nsh-http --all-targets --all-features -- -D warnings
+# 2026-11-16 23:58:49 nsh=nsh 0.5.1 (224d9a7)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+# exit 0 (0s)

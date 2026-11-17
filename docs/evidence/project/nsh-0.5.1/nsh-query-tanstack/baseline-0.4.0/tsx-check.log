@@ -1,0 +1,4 @@
+$ cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack/packages/nsh-query
+$ /opt/homebrew/bin/nsh check
+# 2026-11-17 02:49:23 nsh=nsh 0.5.1 (224d9a7)
+# exit 0 (0s)

@@ -1,0 +1,26 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/functions-app.tsx tests/functions.test.tsx
+# 2026-11-17 01:30:23 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/functions-app.tsx (14841 B in 3.5 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › the request speaks the callable wire protocol and maps the result (6ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › absent data is null in the body (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › a backend error maps to the functions code with its message (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › an unknown canonical status is internal, read even on a 200 (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › the emulator's missing function is functions/not-found (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › the wire's optional error.details reaches the error (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › a data-shaped answer maps too: data is read before result (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › the native tier routes through firebase.functions.call per the contract (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/functions.test.tsx › functions › a failed native handler surfaces the host error with its message (1ms)
+✓ 9 tests: 9 passed, 0 failed (22ms)
+# exit 0 (0s)

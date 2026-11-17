@@ -1,0 +1,30 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/storage-app.tsx tests/storage.test.tsx
+# 2026-11-17 01:30:20 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/storage-app.tsx (26554 B in 3.5 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › uploads in 256 KiB slices with progress (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › an interrupted upload resumes from the saved session id (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › pause holds and resume continues (504ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › cancel ends in error with the canceled code (314ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › a denied finalize is an error despite its final header (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › a query without its size header errors instead of restarting (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › download compares bytes and carries the Firebase auth header (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › the download URL comes from the metadata's first token (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › metadata round-trips and the patch sends writable fields only (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › list walks pages by nextPageToken (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/storage.test.tsx › storage › delete succeeds and a missing object maps to its stable code (2ms)
+✓ 11 tests: 11 passed, 0 failed (852ms)
+# exit 0 (1s)

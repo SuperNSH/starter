@@ -1,0 +1,4 @@
+$ cd /Users/hmziq/fo/nsh-query
+$ cargo fmt --all -- --check
+# 2026-11-16 23:50:16 nsh=nsh 0.5.1 (224d9a7)
+# exit 0 (0s)

@@ -1,0 +1,70 @@
+$ cd /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app
+$ cargo fmt --all -- --check
+# 2026-11-17 00:17:39 nsh=nsh 0.5.1 (224d9a7)
+Diff in /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app/src/lib.rs:3:
+ //! `lines`; the TSX test reads them. Port comes from ECHO_PORT, else the echo
+ //! server's `.runtime.json`.
+ 
+-use nsh_core::prelude::*;
+ use nsh_base::theme;
++use nsh_core::prelude::*;
+ use nsh_http::{CallOptions, HttpClient};
+ 
+ #[native_module("capability-app/native")]
+Diff in /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app/src/lib.rs:60:
+     let undeclared = format!("http://localhost:{port}/health");
+     match fetch(HttpRequest::get(undeclared.clone())).await {
+         Ok(response) => {
+-            note(&lines, format!("D2 undeclared-host: NOT REFUSED status={}", response.status())).await
++            note(
++                &lines,
++                format!(
++                    "D2 undeclared-host: NOT REFUSED status={}",
++                    response.status()
++                ),
++            )
++            .await
+         }
+         Err(message) => note(&lines, format!("D2 undeclared-host: Err {message}")).await,
+     }
+Diff in /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app/src/lib.rs:68:
+     // D3: the redirect hop — /redirect/refused answers 302 to
+     // http://refused.invalid/next, a host no test app declares. The engine
+     // re-checks every hop where it enforces grants.
+-    match client.execute("GET", "/redirect/refused", &CallOptions::new()).await {
++    match client
++        .execute("GET", "/redirect/refused", &CallOptions::new())
++        .await
++    {
+         Ok(response) => {
+-            note(&lines, format!("D3 redirect-hop: NOT REFUSED status={}", response.status())).await
++            note(
++                &lines,
++                format!("D3 redirect-hop: NOT REFUSED status={}", response.status()),
++            )
++            .await
+         }
+         Err(error) => match error {
+             nsh_http::Error::RefusedByCapability { message } => {
+Diff in /Users/hmziq/fo/nsh-http/crates/nsh-http/tests/capability-app/src/lib.rs:92:
+         .flex_1()
+         .bg(move || theme().background)
+         .text_color(move || theme().foreground)
+-        .child(
+-            view()
+-                .flex_1()
+-                .p_safe_area()
+-                .child(each(
+-                    lines,
+-                    |line| line.clone(),
+-                    |line, _index| text(move || line.get()).text_size(px(13.0)),
+-                )),
+-        )
++        .child(view().flex_1().p_safe_area().child(each(
++            lines,
++            |line| line.clone(),
++            |line, _index| text(move || line.get()).text_size(px(13.0)),
++        )))
+ }
+ 
+# exit 1 (0s)

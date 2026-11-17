@@ -1,0 +1,33 @@
+$ cd /Users/hmziq/fo/nsh-http
+$ cargo clippy --all-targets -- -D warnings
+# 2026-11-17 06:49:59 nsh=nsh 0.5.1 (224d9a7)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling ring v0.17.14
+   Compiling quickjs-jit-sys v0.14.2
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+    Checking nsh-updater v0.5.1
+   Compiling nsh-macros v0.5.1
+    Checking nsh-i18n v0.5.1
+   Compiling rustls v0.23.46
+    Checking rustls-webpki v0.103.16
+   Compiling zstd-safe v8.2.0
+    Checking zstd v0.14.3
+    Checking quickjs-jit-core v0.14.2
+    Checking tungstenite v0.28.0
+    Checking tokio-rustls v0.26.6
+    Checking rustls-platform-verifier v0.7.1
+    Checking ureq v3.5.1
+    Checking tokio-tungstenite v0.28.0
+    Checking nsh-core v0.5.1
+   Compiling quickjs-jit-macro v0.14.2
+    Checking quickjs-jit v0.14.2
+    Checking quickjs-jit-stdlib v0.14.2
+    Checking nsh-js v0.5.1
+    Checking nsh-package v0.5.1
+    Checking nsh-http v0.1.0 (/Users/hmziq/fo/nsh-http/crates/nsh-http)
+    Checking nsh-engine v0.5.1
+    Checking nsh-testing v0.5.1
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 23.22s
+# exit 0 (24s)

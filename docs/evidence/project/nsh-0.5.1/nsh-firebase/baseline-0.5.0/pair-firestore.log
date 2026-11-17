@@ -1,0 +1,38 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/firestore-app.tsx tests/firestore.test.tsx
+# 2026-11-17 01:30:22 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › typed values encode to the wire and decode back (0ms)
+✓ bundled tests/firestore-app.tsx (32219 B in 5.1 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › setDoc writes the typed fields document (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › setDoc with merge writes the leaf-path updateMask (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › getDoc decodes a present document and maps 404 to exists false (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › addDoc posts to the collection and reads the id from the name (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › deleteDoc deletes and a 404 is done (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › runQuery posts the structured query and maps the documents (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › a denied read maps to firestore/permission-denied (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › values the JSON contract cannot carry are invalid-data (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › a non-json body is invalid-response (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › the auth token rides as a Bearer header (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › validation refusals happen before any request (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › the native tier routes the five calls with the contract args (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/firestore.test.tsx › firestore › a native reply without the contract shape is invalid-response (4ms)
+✓ 14 tests: 14 passed, 0 failed (39ms)
+# exit 0 (0s)

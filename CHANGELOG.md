@@ -5,6 +5,10 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed: NSH 0.5.1
+
+- All NSH crates move from 0.5.0 to 0.5.1, a bug-fix release with no API changes; the sibling `nsh-query` and `nsh-form` crates move with them. Only `Cargo.toml` pins, `Cargo.lock` (NSH crates only), CI's `NSH_VERSION` and the install line in the README changed; no app code changed. Install the 0.5.1 CLI with the release's `install.sh` (README).
+
 ### Changed: NSH 0.5.0
 
 - All NSH crates move from 0.4.0 to 0.5.0 (`nsh-core`, `nsh-base`, `nsh-platform-{ios,linux,macos,windows}`, `nsh-engine`, `nsh-testing`); the sibling `nsh-query` and `nsh-form` crates move with them, so one NSH version resolves. The CLI must be 0.5.0 too: install it with the release's `install.sh` (README); Homebrew still ships 0.4.0.

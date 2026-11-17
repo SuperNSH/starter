@@ -1,0 +1,13 @@
+$ cd /Users/hmziq/fo/nsh-firebase/examples/demo
+$ nsh check App.tsx
+# 2026-11-17 01:09:28 nsh=nsh 0.5.1 (224d9a7)
+src/screens/auth.tsx(38,27): error TS2558: Expected 12 type arguments, but got 1.
+src/screens/auth.tsx(40,22): error TS7006: Parameter 'values' implicitly has an 'any' type.
+src/screens/auth.tsx(52,27): error TS2551: Property 'field' does not exist on type 'FormWithExtras<Credentials, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, ... 8 more ..., unknown>'. Did you mean 'Field'?
+src/screens/auth.tsx(55,30): error TS2551: Property 'field' does not exist on type 'FormWithExtras<Credentials, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, ... 8 more ..., unknown>'. Did you mean 'Field'?
+src/screens/auth.tsx(61,15): error TS2339: Property 'submit' does not exist on type 'FormWithExtras<Credentials, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, ... 8 more ..., unknown>'.
+src/screens/auth.tsx(129,28): error TS2339: Property 'error' does not exist on type 'FormWithExtras<Credentials, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, ... 8 more ..., unknown>'.
+src/screens/auth.tsx(139,32): error TS2339: Property 'isSubmitting' does not exist on type 'FormWithExtras<Credentials, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, ... 8 more ..., unknown>'.
+src/screens/auth.tsx(147,32): error TS2339: Property 'isSubmitting' does not exist on type 'FormWithExtras<Credentials, FormValidateOrFn<TFormData> | undefined, FormValidateOrFn<TFormData> | undefined, ... 8 more ..., unknown>'.
+error type check failed (exit status: 1)
+# exit 1 (0s)

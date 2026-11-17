@@ -1,0 +1,15 @@
+fmt: (cd /Users/hmziq/fo/nsh-starter && cargo fmt --all -- --check) -> exit 0 (1s)
+clippy: (cd /Users/hmziq/fo/nsh-starter && cargo clippy --all-targets -- -D warnings) -> exit 0 (958s)
+test: (cd /Users/hmziq/fo/nsh-starter && cargo test --no-fail-fast) -> exit 101 (2527s)
+cargo-tree-nsh: (cd /Users/hmziq/fo/nsh-starter && cargo tree --locked -e normal,dev,build --prefix none  | grep -E '^nsh-' | sort -u) -> exit 0 (0s)
+nsh-check-root: (cd /Users/hmziq/fo/nsh-starter && nsh check) -> exit 1 (508s)
+nsh-build-root: (cd /Users/hmziq/fo/nsh-starter && nsh build) -> exit 0 (1s)
+nsh-build-root-warnings: 0 warning lines
+nsh-test-app: (cd /Users/hmziq/fo/nsh-starter && nsh test App.test.tsx) -> exit 0 (88s)
+nsh-test-pages: (cd /Users/hmziq/fo/nsh-starter && nsh test smoke/pages.test.tsx) -> exit 0 (6s)
+trace: (cd /Users/hmziq/fo/nsh-starter && nsh test trace/feed.test.tsx --trace) -> exit 0 (4s)
+remote-screen-check: (cd /Users/hmziq/fo/nsh-starter/packages/remote-screen && nsh check) -> exit 1 (0s)
+remote-screen-build: (cd /Users/hmziq/fo/nsh-starter/packages/remote-screen && nsh build) -> exit 1 (0s)
+remote-screen-build-warnings: 0 warning lines
+remote-screen-test: (cd /Users/hmziq/fo/nsh-starter/packages/remote-screen && nsh test) -> exit 1 (0s)
+DONE

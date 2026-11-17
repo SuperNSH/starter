@@ -1,0 +1,30 @@
+$ cd /Users/hmziq/fo/nsh-query
+$ cargo clippy --all-targets -- -D warnings
+# 2026-11-17 02:49:26 nsh=nsh 0.5.1 (224d9a7)
+   Compiling ring v0.17.14
+   Compiling quickjs-jit-sys v0.14.2
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+    Checking nsh-updater v0.5.1
+   Compiling nsh-macros v0.5.1
+    Checking nsh-i18n v0.5.1
+   Compiling rustls v0.23.46
+    Checking rustls-webpki v0.103.16
+   Compiling zstd-safe v8.2.0
+    Checking quickjs-jit-core v0.14.2
+    Checking zstd v0.14.3
+    Checking tungstenite v0.28.0
+    Checking tokio-rustls v0.26.6
+    Checking rustls-platform-verifier v0.7.1
+    Checking ureq v3.5.1
+   Compiling quickjs-jit-macro v0.14.2
+    Checking tokio-tungstenite v0.28.0
+    Checking nsh-core v0.5.1
+    Checking quickjs-jit v0.14.2
+    Checking quickjs-jit-stdlib v0.14.2
+    Checking nsh-js v0.5.1
+    Checking nsh-package v0.5.1
+    Checking nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+    Checking nsh-engine v0.5.1
+    Checking nsh-testing v0.5.1
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 12.51s
+# exit 0 (12s)

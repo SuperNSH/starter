@@ -1,0 +1,6 @@
+$ cd /Users/hmziq/fo/nsh-http/tools/echo-server
+$ rm -f .runtime.json; PORT=$(for p in $(seq 8123 8132); do lsof -nP -iTCP:$p -sTCP:LISTEN >/dev/null 2>&1 || { echo $p; break; }; done); echo port $PORT; (ECHO_PORT=$PORT nohup bun run src/server.ts > /Users/hmziq/fo/nsh-starter/docs/evidence/project/nsh-0.5.1/nsh-http/final-0.5.1/echo-server.out 2>&1 & echo $! > /Users/hmziq/fo/nsh-starter/docs/evidence/project/nsh-0.5.1/nsh-http/final-0.5.1/echo.pid); for i in $(seq 1 30); do [ -f .runtime.json ] && cat .runtime.json && exit 0; sleep 1; done; cat /Users/hmziq/fo/nsh-starter/docs/evidence/project/nsh-0.5.1/nsh-http/final-0.5.1/echo-server.out; exit 1
+# 2026-11-17 06:52:01 nsh=nsh 0.5.1 (224d9a7)
+port 8123
+{"port":8123,"pid":54169}
+# exit 0 (1s)

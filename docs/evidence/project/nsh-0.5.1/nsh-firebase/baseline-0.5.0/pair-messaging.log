@@ -1,0 +1,18 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/messaging-app.tsx tests/messaging.test.tsx
+# 2026-11-17 01:30:21 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled src/messaging/app.tsx (12221 B in 3.6 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/messaging.test.tsx › messaging › the native tier routes every call, and the wire names and args match the contract (11ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/messaging.test.tsx › messaging › a failed token request surfaces the host error with its message (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/messaging.test.tsx › messaging › press, message and token events reach the listeners (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/messaging.test.tsx › messaging › an empty topic is refused before the host is reached (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/messaging.test.tsx › messaging › the pure tier fails every call with the error naming what is missing (2ms)
+✓ 5 tests: 5 passed, 0 failed (22ms)
+# exit 0 (0s)

@@ -1,0 +1,10 @@
+$ cd /Users/hmziq/fo/nsh-auth/tools/broker
+$ bun test
+# 2026-11-17 05:45:29 nsh=nsh 0.5.1 (224d9a7)
+bun test v1.4.4 (38afee6c8)
+
+ 7 pass
+ 0 fail
+ 31 expect() calls
+Ran 7 tests across 1 file. [337.00ms]
+# exit 0 (1s)

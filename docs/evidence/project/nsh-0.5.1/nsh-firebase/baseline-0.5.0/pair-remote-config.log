@@ -1,0 +1,30 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/remote-config-app.tsx tests/remote-config.test.tsx
+# 2026-11-17 01:30:22 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/remote-config-app.tsx (24591 B in 5.1 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › the pure tier sets, reads and types the defaults (9ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › unset keys read empty, false, zero and null like the SDKs (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › without a transport the fetch rejects with the oauth code and nothing is pretended (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › a fetched template activates over the defaults (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › a refusing backend records failure and rejects (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › a corrupt template rejects with the template code (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › defaults that are not a flat map are refused with the stable code (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › the native tier routes through the firebase.remote-config.* handlers (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › a malformed native answer is a clear host error (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › a host handler that throws surfaces clearly (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/remote-config.test.tsx › remote-config › an explicit transport forces the pure path even on a native tier (1ms)
+✓ 11 tests: 11 passed, 0 failed (31ms)
+# exit 0 (0s)

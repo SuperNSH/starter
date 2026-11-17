@@ -1,0 +1,28 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/perf-app.tsx tests/perf.test.tsx
+# 2026-11-17 01:30:22 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled tests/perf-app.tsx (24847 B in 4.6 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › instrumentFetch records every field of a fetched event (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › a delayed response times on the manual clock (112ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › a failed exchange records an error event with no status (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › the ring evicts the oldest past the capacity (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › aggregates compute count, errorRate, p50 and p95 per host and path (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › the view model sorts slowest first and filters (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › a trace records its metric, attribute and clock duration (1ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › an HTTP metric builds from a monitor event and flushes as one ndjson line (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › a native capture that refuses falls back to the transport (2ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/perf.test.tsx › perf/monitor › with firebase.perf.* handlers played, the trace calls and the metric post cross (1ms)
+✓ 10 tests: 10 passed, 0 failed (143ms)
+# exit 0 (0s)

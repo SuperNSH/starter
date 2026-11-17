@@ -1,0 +1,10 @@
+$ cd /Users/hmziq/fo/nsh-auth/tools
+$ bun test
+# 2026-11-17 06:57:59 nsh=nsh 0.5.1 (224d9a7)
+bun test v1.4.4 (38afee6c8)
+
+ 147 pass
+ 0 fail
+ 674 expect() calls
+Ran 147 tests across 13 files. [7.28s]
+# exit 0 (7s)

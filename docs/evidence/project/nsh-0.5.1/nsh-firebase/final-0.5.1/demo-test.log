@@ -1,0 +1,94 @@
+$ cd /Users/hmziq/fo/nsh-firebase/examples/demo
+$ nsh test tests/demo.test.tsx
+# 2026-11-17 04:27:50 nsh=nsh 0.5.1 (224d9a7)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled App.tsx (237238 B in 60.2 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+error uncaught exception: Error: not a function
+          at withFocus (../../../nsh-form/packages/nsh-form/src/createForm.ts:195:21)
+          at createForm (../../../nsh-form/packages/nsh-form/src/createForm.ts:218:5)
+          at AuthScreen (src/screens/auth.tsx:38:16)
+          at component (native)
+          at screen (App.tsx:26:14)
+          at get children (App.tsx:50:21)
+          at <anonymous> (native)
+          at <anonymous> (native)
+          at <anonymous> (native)
+          at NavPage (native)
+✗ tests/demo.test.tsx › demo › the home rows open every product page (82ms)
+    the app threw: Error: not a function
+        at withFocus (../../../nsh-form/packages/nsh-form/src/createForm.ts:195:21)
+        at createForm (../../../nsh-form/packages/nsh-form/src/createForm.ts:218:5)
+        at AuthScreen (src/screens/auth.tsx:38:16)
+        at component (native)
+        at screen (App.tsx:26:14)
+        at get children (App.tsx:50:21)
+        at <anonymous> (native)
+        at <anonymous> (native)
+        at <anonymous> (native)
+        at NavPage (native)
+    on screen: "Back", "Authentication"
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+error uncaught exception: Error: not a function
+          at withFocus (../../../nsh-form/packages/nsh-form/src/createForm.ts:195:21)
+          at createForm (../../../nsh-form/packages/nsh-form/src/createForm.ts:218:5)
+          at AuthScreen (src/screens/auth.tsx:38:16)
+          at component (native)
+          at screen (App.tsx:26:14)
+          at get children (App.tsx:50:21)
+          at <anonymous> (native)
+          at <anonymous> (native)
+          at <anonymous> (native)
+          at NavPage (native)
+✗ tests/demo.test.tsx › demo › the auth form validates, then signs in through the stubbed emulator (8ms)
+    the app threw: Error: not a function
+        at withFocus (../../../nsh-form/packages/nsh-form/src/createForm.ts:195:21)
+        at createForm (../../../nsh-form/packages/nsh-form/src/createForm.ts:218:5)
+        at AuthScreen (src/screens/auth.tsx:38:16)
+        at component (native)
+        at screen (App.tsx:26:14)
+        at get children (App.tsx:50:21)
+        at <anonymous> (native)
+        at <anonymous> (native)
+        at <anonymous> (native)
+        at NavPage (native)
+    on screen: "Back", "Authentication"
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+error uncaught exception: Error: not a function
+          at withFocus (../../../nsh-form/packages/nsh-form/src/createForm.ts:195:21)
+          at createForm (../../../nsh-form/packages/nsh-form/src/createForm.ts:218:5)
+          at AuthScreen (src/screens/auth.tsx:38:16)
+          at component (native)
+          at screen (App.tsx:26:14)
+          at get children (App.tsx:50:21)
+          at <anonymous> (native)
+          at <anonymous> (native)
+          at <anonymous> (native)
+          at NavPage (native)
+✗ tests/demo.test.tsx › demo › a server auth error lands on its field (16ms)
+    the app threw: Error: not a function
+        at withFocus (../../../nsh-form/packages/nsh-form/src/createForm.ts:195:21)
+        at createForm (../../../nsh-form/packages/nsh-form/src/createForm.ts:218:5)
+        at AuthScreen (src/screens/auth.tsx:38:16)
+        at component (native)
+        at screen (App.tsx:26:14)
+        at get children (App.tsx:50:21)
+        at <anonymous> (native)
+        at <anonymous> (native)
+        at <anonymous> (native)
+        at NavPage (native)
+    on screen: "Back", "Authentication"
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/demo.test.tsx › demo › the database screen shows the live value and pushes (20ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/demo.test.tsx › demo › the upload shows its progress, then download and delete run (186ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/demo.test.tsx › demo › messaging says plainly that the pure tier has no token (34ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/demo.test.tsx › demo › messaging reaches a native host when one answers (80ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/demo.test.tsx › demo › analytics queues three events and the flush sends the batch (110ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/demo.test.tsx › demo › the monitor renders the measured calls from the stubbed collector (229ms)
+error 9 tests: 6 passed, 3 failed (801ms)
+# exit 1 (1s)

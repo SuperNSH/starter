@@ -1,0 +1,25 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ bash scripts/gate-tsx.sh tests/installations-app.tsx tests/installations.test.tsx
+# 2026-11-17 04:27:47 nsh=nsh 0.5.1 (224d9a7)
+✓ built App.tsx into .nsh/out (16.4 KB js, 39.8 KB bytecode, 15ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled src/installations/app.tsx (16425 B in 41.9 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › the pure tier registers an FID, persists the record, and serves the cached token until it is due (407ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › a force refresh on an unregistered installation registers first, then mints (79ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › a restore of the record the Rust tier wrote answers without any request (100ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › the demo- project's refusal maps to a clear request-failed and persists nothing (29ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › a server failure and a transport failure map distinctly (65ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › the native tier routes through the firebase.installations.* handlers (99ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › a native host failure keeps the host error with its message (71ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/installations.test.tsx › installations › a native reply without the field is a host error (61ms)
+✓ 8 tests: 8 passed, 0 failed (937ms)
+# exit 0 (1s)

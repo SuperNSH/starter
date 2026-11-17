@@ -1,0 +1,4 @@
+$ cd /Users/hmziq/fo/.worktrees/nsh-query-tanstack
+$ cargo fmt --all -- --check
+# 2026-11-17 06:49:59 nsh=nsh 0.5.1 (224d9a7)
+# exit 0 (0s)

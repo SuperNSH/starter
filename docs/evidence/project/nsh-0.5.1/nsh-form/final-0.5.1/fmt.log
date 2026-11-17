@@ -1,0 +1,4 @@
+$ cd /Users/hmziq/fo/nsh-form
+$ cargo fmt --all -- --check
+# 2026-11-17 03:42:25 nsh=nsh 0.5.1 (224d9a7)
+# exit 0 (1s)

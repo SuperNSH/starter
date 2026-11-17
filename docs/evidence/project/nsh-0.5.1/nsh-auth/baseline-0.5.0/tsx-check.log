@@ -1,0 +1,4 @@
+$ cd /Users/hmziq/fo/nsh-auth/packages/nsh-auth
+$ nsh check
+# 2026-11-17 05:44:36 nsh=nsh 0.5.1 (224d9a7)
+# exit 0 (0s)

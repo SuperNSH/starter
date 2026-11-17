@@ -1,0 +1,743 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ cargo test --no-fail-fast
+# 2026-11-17 03:11:45 nsh=nsh 0.5.1 (224d9a7)
+   Compiling ring v0.17.14
+   Compiling nsh-macros v0.5.1
+   Compiling nsh-updater v0.5.1
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+   Compiling quickjs-jit-sys v0.14.2
+   Compiling nsh-i18n v0.5.1
+   Compiling onig_sys v69.9.3
+   Compiling zstd-safe v8.2.0
+   Compiling onig v6.5.3
+   Compiling zstd v0.14.3
+   Compiling syntect v5.3.0
+   Compiling rustls-webpki v0.103.16
+   Compiling rustls v0.23.46
+   Compiling two-face v0.4.5
+   Compiling tungstenite v0.28.0
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v3.5.1
+   Compiling tokio-tungstenite v0.28.0
+   Compiling nsh-core v0.5.1
+   Compiling quickjs-jit-core v0.14.2
+   Compiling quickjs-jit-macro v0.14.2
+   Compiling quickjs-jit v0.14.2
+   Compiling quickjs-jit-stdlib v0.14.2
+   Compiling nsh-firebase-core v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-core)
+   Compiling nsh-package v0.5.1
+   Compiling nsh-js v0.5.1
+   Compiling nsh-base v0.5.1
+   Compiling nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+   Compiling nsh-firebase-storage v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-storage)
+   Compiling nsh-firebase-analytics v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-analytics)
+   Compiling nsh-firebase-auth v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-auth)
+   Compiling nsh-firebase-perf v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-perf)
+   Compiling nsh-firebase-messaging v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-messaging)
+   Compiling nsh-firebase-firestore v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-firestore)
+   Compiling nsh-firebase-installations v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-installations)
+   Compiling nsh-firebase-functions v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-functions)
+   Compiling nsh-firebase-crashlytics v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-crashlytics)
+   Compiling nsh-firebase-app-check v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-app-check)
+   Compiling nsh-firebase-remote-config v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-remote-config)
+   Compiling nsh-engine v0.5.1
+   Compiling nsh-testing v0.5.1
+   Compiling nsh-firebase-database v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-database)
+   Compiling nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+   Compiling demo-rs v0.1.0 (/Users/hmziq/fo/nsh-firebase/examples/demo-rs)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 40s
+     Running unittests src/lib.rs (target/debug/deps/demo_rs-6a546deeda4cb57e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/app.rs (target/debug/deps/app-f39ef89980090b8e)
+
+running 8 tests
+test the_index_lists_every_product_route ... ok
+test the_database_screen_shows_the_live_value_and_pushes ... ok
+test messaging_fails_clearly_in_the_pure_tier ... ok
+test the_analytics_queue_sends_a_batch_on_flush ... ok
+test the_auth_form_validates_then_signs_in_through_the_stub ... ok
+test a_server_auth_error_lands_on_its_field ... ok
+test every_product_route_pushes_and_pops ... ok
+test the_upload_shows_progress_then_download_and_delete_run ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.32s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_analytics-10a409faf8f16bbc)
+
+running 34 tests
+test client::tests::native_log_event_posts_the_handler_payload ... ok
+test client::tests::native_screen_view_nulls_the_absent_class ... ok
+test client::tests::native_validation_rejects_before_any_post ... ok
+test client::tests::retry_then_success_after_backoff ... ok
+test client::tests::the_client_id_survives_a_new_client_over_one_storage ... ok
+test clock::tests::the_manual_clock_moves_only_when_advanced ... ok
+test client::tests::screen_views_and_user_data_shape_the_batch ... ok
+test clock::tests::the_system_clock_is_past_2020 ... ok
+test model::tests::a_batch_over_the_mp_limit_is_refused ... ok
+test model::tests::a_queue_smaller_than_a_batch_is_refused ... ok
+test model::tests::consent_statuses_parse_from_the_api_strings ... ok
+test model::tests::defaults_are_deliberate ... ok
+test model::tests::collector_lines_are_one_json_object_per_event ... ok
+test client::tests::consent_denied_blocks_the_transport_and_regrant_resumes ... ok
+test client::tests::interval_flush_is_clock_driven ... ok
+test client::tests::native_set_consent_posts_all_four_keys_with_nulls ... ok
+test model::tests::mp_body_carries_identity_and_micros ... ok
+test queue::tests::a_failure_schedules_backoff_then_the_cap_drops_the_batch ... ok
+test queue::tests::a_full_batch_is_due_immediately_and_bounded ... ok
+test queue::tests::consent_optionals_merge_across_calls_like_the_ts_client ... ok
+test queue::tests::denied_consent_drops_new_events_and_blocks_sends ... ok
+test queue::tests::the_queue_bounded_drops_the_oldest_and_counts ... ok
+test queue::tests::user_properties_merge_and_shape_for_mp ... ok
+test storage::tests::fresh_storage_gives_a_fresh_well_shaped_id ... ok
+test storage::tests::two_clients_over_one_storage_share_the_client_id ... ok
+test transport::tests::mp_query_values_are_percent_encoded ... ok
+test transport::tests::the_collector_request_is_ndjson_to_collect ... ok
+test transport::tests::the_in_memory_transport_records_batches ... ok
+test transport::tests::the_mp_request_carries_the_secret_and_id_in_the_query ... ok
+test validate::tests::malformed_names_fail ... ok
+test validate::tests::ordinary_names_pass ... ok
+test validate::tests::params_must_be_an_object_of_primitives ... ok
+test validate::tests::reserved_names_and_prefixes_fail ... ok
+test validate::tests::user_property_keys_and_values_are_checked ... ok
+
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/analytics.rs (target/debug/deps/analytics-b55687332085ee03)
+
+running 9 tests
+test a_failed_send_retries_with_backoff_and_then_succeeds ... ok
+test an_overfull_queue_drops_the_oldest_and_counts_them ... ok
+test events_batch_at_max_batch_size_without_waiting_for_the_interval ... ok
+test denied_consent_blocks_the_transport_until_it_is_reganted ... ok
+test events_flush_on_the_interval_and_no_earlier ... ok
+test screen_views_carry_the_ga4_param_names ... ok
+test the_client_id_is_stable_across_clients_over_one_storage ... ok
+test validation_refuses_bad_names_params_and_properties ... ok
+test user_properties_and_the_user_id_merge_into_every_batch ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/analytics_ui.rs (target/debug/deps/analytics_ui-4f2d553afda89dfb)
+
+running 2 tests
+test the_collector_transport_posts_through_the_engine ... ok
+test a_refused_collector_send_fails_with_the_events_still_queued ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_app_check-3775967d7de5ba55)
+
+running 25 tests
+test clock::tests::the_manual_clock_moves_only_when_advanced ... ok
+test clock::tests::the_system_clock_is_past_2020 ... ok
+test error::tests::a_refusal_maps_to_invalid_debug_token_with_the_server_text ... ok
+test error::tests::a_body_without_an_error_message_still_maps ... ok
+test app_check::tests::a_native_reply_without_a_token_is_a_clear_error ... ok
+test store::tests::a_corrupt_or_wrong_version_record_is_absent ... ok
+test error::tests::the_refusal_range_covers_400_to_403_only ... ok
+test app_check::tests::the_native_tier_routes_the_contract_call ... ok
+test store::tests::the_memory_store_keeps_what_it_is_given ... ok
+test app_check::tests::the_exchange_request_matches_the_wire ... ok
+test app_check::tests::a_restored_record_answers_without_a_request ... ok
+test app_check::tests::failures_map_to_their_stable_codes ... ok
+test app_check::tests::the_pure_tier_refuses_attestation_and_an_empty_debug_token ... ok
+test app_check::tests::native_failures_map_their_host_codes ... ok
+test app_check::tests::a_corrupt_or_expired_record_exchanges_instead ... ok
+test app_check::tests::a_token_is_issued_cached_and_reissued_after_expiry ... ok
+test store::tests::the_store_key_names_the_app ... ok
+test store::tests::the_record_round_trips_through_camel_case_json ... ok
+test wire::tests::a_reply_without_a_token_or_a_usable_ttl_is_an_invalid_response ... ok
+test transport::tests::an_unscripted_recorder_fails_clearly ... ok
+test wire::tests::a_token_reply_parses_with_its_ttl ... ok
+test transport::tests::the_recorder_keeps_its_scripted_reply_until_replaced ... ok
+test wire::tests::the_exchange_request_is_json_with_the_debug_token_and_no_attest_header ... ok
+test wire::tests::the_exchange_url_sits_under_the_base_with_the_api_key ... ok
+test wire::tests::ttl_parsing_takes_only_the_duration_format ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/app_check.rs (target/debug/deps/app_check-943f6bb783a86263)
+
+running 5 tests
+test a_host_failure_surfaces_with_its_native_code ... ok
+test the_native_tier_routes_through_the_host_channel ... ok
+test the_pure_tier_refuses_without_debug_and_without_a_token ... ok
+test a_host_reply_without_a_token_is_a_clear_error ... ok
+test the_pure_exchange_runs_caches_and_refreshes_on_the_manual_clock ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_auth-2bb61706b3409cc3)
+
+running 17 tests
+test error::tests::only_the_lost_session_codes_sign_the_user_out ... ok
+test auth::tests::the_refresh_flag_blocks_a_second_refresh_and_drops_clear ... ok
+test auth::tests::empty_arguments_are_rejected_before_any_request ... ok
+test error::tests::a_server_failure_is_internal_and_an_unknown_4xx_keeps_its_message ... ok
+test error::tests::a_wire_code_with_a_human_part_keeps_only_the_code ... ok
+test error::tests::the_wire_codes_map_to_their_stable_codes ... ok
+test store::tests::the_store_key_names_the_app ... ok
+test store::tests::the_memory_store_keeps_what_it_is_given ... ok
+test wire::tests::a_session_reply_parses_string_expires_in ... ok
+test wire::tests::a_refresh_reply_may_carry_access_token_and_no_local_id ... ok
+test store::tests::a_corrupt_or_wrong_version_record_is_absent ... ok
+test wire::tests::identity_requests_sit_under_the_base_with_the_api_key ... ok
+test wire::tests::form_encode_leaves_reserved_bytes_no_room ... ok
+test wire::tests::refresh_requests_are_form_encoded ... ok
+test store::tests::the_record_round_trips_through_camel_case_json ... ok
+test wire::tests::a_reply_without_a_token_or_expiry_is_an_invalid_response ... ok
+test wire::tests::uid_reads_sub_from_a_base64url_payload ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/auth_ui.rs (target/debug/deps/auth_ui-2e56255f90462401)
+
+running 13 tests
+test a_second_auth_restores_the_record_another_tier_wrote ... ok
+test a_network_failure_keeps_the_core_network_code ... ok
+test empty_arguments_fail_before_any_request_is_made ... ok
+test a_credential_from_a_foreign_id_token_posts_verify_custom_token ... ok
+test a_custom_token_signs_in_with_the_uid_from_the_token_claims ... ok
+test anonymous_sign_in_sends_no_email_and_no_password ... ok
+test sign_up_refuses_an_already_registered_email ... ok
+test sign_up_signs_in_and_persists_the_record_on_the_manual_clock ... ok
+test a_deleted_user_signs_out_on_refresh ... ok
+test a_lost_session_maps_to_user_token_expired_and_signs_out ... ok
+test the_refresh_schedule_follows_the_moved_clock ... ok
+test sign_out_clears_the_signal_and_the_store ... ok
+test sign_in_maps_the_wire_errors_and_keeps_the_user_signed_out ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/emulator_auth.rs (target/debug/deps/emulator_auth-8a1ee0b1f4cd581b)
+
+running 1 test
+test signs_up_signs_in_refreshes_and_restores_on_the_emulator ... ignored, sandbox: needs emulator suite
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_core-41eb72086bc0af0d)
+
+running 26 tests
+test app::tests::a_missing_app_is_a_stable_no_app_error ... ok
+test app::tests::initializing_twice_returns_one_app ... ok
+test app::tests::invalid_options_never_reach_the_registry ... ok
+test bus::tests::emit_fans_out_in_subscription_order ... ok
+test bus::tests::an_emit_from_a_listener_still_fans_out_to_everyone ... ok
+test bus::tests::events_with_no_listener_change_nothing ... ok
+test bus::tests::off_stops_the_delivery_and_an_unknown_id_is_a_no_op ... ok
+test error::tests::a_refusal_message_maps_to_access_denied ... ok
+test error::tests::an_unknown_host_code_is_a_network_failure ... ok
+test error::tests::display_keeps_the_native_code_visible ... ok
+test error::tests::host_codes_map_to_their_stable_codes ... ok
+test host::tests::a_refused_post_maps_to_access_denied ... ok
+test host::tests::the_pure_tier_fails_every_native_call ... ok
+test host::tests::a_refused_channel_maps_to_access_denied ... ok
+test host::tests::the_pure_tier_fails_every_native_post ... ok
+test options::tests::a_host_override_changes_the_endpoint_but_keeps_the_scheme ... ok
+test options::tests::a_json_float_port_is_taken_as_its_integer ... ok
+test options::tests::an_empty_project_id_is_invalid ... ok
+test options::tests::an_explicit_null_host_is_absent ... ok
+test options::tests::demo_defaults_are_the_sandbox_suite ... ok
+test options::tests::from_config_falls_back_to_the_document_urls_without_an_emulator_block ... ok
+test options::tests::from_config_reads_the_demo_fixture ... ok
+test options::tests::without_emulator_switches_the_real_urls_stand ... ok
+test transport::tests::socket_requests_normalize_the_url ... ok
+test transport::tests::join_url_uses_one_slash_whatever_the_sides_have ... ok
+test options::tests::from_config_rejects_wrong_shapes ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/core_ui.rs (target/debug/deps/core_ui-d8d1f1def5aac450)
+
+running 4 tests
+test the_pure_transport_goes_through_the_stubbed_network ... ok
+test demo_options_resolve_the_emulator_suite_urls ... ok
+test the_bus_fans_out_and_off_stops_one_listener ... ok
+test the_tier_facade_surfaces_stable_codes_through_the_ui ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_crashlytics-8e70d8ff3a6a4a29)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/crashlytics.rs (target/debug/deps/crashlytics-6a49b53a408fe042)
+
+running 13 tests
+test the_wire_names_are_the_contract ... ok
+test the_pure_tier_still_validates_its_arguments_first ... ok
+test send_unsent_reports_carries_no_args ... ok
+test a_non_scalar_custom_value_is_refused_before_the_host ... ok
+test a_host_without_the_handlers_is_rewritten_to_unavailable ... ok
+test attributes_send_one_call_per_key_in_order ... ok
+test a_refused_host_name_stays_a_denial ... ok
+test log_and_the_user_id_carry_their_args ... ok
+test a_reply_without_the_flag_is_a_host_error_not_a_false ... ok
+test did_crash_reads_the_flag_both_ways ... ok
+test a_custom_key_passes_strings_numbers_and_booleans ... ok
+test the_pure_tier_rejects_every_call_naming_what_is_missing ... ok
+test record_error_carries_the_stack_only_when_given ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_database-e2dd0597fd4c4b61)
+
+running 40 tests
+test database::tests::a_null_body_reads_as_none_and_garbage_is_a_network_error ... ok
+test database::tests::a_wrong_request_is_invalid_argument_and_other_statuses_are_network ... ok
+test database::tests::an_update_of_a_non_object_is_invalid_argument ... ok
+test database::tests::permission_denied_maps_to_access_denied ... ok
+test database::tests::the_root_ref_has_an_empty_path ... ok
+test database::tests::child_joins_paths_without_double_slashes ... ok
+test database::tests::without_a_token_the_url_has_no_auth ... ok
+test database::tests::a_path_with_a_space_or_a_question_mark_is_percent_encoded ... ok
+test listener::tests::a_failure_status_revokes_instead_of_reconnecting ... ok
+test listener::tests::a_cancel_stops_the_listener_without_reconnecting ... ok
+test listener::tests::a_revoked_stream_is_cancelled_without_the_caller_going_off ... ok
+test database::tests::the_url_carries_the_path_params_and_auth_in_order ... ok
+test listener::tests::a_stream_revoked_inside_open_is_cancelled_once_stored ... ok
+test listener::tests::off_before_the_wait_stops_the_reconnect ... ok
+test listener::tests::a_listener_receives_then_reconnects_and_resyncs_from_the_put ... ok
+test listener::tests::a_patch_updates_the_reported_value_in_place ... ok
+test listener::tests::statuses_label_as_the_typescript_side_reports_them ... ok
+test listener::tests::the_wait_doubles_to_the_cap ... ok
+test push::tests::a_later_millisecond_sorts_after_the_last_id ... ok
+test push::tests::an_id_is_twenty_alphabet_characters ... ok
+test push::tests::ids_within_one_millisecond_keep_increasing ... ok
+test push::tests::the_timestamp_is_the_first_eight_characters ... ok
+test query::tests::a_filter_without_orderby_is_invalid_argument ... ok
+test query::tests::a_child_order_reads_a_nested_path_and_sorts_numbers ... ok
+test query::tests::a_query_encodes_in_a_fixed_order ... ok
+test query::tests::an_empty_query_encodes_nothing ... ok
+test query::tests::children_sort_null_false_true_number_string_object ... ok
+test query::tests::encoding_matches_javascripts_encodeuricomponent_on_shared_characters ... ok
+test query::tests::integer_keys_sort_first_and_numerically ... ok
+test query::tests::key_and_value_orders_encode_as_the_docs_write_them ... ok
+test query::tests::order_parses_the_dollar_forms ... ok
+test query::tests::two_limits_are_invalid_argument ... ok
+test sse::tests::a_chunk_of_two_frames_gives_two_events ... ok
+test sse::tests::a_deep_put_creates_its_parents_and_a_null_deletes ... ok
+test sse::tests::a_frame_split_across_chunks_parses_when_whole ... ok
+test sse::tests::a_multi_byte_character_split_across_chunks_survives ... ok
+test sse::tests::a_patch_merges_its_keys_at_its_path ... ok
+test sse::tests::a_put_at_root_replaces_the_whole_cache ... ok
+test sse::tests::an_unknown_event_and_an_unreadable_payload_are_ignored ... ok
+test sse::tests::keep_alive_cancel_and_auth_revoked_parse ... ok
+
+test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/database_ui.rs (target/debug/deps/database_ui-efa8e96e5c12d132)
+
+running 10 tests
+test a_queried_get_encodes_the_params_and_sorts_children ... ok
+test push_ids_stay_ordered_within_and_across_milliseconds ... ok
+test a_transaction_rebuilds_on_412_and_commits ... ok
+test update_merges_multi_paths_and_get_shows_the_merge ... ok
+test a_listener_on_an_invalid_query_fails_at_subscribe_time ... ok
+test set_then_get_round_trips_through_the_stubbed_rest ... ok
+test a_request_no_route_lists_is_a_network_failure ... ok
+test remove_deletes_and_the_read_back_is_none ... ok
+test the_listener_receives_then_reconnects_and_resyncs_from_the_put ... ok
+test off_during_the_backoff_stops_the_reconnecting ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/emulator_database.rs (target/debug/deps/emulator_database-012674831af01714)
+
+running 1 test
+test writes_reads_and_receives_a_live_update_against_the_emulator ... ignored, sandbox: needs emulator suite
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_firestore-bc7aa4eac673edfc)
+
+running 24 tests
+test firestore::tests::a_run_query_reply_without_docs_is_invalid_response ... ok
+test firestore::tests::both_tiers_refuse_bad_shapes_before_their_transport ... ok
+test firestore::tests::get_doc_routes_the_contract_args_and_reply ... ok
+test wire::tests::encode_segment_is_encode_uri_component ... ok
+test firestore::tests::set_doc_routes_path_data_and_merge_only_when_set ... ok
+test wire::tests::ids_come_from_the_names_last_segment ... ok
+test wire::tests::fields_encode_and_decode_in_order ... ok
+test firestore::tests::an_absent_native_document_reads_exists_false ... ok
+test firestore::tests::add_doc_routes_the_collection_and_unwraps_the_id ... ok
+test firestore::tests::a_reply_without_the_contract_shape_is_invalid_response ... ok
+test wire::tests::documents_map_to_docs_and_snapshots ... ok
+test wire::tests::containers_encode_recursively_and_keep_key_order ... ok
+test firestore::tests::delete_doc_routes_the_path_and_run_query_unwraps_docs ... ok
+test wire::tests::a_value_round_trips_through_the_wire ... ok
+test wire::tests::merge_leaf_paths_descend_maps_and_stop_at_arrays ... ok
+test wire::tests::a_top_level_query_posts_at_the_documents_root_and_omits_empty_keys ... ok
+test wire::tests::document_paths_validate_shape_and_encode ... ok
+test wire::tests::query_validation_refuses_empty_fields_bad_limits_and_scalar_in ... ok
+test wire::tests::server_errors_map_through_the_canonical_status ... ok
+test wire::tests::the_run_query_reply_yields_only_document_items ... ok
+test wire::tests::the_query_plan_carries_url_body_and_native_args ... ok
+test wire::tests::values_decode_from_the_wire_shapes ... ok
+test wire::tests::values_encode_to_the_wire_shapes ... ok
+test wire::tests::values_the_json_contract_cannot_carry_are_invalid_data ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/emulator_firestore.rs (target/debug/deps/emulator_firestore-c7a54349cd79af3d)
+
+running 1 test
+test writes_reads_queries_and_deletes_against_the_emulator ... ignored, sandbox: needs emulator suite
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/firestore_ui.rs (target/debug/deps/firestore_ui-afa13ff78a8c81e8)
+
+running 11 tests
+test a_denied_read_maps_to_permission_denied ... ok
+test a_non_json_body_is_invalid_response ... ok
+test the_auth_token_rides_as_a_bearer_header ... ok
+test add_doc_posts_to_the_collection_and_reads_the_id_from_the_name ... ok
+test a_value_type_the_json_contract_cannot_carry_is_invalid_data ... ok
+test a_missing_document_reads_as_exists_false_not_an_error ... ok
+test set_then_get_round_trip_through_the_typed_values ... ok
+test a_queried_run_query_encodes_the_structured_query ... ok
+test merge_writes_the_leaf_path_update_mask ... ok
+test a_bad_path_is_refused_before_any_request ... ok
+test delete_doc_deletes_and_a_404_is_done ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_functions-be03c9b6522a6f72)
+
+running 21 tests
+test functions::tests::connect_emulator_repoints_calls ... ok
+test functions::tests::the_default_config_is_the_sandbox_emulator ... ok
+test functions::tests::a_refused_handler_keeps_its_native_code ... ok
+test wire::tests::a_2xx_answer_without_data_or_result_is_internal ... ok
+test wire::tests::a_2xx_body_that_is_not_json_is_internal ... ok
+test functions::tests::native_routing_sends_the_name_and_data_and_unwraps_result ... ok
+test wire::tests::a_backend_error_maps_to_its_functions_code ... ok
+test wire::tests::a_host_override_keeps_the_project_region_name_path ... ok
+test wire::tests::a_status_without_a_body_still_names_the_code ... ok
+test wire::tests::a_result_answer_maps_and_the_legacy_data_key_wins_first ... ok
+test wire::tests::a_success_status_is_no_error_even_with_a_body ... ok
+test wire::tests::an_unknown_canonical_status_is_internal_not_the_status_default ... ok
+test wire::tests::details_reach_the_error_whenever_the_key_exists ... ok
+test functions::tests::native_routing_sends_null_data_when_absent ... ok
+test functions::tests::https_callable_keeps_its_name ... ok
+test functions::tests::a_handler_without_a_result_is_a_host_error ... ok
+test wire::tests::firebase_errors_round_trip_through_functions_errors ... ok
+test wire::tests::production_builds_the_region_prefixed_host ... ok
+test wire::tests::status_fallbacks_match_the_sdk_table ... ok
+test wire::tests::the_emulator_url_is_origin_project_region_name ... ok
+test wire::tests::the_body_always_carries_data_null_when_absent ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/emulator_functions.rs (target/debug/deps/emulator_functions-b89a86385bff994d)
+
+running 1 test
+test ping_add_and_missing_function_over_the_live_emulator ... ignored, sandbox: needs emulator suite
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/functions_ui.rs (target/debug/deps/functions_ui-3e22aeaff343ba25)
+
+running 7 tests
+test the_request_speaks_the_callable_wire_protocol ... ok
+test a_data_shaped_answer_maps ... ok
+test a_backend_error_maps_to_the_functions_code ... ok
+test a_missing_function_is_not_found ... ok
+test details_reach_the_error ... ok
+test an_unknown_backend_status_is_internal ... ok
+test absent_data_is_null_in_the_body ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_installations-8a17477f7914bb23)
+
+running 18 tests
+test fid::tests::the_validation_rejects_wrong_shapes ... ok
+test fid::tests::base64url_matches_the_reference_vectors ... ok
+test store::tests::the_store_key_names_the_app ... ok
+test wire::tests::a_reply_missing_a_field_is_an_invalid_response ... ok
+test store::tests::the_memory_store_keeps_what_it_is_given ... ok
+test wire::tests::a_token_reply_parses_the_seconds_suffixed_expiry ... ok
+test wire::tests::a_register_reply_without_a_fid_keeps_the_generated_one ... ok
+test fid::tests::a_generated_fid_is_22_base64url_characters_with_the_header ... ok
+test store::tests::the_record_round_trips_through_camel_case_json ... ok
+test wire::tests::an_empty_api_key_or_app_id_is_refused_before_any_request ... ok
+test error::tests::a_5xx_is_internal_whatever_the_body_says ... ok
+test error::tests::a_4xx_error_body_maps_to_request_failed_with_the_server_parts ... ok
+test wire::tests::a_register_reply_parses_into_the_record_and_token ... ok
+test error::tests::a_missing_status_or_code_still_names_the_request ... ok
+test fid::tests::two_generated_fids_differ ... ok
+test wire::tests::the_register_request_carries_the_body_and_headers_the_service_takes ... ok
+test wire::tests::the_token_request_authenticates_with_the_fis_scheme ... ok
+test store::tests::a_corrupt_or_wrong_version_record_is_absent ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/installations.rs (target/debug/deps/installations-0a164943f52d04a0)
+
+running 5 tests
+test get_id_routes_through_the_host_and_reads_the_id ... ok
+test a_failed_registration_keeps_the_host_error ... ok
+test a_reply_without_the_field_is_a_host_error ... ok
+test a_refused_host_name_stays_a_denial ... ok
+test get_token_routes_through_the_host_and_reads_the_token ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/installations_ui.rs (target/debug/deps/installations_ui-fcfbcb03df4ed596)
+
+running 6 tests
+test a_fresh_installations_restores_the_record_another_tier_wrote ... ok
+test a_server_failure_maps_to_internal_error ... ok
+test a_transport_failure_keeps_the_core_network_code ... ok
+test a_fake_project_refusal_maps_to_a_clear_request_failed_and_persists_nothing ... ok
+test a_force_refresh_skips_the_cache_but_a_plain_get_token_keeps_it ... ok
+test register_persists_and_get_token_serves_the_cached_token_until_it_is_due ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_messaging-1969ef8b85d1d7e6)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/messaging.rs (target/debug/deps/messaging-599d9be9b5c71bbb)
+
+running 17 tests
+test permission_names_are_the_notifications_modules ... ok
+test show_needs_a_title ... ok
+test a_token_reply_without_a_token_is_a_host_error ... ok
+test token_resolves_with_the_host_token ... ok
+test close_and_the_badge_pass_through ... ok
+test show_reads_a_bare_boolean_reply ... ok
+test topics_pass_through_and_an_empty_topic_is_refused ... ok
+test show_reads_the_silent_flag_and_a_false_reply ... ok
+test a_failed_token_request_keeps_the_host_error ... ok
+test show_needs_its_content ... ok
+test show_allows_an_empty_body ... ok
+test show_passes_the_content_and_reads_the_shown_reply ... ok
+test a_refused_host_name_stays_a_denial ... ok
+test permission_reads_the_host_answer ... ok
+test the_pure_tier_names_what_is_missing ... ok
+test an_unknown_permission_name_is_a_host_error ... ok
+test presses_messages_and_token_refreshes_reach_their_listeners ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_perf-c007800d49792efa)
+
+running 22 tests
+test aggregate::tests::an_empty_group_is_all_zeros ... ok
+test aggregate::tests::percentiles_are_nearest_rank_over_sorted_durations ... ok
+test aggregate::tests::aggregates_count_errors_and_percentiles_per_host ... ok
+test aggregate::tests::aggregates_by_path_group_the_same_events_by_their_path ... ok
+test event::tests::an_http_error_status_is_an_error_without_an_error_field ... ok
+test event::tests::ids_are_unique ... ok
+test event::tests::a_json_null_field_round_trips_as_none ... ok
+test event::tests::urls_split_into_host_and_path_like_the_typescript_side ... ok
+test event::tests::serde_uses_the_exact_prompt_json ... ok
+test monitor::tests::a_listener_sees_the_event_already_in_the_ring ... ok
+test monitor::tests::listeners_hear_in_subscription_order_and_off_stops_one ... ok
+test monitor::tests::the_ring_evicts_the_oldest_past_the_capacity ... ok
+test perf::tests::a_trace_record_names_its_metrics_and_attributes ... ok
+test perf::tests::an_empty_flush_sends_nothing ... ok
+test perf::tests::a_refused_probe_sends_records_to_the_transport ... ok
+test perf::tests::a_probe_without_a_string_id_falls_back_to_the_transport ... ok
+test view::tests::combined_filters_intersect ... ok
+test perf::tests::the_batching_transport_flushes_at_the_batch_size_and_on_flush ... ok
+test perf::tests::an_http_record_flattens_the_event_into_one_collector_line ... ok
+test view::tests::a_status_filter_matches_null_only_when_unset ... ok
+test view::tests::filters_narrow_by_host_path_min_duration_and_status ... ok
+test view::tests::rows_sort_by_duration_descending_with_stable_ties ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/perf_ui.rs (target/debug/deps/perf_ui-23f2114a0601e399)
+
+running 5 tests
+test the_ring_keeps_the_newest_three ... ok
+test an_unrouted_request_records_an_error_event ... ok
+test the_native_tier_takes_the_trace_and_the_http_metric_through_the_fixed_handlers ... ok
+test a_trace_stops_on_the_clock_and_flushes_one_ndjson_line_to_the_sink ... ok
+test an_instrumented_fetch_records_every_field_on_the_manual_clock ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_remote_config-00b5fe492b60a3b7)
+
+running 20 tests
+test codes::tests::the_codes_are_stable ... ok
+test clock::tests::the_system_clock_is_past_2020 ... ok
+test clock::tests::the_manual_clock_moves_only_when_advanced ... ok
+test client::tests::the_manual_clock_never_moves_by_itself ... ok
+test template::tests::a_non_object_version_is_invalid ... ok
+test template::tests::a_missing_optional_block_parses_empty ... ok
+test template::tests::an_empty_parameter_value_object_stays_unset ... ok
+test template::tests::a_grouped_parameter_with_no_block_is_ignored ... ok
+test client::tests::invalid_defaults_are_refused_before_any_state_changes ... ok
+test client::tests::defaults_round_trip_and_replace ... ok
+test client::tests::a_realistic_template_parses_and_resolves_defaults_only ... ok
+test client::tests::fetch_without_a_transport_rejects_with_the_oauth_code ... ok
+test client::tests::an_invalid_template_records_failure_and_names_itself ... ok
+test client::tests::typed_reads_coerce_the_web_sdk_way ... ok
+test client::tests::a_refusing_backend_records_failure_and_rejects ... ok
+test client::tests::native_calls_carry_the_contract_wire_shapes ... ok
+test client::tests::a_malformed_native_answer_is_a_host_error ... ok
+test client::tests::native_validation_refuses_before_any_call ... ok
+test client::tests::native_typed_reads_coerce_the_wire_value ... ok
+test client::tests::activation_overrides_defaults_and_conditions_stay_unevaluated ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/remote_config.rs (target/debug/deps/remote_config-9ebbded8e96c4142)
+
+running 12 tests
+test the_manual_clock_never_moves_by_itself ... ok
+test a_realistic_template_document_parses ... ok
+test set_defaults_replaces_and_refuses_invalid_maps ... ok
+test fetch_and_activate_without_a_transport_rejects_with_the_documented_code ... ok
+test defaults_set_get_and_get_defaults_round_trip ... ok
+test native_validation_refuses_before_any_wire_call ... ok
+test a_corrupt_template_body_rejects_with_the_template_code ... ok
+test typed_gets_coerce_over_the_defaults ... ok
+test a_refusing_backend_is_surfaced_and_recorded_as_a_failure ... ok
+test a_malformed_native_answer_is_a_clear_host_error ... ok
+test native_routing_asserts_the_contract_wire_calls ... ok
+test fetch_and_activate_applies_the_template_over_the_defaults ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/nsh_firebase_storage-1c6d56e25fde1a7b)
+
+running 10 tests
+test storage::tests::refs_resolve_against_the_emulator_objects_url ... ok
+test upload::tests::states_read_as_the_type_script_strings ... ok
+test upload::tests::status_errors_map_like_the_sdk ... ok
+test upload::tests::the_auth_header_is_firebase_prefixed_and_optional ... ok
+test wire::tests::encoding_matches_uri_encode_component ... ok
+test wire::tests::list_pages_parse ... ok
+test wire::tests::metadata_parses_and_builds_the_download_url ... ok
+test wire::tests::origin_takes_the_emulator_switch_then_the_real_host ... ok
+test wire::tests::settable_metadata_serializes_writable_fields_only ... ok
+test wire::tests::urls_follow_the_sdk_shapes ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/emulator_storage.rs (target/debug/deps/emulator_storage-38725b3af39aca64)
+
+running 1 test
+test upload_download_url_round_trip_and_delete ... ignored, sandbox: needs emulator suite
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/storage_ui.rs (target/debug/deps/storage_ui-b0090e6928e68ec3)
+
+running 10 tests
+test list_pages_through_the_tokens ... ok
+test download_carries_the_firebase_auth_header ... ok
+test download_url_builds_from_the_metadata_tokens ... ok
+test metadata_round_trips ... ok
+test a_denied_finalize_is_an_error_despite_its_final_header ... ok
+test upload_slices_and_reports_progress ... ok
+test delete_succeeds_and_errors_map_to_stable_codes ... ok
+test an_interrupted_upload_resumes_from_the_saved_session ... ok
+test cancel_ends_in_error_with_the_canceled_code ... ok
+test pause_holds_and_resume_continues ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.63s
+
+   Doc-tests demo_rs
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_analytics
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_app_check
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_auth
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_crashlytics
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_database
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_firestore
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_functions
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_installations
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_messaging
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_perf
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_remote_config
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsh_firebase_storage
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+# exit 0 (3654s)

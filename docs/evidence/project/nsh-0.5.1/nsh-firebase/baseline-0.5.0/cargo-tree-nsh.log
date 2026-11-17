@@ -1,0 +1,40 @@
+$ cd /Users/hmziq/fo/nsh-firebase
+$ cargo tree --locked -e normal,dev,build --prefix none --workspace | grep -E '^nsh-' | sort -u
+# 2026-11-17 00:54:18 nsh=nsh 0.5.1 (224d9a7)
+nsh-base v0.5.0
+nsh-base v0.5.0 (*)
+nsh-core v0.5.0
+nsh-core v0.5.0 (*)
+nsh-engine v0.5.0
+nsh-engine v0.5.0 (*)
+nsh-firebase-analytics v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-analytics)
+nsh-firebase-analytics v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-analytics) (*)
+nsh-firebase-app-check v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-app-check)
+nsh-firebase-auth v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-auth)
+nsh-firebase-auth v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-auth) (*)
+nsh-firebase-core v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-core)
+nsh-firebase-core v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-core) (*)
+nsh-firebase-crashlytics v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-crashlytics)
+nsh-firebase-database v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-database)
+nsh-firebase-database v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-database) (*)
+nsh-firebase-firestore v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-firestore)
+nsh-firebase-functions v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-functions)
+nsh-firebase-installations v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-installations)
+nsh-firebase-messaging v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-messaging)
+nsh-firebase-messaging v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-messaging) (*)
+nsh-firebase-perf v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-perf)
+nsh-firebase-perf v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-perf) (*)
+nsh-firebase-remote-config v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-remote-config)
+nsh-firebase-storage v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-storage)
+nsh-firebase-storage v0.1.0 (/Users/hmziq/fo/nsh-firebase/crates/nsh-firebase-storage) (*)
+nsh-form v0.1.0 (/Users/hmziq/fo/nsh-form/crates/nsh-form)
+nsh-i18n v0.5.0
+nsh-js v0.5.0
+nsh-macros v0.5.0 (proc-macro)
+nsh-package v0.5.0
+nsh-query v0.1.0 (/Users/hmziq/fo/nsh-query/crates/nsh-query)
+nsh-testing v0.5.0
+nsh-testing v0.5.0 (*)
+nsh-updater v0.5.0
+nsh-updater v0.5.0 (*)
+# exit 0 (1s)
