@@ -8,11 +8,13 @@ use nsh_core::prelude::*;
 use nsh_engine::{Clock, EngineConfig, Root};
 use nsh_testing::Headless;
 
-use nsh_starter::features::data::{data_page, query_devtools_page};
+use nsh_query::query_client;
+use nsh_starter::features::data::{data_page, feed_key, query_devtools_page};
 
 /// The test's surface: the data page on top and the devtools beneath, so a
 /// switch flip reaches a live feed without unmounting it. `Remount feed`
-/// rebuilds the data page, which is how a first load is made to fail.
+/// drops the feed's cache entry and rebuilds the data page, which is how a
+/// first load is made to fail: a remount alone is served the cached pages.
 #[component]
 pub fn DataTestApp() -> impl IntoElement {
     let live = signal(0_u64);
@@ -22,7 +24,10 @@ pub fn DataTestApp() -> impl IntoElement {
         .child(
             view().flex_row().p_2().gap_2().child(
                 button()
-                    .on_press(move |_: &()| live.update(|n| *n += 1))
+                    .on_press(move |_: &()| {
+                        query_client().remove(feed_key());
+                        live.update(|n| *n += 1);
+                    })
                     .h(px(32.0))
                     .px_3()
                     .items_center()

@@ -1,0 +1,3 @@
+$ ~/.nsh/bin/nsh check
+✓ checked nsh-starter (2m 20s)
+✓ built the Rust crate nsh-starter (1m 46s)

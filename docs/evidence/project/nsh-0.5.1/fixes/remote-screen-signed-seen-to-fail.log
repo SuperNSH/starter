@@ -1,0 +1,27 @@
+warning: linker stderr: ld: __eh_frame section too large (max 16MB) to encode dwarf unwind offsets in compact unwind table, performance of exception handling might be affected
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `nsh-starter` (bin "nsh-starter") generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.29s
+     Running tests/remote_screen.rs (target/debug/deps/remote_screen-011f85be21c4c80d)
+
+running 1 test
+test the_signed_package_verifies_runs_and_then_refuses_after_revocation ... FAILED
+
+failures:
+
+---- the_signed_package_verifies_runs_and_then_refuses_after_revocation stdout ----
+
+thread 'the_signed_package_verifies_runs_and_then_refuses_after_revocation' (4640314) panicked at tests/remote_screen.rs:151:44:
+called `Result::unwrap()` on an `Err` value: "`text:Register a screen` showing never happened in 5000 ms; on screen: [\"Dashboard\", \"Couldn't load the dashboard: TypeError: Network request failed: this host has no network stack\", \"Retry\", \"Refresh\", \"Register\", \"Screen name\", \"Register\", \"Host\", \"No host on this platform\", \"Ping host\"]"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    the_signed_package_verifies_runs_and_then_refuses_after_revocation
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 1 filtered out; finished in 5.17s
+
+error: test failed, to rerun pass `--test remote_screen`
+exit 101

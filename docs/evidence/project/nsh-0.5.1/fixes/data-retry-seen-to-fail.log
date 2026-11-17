@@ -1,0 +1,28 @@
+   Compiling nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+warning: linker stderr: ld: __eh_frame section too large (max 16MB) to encode dwarf unwind offsets in compact unwind table, performance of exception handling might be affected
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: `nsh-starter` (bin "nsh-starter") generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 11.21s
+     Running tests/data.rs (target/debug/deps/data-e0f57512c91f07f1)
+
+running 1 test
+test retry_recovers_a_failed_feed ... FAILED
+
+failures:
+
+---- retry_recovers_a_failed_feed stdout ----
+
+thread 'retry_recovers_a_failed_feed' (4619926) panicked at tests/data.rs:217:57:
+called `Result::unwrap()` on an `Err` value: "`label:Post 1, Shipping a Rust shell` showing never happened in 5000 ms; on screen: [\"Remount feed\", \"Couldn't load the feed\", \"The request failed\", \"Retry\", \"The fake API's knobs and the query cache: keys, states and timings.\", \"Fake API\", \"Latency\", \"How long every response waits\", \"0 ms\", \"100 ms\", \"400 ms\", \"Failures\", \"Which requests the fake API rejects\", \"Never\", \"Every 2nd\", \"All\", \"Offline\", \"Requests fail at once while it is on\", \"4 requests, 3 failed, 0 in flight\", \"Query cache\", \"feed\", \"error\", \"The request failed\", \"0s ago\"]"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    retry_recovers_a_failed_feed
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 5.04s
+
+error: test failed, to rerun pass `--test data`
+exit 101

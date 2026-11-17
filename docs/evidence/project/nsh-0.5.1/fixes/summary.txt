@@ -1,0 +1,14 @@
+# Gate re-run after the fixes, 2026-11-17 07:05. Each line: gate -> exit code; logs beside this file.
+fmt -> exit 0 (1s)
+clippy -> exit 0 (2s)
+remote-screen-check -> exit 0 (0s)
+remote-screen-build -> exit 0 (0s)
+remote-screen-test -> exit 0 (0s)
+remote-screen-build-warnings: 0 warning lines
+nsh-check-root -> exit 0 (12s)
+nsh-build-root -> exit 0 (0s)
+nsh-build-root-warnings: 0 warning lines
+nsh-test-app -> exit 0 (9s)
+test -> exit 0 (28s)
+nsh-test-pages -> exit 0 (3s)
+(remote-screen check/build/test and root check re-run after a whitespace-only re-indent of packages/remote-screen/App.tsx: all exit 0)

@@ -1,0 +1,3 @@
+$ /Users/hmziq/.nsh/bin/nsh build
+✓ built the Rust crate nsh-starter (294ms)
+✓ built the Rust app nsh.json into .nsh/out (no bundle: its runners mount the root, 9 assets)

@@ -1,0 +1,23 @@
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled App.tsx (289063 B in 18.3 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › the dashboard loads its metrics over the stubbed API (30ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › refresh reloads the dashboard (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a failed load shows an error and Retry recovers (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › an empty name stays unregistered and shows the rule error (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✗ App.test.tsx › a name the server already has lands on the field (5.0s)
+    `text:That name is already registered` showing never happened in 5000 ms; on screen: ["Dashboard", "Sessions today", "1,284", "Lobby board", "live", "Refresh", "Register a screen", "Screen name", "Register", "Host", "No host on this platform", "Ping host"]
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › registering a screen invalidates the dashboard (6ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › pinging the host answers through the host channel (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a host without a handler for the name rejects the ping (3ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › no host at all is a different failure (3ms)
+error 9 tests: 8 passed, 1 failed (5.1s)
+exit 1

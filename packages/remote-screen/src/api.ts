@@ -10,12 +10,8 @@ export async function getJson<T>(url: string, signal: AbortSignal): Promise<T> {
 }
 
 /** Registers a screen; a name the server already has comes back as a conflict. */
-export async function registerScreen(name: string, signal: AbortSignal): Promise<{ id: string }> {
-  const response = await fetch(`${API}/screens`, {
-    method: "POST",
-    body: JSON.stringify({ name }),
-    signal,
-  });
+export async function registerScreen(name: string): Promise<{ id: string }> {
+  const response = await fetch(`${API}/screens`, { method: "POST", body: JSON.stringify({ name }) });
   if (response.status === 409) throw new ScreenTaken();
   if (!response.ok) throw new Error(`status ${response.status}`);
   return (await response.json()) as { id: string };

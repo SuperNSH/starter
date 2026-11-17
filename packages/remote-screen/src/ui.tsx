@@ -1,8 +1,8 @@
 // The package's styled layer: one wrapper per `nsh/base` component in use,
 // drawn with the theme's tokens so a host's theme overrides reach it.
-import { type JSX, Text, View } from "nsh";
+import { type Accessor, type JSX, Text, View } from "nsh";
 import { Button as BaseButton, Input } from "nsh/base";
-import type { Field } from "nsh-form";
+import { type AnyFieldApi, inputProps } from "nsh-form";
 
 const variants = {
   primary: "bg-primary active:bg-primary/90",
@@ -36,19 +36,19 @@ export function Button(props: {
 }
 
 /** A labelled input: the field's value, edits, blur and its error, once left or submitted. */
-export function TextField(props: { label: string; placeholder: string; field: Field<string> }) {
+export function TextField(props: { label: string; placeholder: string; field: Accessor<AnyFieldApi> }) {
   return (
     <View class="gap-1">
       <Text class="text-sm text-muted-foreground">{props.label}</Text>
       <Input
-        testID={props.field.path}
+        testID={props.field().name}
         placeholder={props.placeholder}
         autoCapitalize="none"
         autoCorrect={false}
         class="min-h-9 rounded-(--radius) border border-input px-3 py-2 text-base placeholder:text-muted-foreground focus:outline-2 focus:outline-ring"
-        {...props.field.inputProps()}
+        {...inputProps(props.field)}
       />
-      <If when={props.field.error()}>
+      <If when={props.field().state.meta.errors[0] as string | undefined}>
         {(message) => <Text class="text-sm text-destructive">{message()}</Text>}
       </If>
     </View>
