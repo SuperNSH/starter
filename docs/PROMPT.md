@@ -57,7 +57,7 @@ All of these hold, each with evidence in `docs/STATUS.md`:
 
 ## Environment, as measured on this Mac
 
-- `nsh` 0.5.1 (224d9a7), installed by the release's `install.sh` into `~/.nsh`, linked at `~/.local/bin/nsh`, which comes before Homebrew on this Mac's `PATH`. Homebrew's `nsh` 0.4.0 (e626a8d) stays installed at `/opt/homebrew/bin/nsh`; do not uninstall or upgrade it. Platform runtimes are components (`nsh component list`); `android`, `ios` and `web` are installed. The release archives no longer bundle the embedding SDKs (`nsh-embed-ios.zip`, `nsh-embed-android.zip` are separate release assets); the 0.4.0 frameworks under `$(brew --prefix nsh)/libexec/embed/` are 0.4.0's.
+- `nsh` 0.6.0 (5541637), installed by the release's `install.sh` into `~/.nsh`, linked at `~/.local/bin/nsh`, which comes before Homebrew on this Mac's `PATH`. Homebrew's `nsh` 0.4.0 (e626a8d) stays installed at `/opt/homebrew/bin/nsh`; do not uninstall or upgrade it. Platform runtimes are components (`nsh component list`); `android`, `ios` and `web` are installed. The release archives no longer bundle the embedding SDKs (`nsh-embed-ios.zip`, `nsh-embed-android.zip` are separate release assets); the 0.4.0 frameworks under `$(brew --prefix nsh)/libexec/embed/` are 0.4.0's.
 - Rust stable with `aarch64-apple-ios`, `aarch64-apple-ios-sim`, `aarch64-linux-android`, `armv7-linux-androideabi`, `x86_64-linux-android` and `wasm32-unknown-unknown` installed.
 - Xcode with an iOS 27 simulator runtime. Android SDK at `$ANDROID_HOME`, NDK 29, one AVD named `indopak-audit`.
 - `/usr/bin/java` is a stub with no runtime behind it. Use Android Studio's JDK: `export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"`.

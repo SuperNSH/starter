@@ -1,6 +1,6 @@
 # Architecture
 
-nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.5.1 application boilerplate. One Rust crate at the repo root is the UI and most features; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. All async state runs on `nsh-query`, all forms on `nsh-form`, both as path dependencies from `../nsh-query` and `../nsh-form`. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
+nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.6.0 application boilerplate. One Rust crate at the repo root is the UI and most features; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. All async state runs on `nsh-query`, all forms on `nsh-form`, both as path dependencies from `../nsh-query` and `../nsh-form`. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
 
 ## Mode and entry points
 

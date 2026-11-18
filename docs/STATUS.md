@@ -148,6 +148,18 @@ is unverified. Every area updates its own section as it lands work.
 - Verified: `nsh test --target macos|ios|android .audit/capture2.test.tsx` (a throwaway capture script kept out of git) passed on each target. Its 52 screenshots per target are in `docs/evidence/shell/ui-pass/{macos,ios,android}/`, and the key ones were looked at after the fixes. `cargo fmt --check`, `cargo clippy --all-targets -D warnings`, `cargo test` (all suites), `nsh check`, `nsh test App.test.tsx` and `nsh test smoke/pages.test.tsx` all pass. Test updates: `tests/shell.rs` (the lifecycle test now runs at desktop width, where the status bar lives; the back-order test uses the "Sign up" marker) and `App.test.tsx` (the root check uses Home's own text). Each failed before its update.
 - Not verified: the web target; widths between phone and desktop (tablet); `vision/*.test.tsx` was not re-run, and its saved screenshots predate this pass.
 
+## 0.6.0 update (2026-11-18)
+
+NSH 0.6.0 (5541637, released 2026-11-18). Release notes: `docs/evidence/project/nsh-0.6.0/release-notes-v0.6.0.md`; gate logs: `docs/evidence/project/nsh-0.6.0/final/` (below, `E/`).
+
+- Changed: `Cargo.toml` pins 0.5.1 → 0.6.0, `cargo update -p` for the NSH crates only; every NSH crate resolves to 0.6.0, one version each (`cargo tree -i nsh-core`). `nsh.json` adds `"application": true` (0.6.0 breaking change #1499: the shell's `main_window()`, `set_application_menu` and `close()` need it once `capabilities` is declared). `src/foundation/capabilities.rs` lists 0.6.0's sixteen keys from `KNOWN` in `nsh-core/src/access.rs`. CI `NSH_VERSION`, README, `CONTRIBUTING.md`, `docs/architecture.md`, `docs/coverage.md` say 0.6.0. The CLI is 0.6.0 in `~/.nsh` (release `install.sh`), components `android`, `ios`, `web` re-added.
+- The other breaking changes in the release notes were grepped for across `src/`, `tests/`, `packages/`, `smoke/`, `trace/`: no use of `clip_utf16`, `AlertDialogOptions`, `MenuEvent`, `Transition::`, `ModalConfig`/`ModalProp`, `RichEditorEvent`, WebView downloads, `selectOnModifierPress`, `readText` or the home directory.
+- Gates on 0.6.0 (`E/summary.txt`): fmt 0, clippy 0, `cargo test --no-fail-fast` 127 passed / 0 failed (same as 0.5.1 after the fixes), `nsh test App.test.tsx` 2/2, `nsh test smoke/pages.test.tsx` 1/1, `packages/remote-screen` `nsh check` 0, `nsh build` 0 with no warning, `nsh test` 9/9. Re-run after the registry change: fmt 0, clippy 0, 127/0.
+- Trace (`E/trace.log`): `open()` 527 mount items, like tap 1, scroll 42 per step while the pool fills, `nodes` flat at 479: identical to 0.5.1.
+- The headless runner's build prints one linker warning (`ld: __eh_frame section too large (max 16MB)`) for the debug test binary; it is the linker on binary size, not app code, and the root `nsh build` is not affected.
+- Siblings: every `~/fo/nsh-*` repo pinned to 0.5.1 moved to 0.6.0, uncommitted, each with its own fmt/clippy/test and TSX gates; none needed a source change. `nsh-query` (Rust all-features 122, TSX 74/74) and `nsh-form` (Rust 113, TSX 100/100) all 0.
+- Not run: device and packaging runs (`--target ios|android|macos|web`), the vision pass, cross-target `cargo check`. 0.6.0 changes mobile `Switch`/`DateTimePicker` to system controls and iOS sheets to detents, which no screen here has been looked at with yet.
+
 ## 0.5.1 update (2026-11-17)
 
 NSH 0.5.1 (224d9a7, released 2026-11-14) is bug-fix only, with no API changes. Evidence: `docs/evidence/project/nsh-0.5.1/` (below, `E/`); `E/gate-summary.txt` lists every gate's exit code, baseline and after.

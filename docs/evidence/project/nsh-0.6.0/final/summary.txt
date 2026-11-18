@@ -1,0 +1,7 @@
+cargo-test exit=0
+app-test exit=0
+smoke exit=0
+trace exit=0
+rs-check exit=0
+rs-build exit=0
+rs-test exit=0

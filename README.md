@@ -23,12 +23,12 @@ The app is Rust-first: one crate at the repo root is the UI, and `packages/remot
 ## Prerequisites
 
 - **macOS** with Xcode and an iOS simulator runtime (tested against iOS 27).
-- **nsh 0.5.1**, from the release's installer (Homebrew's tap still ships 0.4.0):
+- **nsh 0.6.0**, from the release's installer (Homebrew's tap still ships 0.4.0):
   ```sh
-  curl -fsSL https://github.com/longbridge/nsh/releases/download/v0.5.1/install.sh | NSH_VERSION=v0.5.1 sh
+  curl -fsSL https://github.com/longbridge/nsh/releases/download/v0.6.0/install.sh | NSH_VERSION=v0.6.0 sh
   nsh component add android ios web
   ```
-  It installs into `~/.nsh` and links `~/.local/bin/nsh`. `nsh --version` must print 0.5.1: if an older Homebrew `nsh` comes first on your `PATH`, put `~/.local/bin` before it. The Rust crates pin 0.5.1, and the CLI must match them. Platform runtimes are components since 0.5.0; a command that needs one also adds it on demand.
+  It installs into `~/.nsh` and links `~/.local/bin/nsh`. `nsh --version` must print 0.6.0: if an older Homebrew `nsh` comes first on your `PATH`, put `~/.local/bin` before it. The Rust crates pin 0.6.0, and the CLI must match them. Platform runtimes are components since 0.5.0; a command that needs one also adds it on demand.
 - **Rust stable** with the cross-compile targets:
   ```sh
   rustup target add aarch64-apple-ios aarch64-apple-ios-sim \

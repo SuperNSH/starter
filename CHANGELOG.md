@@ -5,6 +5,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed: NSH 0.6.0
+
+- All NSH crates move from 0.5.1 to 0.6.0; the sibling `nsh-query` and `nsh-form` crates move with them. CI's `NSH_VERSION` and the README install line say v0.6.0. Install the 0.6.0 CLI with the release's `install.sh` (README).
+- `nsh.json` declares `"application": true`. 0.6.0 gates the main window, app menu, tray, global shortcuts and quit/restart behind it for apps that declare `capabilities`, and the shell uses `main_window()` and `set_application_menu`.
+- The diagnostics page's capability registry lists 0.6.0's sixteen keys (`share`, `application` and `homeDir` are new).
+- No other app code changed: none of 0.6.0's other breaking changes (`clip_utf16`, `AlertDialogOptions::show`, `ContextMenu` listeners, `Transition`, `ModalConfig`, `RichEditorEvent`, WebView downloads) touch this repo.
+
 ### Changed: NSH 0.5.1
 
 - All NSH crates move from 0.5.0 to 0.5.1, a bug-fix release with no API changes; the sibling `nsh-query` and `nsh-form` crates move with them. Only `Cargo.toml` pins, `Cargo.lock` (NSH crates only), CI's `NSH_VERSION` and the install line in the README changed; no app code changed. Install the 0.5.1 CLI with the release's `install.sh` (README).
