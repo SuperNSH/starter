@@ -15,5 +15,5 @@ fetch() {
   echo "$name at $(git -C "$dir" rev-parse --short HEAD)"
 }
 
-fetch nsh-query SuperNSH/query 470e10a49f0e4e44148a6a08e229a55867eb9688
-fetch nsh-form SuperNSH/form 682844a08bb5de5b5a0d196d8ea383cce7dcba2b
+fetch nsh-query SuperNSH/query 4f5ee0edcc1e153a381739e4063c952b7ceffdb7
+fetch nsh-form SuperNSH/form 06053c367618e0feeec8cd3765636d552f987b9d
