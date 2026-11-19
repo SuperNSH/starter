@@ -118,7 +118,20 @@ pub fn styled_date_picker(
         .value(move || DatePickerValue::Controlled(value()))
         .on_change(on_change)
         .offset(px(4.0))
-        .popup_style(|s| popup_surface(s).w(px(320.0)).p_2())
+        .popup_style(|s| {
+            // The base shows a sheet on touch screens, docked at the bottom
+            // and as wide as its style says: full width there, not 320.
+            if is_desktop() {
+                popup_surface(s).w(px(320.0)).p_2()
+            } else {
+                popup_surface(s)
+                    .w_full()
+                    .rounded_t(move || theme().radius)
+                    .rounded_b(px(0.0))
+                    .p_2()
+                    .pb_6()
+            }
+        })
         .backdrop_style(popup_backdrop)
         .content_style(|s| s.flex_col().gap_2())
         .header_style(|s| {

@@ -1,10 +1,12 @@
 //! Deep links: [`route_from_deep_link`](crate::shell::routes) parses the
-//! path. NSH 0.4.0 had no deep-link delivery of its own; 0.5.0's URL
-//! schemes are not adopted yet (a follow-up), so the entries are a
-//! desktop launch argument (set before the engine runs) and this seam for
-//! an embedding host, which calls [`open`] from its `host.on` wiring.
+//! path. The system hands the app links of the scheme `nsh.json` claims
+//! (`schemes`) through `next_url_scheme_open`, the one that launched it
+//! included ([`listen`]); a desktop launch argument and an embedding host's
+//! `host.on` wiring call [`open`] too.
 
 use std::sync::OnceLock;
+
+use nsh_core::prelude::*;
 
 use crate::shell::{
     nav,
@@ -30,6 +32,20 @@ pub fn open(url: &str) -> Option<Route> {
     let route = route_from_deep_link(&path.split('/').collect::<Vec<_>>())?;
     nav::open(route);
     Some(route)
+}
+
+/// Opens each link the system hands the app, for as long as the shell lives.
+pub fn listen() {
+    let owner = Owner::current();
+    spawn(async move {
+        loop {
+            let url = next_url_scheme_open().await;
+            if !owner.is_live() {
+                break;
+            }
+            open(&url);
+        }
+    });
 }
 
 /// Opens the launch argument, once, from the shell's install.

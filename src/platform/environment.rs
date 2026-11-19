@@ -1,6 +1,6 @@
-//! The device and environment page: what NSH 0.5.0 exposes about the surface,
+//! The device and environment page: what NSH 0.6.0 exposes about the surface,
 //! read in bindings so a change (a rotation, an appearance switch, a test's
-//! pin) re-renders it. The device model is not exposed on 0.5.0 and says so.
+//! pin) re-renders it. The device model is not exposed on 0.6.0 (no model field on `Environment`, nsh-core platform.rs) and says so.
 //! Word values translate with the locale; the system's numbers and tags stay
 //! as reported.
 
@@ -10,7 +10,7 @@ use nsh_core::{
     prelude::*,
 };
 
-// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+// nsh_core 0.6.0's prelude has a `t!` of its own; the app translates with rust-i18n.
 use rust_i18n::t;
 
 use super::{
@@ -131,7 +131,7 @@ fn safe_area_card() -> AnyElement {
     )
 }
 
-/// What the platform keeps to itself on 0.5.0, so a missing read reads as a
+/// What the platform keeps to itself on 0.6.0, so a missing read reads as a
 /// boundary, not a bug.
 fn limits_card() -> AnyElement {
     panel(

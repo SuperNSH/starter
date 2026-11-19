@@ -1,6 +1,6 @@
 //! The remote screen: the signed TSX package's delivery status, the
 //! revocation control that models a host applying a revocation list, and the
-//! embedding contract an NSH 0.5.0 host must provide to run the package. Owned
+//! embedding contract an NSH 0.6.0 host must provide to run the package. Owned
 //! by the remote-screen area. The shell mounts `remote_screen_page`; keep
 //! its name and signature.
 
@@ -189,32 +189,27 @@ fn embedding_section() -> impl IntoElement {
                 .text_color(move || theme().foreground),
         )
         .child(
-            text("NSH 0.5.0 runs a verified package in a surface of its own: nsh_engine::load_package verifies against a TrustStore and hands its bundle to App::Js. This app's one surface runs its Rust root, and no element embeds a second engine in a page tree, so displaying the package needs an embedding host: NshAppView.loadPackage on iOS, NshView.runPackage on Android, or AppView::load(App::Js(bundle)) in a Rust host. tests/remote_screen.rs loads the published package into a headless engine of this crate, so the mixed path stays proven.")
-                .flex_1()
+            text("NSH 0.6.0 runs a verified package in a surface of its own: nsh_engine::load_package verifies against a TrustStore and hands its bundle to App::Js. This app's one surface runs its Rust root, and no element embeds a second engine in a page tree, so displaying the package needs an embedding host: NshAppView.loadPackage on iOS, NshView.runPackage on Android, or AppView::load(App::Js(bundle)) in a Rust host. tests/remote_screen.rs loads the published package into a headless engine of this crate, so the mixed path stays proven.")
                 .text_sm()
                 .text_color(move || theme().foreground),
         )
         .child(
             text("The package calls its host over host.call: it declares capabilities.host \"remote.*\" and calls remote.ping. A failed call rejects with:")
-                .flex_1()
                 .text_sm()
                 .text_color(move || theme().foreground),
         )
         .child(
             text("ERR_ACCESS_DENIED - the name is not in capabilities.host.")
-                .flex_1()
                 .text_sm()
                 .text_color(move || theme().muted_foreground),
         )
         .child(
             text("ERR_NSH_HOST_ERROR - the host has no handler for the name, or its handler threw.")
-                .flex_1()
                 .text_sm()
                 .text_color(move || theme().muted_foreground),
         )
         .child(
             text("ERR_FEATURE_UNAVAILABLE_ON_PLATFORM - nothing embeds the app.")
-                .flex_1()
                 .text_sm()
                 .text_color(move || theme().muted_foreground),
         )

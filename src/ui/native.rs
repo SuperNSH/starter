@@ -4,8 +4,8 @@
 //!
 //! Elsewhere (Android, Linux, Windows, the web, the headless tests) each
 //! function falls back to the app's own styled control, so a screen can use
-//! them everywhere. NSH 0.5.0 registers an app crate's native components on
-//! iOS, macOS, Linux and Windows only; Android's come from the Java host.
+//! them everywhere. NSH 0.6.0 registers an app crate's native components on
+//! iOS, macOS, Linux and Windows only (`nsh-macros/src/native_components.rs`); Android's come from the Java host.
 //!
 //! The native views keep the system font and metrics on purpose: they are
 //! the system's controls. The app's accent tints them, so they sit with the

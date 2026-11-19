@@ -6,8 +6,9 @@
 //! window hidden.
 //!
 //! It was built on NSH 0.4.0, which had no second window, status item or
-//! global shortcut, so AppKit draws all of it. 0.5.0 has all three
-//! (`Window`, `Tray`, global shortcuts); moving onto them is a follow-up. A hidden native component in the shell
+//! global shortcut, so AppKit draws all of it. 0.5.0 added all three
+//! (`Window`, `Tray`, global shortcuts) and 0.6.0 keeps them. The panel stays on AppKit: its glass material and non-activating panel
+//! have no `Window` option, and it already serves the menu bar item and Option+Space. A hidden native component in the shell
 //! ([`bridge`]) hands the panel its commands and carries the chosen one back
 //! into the app, where [`palette::dispatch`] runs it. Elsewhere the in-app
 //! palette stays.

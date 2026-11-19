@@ -26,7 +26,7 @@ const PAGES: Array<{ id: string; marker: string }> = [
   { id: "page-diagnostics", marker: "text:Start sample task" },
 ];
 
-// What the web target does not have on 0.5.0, asserted so a silently
+// What the web target does not have on 0.6.0, asserted so a silently
 // missing feature cannot pass unnoticed. Page navigation itself works
 // everywhere (every page is Rust).
 const SKIPPED_ON_WEB = [
@@ -35,14 +35,16 @@ const SKIPPED_ON_WEB = [
   "the system tab bar (nsh/mobile renders nothing off iOS and Android)",
 ];
 
-async function openShell(): Promise<App> {
+// `phone` is true where the size was rejected: Home scrolls there, and on
+// the desktop layout it does not.
+async function openShell(): Promise<{ app: App; phone: boolean }> {
   try {
     // Desktop width exercises the sidebar; iOS and Android reject the
     // size (the app fills their screen) and fall through to the default.
-    return await open("..", { clock: {}, width: 1280, height: 800 });
+    return { app: await open("..", { clock: {}, width: 1280, height: 800 }), phone: false };
   } catch (error) {
     if ((error as { code?: string }).code !== "ERR_NSH_TEST_UNSUPPORTED") throw error;
-    return await open("..", { clock: {} });
+    return { app: await open("..", { clock: {} }), phone: true };
   }
 }
 
@@ -50,8 +52,9 @@ async function openShell(): Promise<App> {
 // macOS host ignores it), so Home is its first row.
 // Home keeps its scroll offset, and a row under the title bar or the tab
 // bar takes the press for that bar. Where the content fits (desktop) there
-// is nothing to scroll.
-async function homeRowInView(app: App, index: number): Promise<void> {
+// is nothing to scroll, and trying costs a 25 s timeout a page on the web.
+async function homeRowInView(app: App, phone: boolean, index: number): Promise<void> {
+  if (!phone) return;
   // PAGES skips the "Native vs app" tile; the data item row is the last.
   index = PAGES[index].id === "page-data-item" ? 14 : index + 1;
   try {
@@ -77,11 +80,11 @@ test("every page opens from the shell", async () => {
     "the system tab bar (nsh/mobile renders nothing off iOS and Android)",
   ]);
 
-  const app = await openShell();
+  const { app, phone } = await openShell();
   await app.waitFor("text:Home");
 
   for (const page of PAGES) {
-    await homeRowInView(app, PAGES.indexOf(page));
+    await homeRowInView(app, phone, PAGES.indexOf(page));
     await app.press(`id:${page.id}`);
     await app.waitFor(page.marker);
     // A push animates for a moment on the devices; settle before the capture.

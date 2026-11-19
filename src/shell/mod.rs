@@ -57,6 +57,7 @@ pub fn install() {
     back::install();
     lifecycle::watch();
     deep_link::open_pending();
+    deep_link::listen();
 }
 
 /// The shell: the layout of the window's width, with the palette, the

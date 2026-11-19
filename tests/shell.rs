@@ -24,6 +24,8 @@
 //! | `App.test.tsx` "the root mounts" | `status.rs`: the app's name replaced by `"shell"` |
 //! | `App.test.tsx` "the shell navigates from Home" | `back.rs`: the `AskExit` arm opened no prompt |
 //! | `smoke/pages.test.tsx` | `nav.rs`: `open` never applied the pages |
+//! | `a_link_of_the_claimed_scheme_opens_its_page` | `deep_link.rs`: `listen` never called `open` |
+//! | `the_sidebar_key_parses_on_every_os` | `chrome.rs`: the non-Apple arm returned `"ctrl+mod+s"` |
 
 use std::time::{Duration, SystemTime};
 
@@ -295,4 +297,37 @@ fn the_lifecycle_watch_follows_the_environment() {
     })
     .unwrap();
     app.wait_for("text:Active").unwrap();
+}
+
+#[test]
+fn the_sidebar_key_parses_on_every_os() {
+    use nsh_core::{keymap::Keystroke, platform::Os};
+    use nsh_starter::shell::chrome::sidebar_key_on;
+    // `mod` twice is invalid off the Apple platforms and failed the
+    // shell's mount on Android.
+    for os in [
+        Os::Ios,
+        Os::Android,
+        Os::MacOs,
+        Os::Windows,
+        Os::Linux,
+        Os::Web,
+    ] {
+        let key = sidebar_key_on(os);
+        assert!(
+            Keystroke::parse(key, os).is_ok(),
+            "{key:?} is not a valid keystroke on {os:?}"
+        );
+    }
+}
+
+#[test]
+fn a_link_of_the_claimed_scheme_opens_its_page() {
+    // nsh's generated code claims `nsh.json`'s schemes; a test says so itself.
+    let mut config = EngineConfig::new(Root::of::<nsh_starter::App>().url_schemes(["nsh-starter"]));
+    config.clock = Clock::manual(SystemTime::UNIX_EPOCH);
+    let mut app = Headless::start(config).unwrap();
+    app.wait_for("text:Home").unwrap();
+    app.open_with_url("nsh-starter://forms").unwrap();
+    app.wait_for("id:signup-email").unwrap();
 }

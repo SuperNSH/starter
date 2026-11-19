@@ -13,6 +13,8 @@
     "clipboard": true,
     "picker": true,
     "speech": true,
+    "notifications": true,
     "webview": { "hosts": [] }
-  }
+  },
+  "schemes": ["nsh-starter"]
 }

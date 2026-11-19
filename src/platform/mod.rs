@@ -12,6 +12,7 @@ mod files;
 mod i18n_card;
 mod keyboard;
 pub mod locale;
+mod notifications_card;
 mod picker_card;
 mod safe_area;
 mod speech_card;
@@ -71,6 +72,7 @@ pub fn platform_page() -> impl IntoElement {
             clipboard_card::card(),
             picker_card::card(),
             speech_card::card(),
+            notifications_card::card(),
             files::card(),
             i18n_card::card(),
             desktop_card::card(),

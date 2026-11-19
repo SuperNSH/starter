@@ -5,6 +5,9 @@
 //! platform's part. Tests run in parallel in one process and the locale is
 //! process-global, so every test but the locale one presses by test id and
 //! asserts on locale-independent values only.
+//!
+//! Break seen: `notifications_report_a_platform_that_shows_none` failed once with
+//! `notifications_card.rs` mapping `Unavailable` to the granted line.
 
 use std::time::{Duration, SystemTime};
 
@@ -135,6 +138,17 @@ fn speech_transcribes_a_heard_phrase() -> Result<(), String> {
     app.hear("hello nsh")?;
     app.end_speech(None)?;
     app.wait_for("hello nsh")?;
+    Ok(())
+}
+
+#[test]
+fn notifications_report_a_platform_that_shows_none() -> Result<(), String> {
+    let mut app = start::<PlatformRoot>();
+    // A headless run has no notification center: the permission reads
+    // unavailable and the system takes none.
+    app.wait_for("text:Notifications unavailable here")?;
+    app.press("id:platform-notifications-send")?;
+    app.wait_for("text:The system took none")?;
     Ok(())
 }
 

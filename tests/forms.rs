@@ -9,6 +9,7 @@
 //!
 //! | test | break seen |
 //! |---|---|
+//! | `the_birth_date_sheet_spans_the_phone_screen` | `pickers.rs`: `popup_style` kept the 320 pt popup width on touch screens |
 //! | `errors_wait_for_submit_then_follow_edits` | `SubmitRule::check` registered its rule with `.rule` (change and blur too) |
 //! | `a_failed_submit_scrolls_the_first_failing_row_into_view` | `fields.rs`: `RowReveal::provide` registered no `on_submit_invalid` hook |
 //! | `the_username_check_debounces_and_drops_stale_answers` | `USERNAME_DEBOUNCE` raised to 10 s |
@@ -138,6 +139,38 @@ fn the_birth_date_calendar_names_its_weekdays() {
     // read as names, as in the gallery's pickers.
     app.wait_for("text:Mo").unwrap();
     app.wait_for("text:Sa").unwrap();
+}
+
+#[test]
+fn the_birth_date_sheet_spans_the_phone_screen() {
+    let mut app = start(seeded_storage(&[]));
+    app.press("text:Pick a date").unwrap();
+    app.wait_for("text:Mo").unwrap();
+    // On a phone the calendar is a sheet at the bottom: some view around
+    // the weekday cell is as wide as the screen yet shorter than it.
+    let nodes = app.screen().layout_nodes();
+    let screen = nodes
+        .iter()
+        .map(|n| n.bounds.size.width.0)
+        .fold(0.0, f32::max);
+    let tallest = nodes
+        .iter()
+        .map(|n| n.bounds.size.height.0)
+        .fold(0.0, f32::max);
+    let mut at = nodes
+        .iter()
+        .find(|n| n.text.as_ref().is_some_and(|t| t.text.text == "Mo"))
+        .map(|n| n.parent);
+    let mut spans = false;
+    while let Some(id) = at {
+        let Some(node) = nodes.iter().find(|n| n.id == id) else {
+            break;
+        };
+        spans |=
+            node.bounds.size.width.0 >= screen - 1.0 && node.bounds.size.height.0 < tallest - 1.0;
+        at = Some(node.parent);
+    }
+    assert!(spans, "the sheet is narrower than the screen ({screen})");
 }
 
 #[test]

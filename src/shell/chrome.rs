@@ -12,7 +12,7 @@ use nsh_core::{
     prelude::*,
 };
 
-// nsh_core 0.5.0's prelude has a `t!` of its own; the app translates with rust-i18n.
+// nsh_core's prelude has a `t!` of its own; the app translates with rust-i18n.
 use rust_i18n::t;
 
 use crate::shell::{nav, palette, routes::Route, undo};
@@ -25,7 +25,12 @@ pub const TITLE_BAR: f32 = 52.0;
 /// The sidebar toggle's keystroke. `mod` is Ctrl off the Apple platforms,
 /// where `ctrl+mod+s` is invalid ("mod" twice) and fails the shell's mount.
 pub fn sidebar_key() -> &'static str {
-    match os() {
+    sidebar_key_on(os())
+}
+
+/// [`sidebar_key`] for a given OS, so every one can be checked.
+pub fn sidebar_key_on(os: nsh_core::platform::Os) -> &'static str {
+    match os {
         nsh_core::platform::Os::MacOs | nsh_core::platform::Os::Ios => "ctrl+mod+s",
         _ => "ctrl+alt+s",
     }
