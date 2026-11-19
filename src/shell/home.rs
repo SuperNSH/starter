@@ -21,6 +21,7 @@ use crate::{
 /// into as many columns as the width holds (one on a phone).
 pub fn content() -> AnyElement {
     scroll()
+        .test_id("home-scroll")
         .flex_1()
         .content_inset(crate::ui::layout::page_insets(0.0))
         .child(

@@ -1,0 +1,8 @@
+✓ built the Rust crate nsh-starter (1m 7s)
+warn app id `com.example.nshstarter` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+✓ built the macOS runner of nsh-starter (8m 14s)
+✓ packaged .nsh/out/macos/nsh-starter.app (357ms)
+
+real	9m24.781s
+user	11m16.224s
+sys	0m38.054s

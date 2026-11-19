@@ -1,0 +1,7 @@
+alive
+nsh-starter {
+    Height = 800;
+    Width = 1200;
+    X = 156;
+    Y = 95;
+}

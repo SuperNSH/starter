@@ -1,0 +1,53 @@
+✓ built the Rust crate nsh-starter (27.1s)
+✓ built libnsh.so of nsh-starter for armeabi-v7a (47.4s)
+✓ built libnsh.so of nsh-starter for arm64-v8a (55.6s)
+✓ built libnsh.so of nsh-starter for x86_64 (46.8s)
+✓ built the Android development host (10.2s)
+✓ installed the Android development host on emulator-5590 (12.6s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+error Fake map
+✓ smoke/pages.test.tsx › every page opens from the shell (2m 28s)
+✓ 1 test: 1 passed, 0 failed (5m 22s)

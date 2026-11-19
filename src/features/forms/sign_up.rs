@@ -8,10 +8,10 @@ use std::time::Duration;
 
 use nsh_base::rich_editor::view::{RichEditor, RichEditorApi, RichEditorChange, rich_editor};
 use nsh_base::{
-    ColorChannel, ColorSpace, DatePickerValue, DateTime, PickedDate, SelectEntry, SelectItem,
-    SliderValue, TimeOfDay, checkbox, color_area, color_picker, color_slider, color_swatch,
-    combobox, date_picker, nav_page, nav_stack, number_input, otp_input, radio, radio_group,
-    select, slider, switch, theme, time_field,
+    ColorChannel, ColorSpace, DateTime, PickedDate, SelectEntry, SelectItem, SliderValue,
+    TimeOfDay, checkbox, color_area, color_picker, color_slider, color_swatch, combobox, nav_page,
+    nav_stack, number_input, otp_input, radio, radio_group, select, slider, switch, theme,
+    time_field,
 };
 use nsh_core::{
     element::{
@@ -32,6 +32,7 @@ use crate::features::forms::fields::{
 use crate::ui::button::{ButtonSize, ButtonVariant, button_with};
 use crate::ui::controls::progress_indeterminate;
 use crate::ui::dialog::confirm_destructive;
+use crate::ui::pickers::styled_date_picker;
 use crate::ui::popups::{popup_backdrop, popup_surface, popup_trigger_frame};
 use crate::ui::text;
 
@@ -565,19 +566,15 @@ fn phone_row(phone: Field<SignUp, String>) -> View {
 fn date_row(birth_date: Field<SignUp, DateTime>) -> View {
     field_row(
         "Birth date",
-        view().test_id("signup-birth-date").child(
-            date_picker()
-                .value(move || DatePickerValue::Controlled(birth_date.value()))
-                .on_change(move |picked: &PickedDate| birth_date.set(picked.value))
-                .accessibility_label("Birth date")
-                .offset(px(4.0))
-                .popup_style(popup_surface)
-                .backdrop_style(popup_backdrop)
-                .trigger(popup_trigger_frame(
-                    move || birth_text(birth_date.value()).to_string(),
-                    true,
-                )),
-        ),
+        view()
+            .test_id("signup-birth-date")
+            .child(styled_date_picker(
+                "Birth date",
+                false,
+                move || birth_date.value(),
+                move |picked: &PickedDate| birth_date.set(picked.value),
+                move || birth_text(birth_date.value()).to_string(),
+            )),
         move || birth_date.error(),
     )
 }
@@ -908,6 +905,7 @@ fn budget_row(budget: Field<SignUp, Option<f64>>) -> View {
                     s.h(px(44.0))
                         .px(px(12.0))
                         .text_size(px(15.0))
+                        .text_color(move || theme().foreground)
                         .border_1()
                         .border_color(move || theme().input)
                         .rounded(move || theme().radius)

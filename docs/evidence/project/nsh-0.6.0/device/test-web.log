@@ -1,0 +1,8 @@
+✓ built the Rust crate nsh-starter (10m 14s)
+✓ built the web runtime of nsh-starter (2m 3s)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✗ smoke/pages.test.tsx › every page opens from the shell (4m 12s)
+    the test did not end in 240 s
+    on screen: "Pages", "Home", "UI gallery", "Native vs app", "Forms", "Data", "Query devtools", "Lists", "Canvas", "Motion", "Overlays", "Platform", "Device", "Remote screen", "Diagnostics", "Home", "Everything the boilerplate demonstrates, one page each.", "Pages", "UI gallery", "›", "Every control of the app's own library, with its states.", "Native vs app", "›", "Each control as the app draws it and as the system does.", "Forms", "›", "A full sign-up and a settings form on nsh-form.", "Data", "›", "An infinite feed on nsh-query with optimistic likes.", "Query devtools", "›", "The query cache: keys, states and timings.", "Lists", "›", "Tables, a tree, a calendar, a chat and a carousel.", "Canvas", "›", "Drawing, charts, shaders, SVG, media and the web view.", "Motion", "›", "Springs, transitions, swipe rows and gestures.", "Overlays", "›", "Dialogs, sheets, menus, toasts and desktop panes.", "Platform", "›", "Safe areas, clipboard, picker, speech and locales.", "Device", "›", "The device, its screen and the environment.", "Remote screen", "›", "A signed TSX package, verified and revocable.", "Diagnostics", "›", "Config, capabilities, tasks, events and the log.", "Pushed", "Open data item 3", "›", "Open a deep link", "›", "nsh-starter", "Home", "Active"
+error 1 test: 0 passed, 1 failed (6m 17s)
+nsh test --target web smoke/pages.test.tsx  818.87s user 48.13s system 87% cpu 16:34.66 total

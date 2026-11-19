@@ -1,0 +1,9 @@
+✓ built the Rust crate nsh-starter (177ms)
+warn app id `com.example.nshstarter` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+✓ built the web runtime of nsh-starter (7m 44s)
+✓ packaged .nsh/out/web/nsh-starter, 14.1 MB (18.3s)
+  under a Content-Security-Policy it needs script-src 'self' 'wasm-unsafe-eval'; img-src 'self' blob: data:
+
+real	9m16.555s
+user	4m51.906s
+sys	0m23.707s

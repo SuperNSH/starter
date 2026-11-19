@@ -53,7 +53,7 @@ pub fn install() {
     on_key("mod+k", move |_| palette::toggle());
     on_key("mod+z", move |_| undo::undo());
     on_key("mod+shift+z", move |_| undo::redo());
-    on_key("ctrl+mod+s", move |_| chrome::toggle_sidebar());
+    on_key(chrome::sidebar_key(), move |_| chrome::toggle_sidebar());
     back::install();
     lifecycle::watch();
     deep_link::open_pending();

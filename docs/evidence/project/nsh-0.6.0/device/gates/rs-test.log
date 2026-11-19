@@ -1,0 +1,22 @@
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ bundled App.tsx (289165 B in 24.9 ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › the dashboard loads its metrics over the stubbed API (40ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › refresh reloads the dashboard (5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a failed load shows an error and Retry recovers (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › an empty name stays unregistered and shows the rule error (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a name the server already has lands on the field (5ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › registering a screen invalidates the dashboard (8ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › pinging the host answers through the host channel (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › a host without a handler for the name rejects the ping (4ms)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ App.test.tsx › no host at all is a different failure (4ms)
+✓ 9 tests: 9 passed, 0 failed (92ms)
+exit 0

@@ -22,8 +22,17 @@ use crate::ui::desktop::set_title_bar;
 /// center in it, and the sidebar's top and each page's toolbar match it.
 pub const TITLE_BAR: f32 = 52.0;
 
-/// Whether the desktop sidebar shows; the toolbar toggle and `ctrl+mod+s`
-/// flip it.
+/// The sidebar toggle's keystroke. `mod` is Ctrl off the Apple platforms,
+/// where `ctrl+mod+s` is invalid ("mod" twice) and fails the shell's mount.
+pub fn sidebar_key() -> &'static str {
+    match os() {
+        nsh_core::platform::Os::MacOs | nsh_core::platform::Os::Ios => "ctrl+mod+s",
+        _ => "ctrl+alt+s",
+    }
+}
+
+/// Whether the desktop sidebar shows; the toolbar toggle and
+/// [`sidebar_key`] flip it.
 #[derive(Clone, Copy, PartialEq)]
 pub struct SidebarOpen(pub bool);
 
@@ -94,7 +103,7 @@ fn menus(is_dark: bool) -> Vec<MenuItem> {
         MenuItem::submenu(
             "View",
             [
-                MenuItem::new(format!("Toggle Sidebar  {}", key_label("ctrl+mod+s")))
+                MenuItem::new(format!("Toggle Sidebar  {}", key_label(sidebar_key())))
                     .on_select(toggle_sidebar),
             ],
         ),

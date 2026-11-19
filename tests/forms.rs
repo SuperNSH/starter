@@ -131,6 +131,16 @@ fn fill_valid(app: &mut Headless, code: &str) {
 }
 
 #[test]
+fn the_birth_date_calendar_names_its_weekdays() {
+    let mut app = start(seeded_storage(&[]));
+    app.press("text:Pick a date").unwrap();
+    // The calendar's weekday cells are numbers (0 is Sunday); they must
+    // read as names, as in the gallery's pickers.
+    app.wait_for("text:Mo").unwrap();
+    app.wait_for("text:Sa").unwrap();
+}
+
+#[test]
 fn errors_wait_for_submit_then_follow_edits() {
     let mut app = start(seeded_storage(&[]));
     app.type_text("id:signup-email", "not-an-email").unwrap();

@@ -1,0 +1,5 @@
+✓ built the Rust crate nsh-starter (256ms)
+✓ built the development host for the iOS simulator (34.8s, 1 warning: -v shows it)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ smoke/controls.test.tsx › forms switch and date picker, overlays sheet, light and dark (1m 0s)
+✓ 1 test: 1 passed, 0 failed (1m 36s)

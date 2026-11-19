@@ -1,0 +1,7 @@
+✓ built the Rust crate nsh-starter (9m 40s)
+warn app id `com.example.nshstarter` is a placeholder: give the app an id under a domain you own before releasing it, as apps with one id share their data
+✓ built libnsh.so of nsh-starter for armeabi-v7a (1m 10s)
+✓ built libnsh.so of nsh-starter for arm64-v8a (1m 26s)
+warn signing with the debug key: pass --keystore for store releases
+✓ packaged .nsh/out/android/nsh-starter.apk (arm64-v8a, armeabi-v7a) (723ms)
+nsh package --target android -o .nsh/out/android  1383.26s user 44.94s system 192% cpu 12:20.61 total
