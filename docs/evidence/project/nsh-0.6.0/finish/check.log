@@ -1,0 +1,5 @@
+cargo fmt --all -- --check
+cargo clippy --all-targets -- -D warnings
+    Checking nsh-starter v0.1.0 (/Users/hmziq/fo/nsh-starter)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.65s
+exit 0

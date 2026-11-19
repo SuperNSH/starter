@@ -5,6 +5,19 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Links of the `nsh-starter://` scheme open their page: `nsh.json` claims the scheme and the shell listens with `next_url_scheme_open`.
+- A Notifications card on the Platform page: permission state, ask, and a test notification (`notifications` capability).
+
+### Fixed
+
+- The sign-up birth date calendar spans the screen as a bottom sheet on phones; it hung at the lower left at a fixed 320 pt width.
+- The Remote screen's "Loading this package" paragraphs no longer draw over each other on the web.
+- The Device and Remote screen pages, and their strings, say 0.6.0.
+- The sidebar toggle key is tested for every OS.
+- The smoke test no longer scrolls Home at desktop width, which cost 25 s a page on the web: all 13 pages now run on the web target in 27 s.
+
 ### Changed: NSH 0.6.0
 
 - All NSH crates move from 0.5.1 to 0.6.0; the sibling `nsh-query` and `nsh-form` crates move with them. CI's `NSH_VERSION` and the README install line say v0.6.0. Install the 0.6.0 CLI with the release's `install.sh` (README).

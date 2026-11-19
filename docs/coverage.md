@@ -1,6 +1,6 @@
 # Coverage
 
-Every `nsh_core` and `nsh_base` element export on NSH 0.4.0 (e626a8d), and where this app uses it. The app now builds on 0.6.0 (5541637); the exports 0.5.0 added are listed apart, under "New in 0.5.0, not yet used". The list comes from the generated declarations in `.nsh/types/nsh/` (regenerate them with `nsh check` at the repo root if `.nsh/` is missing) cross-checked against the 0.4.0 crate sources. The "Used in" column is a grep over `src/` and `packages/remote-screen/`; rows marked *planned* name the page an area is building — the audit pass replaces those with real paths, and anything still unused gets a reason.
+Every `nsh_core` and `nsh_base` element export on NSH 0.4.0 (e626a8d), and where this app uses it. The app now builds on 0.6.0 (5541637); the exports 0.5.0 added are listed apart, under "New in 0.5.0, not yet used", and those 0.6.0 added under "New in 0.6.0, not yet used". The list comes from the generated declarations in `.nsh/types/nsh/` (regenerate them with `nsh check` at the repo root if `.nsh/` is missing) cross-checked against the 0.4.0 crate sources. The "Used in" column is a grep over `src/` and `packages/remote-screen/`; rows marked *planned* name the page an area is building — the audit pass replaces those with real paths, and anything still unused gets a reason.
 
 The Rust constructors are what screens call (`use nsh_core::prelude::*`; `nsh_base` exports the same components as lowercase factory functions — `button()`, `tree()`, `virtual_list()` — next to their PascalCase types); the TSX names are the `nsh` package's exports, which mirror the same crates. The tables use the export names from the generated declarations; both surfaces are listed because the app ships both (Rust root plus the TSX remote-screen package).
 
@@ -130,7 +130,7 @@ Nothing is excluded yet: the areas are still landing, so every not-yet-reference
 
 ## New in 0.5.0, not yet used
 
-The port to 0.5.0 adopted no new feature beyond what compiling required. These exports are new in 0.5.0 (a diff of the `pub use` lists in `crates/nsh-base/src/lib.rs` and `crates/nsh-core/src/lib.rs`, and of the `pub fn`/`struct`/`enum` names in `crates/nsh-core/src/element/`, between the v0.4.0 and v0.5.0 tags). They are follow-ups, not gaps in the port.
+The port to 0.5.0 adopted no new feature beyond what compiling required; since then the notifications card and URL-scheme deep links use the rows marked below. These exports are new in 0.5.0 (a diff of the `pub use` lists in `crates/nsh-base/src/lib.rs` and `crates/nsh-core/src/lib.rs`, and of the `pub fn`/`struct`/`enum` names in `crates/nsh-core/src/element/`, between the v0.4.0 and v0.5.0 tags). They are follow-ups, not gaps in the port.
 
 | Export | Crate | Note |
 |---|---|---|
@@ -139,11 +139,11 @@ The port to 0.5.0 adopted no new feature beyond what compiling required. These e
 | `MenuList`, `menu_list`, `MenuListElement`, `MenuListEntry`, `MenuListProps`, `SubmenuEvent` | nsh_base | |
 | `TextViewApi`, `TextViewSelectionEvent`, `TextSelectionFormat`, `TextSelectionOptions` | nsh_base | selection as plain text, Markdown, HTML |
 | `window()`/`Window`, `open_window`, `OpenChange`, window kinds; `WindowRef` beyond the main window (`current_window`, `on_close_press`, `on_mode_change`, `on_bounds_change`, `set_placement`, `request_attention`, ...) | nsh_core | multi-window; the port uses only `main_window()` |
-| `Tray`, `tray`, `set_tray`, `TrayClickEvent`, `register_global_shortcut`, `unregister_global_shortcut`, `unregister_all_global_shortcuts` | nsh_core | tray and global shortcuts |
-| `show_notification`, `close_notification`, `next_notification_press`, `notification_permission`, `request_notification_permission`, `set_badge`, `mod notifications` | nsh_core | the stub in `src/services` still stands in for these |
+| `Tray`, `tray`, `set_tray`, `TrayClickEvent`, `register_global_shortcut`, `unregister_global_shortcut`, `unregister_all_global_shortcuts` | nsh_core | tray and global shortcuts (not used: the macOS command bar's AppKit menu bar item and Option+Space cover them, see `docs/gpui-starter-parity.md`) |
+| `show_notification`, `close_notification`, `next_notification_press`, `notification_permission`, `request_notification_permission`, `set_badge`, `mod notifications` | nsh_core | `notification_permission`, `request_notification_permission`, `show_notification` and `Notification` are used in `src/platform/notifications_card.rs`; the rest (`close_notification`, `next_notification_press`, `set_badge`) are not: the card sends one test notification and does not react to presses |
 | `Sound`, `SoundSource`, `AudioPlayer`, `audio_player`, `audio_available`, `PlayerState`, `AudioFailure`, `mod audio` | nsh_core | |
 | `Haptic`, `HapticImpact`, `HapticNotification`, `haptic` | nsh_core | |
-| `url_scheme`, `url_schemes`, `next_url_scheme_open`, `app_url`, `set_app_url`, `next_app_url_change`, `mod url_scheme` | nsh_core | deep links through `nsh.json` |
+| `url_scheme`, `url_schemes`, `next_url_scheme_open`, `app_url`, `set_app_url`, `next_app_url_change`, `mod url_scheme` | nsh_core | `next_url_scheme_open` is used in `src/shell/deep_link.rs` (`nsh.json` `schemes`); the app-address functions are web-only history and are not used |
 | `on_app_quit`, `quit`, `restart`, `mod restart`, `mod single_instance`, `next_second_instance`, `next_open_files`, `mod file_type` | nsh_core | lifecycle, single instance, file associations |
 | `with_updater` | nsh_core | the updater |
 | `pick_files`, `data_dir`, `register_font`, `set_locale`, `translations`, `mod i18n`, `run_on_main_thread`, `mod main_thread` | nsh_core | |
@@ -151,3 +151,18 @@ The port to 0.5.0 adopted no new feature beyond what compiling required. These e
 | `MacOsBackdrop`, `MacOsBackdropBlending`, `MacOsBackdropMaterial`, `MacOsBackdropState`, `WebElement`, `WebLoad`, `evaluate`, `EvaluateOptions`, `Evaluation`, `web_view_available`, `web_evaluate_available`, `EditAction`, `open_edit_menu`, `close_edit_menu`, `insert_text` | nsh_core | |
 
 Removed in 0.5.0, and ported: `close_window`, `set_frame`, `set_title`, `set_title_bar`, `toggle_maximize` (now `WindowRef` methods and `WindowAttributes`). Also removed, never used here: `order_front`, `set_level`, `set_menu_bar_visibility`, `toggle_full_screen`.
+
+## New in 0.6.0, not yet used
+
+A diff of the `pub use` lists in `crates/nsh-base/src/lib.rs` and `crates/nsh-core/src/lib.rs`, and of the `pub fn`/`struct`/`enum` names in `crates/nsh-core/src/element/`, between the v0.5.0 and v0.6.0 sources, checked against a grep of `src/` and `packages/` (no hit for any row). The plan covers what 0.4.0 shipped, so these are additions beyond it, not gaps.
+
+| Export | Crate | Note |
+|---|---|---|
+| `MenuButton`, `menu_button`, `MenuButtonElement`/`Event`/`Item`/`Props` | nsh_base | a button that opens a menu |
+| `SplitView`, `split_view`, `SplitViewElement`/`Event`/`Props`, `ColumnVisibility` | nsh_base | master-detail columns |
+| `SheetDetent`, `AlertDialogAnswer`, `ContextMenuEvents`, `DataTableCellClass`, `DataTableColumnPress`, `TextViewTaskPressEvent` | nsh_base | detents, event types and DataTable hooks of existing components |
+| `share`, `share_available`, `mod share`, the `share` capability | nsh_core | the system share sheet |
+| `open_auth_session`, `close_auth_session`, `mod auth_session` | nsh_core | web sign-in sessions; the auth seam is a mock by design |
+| `launch_at_login`, `set_launch_at_login`, `on_quit_request`, `set_quit_request_options`, `cancel_quit_request` | nsh_core | desktop lifecycle |
+| `ClipboardItem`, `set_clipboard_item`, `with_clipboard_images` | nsh_core | rich clipboard content; the clipboard card is text and image only |
+| `HeaderItem`, `header_right_items`, `PinchEvent`, `KeyEvent`, `FpsMode`, `set_fps_mode`, `perf_stats`, `wake_count`, `log_file`, `mod list_diff` | nsh_core | header items, input events and monitors |
