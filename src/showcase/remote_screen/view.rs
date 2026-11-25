@@ -10,9 +10,7 @@ use nsh_core::prelude::*;
 pub fn remote_screen_page() -> impl IntoElement {
     let state = signal(read_delivery_state());
     let revoked = signal(false);
-    scroll()
-        .flex_1()
-        .content_inset(crate::ui::layout::page_insets(0.0))
+    crate::ui::layout::page_scroll(0.0)
         .bg(move || theme().background)
         .child(
             crate::ui::layout::page_body()

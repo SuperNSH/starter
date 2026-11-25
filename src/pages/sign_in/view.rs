@@ -33,24 +33,20 @@ pub fn sign_in_page() -> impl IntoElement {
             .is_empty()
             .then(|| locale::text("sign_in.password_required")())
     });
-    scroll()
-        .test_id("sign_in-scroll")
-        .flex_1()
-        .content_inset(layout::page_insets(0.0))
-        .child(
-            layout::page_body()
-                .child(text::page_intro(
-                    locale::text("sign_in.title"),
-                    locale::text("sign_in.summary"),
-                ))
-                .child(
-                    when(
-                        || session::user().is_some(),
-                        move || account_card(form).into_element(),
-                    )
-                    .otherwise(move || sign_in_form(form, email, password).into_element()),
-                ),
-        )
+    layout::page_scroll(0.0).test_id("sign_in-scroll").child(
+        layout::page_body()
+            .child(text::page_intro(
+                locale::text("sign_in.title"),
+                locale::text("sign_in.summary"),
+            ))
+            .child(
+                when(
+                    || session::user().is_some(),
+                    move || account_card(form).into_element(),
+                )
+                .otherwise(move || sign_in_form(form, email, password).into_element()),
+            ),
+    )
 }
 
 /// The signed-in user, and the way out.

@@ -24,9 +24,7 @@ pub fn gallery_page() -> impl IntoElement {
         .bg(move || theme().background)
         .text_color(move || theme().foreground)
         .child(
-            scroll()
-                .flex_1()
-                .content_inset(crate::ui::layout::page_insets(0.0))
+            crate::ui::layout::page_scroll(0.0)
                 .test_id("gallery-scroll")
                 .child(
                     layout::page_body()

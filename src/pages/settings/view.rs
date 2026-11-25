@@ -11,22 +11,18 @@ use crate::ui::{
 
 /// The settings page.
 pub fn settings_page() -> impl IntoElement {
-    scroll()
-        .test_id("settings-scroll")
-        .flex_1()
-        .content_inset(layout::page_insets(0.0))
-        .child(
-            layout::page_body()
-                .child(text::page_intro(
-                    locale::text("settings.title"),
-                    locale::text("settings.summary"),
-                ))
-                .child(account_card())
-                .child(name_card())
-                .child(language_card())
-                .child(appearance_card())
-                .child(telemetry_card()),
-        )
+    layout::page_scroll(0.0).test_id("settings-scroll").child(
+        layout::page_body()
+            .child(text::page_intro(
+                locale::text("settings.title"),
+                locale::text("settings.summary"),
+            ))
+            .child(account_card())
+            .child(name_card())
+            .child(language_card())
+            .child(appearance_card())
+            .child(telemetry_card()),
+    )
 }
 
 /// A titled card.

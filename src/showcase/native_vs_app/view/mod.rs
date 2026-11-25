@@ -44,35 +44,31 @@ pub fn native_vs_app_page() -> impl IntoElement {
         .bg(move || theme().background)
         .text_color(move || theme().foreground)
         .child(
-            scroll()
-                .flex_1()
-                .content_inset(layout::page_insets(0.0))
-                .test_id("native-scroll")
-                .child(
-                    layout::page_body()
-                        .max_w(px(860.0))
-                        .child(text::page_intro(
-                            "Native vs app",
-                            "The app's control on the left, the system's on the right, \
+            layout::page_scroll(0.0).test_id("native-scroll").child(
+                layout::page_body()
+                    .max_w(px(860.0))
+                    .child(text::page_intro(
+                        "Native vs app",
+                        "The app's control on the left, the system's on the right, \
                              sharing one value. Change either and both follow.",
-                        ))
-                        .child(text::muted(platform_note()))
-                        .child(glass_row())
-                        .child(buttons_row())
-                        .child(switch_row())
-                        .child(checkbox_row())
-                        .child(radio_row())
-                        .child(segmented_row())
-                        .child(tabs_row())
-                        .child(popup_row())
-                        .child(text_row())
-                        .child(slider_row())
-                        .child(stepper_row())
-                        .child(date_row())
-                        .child(calendar_row())
-                        .child(color_row())
-                        .child(alerts_row(open_dialog, open_sheet)),
-                ),
+                    ))
+                    .child(text::muted(platform_note()))
+                    .child(glass_row())
+                    .child(buttons_row())
+                    .child(switch_row())
+                    .child(checkbox_row())
+                    .child(radio_row())
+                    .child(segmented_row())
+                    .child(tabs_row())
+                    .child(popup_row())
+                    .child(text_row())
+                    .child(slider_row())
+                    .child(stepper_row())
+                    .child(date_row())
+                    .child(calendar_row())
+                    .child(color_row())
+                    .child(alerts_row(open_dialog, open_sheet)),
+            ),
         )
         .child(dialog::dialog_card(
             open_dialog,

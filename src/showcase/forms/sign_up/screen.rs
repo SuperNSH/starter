@@ -245,13 +245,11 @@ pub(super) fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
     sign_up_nav(form)
         .child(
             reveal
-                .scroll(scroll())
-                .flex_1()
-                // nav_page paints the platform's color; the page takes the theme's.
-                .bg(move || theme().background)
                 // The focused field's label keeps clear of the page header when
                 // the reveal scrolls it to the top.
-                .content_inset(crate::ui::layout::page_insets(SCROLL_TOP_INSET))
+                .scroll(crate::ui::layout::page_scroll(SCROLL_TOP_INSET))
+                // nav_page paints the platform's color; the page takes the theme's.
+                .bg(move || theme().background)
                 .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
                 .keyboard_taps(KeyboardTaps::Handled)
                 .test_id("forms-scroll")

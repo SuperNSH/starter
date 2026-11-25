@@ -132,7 +132,7 @@ pub fn divider() -> impl IntoElement {
 
 /// A page's content column, the gallery's frame shared by every page: 16pt
 /// around, 24pt between sections, room under the last one. Put it inside the
-/// page's scroll and give it `text::page_intro` first.
+/// page's scroll ([`page_scroll`]) and give it `text::page_intro` first.
 pub fn page_body() -> nsh_core::element::View {
     view()
         .w_full()
@@ -158,10 +158,25 @@ pub fn tab_bar_room() -> f32 {
     }
 }
 
+/// A page's scroll: the content passes under the phone's bars and comes to
+/// rest clear of them (`top` extra points above it). It bounces on phones
+/// only: on a desktop the bounce pulls the page far off its header.
+pub fn page_scroll(top: f32) -> nsh_core::element::Scroll {
+    scroll()
+        .flex_1()
+        .content_inset(page_insets(top))
+        .bounces(page_bounces())
+}
+
+/// Whether a page's own scroll bounces at its ends (see [`page_scroll`]).
+pub fn page_bounces() -> bool {
+    !is_desktop()
+}
+
 /// A page scroll's content inset on phones: `top` above the content, and
 /// room at the end so the last row scrolls clear of the floating tab bar
 /// (the content passes under the bar on its way there, as under the
-/// header). Read where the scroll is made: `.content_inset(page_insets(0.0))`.
+/// header). [`page_scroll`] sets it; a virtual list sets it itself.
 pub fn page_insets(top: f32) -> impl Fn() -> nsh_core::EdgeInsets + 'static {
     move || {
         let room = tab_bar_room();

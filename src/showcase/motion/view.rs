@@ -14,9 +14,7 @@ pub fn motion_page() -> impl IntoElement {
     // The page's own reduced-motion switch; the ambient `reduce_motion()`
     // is honored beside it.
     let calm = signal(false);
-    scroll()
-        .flex_1()
-        .content_inset(crate::ui::layout::page_insets(0.0))
+    crate::ui::layout::page_scroll(0.0)
         .test_id("motion-page-scroll")
         .bg(move || theme().background)
         // The sides only: UIKit insets the scroll under the header and the

@@ -69,10 +69,8 @@ pub(super) fn item_detail(id: u64, on_back: Option<impl Fn() + 'static>) -> impl
                         )),
                 )
         }));
-    scroll()
+    layout::page_scroll(0.0)
         .test_id("items_detail-scroll")
-        .flex_1()
-        .content_inset(layout::page_insets(0.0))
         .child(body)
 }
 

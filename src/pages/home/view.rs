@@ -18,10 +18,8 @@ use crate::{
 /// Home's content, under the page's header: a card per page, wrapping
 /// into as many columns as the width holds (one on a phone).
 pub fn home_page() -> AnyElement {
-    scroll()
+    crate::ui::layout::page_scroll(0.0)
         .test_id("home-scroll")
-        .flex_1()
-        .content_inset(crate::ui::layout::page_insets(0.0))
         .child(
             view()
                 .gap_6()

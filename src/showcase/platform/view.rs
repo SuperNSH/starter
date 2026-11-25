@@ -16,9 +16,7 @@ use super::widgets::localized;
 /// padding decides it (the keyboard covers the bottom inset while it shows).
 /// The scroll carries `scroll_id` so captures and tests can scroll the page.
 fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) -> AnyElement {
-    scroll()
-        .flex_1()
-        .content_inset(crate::ui::layout::page_insets(0.0))
+    crate::ui::layout::page_scroll(0.0)
         .test_id(scroll_id)
         .child(
             view()

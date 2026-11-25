@@ -121,11 +121,9 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
             }
         })
         .child(
-            scroll()
-                .flex_1()
+            crate::ui::layout::page_scroll(8.0)
                 // nav_page paints the platform's color; the page takes the theme's.
                 .bg(move || theme().background)
-                .content_inset(crate::ui::layout::page_insets(8.0))
                 .keyboard_dismiss_mode(KeyboardDismissMode::OnDrag)
                 .child(
                     view()

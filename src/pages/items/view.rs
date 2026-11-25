@@ -25,18 +25,14 @@ pub fn items_page() -> impl IntoElement {
             presented.set(Some(id));
         }
     };
-    let list = scroll()
-        .test_id("items-scroll")
-        .flex_1()
-        .content_inset(layout::page_insets(0.0))
-        .child(
-            layout::page_body()
-                .child(text::page_intro(
-                    locale::text("items.title"),
-                    locale::text("items.summary"),
-                ))
-                .child(list_body(items, reloads, open)),
-        );
+    let list = layout::page_scroll(0.0).test_id("items-scroll").child(
+        layout::page_body()
+            .child(text::page_intro(
+                locale::text("items.title"),
+                locale::text("items.summary"),
+            ))
+            .child(list_body(items, reloads, open)),
+    );
     view().flex_1().child(list).child(when(
         move || presented.get().is_some(),
         move || {

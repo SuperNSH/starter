@@ -96,9 +96,7 @@ pub(crate) fn tool_button(
 /// The canvas and graphics page, one section per element it covers.
 pub fn canvas_page() -> impl IntoElement {
     view().flex_1().bg(move || theme().background).child(
-        scroll()
-            .flex_1()
-            .content_inset(crate::ui::layout::page_insets(0.0))
+        crate::ui::layout::page_scroll(0.0)
             .child(
                 ui::layout::page_body()
                     .child(ui::text::page_intro(

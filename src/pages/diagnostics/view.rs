@@ -21,22 +21,19 @@ const TAIL_LINES: usize = 6;
 /// The page's body without its `nav_page`, for a stack that frames its
 /// pages itself (the shell): a page nested in a page draws nothing.
 pub fn diagnostics_page() -> impl IntoElement {
-    scroll()
-        .flex_1()
-        .content_inset(crate::ui::layout::page_insets(0.0))
-        .child(
-            crate::ui::layout::page_body()
-                .child(crate::ui::text::page_intro(
-                    "Diagnostics",
-                    "Config, capabilities, tasks, events and the log.",
-                ))
-                .child(app_card())
-                .child(config_card())
-                .child(capabilities_card())
-                .child(tasks_card())
-                .child(events_card())
-                .child(log_card()),
-        )
+    crate::ui::layout::page_scroll(0.0).child(
+        crate::ui::layout::page_body()
+            .child(crate::ui::text::page_intro(
+                "Diagnostics",
+                "Config, capabilities, tasks, events and the log.",
+            ))
+            .child(app_card())
+            .child(config_card())
+            .child(capabilities_card())
+            .child(tasks_card())
+            .child(events_card())
+            .child(log_card()),
+    )
 }
 
 /// One titled section of the page.
