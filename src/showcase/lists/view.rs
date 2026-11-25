@@ -67,7 +67,10 @@ pub fn lists_page() -> impl IntoElement {
 /// for tests so a label collision with the shell's nav cannot miss.
 fn chip(active: Signal<DemoView>, me: DemoView, label: &'static str) -> impl IntoElement {
     let mine = move || active.get() == me;
-    let chip = button()
+    // The id sits on the button itself: a press resolves to the selected
+    // view or one around it, never to a view inside.
+    button()
+        .test_id(&format!("lists-tab-{}", key_of(me)))
         .selected(mine)
         .accessibility_label(label)
         .hit_slop(6.0)
@@ -100,10 +103,7 @@ fn chip(active: Signal<DemoView>, me: DemoView, label: &'static str) -> impl Int
                         theme().muted_foreground
                     }
                 }),
-        );
-    view()
-        .test_id(&format!("lists-tab-{}", key_of(me)))
-        .child(chip)
+        )
 }
 
 /// The stable key a view names itself by in test ids.

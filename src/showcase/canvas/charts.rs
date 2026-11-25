@@ -164,12 +164,19 @@ pub(crate) fn Charts() -> impl IntoElement {
                             .accessibility_label("Orders per day and channel")
                             .w_full()
                             .h(px(150.0))
+                            // Room for the axis labels, which sit past the
+                            // plot's edge: without it they covered the legend.
+                            .mb(px(20.0))
                             .child(
                                 grid()
                                     .y(vec![0.0, 250.0, 500.0])
                                     .stroke_color(move || theme().border),
                             )
-                            .child(plot_axis().placement(AxisPlacement::Bottom))
+                            .child(
+                                plot_axis()
+                                    .placement(AxisPlacement::Bottom)
+                                    .label_class("pt-1 text-xs text-muted-foreground"),
+                            )
                             .child(
                                 bar()
                                     .value(RowAccessor::key("web"))

@@ -91,6 +91,10 @@ const ORDERS: [Order; 8] = [
     },
 ];
 
+/// The amount column: wide enough for the footer's four-digit total in
+/// medium weight, which wrapped its cents onto a second line at 90.
+const AMOUNT_WIDTH: Points = px(104.0);
+
 /// The orders' total, the footer row's.
 fn total() -> f64 {
     ORDERS.iter().map(|o| o.total).sum()
@@ -145,7 +149,7 @@ fn head_row(label: &'static str, amounts: &'static str) -> TableHeaderElement {
                 ),
             )
             .child(
-                table_head().w(px(90.0)).px_3().py_2().child(
+                table_head().w(AMOUNT_WIDTH).px_3().py_2().child(
                     text(amounts)
                         .text_xs()
                         .uppercase()
@@ -189,7 +193,7 @@ fn order_row(order: &Order) -> TableRowElement {
                 .child(status_pill(status)),
         )
         .child(
-            table_cell().w(px(90.0)).px_3().py_2().child(
+            table_cell().w(AMOUNT_WIDTH).px_3().py_2().child(
                 text(format!("${total:.2}"))
                     .text_sm()
                     .tabular_nums()
@@ -237,7 +241,7 @@ fn orders_table() -> impl IntoElement {
                     )
                     .child(table_cell().w(px(110.0)))
                     .child(
-                        table_cell().w(px(90.0)).px_3().py_2().child(
+                        table_cell().w(AMOUNT_WIDTH).px_3().py_2().child(
                             text(format!("${:.2}", total()))
                                 .text_sm()
                                 .tabular_nums()
