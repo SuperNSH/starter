@@ -160,6 +160,9 @@ fn color([r, g, b]: [f64; 3]) -> Retained<AnyObject> {
     }
 }
 
+/// A toolbar icon button's side, in points.
+const ICON_BUTTON: f64 = 32.0;
+
 /// Liquid Glass exists here (macOS 26 and later).
 fn glass() -> bool {
     AnyClass::get(c"NSGlassEffectView").is_some()
@@ -356,6 +359,12 @@ impl Control {
                     if props.title.is_empty() {
                         // Before glass, a toolbar icon has no bezel.
                         let _: () = msg_send![view, setBordered: glass()];
+                        // NSControlSizeLarge, and (macOS 26)
+                        // NSControlBorderShapeCircle.
+                        let _: () = msg_send![view, setControlSize: 3_usize];
+                        if glass() {
+                            let _: () = msg_send![view, setBorderShape: 3_isize];
+                        }
                         if !props.text.is_empty() {
                             let name = ns_string(&props.text);
                             let _: () = msg_send![view, setToolTip: &*name];
@@ -444,6 +453,9 @@ impl Control {
                 Kind::Spinner => (32.0, 32.0),
                 // Each symbol button gets a 36 pt square on the pill.
                 Kind::GlassBar => (self.props.items.len() as f64 * 36.0 + 16.0, 44.0),
+                // AppKit's fitting height for an image-only button is the
+                // symbol's, which squashed the bezel to a sliver.
+                Kind::GlassButton if self.props.title.is_empty() => (ICON_BUTTON, ICON_BUTTON),
                 Kind::Color => (size.width.max(44.0), size.height.max(24.0)),
                 _ => (size.width.max(0.0), size.height.max(0.0)),
             };
