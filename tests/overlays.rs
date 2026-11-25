@@ -44,7 +44,7 @@ fn reveal(app: &mut Headless, selector: &str) {
 
 use nsh_core::{Points, geometry::point};
 use nsh_engine::{EngineConfig, Root};
-use nsh_starter::features::overlays::OverlaysTestRoot;
+use nsh_starter::showcase::overlays::OverlaysTestRoot;
 use nsh_testing::{DialogAnswer, Headless};
 
 /// A desktop-sized surface at `width`, on the manual clock.

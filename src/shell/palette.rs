@@ -1,4 +1,4 @@
-//! The command palette: the ui area's `command_palette` in a dialog,
+//! The command palette: `ui::command`'s `command_palette` in a dialog,
 //! opened with Cmd/Ctrl+K. Destinations first (the palette highlights its
 //! first row), then the shell's actions. One owner per keystroke: `mod+k`,
 //! `mod+z` and `mod+shift+z` are keymap bindings, so the entries show them
@@ -8,7 +8,9 @@ use nsh_base::{dialog, theme};
 use nsh_core::{element::AnyElement, prelude::*};
 
 use crate::{
-    shell::{nav, routes::Route, undo},
+    pages,
+    routes::Route,
+    store::{appearance, nav, undo},
     ui::command::{command_entry, command_palette},
 };
 
@@ -35,15 +37,19 @@ fn close() {
 }
 
 /// Runs the command `id` names and closes the palette. A destination's id
-/// is its route key; an action's is `action:<name>`.
+/// is its page's key; an action's is `action:<name>`.
 pub(crate) fn dispatch(id: &str) {
-    if let Some(route) = Route::ALL.iter().copied().find(|r| r.key_str() == id) {
+    if let Some(route) = pages::sidebar()
+        .iter()
+        .copied()
+        .find(|r| r.page().key == id)
+    {
         nav::open(route);
     } else {
         match id {
             "action:undo" => undo::undo(),
             "action:redo" => undo::redo(),
-            "action:appearance" => crate::shell::toggle_appearance(),
+            "action:appearance" => appearance::toggle(),
             _ => {}
         }
     }
@@ -52,10 +58,10 @@ pub(crate) fn dispatch(id: &str) {
 
 /// Every command the palette lists.
 pub fn items() -> Vec<nsh_base::CommandItem> {
-    let mut items: Vec<nsh_base::CommandItem> = Route::ALL
+    let mut items: Vec<nsh_base::CommandItem> = pages::sidebar()
         .iter()
         .filter(|route| **route != Route::Home)
-        .map(|route| command_entry(route.key_str(), route.label_str()).group("Go to"))
+        .map(|route| command_entry(route.page().key, route.page().title).group("Go to"))
         .collect();
     items.push(
         command_entry("action:undo", "Undo")

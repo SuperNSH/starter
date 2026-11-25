@@ -5,6 +5,26 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- The source is laid out for navigation: `src/pages` (the app's screens), `src/showcase` (the demo screens), `src/shell`, `src/store`, `src/services`, `src/ui`, `src/native`, with `routes.rs`, `error.rs` and `startup.rs` at the root. `features`, `foundation`, `state`, `platform` and `app` are gone. `AGENTS.md` is the map.
+- Every screen declares one `Page` record; the shell reads records and names no screen. Adding a screen is a folder, a `Route` variant and one line in `src/pages/mod.rs`, where it was eleven edits in the route table.
+- One name per screen. Renamed: `ui` → `gallery`, `native` → `native_vs_app`, `remote` → `remote_screen`, `device` → `platform_device`, `query-devtools` → `data_devtools`, `data-item` → `data_item`. Their links (`nsh-starter://gallery`, `nsh-starter://platform/device`) and test ids (`page-gallery`) changed with them.
+- TSX suites moved under `tests/` (`tests/smoke`, `tests/vision`, `tests/trace`).
+- The error banner and the config-save log line now run in the real app (`shell/error_surface.rs`, `startup.rs`); the demo root that used to host them is gone.
+- Every `global::<T>()` has a type of its own; `unsafe` is confined to `src/native` and forbidden elsewhere by the compiler; no source file is longer than 500 lines.
+
+### Added
+
+- `tests/architecture.rs` (`just rules`): the layout's rules, each failure saying how to fix it.
+- A Settings page (name, language, appearance, telemetry), translated in both languages.
+- `scripts/new-app.sh` (`just new-app`): a new app from the starter without the demo screens.
+- `docs/recipes/`: step lists for the common changes.
+
+### Removed
+
+- `state::history::History`, `foundation::page_placeholder` and `foundation::DemoRoot`: unused outside tests.
+
 ### Added
 
 - Links of the `nsh-starter://` scheme open their page: `nsh.json` claims the scheme and the shell listens with `next_url_scheme_open`.

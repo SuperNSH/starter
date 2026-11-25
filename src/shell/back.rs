@@ -7,7 +7,8 @@ use nsh_base::{dialog, theme};
 use nsh_core::{element::AnyElement, prelude::*};
 
 use crate::{
-    shell::{chrome, nav},
+    shell::chrome,
+    store::nav,
     ui::button::{ButtonSize, ButtonVariant, button_with},
 };
 

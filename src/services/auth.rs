@@ -8,7 +8,7 @@ use std::sync::{Arc, Mutex};
 
 use nsh_core::element::SharedString;
 
-use crate::foundation::error::AppError;
+use crate::error::AppError;
 
 /// A sign-in in flight, boxed so the trait stays object-safe.
 pub type AuthFut<'a> = Pin<Box<dyn Future<Output = Result<AuthUser, AppError>> + 'a>>;
@@ -62,7 +62,7 @@ impl AuthProvider for MockAuthProvider {
         let email = email.trim().to_owned();
         let password = password.to_owned();
         Box::pin(async move {
-            if crate::foundation::validation::email_error(&email).is_some() {
+            if crate::services::validation::email_error(&email).is_some() {
                 return Err(AppError::new("invalid", "Enter a valid email address"));
             }
             if password.is_empty() {

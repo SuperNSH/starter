@@ -29,7 +29,7 @@ use std::time::{Duration, SystemTime};
 use nsh_base::{nav_page, nav_stack, theme};
 use nsh_core::prelude::*;
 use nsh_engine::{Clock, EngineConfig, Root};
-use nsh_starter::features::forms::forms_page;
+use nsh_starter::showcase::forms::forms_page;
 use nsh_testing::{DialogAnswer, Headless, MemoryStorage};
 
 /// A wall time inside the calendar's range, for the date picker.

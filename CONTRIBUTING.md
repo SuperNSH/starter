@@ -4,7 +4,7 @@
 
 Follow [README.md](README.md) — nsh 0.6.0, the Rust targets, Xcode and the Android SDK, and `../nsh-query` and `../nsh-form` checked out beside this repo.
 
-Work happens in disjoint file areas so parallel changes cannot collide; the map of who owns what is in [AGENTS.md](AGENTS.md). Do not edit files outside your area, including other areas' tests.
+[AGENTS.md](AGENTS.md) is the map of the source and the rules `just rules` checks; read it before changing anything. When several agents work at once, file areas are disjoint (its Ownership section): do not edit files outside your area, including other areas' tests.
 
 ## The gates
 
@@ -16,15 +16,16 @@ cargo fmt --all -- --check
 cargo clippy --all-targets -- -D warnings
 cargo test
 
-# TSX gate (repo root: the TSX entry's tests)
+# TSX gate (repo root)
 nsh check
 nsh build          # fix every warning it prints
-nsh test
+nsh test tests/smoke/app.test.tsx
+nsh test tests/smoke/pages.test.tsx
 
 # TSX gate (packages/remote-screen), same three commands in that directory
 ```
 
-`just check`, `just test` and `just test-tsx` run these. `just smoke` is the whole-tree headless gate. Real-input smoke runs go per target: `nsh test --target macos|ios|android` (web passes only what exists on the web; list the rest in `docs/STATUS.md`).
+`just check`, `just test` and `just test-tsx` run these; `just rules` runs the architecture rules alone. `just smoke` is the whole-tree headless gate. Real-input smoke runs go per target: `nsh test --target macos|ios|android` (web passes only what exists on the web; list the rest in `docs/STATUS.md`).
 
 `nsh build` and `nsh check` are not interchangeable: a typo in a `nsh.json` capability key fails `nsh build` and passes `nsh check`. Run both when you touch capabilities.
 

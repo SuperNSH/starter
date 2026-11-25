@@ -4,15 +4,15 @@
 
 use std::sync::{Arc, Mutex};
 
-use crate::foundation::error::AppError;
-use crate::foundation::time;
+use crate::error::AppError;
+use crate::services::time;
 
 /// One recorded error, as the sink keeps it.
 #[derive(Clone, Debug, PartialEq)]
 pub struct RecordedError {
     /// The error as it was raised.
     pub error: AppError,
-    /// When it was recorded (`foundation::time::now_ms`).
+    /// When it was recorded (`services::time::now_ms`).
     pub at_ms: f64,
 }
 
@@ -21,7 +21,7 @@ pub struct RecordedError {
 pub struct Breadcrumb {
     /// One line: `"feed:page-loaded"`.
     pub message: String,
-    /// When it was dropped (`foundation::time::now_ms`).
+    /// When it was dropped (`services::time::now_ms`).
     pub at_ms: f64,
 }
 

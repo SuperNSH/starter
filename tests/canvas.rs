@@ -9,7 +9,7 @@ use std::time::Duration;
 
 use nsh_core::{Size, prelude::*};
 use nsh_engine::{Clock, EngineConfig, Root};
-use nsh_starter::features::canvas::canvas_page;
+use nsh_starter::showcase::canvas::canvas_page;
 use nsh_testing::Headless;
 
 /// The page alone: no shell, so selectors name only this area's views.

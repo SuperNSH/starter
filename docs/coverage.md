@@ -19,7 +19,7 @@ Status at this audit (mid-build snapshot): the shell routing, the data feed, the
 | `web_view()`, `web_view_html()` | `<WebView>` | planned: canvas (`web_view` with messaging) | Needs the `webview` capability. |
 | `scroll()` | `<Scroll>` | TSX: the remote-screen package's root; planned: lists, overlays | |
 | `overlay()` | `<Overlay>` | planned: overlays | |
-| `virtual_list()` | `<List>` | real: `src/features/data/feed.rs` (feed rows), `src/features/lists/orders.rs` (infinite orders) | TSX `List` recycles rows; keep per-item state in the data. |
+| `virtual_list()` | `<List>` | real: `src/showcase/data/feed.rs` (feed rows), `src/showcase/lists/orders.rs` (infinite orders) | TSX `List` recycles rows; keep per-item state in the data. |
 | `shader()` | `<Shader>` | planned: canvas (WGSL `shader`) | Reading `nsh.time` animates it. |
 | `shader_effect()` | `<ShaderEffect>` | planned: canvas (animated canvas) | Draws children through a WGSL `shade`. |
 | `shader_transition()` | `<ShaderTransition>` | planned: motion (transition demo) | |
@@ -56,16 +56,16 @@ Grouped rows name every export of a family; parts with nothing to say of their o
 | `Accordion`, `AccordionHeader`, `AccordionItem`, `AccordionPanel`, `AccordionTrigger` | planned: ui gallery |
 | `AlertDialog` | planned: overlays |
 | `Avatar`, `AvatarGroup` | planned: data (feed authors) |
-| `Button` | real: the `button()` factory in `src/features/data/feed.rs`, `src/features/lists/`, `src/shell/back.rs`; TSX: the remote-screen package wraps `nsh/base`'s `Button` in its own `ui.tsx` |
-| `Calendar` | real: the lists page's calendar demo (`src/features/lists/`); planned: forms (date) |
-| `Carousel`, `CarouselContent`, `CarouselItem`, `CarouselNext`, `CarouselPagination`, `CarouselPaginationItem`, `CarouselPrevious` | real: the lists page's carousel demo (`src/features/lists/`) |
+| `Button` | real: the `button()` factory in `src/showcase/data/feed.rs`, `src/showcase/lists/`, `src/shell/back.rs`; TSX: the remote-screen package wraps `nsh/base`'s `Button` in its own `ui.tsx` |
+| `Calendar` | real: the lists page's calendar demo (`src/showcase/lists/`); planned: forms (date) |
+| `Carousel`, `CarouselContent`, `CarouselItem`, `CarouselNext`, `CarouselPagination`, `CarouselPaginationItem`, `CarouselPrevious` | real: the lists page's carousel demo (`src/showcase/lists/`) |
 | `Checkbox` | planned: forms (sign-up), ui gallery |
 | `Collapsible` | planned: overlays, data devtools |
 | `ColorArea`, `ColorEyeDropper`, `ColorField`, `ColorPicker`, `ColorSlider`, `ColorSwatch` | planned: forms (color picker). `ColorEyeDropper`: reason at audit if it stays off non-desktop targets. |
 | `Combobox` | planned: forms (sign-up) |
 | `Command` | planned: shell (command palette) |
 | `ContextMenu` | planned: overlays |
-| `DataTable` | real: the quotes table (`src/features/lists/quotes.rs`) |
+| `DataTable` | real: the quotes table (`src/showcase/lists/quotes.rs`) |
 | `DatePicker` | planned: forms (sign-up) |
 | `Dialog` | real: the `dialog()` factory in `src/shell/back.rs` (the back-guard confirm); planned: more surfaces in overlays |
 | `DiffView` | planned: overlays |
@@ -104,7 +104,7 @@ Grouped rows name every export of a family; parts with nothing to say of their o
 | `Toggle`, `ToggleGroup` | planned: ui gallery |
 | `Toolbar`, `ToolbarGroup`, `ToolbarSeparator` | planned: canvas (drawing tools) |
 | `Tooltip` | planned: overlays, shell (desktop) |
-| `Tree` | real: the workspace tree demo (`src/features/lists/tree.rs`) |
+| `Tree` | real: the workspace tree demo (`src/showcase/lists/tree.rs`) |
 | Plot family: `Arc`, `Area`, `Bar`, `Cell`, `Dot`, `Grid`, `Line`, `Pie`, `Plot`, `PlotAppearScope`, `PlotAxis`, `PlotLabel`, `RadialGrid`, `RadialLine`, `Rule`, `Sankey`, `Treemap` | planned: canvas (Plot charts). Any chart type with no screen gets its reason at audit. |
 
 ## nsh/mobile
@@ -119,7 +119,7 @@ Grouped rows name every export of a family; parts with nothing to say of their o
 
 | Export | Used in |
 |---|---|
-| `Window` | planned: shell (window assembly). On 0.5.0 the Rust side drives the main window through `main_window()` (`WindowRef`): `src/ui/desktop.rs`, `src/shell/chrome.rs`, `src/platform/desktop_card.rs` |
+| `Window` | planned: shell (window assembly). On 0.5.0 the Rust side drives the main window through `main_window()` (`WindowRef`): `src/ui/desktop.rs`, `src/shell/chrome.rs`, `src/showcase/platform/desktop_card.rs` |
 | `Menu` | planned: shell (application menus) |
 | `titleBar` | planned: shell (title bar layout) |
 | `isAvailable` | planned: shell, platform |
@@ -140,7 +140,7 @@ The port to 0.5.0 adopted no new feature beyond what compiling required; since t
 | `TextViewApi`, `TextViewSelectionEvent`, `TextSelectionFormat`, `TextSelectionOptions` | nsh_base | selection as plain text, Markdown, HTML |
 | `window()`/`Window`, `open_window`, `OpenChange`, window kinds; `WindowRef` beyond the main window (`current_window`, `on_close_press`, `on_mode_change`, `on_bounds_change`, `set_placement`, `request_attention`, ...) | nsh_core | multi-window; the port uses only `main_window()` |
 | `Tray`, `tray`, `set_tray`, `TrayClickEvent`, `register_global_shortcut`, `unregister_global_shortcut`, `unregister_all_global_shortcuts` | nsh_core | tray and global shortcuts (not used: the macOS command bar's AppKit menu bar item and Option+Space cover them, see `docs/gpui-starter-parity.md`) |
-| `show_notification`, `close_notification`, `next_notification_press`, `notification_permission`, `request_notification_permission`, `set_badge`, `mod notifications` | nsh_core | `notification_permission`, `request_notification_permission`, `show_notification` and `Notification` are used in `src/platform/notifications_card.rs`; the rest (`close_notification`, `next_notification_press`, `set_badge`) are not: the card sends one test notification and does not react to presses |
+| `show_notification`, `close_notification`, `next_notification_press`, `notification_permission`, `request_notification_permission`, `set_badge`, `mod notifications` | nsh_core | `notification_permission`, `request_notification_permission`, `show_notification` and `Notification` are used in `src/showcase/platform/notifications_card.rs`; the rest (`close_notification`, `next_notification_press`, `set_badge`) are not: the card sends one test notification and does not react to presses |
 | `Sound`, `SoundSource`, `AudioPlayer`, `audio_player`, `audio_available`, `PlayerState`, `AudioFailure`, `mod audio` | nsh_core | |
 | `Haptic`, `HapticImpact`, `HapticNotification`, `haptic` | nsh_core | |
 | `url_scheme`, `url_schemes`, `next_url_scheme_open`, `app_url`, `set_app_url`, `next_app_url_change`, `mod url_scheme` | nsh_core | `next_url_scheme_open` is used in `src/shell/deep_link.rs` (`nsh.json` `schemes`); the app-address functions are web-only history and are not used |

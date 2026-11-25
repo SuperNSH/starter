@@ -73,7 +73,9 @@ just run-web       # the browser
 | Recipe | What it runs |
 |---|---|
 | `just check` | `cargo fmt --all -- --check` and `cargo clippy --all-targets -- -D warnings` |
-| `just test` | `cargo test` |
+| `just test` | `cargo test`; `just test settings` runs one screen's file |
+| `just rules` | the architecture rules alone ([AGENTS.md](AGENTS.md)) |
+| `just new-app <dir> <name> <id>` | a new app from this starter, without the demo screens (see below) |
 | `just test-tsx` | `nsh check`, `nsh build` (warnings denied) and `nsh test` inside `packages/remote-screen` |
 | `just smoke` | `nsh test` at the root, then `just test-tsx` — the whole-tree headless gate |
 | `just run-macos` / `run-ios` / `run-android` / `run-web` | `nsh run --target <t>` |
@@ -83,6 +85,18 @@ just run-web       # the browser
 | `just status` | print `docs/STATUS.md` — what is done and how it was verified |
 
 Per-target smoke suites (open every page, screenshot) run as `nsh test --target macos|ios|android` — the web target passes only the features that exist on the web, and the rest are listed in `docs/STATUS.md`.
+
+## Finding your way
+
+[AGENTS.md](AGENTS.md) is the map: what each folder under `src/` is for, where a new thing goes, the shape every screen folder has, and the rules `just rules` checks. [docs/recipes/](docs/recipes/) has a step list for each common change, starting with [adding a page](docs/recipes/add-a-page.md).
+
+## Starting a new app
+
+```sh
+just new-app ../acme-notes acme-notes com.acme.notes
+```
+
+This copies the repo to the directory without the demo screens (`src/showcase`), their tests, the remote-screen package, the fake API and this starter's build records, then renames it. The copy keeps Home, Settings and Diagnostics, the shell, the store, the services, the ui library and the native code, and passes `just check` and `just test` as made.
 
 ## Renaming the app
 
@@ -99,7 +113,9 @@ The script replaces the name and id everywhere they live: `nsh.json`, the Cargo 
 
 ## Documentation
 
-- [docs/architecture.md](docs/architecture.md) — crate layout, shell routing, the state and query layers, the ui wrapper policy, service seams, the signed package path.
+- [AGENTS.md](AGENTS.md) — the map of the source, the rules and the commands.
+- [docs/architecture.md](docs/architecture.md) — how the layers, routes, pages, navigation, state and services work together.
+- [docs/recipes/](docs/recipes/) — step lists: add a page, shared state, a service, a control, a string, move to a new NSH release.
 - [docs/coverage.md](docs/coverage.md) — every `nsh_base` and `nsh_core` element export on 0.4.0, where it is used, why anything is not, and what 0.5.0 and 0.6.0 added.
 - [docs/gpui-starter-parity.md](docs/gpui-starter-parity.md) — feature-by-feature against the GPUI starter this repo mirrors.
 - [docs/upstream-issues.md](docs/upstream-issues.md) — known `nsh-query`/`nsh-form` bugs and their workarounds.

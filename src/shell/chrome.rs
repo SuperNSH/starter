@@ -1,7 +1,7 @@
 //! Desktop chrome: the hidden system title bar, the sidebar's open state
 //! and the application menu (`nsh/desktop`'s `Window` and `Menu`). Everything here no-ops off the
 //! desktops, so it is installed unconditionally. One owner per keystroke:
-//! the shortcuts are keymap bindings (`shell::install`); the menu items
+//! the shortcuts are keymap bindings (`startup::install`); the menu items
 //! show them and carry no `shortcut` of their own.
 
 use nsh_core::{
@@ -15,7 +15,10 @@ use nsh_core::{
 // nsh_core's prelude has a `t!` of its own; the app translates with rust-i18n.
 use rust_i18n::t;
 
-use crate::shell::{nav, palette, routes::Route, undo};
+use crate::pages;
+use crate::routes::Route;
+use crate::shell::palette;
+use crate::store::{appearance, nav, undo};
 use crate::ui::desktop::set_title_bar;
 
 /// The unified toolbar's height, as macOS draws one: the window controls
@@ -86,7 +89,7 @@ pub fn close() {
 
 /// The application menu: the shell's commands, every route, the window.
 fn menus(is_dark: bool) -> Vec<MenuItem> {
-    let go = |route: Route| MenuItem::new(route.label()).on_select(move || nav::open(route));
+    let go = |route: Route| MenuItem::new(route.title()).on_select(move || nav::open(route));
     vec![
         MenuItem::submenu(
             t!("app.name"),
@@ -100,7 +103,7 @@ fn menus(is_dark: bool) -> Vec<MenuItem> {
                 MenuItem::separator(),
                 MenuItem::new("Toggle Appearance")
                     .checked(is_dark)
-                    .on_select(crate::shell::toggle_appearance),
+                    .on_select(appearance::toggle),
                 MenuItem::separator(),
                 MenuItem::role(MenuRole::Quit),
             ],
@@ -112,7 +115,10 @@ fn menus(is_dark: bool) -> Vec<MenuItem> {
                     .on_select(toggle_sidebar),
             ],
         ),
-        MenuItem::submenu("Go", Route::ALL.iter().copied().map(go).collect::<Vec<_>>()),
+        MenuItem::submenu(
+            "Go",
+            pages::sidebar().iter().copied().map(go).collect::<Vec<_>>(),
+        ),
         MenuItem::submenu(
             "Window",
             [

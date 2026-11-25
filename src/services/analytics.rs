@@ -6,7 +6,7 @@ use std::sync::{Arc, Mutex};
 
 use serde_json::Value;
 
-use crate::foundation::time;
+use crate::services::time;
 
 /// One tracked event, as the sink keeps it.
 #[derive(Clone, Debug, PartialEq)]
@@ -15,7 +15,7 @@ pub struct AnalyticsEvent {
     pub name: String,
     /// Its properties, a JSON object (empty when the event carries none).
     pub properties: Value,
-    /// When it was tracked (`foundation::time::now_ms`).
+    /// When it was tracked (`services::time::now_ms`).
     pub at_ms: f64,
 }
 

@@ -36,7 +36,7 @@ use std::time::{Duration, SystemTime};
 use nsh_base::{DataTableSort, DataTableSortDirection};
 use nsh_core::{Size, prelude::*};
 use nsh_engine::{Clock, EngineConfig, Root};
-use nsh_starter::features::lists::{
+use nsh_starter::showcase::lists::{
     calendar_view::CalendarDemo,
     chat::{ChatDemo, WINDOW_BOTTOM, WINDOW_TOP},
     grid::GridDemo,
@@ -90,7 +90,7 @@ fn visible_msgs(app: &Headless) -> Vec<u32> {
 
 #[test]
 fn chat_pages_stay_contiguous_with_the_window() {
-    use nsh_starter::features::lists::chat::{OLDEST, PAGE, newer_page, older_page};
+    use nsh_starter::showcase::lists::chat::{OLDEST, PAGE, newer_page, older_page};
 
     // The window and the counters, exactly as the demo holds them. The
     // ceiling of a newer page is the room's newest, which Receive grows.

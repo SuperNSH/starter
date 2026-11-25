@@ -1,5 +1,6 @@
-//! The navigation row: a full-width row button for lists of destinations
-//! (a sidebar, a home grid), with a trailing slot and a selected state.
+//! Navigation controls: the full-width row for lists of destinations (a
+//! sidebar, a settings list), with a trailing slot and a selected state,
+//! and the card for a grid of them.
 
 use nsh_base::{ButtonElement, button, theme};
 use nsh_core::prelude::*;
@@ -72,6 +73,63 @@ pub fn chevron() -> View {
             .text_sm()
             .text_color(move || theme().muted_foreground),
     )
+}
+
+/// A destination's card: its `title` over one line of `summary`, the whole
+/// card the target. Cards wrap into as many columns as the width holds.
+/// `test_id` rides the inner view, as [`nav_row`]'s does.
+pub fn nav_tile(
+    title: &'static str,
+    summary: &'static str,
+    test_id: &str,
+    on_press: impl Fn() + 'static,
+) -> ButtonElement {
+    button()
+        .on_press(on_press)
+        .accessibility_label(title)
+        .flex_grow(1.0)
+        .basis(px(240.0))
+        .min_h(px(84.0))
+        .rounded_lg()
+        .border_1()
+        .border_color(move || theme().border)
+        .bg(move || theme().card)
+        .transition_colors()
+        .hover(|s| s.bg(move || theme().accent))
+        .active(|s| s.opacity(0.8))
+        .focus(|s| {
+            s.outline(px(2.0))
+                .outline_offset(px(2.0))
+                .outline_color(move || theme().ring)
+        })
+        .child(
+            view()
+                .test_id(test_id)
+                .flex_1()
+                .p_4()
+                .gap_1()
+                .child(
+                    view()
+                        .flex_row()
+                        .items_center()
+                        .gap_2()
+                        .child(
+                            text(title)
+                                .flex_1()
+                                .text_sm()
+                                .font_weight(FontWeight::SEMIBOLD)
+                                .number_of_lines(1)
+                                .text_color(move || theme().card_foreground),
+                        )
+                        .child(chevron()),
+                )
+                .child(
+                    text(summary)
+                        .text_xs()
+                        .number_of_lines(2)
+                        .text_color(move || theme().muted_foreground),
+                ),
+        )
 }
 
 /// A system screen in the app's colors: the screen itself takes the

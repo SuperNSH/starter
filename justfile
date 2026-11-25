@@ -13,9 +13,17 @@ check:
     cargo fmt --all -- --check
     cargo clippy --all-targets -- -D warnings
 
-# Rust unit and integration tests (also run by `nsh test` before its TSX tests).
-test:
-    cargo test
+# Rust tests (also run by `nsh test` before its TSX tests). `just test` runs
+# all of them; `just test forms` runs one screen's file, tests/forms.rs.
+test section='':
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ -z "{{section}}" ]; then cargo test; else cargo test --test "{{section}}"; fi
+
+# The architecture's rules alone (AGENTS.md): what may import what, file
+# sizes, the shape of a screen folder. Each failure says how to fix it.
+rules:
+    cargo test --test architecture
 
 # TSX package gate in packages/remote-screen: type check, a build with no
 # warnings, headless tests. Needs the node_modules/{nsh-query,nsh-form}
@@ -23,13 +31,13 @@ test:
 test-tsx:
     cd packages/remote-screen && nsh check && nsh build && nsh test
 
-# Headless smoke gate: the root's App test plus the per-page smoke suite,
-# and the remote-screen package gates. vision/ is excluded on purpose: its
+# Headless smoke gate: the root's app test plus the per-page smoke suite,
+# and the remote-screen package gates. tests/vision/ is excluded on purpose: its
 # tests drive screenshots, which need a real target (`--target`) and a
 # reviewing model, so they fail a headless run by design.
 smoke:
-    nsh test App.test.tsx
-    nsh test smoke/pages.test.tsx
+    nsh test tests/smoke/app.test.tsx
+    nsh test tests/smoke/pages.test.tsx
     just test-tsx
 
 # Desktop run in the AppKit development host, with hot reload.
@@ -61,6 +69,11 @@ package:
     nsh package --target ios-simulator
     nsh package --target android
     nsh package --target web
+
+# Make a new app from this starter: a copy without the demo screens, renamed.
+#   just new-app ../acme acme com.acme.app
+new-app dir name id:
+    scripts/new-app.sh {{dir}} {{name}} {{id}}
 
 # Rename the app everywhere it lives, or prove the rename with a roundtrip:
 #   just rename <new-name> <new-id>

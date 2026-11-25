@@ -1,76 +1,99 @@
 # Architecture
 
-nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.6.0 application boilerplate. One Rust crate at the repo root is the UI and most features; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. All async state runs on `nsh-query`, all forms on `nsh-form`, both as path dependencies from `../nsh-query` and `../nsh-form`. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
+nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.6.0 application boilerplate. One Rust crate at the repo root is the app; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
 
-## Mode and entry points
+`AGENTS.md` is the map and the rules. This file explains how the parts work together.
 
-`nsh.json` says `"rust": "."` and `"root": "App"`: the app is a Rust app whose root component is `App`, exported to the TSX side through `#[native_module("nsh-starter/native")]` in `src/lib.rs`. What runs where:
+## Entry points
 
-- **macOS/Linux/Windows** — `src/main.rs` calls the platform crate's `run_app` with `Root::of::<App>()`. Running the binary directly on a non-desktop target is a compile error; mobile and web go through the dev host.
-- **iOS, Android, web** — `nsh run --target ios|android|web` boots the development host and mounts the same `App` root. The host scaffolding a Rust app needs per target is generated into `.nsh/` (`nsh` writes it; `.nsh/` is git-ignored) — the repository keeps no hand-written TSX except tests and the remote-screen package.
-- **Packaged** — `nsh package --target macos|ios-simulator|android|web` builds an installable app from the prebuilt runtime; no Xcode project and no Gradle are involved. Anything needing entitlements, URL schemes or extra native SDKs goes through an embedding host (`NshAppView` + `app.handle(..)` on iOS, `NshView` + `nsh.handle(..)` on Android), with the called names declared under `capabilities.host`.
+`nsh.json` says `"rust": "."` and `"root": "App"`: the app is a Rust app whose root component is `App` in `src/lib.rs`.
 
-## Module map
+- **macOS, Linux, Windows:** `src/main.rs` calls the platform crate's `run_app` with `Root::of::<App>()`.
+- **iOS, Android, web:** `nsh run --target ios|android|web` boots the development host and mounts the same `App`. The host scaffolding is generated into `.nsh/` (git-ignored).
+- **Packaged:** `nsh package --target macos|ios-simulator|android|web` builds an installable app from the prebuilt runtime.
 
-Everything lives under `src/`. Arrows name the modules a module builds on.
+`App` does two things: it calls `startup::install()`, then draws `shell::shell()`. `src/startup.rs` is the list of everything that runs once at launch, in order: keyboard shortcuts, the back order, the lifecycle watch, deep links, and the log line a config save leaves.
 
-| Module | Contents | Depends on |
-|---|---|---|
-| `main` | Desktop entry: `env_logger`, `run_app`, window title and app id. | `shell` (via the root) |
-| `lib` | Crate root: `i18n!` block, module tree, the native module registry. | everything |
-| `app` | Composition owned by the shell: providers, appearance, window assembly. | `shell`, `state`, `ui` |
-| `shell` | Lifecycle, the typed route enum, `nav_stack`, deep-link parsing, sidebar/tabs, title bar and menus, status bar, command palette, shortcuts, undo/redo. | `state`, `ui`, `features` |
-| `features/forms` | Sign-up and settings screens on `nsh-form`. | `ui`, `services` |
-| `features/data` | Feed, detail, query devtools on `nsh-query`. | `ui`, `services::fake_api`, `state` |
-| `features/lists` | Tables, tree, calendar, grid, chat, carousel, pagination. | `ui` |
-| `features/canvas` | Drawing app, animated canvas, plots, shader, SVG, media, `web_view`. | `ui` |
-| `features/motion` | Transitions, springs, gestures, scroll-linked effects. | `ui` |
-| `features/overlays` | Dialogs, sheets, popovers, menus, toasts, dock, editor, diff. | `ui` |
-| `features/remote_screen` | The page that loads and controls the signed TSX package. | `ui` |
-| `ui` | One wrapper per `nsh_base` component in use; screens import from here only. | `themes/theme.json` tokens |
-| `services` | `http`, `auth`, `analytics`, `monitoring` seams (foundation) and `fake_api` (data). | `foundation` |
-| `state` | Stores, appearance and locale signals, undo/redo history types. | `foundation` |
-| `foundation` | Errors, ids, time, validation, config + migrations, event bus, task manager, capability registry, first run, file logging, diagnostics page, error surface. | — |
-| `platform` | Safe areas, keyboard, clipboard, picker, speech, file dialogs, `nsh/mobile`, `nsh/desktop`, i18n, accessibility, capabilities in `nsh.json`. | `foundation`, `ui` |
+## Layers
 
-The layout gives each area one integration test file under `tests/` (`shell.rs`, `foundation.rs`, `ui.rs`, `forms.rs`, `data.rs`, `lists.rs`, `canvas.rs`, `motion.rs`, `overlays.rs`, `platform.rs`, `remote_screen.rs`) — planned until each area lands its file; `docs/STATUS.md` accounts for what exists. The data area also records its `--trace` runs under `trace/` (same: planned until it lands).
+```text
+lib.rs, main.rs, startup.rs
+        │
+      shell            the frame: sidebar, tabs, headers, palette, back, links, error banner
+        │
+ pages, showcase       the screens
+        │
+      store            what the app remembers
+        │
+     services          what the app talks to
+        
+ ui ◀── native         below the screens: the component library, and platform views built on it
+ routes.rs, error.rs   vocabulary every layer may name
+```
 
-## Shell routing
+Imports point down only, and a screen never imports another screen. `tests/architecture.rs` enforces both.
 
-The route enum in `src/shell` is the single source of navigation. Every page is a variant; deep links parse into the same enum, so an external open and a sidebar click take one path. Pages mount through `nav_stack` (native stack on iOS and Android: swipe back, system header, predictive back; a stack with a toolbar on desktop). `pop_on_back` decides whether the back gesture pops the route; Android back runs through the nav stack's back order, with the dirty-form guard ahead of it.
+## Routes and pages
 
-`NavPage`'s `header` slot is the app's desktop/web header on every page (those platforms have no system header); `headerLeft`, `headerRight` and `headerTitle` feed the system header on iOS and Android. The desktop shell adds a title bar, application menus, the command palette (built on `nsh_base`'s `Command`), keyboard shortcuts and an undo/redo stack whose history types live in `src/state`. The status bar shows route, running background tasks, connectivity and the last error.
+`src/routes.rs` holds two things. `Route` is a screen's address: what navigation pushes, what a deep link parses into, what undo snapshots. `Page` is what a screen declares about itself: key, title, summary, icons, how the shell frames it, an optional header button, and what it draws.
 
-## State and queries
+Each screen's folder has a `const PAGE: Page` in its `mod.rs`. `src/pages/mod.rs` joins addresses to records in one `match` (`Route::page`) and lists the sidebar's and the tab bar's screens in order.
 
-Two layers, both signals all the way down.
+The shell reads only records. `shell/mod.rs` draws the sidebar and the tab bar from `pages::sidebar()` and `pages::tabs()`; `shell/page.rs` frames a screen from `Page::frame` and `Page::action`; the palette, the application menu and the macOS command bar list `pages::sidebar()`. No file in `src/shell/` names a screen, so adding one changes nothing there.
 
-**App state** (`src/state`, `src/foundation`): plain `signal`/`computed` values plus the event bus, the background task manager, the capability registry and typed config persisted through NSH's `Storage` with schema migrations. One NSH constraint shapes this layer: `Signal::update` needs `T: Clone`, so state machines holding user types pair `stored(..)` with a version signal rather than mutating in place. A component's signals are already disposed when its `cleanup` runs, so code that must outlive a component (caches, in-flight writes) captures what it needs up front or uses `create_root`.
+The demo screens have their own enum, `showcase::Route`, wrapped by one variant, `Route::Showcase`. That is what lets `scripts/new-app.sh` remove them as a unit.
 
-**Async state** (`nsh-query`): every server-shaped read is a `use_query*` with a typed key, a `CachePolicy` (TTL, stale-while-revalidate, none) and a `RetryPolicy`; writes are `use_mutation*` that invalidate keys on success. The feed is `use_infinite_query` over `virtual_list`; the optimistic like writes `query.set_data` and rolls back on failure. The query client is shared; the devtools page lists its cache entries. The fetcher calls `src/services/fake_api.rs`, never a real network.
+## Navigation
 
-**Forms** (`nsh-form`): `use_form` owns one value type per form; `field!` binds fields with `rules` (required, email, length, async checks with debounce); `form.submit` maps server failures to field errors with `SubmitError`; dirty state drives the back guard (`pop_on_back`) and draft autosave; the settings form hydrates with `form.load` instead of initializing constants.
+`store::nav` is the one stack: the pages pushed over Home. The sidebar, the tabs, the palette, system back, deep links and a page's own button all call `nav::open`, `nav::push` or `nav::pop`, and each change snapshots the stack for undo (`store::undo`).
 
-## UI layer policy
+A screen that opens a child (a post from the feed) calls `nav::push_child`. On phones the shell pushes it as a screen of its own; on desktop widths the call answers `false` and the screen presents the child itself. The screen does not know which shell is up.
 
-`themes/theme.json` defines the semantic tokens, including `destructive-foreground`, which NSH's default theme lacks. `src/ui` holds one wrapper per `nsh_base` component in use, styled from those tokens; screens import from `src/ui` only — never from `nsh_base` directly, and no raw hex or `rgb(` outside the theme file (data colors excepted, and each one explained). The wrappers carry the states (hover, focus ring, press feedback, disabled), and the gallery page renders every control in light and dark at both widths. Density, navigation and overlays adapt per platform; the semantics stay shared.
+Pages mount through `nav_stack`: a native stack on iOS and Android (swipe back, system header, predictive back), a stack with the app's own header on the desktops and the web. Android back runs through `shell::back`: modals first, then pushed pages, then the exit ask.
 
-## Service seams
+## State
 
-Each seam is a trait with a local implementation, so the real library from the parallel projects swaps in by changing one file:
+Two layers, both signals.
 
-| Seam | Local implementation | Swapped by |
-|---|---|---|
-| `services/http.rs` — one small trait over NSH `fetch` | local requester with injected latency/failures | the nsh-http project |
-| `services/auth.rs` — session state machine | mock provider, no real account | the nsh-auth / nsh-firebase projects |
-| `services/analytics.rs` — event sink | recording sink the diagnostics page can show | analytics backend |
-| `services/monitoring.rs` — error/trace sink | in-memory sink | monitoring backend |
+**App state** (`src/store`): plain signals behind functions. Navigation, the typed config (persisted through NSH's `Storage`, with schema migrations), the UI language, the appearance, the event bus, the background task manager and the error queue. A store keeps its signal private and exports what reads and changes it. `global::<T>()` keeps one value per type, so every global has a type of its own. NSH's own reads (`dark()`, `locale()`, `font_scale()`) are already reactive and are not copied into the store.
 
-System notifications go through NSH's `Notifications` module (`notifications` capability), shown by the Platform page's notifications card; headless runs report them unavailable. Toasts are the in-app surface. The capability registry records every seam's status, and the diagnostics page renders it — nothing degrades silently.
+**Async state** (`nsh-query`, in the showcase's data screens): every server-shaped read is a `use_query*` with a typed key, a cache policy and a retry policy; writes are `use_mutation*` that invalidate keys on success. The fetchers call `services::fake_api`, never a real network.
+
+**Forms** (`nsh-form`, in the showcase's forms screens): `use_form` owns one value type per form; `field!` binds fields with rules; `form.submit` maps server failures to field errors; dirty state drives the back guard and draft autosave.
+
+Two NSH constraints shape this code: `Signal::update` needs `T: Clone`, and a component's signals are already disposed when its `cleanup` runs.
+
+## Errors
+
+`error::AppError` is the one error type: a stable `code`, a `message`, an optional `detail`. Services return it. Anything raises one with `store::errors::report_error`, which logs it, records it in the monitoring sink, publishes it on the bus and queues it. `shell/error_surface.rs` shows the newest queued error in a banner over the app.
+
+## UI
+
+`themes/theme.json` defines the semantic tokens. `src/ui` holds one wrapper per `nsh_base` component in use, styled from those tokens, with the states (hover, focus ring, press, disabled). The app's pages take every control from `ui`. The showcase also imports `nsh_base` directly where it demonstrates a base component itself.
+
+`src/native` holds the views UIKit and AppKit draw: the system's own controls, the soft scroll edges under the iOS header, the macOS command bar. Each has a fallback built from `ui` for every other platform, and each is registered from `src/lib.rs`. It is the only folder with `unsafe`; `src/lib.rs` forbids it everywhere else.
+
+## Services
+
+Each seam is a trait with a local implementation, so the real library replaces it by changing one file.
+
+| Seam | Local implementation |
+|---|---|
+| `services/http.rs`: one small trait over NSH `fetch` | a thin `fetch` caller |
+| `services/auth.rs`: the session provider | a mock user, no real account |
+| `services/analytics.rs`: event sink | an in-memory sink |
+| `services/monitoring.rs`: error and breadcrumb sink | an in-memory sink; `report_error` feeds it |
+
+Nothing in the app calls the HTTP, auth or analytics seams yet: they are the places a real app plugs in. `services/logging.rs` keeps a bounded in-memory ring; `init_file` adds a log file, and the app does not call it (add the call to `startup.rs` to turn it on).
+
+## What is built but not switched on
+
+- **The first-run flow** (`shell/first_run.rs`): the welcome page and its storage flag work and are tested (`tests/first_run.rs`), but `App` does not gate on it. `startup.rs` and `App` are where the gate goes.
+- **File logging** and the three seams above.
 
 ## i18n
 
-`i18n!` in `src/lib.rs` loads `i18n/en.yml` and `i18n/zh-CN.yml` at compile time; `t!` reads them with `en` as fallback. Locale is a state signal the settings screen switches; RTL checks run against the layouts. New user-facing strings go through `t!` in both locales.
+`i18n!` in `src/lib.rs` loads `i18n/*.yml` at compile time. `store::locale` mirrors `rust-i18n`'s locale into a signal; `locale::text("key")` gives a closure that redraws when the language changes. The Settings page and the showcase's Platform pages are translated; the other demo screens and the shell's labels are English literals.
 
 ## The signed package path
 
@@ -86,15 +109,12 @@ Capability keys declared in `nsh.json` come from the real 0.6.0 set (`KNOWN_CAPA
 
 ## Testing
 
-Four layers, all through the UI:
+- **Rust** (`tests/<screen>.rs`): headless engine tests with `nsh-testing` on a manual clock. `Headless::start` can return before the first frame, so tests `wait_for` something first.
+- **The rules** (`tests/architecture.rs`): the layout's rules, read from the source as text.
+- **TSX headless** (`tests/smoke/app.test.tsx`, `tests/smoke/pages.test.tsx`): `nsh test <file>` opens the app on an engine per test, after `cargo test`.
+- **Per target** (`tests/smoke/`, `tests/vision/`): `nsh test --target macos|ios|android|web <file>` drives the real host and saves screenshots. `tests/vision/` needs a real target and someone to look at the captures; it fails headless by design.
+- **Budgets** (`tests/trace/data.test.tsx`): `nsh test --trace` shows mount batches for a like tap and a feed scroll.
 
-- **cargo** (`tests/<area>.rs`): headless engine tests with `nsh-testing`, manual clock, no real time. `Headless::start` can return before the first frame, so tests `wait_for` something first; `Headless::shows` takes plain text while `wait_for`/`press` take selectors.
-- **TSX headless** (`*.test.tsx`): `nsh test` runs each file's tests with an engine per test after `cargo test`. `App.test.tsx` is the root smoke.
-- **Per-target smoke**: `nsh test --target macos|ios|android` opens every page and screenshots it; web runs what the web supports and lists the rest.
-- **Budgets**: `nsh test --trace` shows mount batches; a tap on the feed's like button costs a handful of mount items and scrolling keeps `nodes` flat.
+## A new app
 
-## Adding a page
-
-1. Add the route variant in `src/shell` (enum, deep-link arm, palette entry).
-2. Build the screen in your area under `src/features/<area>`, importing from `src/ui` only.
-3. Cover it in your area's `tests/<area>.rs` and the smoke list; add strings to both locales.
+`just new-app <dir> <name> <id>` copies the repo without the demo screens, the remote-screen package, the fake API and this starter's build records, then renames it. The copy keeps Home, Settings and Diagnostics.

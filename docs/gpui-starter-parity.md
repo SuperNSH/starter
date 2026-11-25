@@ -8,11 +8,11 @@ Legend: **ported** — a real implementation exists in this app; **adapted** —
 
 | gpui-starter | Here |
 |---|---|
-| Lifecycle state machine (startup, shutdown, crash handling, first-run detection) | **ported** in `src/shell` + `src/foundation`: lifecycle stage tracking, panic capture into file logs, first-run flow persisted in typed config. |
+| Lifecycle state machine (startup, shutdown, crash handling, first-run detection) | **ported** in `src/shell` + `src/store and src/services`: lifecycle stage tracking, panic capture into file logs, first-run flow persisted in typed config. |
 | Routed pages with deep links (`gpui-starter://settings`) | **ported** in `src/shell`: a typed route enum; deep links parse into the same enum through `nav_stack`, which gives them the native back stack on iOS and Android for free. |
 | Command palette (Cmd+K, fuzzy search) | **ported**: `nsh_base`'s `Command` component driving the same registry the menus and shortcuts use. |
-| Undo/redo stack (Cmd+Z / Cmd+Y) | **ported** in `src/state` + `src/shell`: history types next to the stores, palette and menu entries wired to them. |
-| Event bus (typed `AppEventQueue`, emit/drain) | **ported** in `src/foundation`: signals and an app event bus; cross-module state never goes through one-off globals. |
+| Undo/redo stack (Cmd+Z / Cmd+Y) | **ported** in `src/store` + `src/shell`: history types next to the stores, palette and menu entries wired to them. |
+| Event bus (typed `AppEventQueue`, emit/drain) | **ported** in `src/store and src/services`: signals and an app event bus; cross-module state never goes through one-off globals. |
 | Custom title bar with drag regions | **adapted**: the desktop shell builds its title bar area and every page's `header` slot; mobile gets the system header through `NavPage` instead of a hand-rolled bar. |
 | Status bar (route, tasks, degraded state, last error) | **ported** in `src/shell`. |
 | Application menus, keyboard shortcuts | **ported**: `nsh/desktop` `Menu` plus the shared command registry; shortcuts through the keymap. |
@@ -23,7 +23,7 @@ Legend: **ported** — a real implementation exists in this app; **adapted** —
 
 | gpui-starter | Here |
 |---|---|
-| JSON config with schema migrations, atomic writes, quarantine | **ported** in `src/foundation`: typed config in NSH `Storage` with schema migrations and recovery; the diagnostics page shows the migration result. |
+| JSON config with schema migrations, atomic writes, quarantine | **ported** in `src/store and src/services`: typed config in NSH `Storage` with schema migrations and recovery; the diagnostics page shows the migration result. |
 | SQLite persistence (`rusqlite`) | **adapted**: NSH apps get `Storage` from the runtime, so the boilerplate demonstrates typed config + query cache rather than embedding a second database; a document saying when to reach for one lives in the architecture page if a real app needs it. |
 | gpui-query async state (TanStack-style) | **ported** as `nsh-query`: caching, retries, invalidation, optimistic updates, infinite lists — with the feed, detail and devtools pages as the demo. |
 | Window bounds persistence | **out**: window frames are the host's business on NSH; `nsh/desktop` `Window` manages them, and there is nothing app-side to persist. |
@@ -34,12 +34,12 @@ Legend: **ported** — a real implementation exists in this app; **adapted** —
 
 | gpui-starter | Here |
 |---|---|
-| File logging (`tracing-appender`) | **ported** in `src/foundation`: file logging with the path surfaced on the diagnostics page. |
+| File logging (`tracing-appender`) | **ported** in `src/store and src/services`: file logging with the path surfaced on the diagnostics page. |
 | Telemetry with off/local/remote sinks + consent gate | **adapted**: `src/services/analytics.rs` and `src/services/monitoring.rs` are sink traits with local implementations; remote sinks arrive with the analytics/monitoring projects and keep the same consent gate. |
-| Diagnostics page (subsystem status, log path, actions) | **ported** in `src/foundation`. |
+| Diagnostics page (subsystem status, log path, actions) | **ported** in `src/store and src/services`. |
 | Central error surface (structured errors, retry/dismiss) | **ported**: structured errors surfaced through toasts (`Toast`/`ToastStack`) and the error surface, never panics. |
-| Background task manager with drain-on-shutdown | **ported** in `src/foundation`; the status bar shows running tasks. |
-| Capability registry (supported/enabled/degraded/reason) | **ported** in `src/foundation`, backed by `nsh.json` capabilities — NSH already gates native surfaces (network, webview, clipboard, picker, speech, host) at the manifest level, so the registry tracks the app's own seams on top. |
+| Background task manager with drain-on-shutdown | **ported** in `src/store and src/services`; the status bar shows running tasks. |
+| Capability registry (supported/enabled/degraded/reason) | **ported** in `src/store and src/services`, backed by `nsh.json` capabilities — NSH already gates native surfaces (network, webview, clipboard, picker, speech, host) at the manifest level, so the registry tracks the app's own seams on top. |
 | Frame-time debugger | **adapted**: `nsh run --fps` / `nsh test --fps` and `--trace` give mount budgets and frame costs; `trace/` holds the recorded runs (data area, planned until it lands). |
 | Crash report generation | **adapted**: panics land in the file log with lifecycle context; there is no separate crash-store surface on 0.6.0 (no crash API in `nsh-core/src`). |
 | Error boundary | **ported**: the root wraps pages in an `ErrorBoundary` (TSX) / `catch_error` (Rust) so a broken page degrades to the error surface. |
@@ -48,10 +48,10 @@ Legend: **ported** — a real implementation exists in this app; **adapted** —
 
 | gpui-starter | Here |
 |---|---|
-| macOS tray icon | **adapted**: the command bar (`src/shell/command_bar.rs`) draws a menu bar item with AppKit, which works with the main window hidden. NSH's `Tray`/`set_tray` (0.5.0, kept in 0.6.0) would give the same item on Windows and Linux; not built, since the app's desktop story is the macOS bar. |
-| Global hotkey (Alt+Space) | **adapted**: Option+Space opens the command bar from any app on macOS, through AppKit (`src/shell/command_bar.rs`). `register_global_shortcut` (0.5.0, kept in 0.6.0) is the cross-platform route; not used, the same bar answers on macOS already. |
-| Native local notifications + inbox + toast fallback | **adapted**: toasts are real (`src/ui/toast.rs`); there is no inbox page. The system notification is NSH's `Notifications` module (`notifications` capability) behind the Platform page's notifications card (`src/platform/notifications_card.rs`): permission state, ask, send. A headless run reports it unavailable (`tests/platform.rs`). |
-| Native file/folder pickers, clipboard, opener | **ported** on `src/platform` over NSH's `picker`, `Clipboard`, `openUrl`/`open_path`, with capability keys declared tightly in `nsh.json`. |
+| macOS tray icon | **adapted**: the command bar (`src/native/command_bar/`) draws a menu bar item with AppKit, which works with the main window hidden. NSH's `Tray`/`set_tray` (0.5.0, kept in 0.6.0) would give the same item on Windows and Linux; not built, since the app's desktop story is the macOS bar. |
+| Global hotkey (Alt+Space) | **adapted**: Option+Space opens the command bar from any app on macOS, through AppKit (`src/native/command_bar/`). `register_global_shortcut` (0.5.0, kept in 0.6.0) is the cross-platform route; not used, the same bar answers on macOS already. |
+| Native local notifications + inbox + toast fallback | **adapted**: toasts are real (`src/ui/toast.rs`); there is no inbox page. The system notification is NSH's `Notifications` module (`notifications` capability) behind the Platform page's notifications card (`src/showcase/platform/notifications_card.rs`): permission state, ask, send. A headless run reports it unavailable (`tests/platform.rs`). |
+| Native file/folder pickers, clipboard, opener | **ported** on `src/showcase/platform` over NSH's `picker`, `Clipboard`, `openUrl`/`open_path`, with capability keys declared tightly in `nsh.json`. |
 | Connectivity probe (reqwest) + interface diagnostics | **adapted**: connectivity is a state signal fed by the http seam's probe against the fake API; the offline banner on the feed is the demo. |
 | Web contents (`web_view`) | **ported** on the canvas page with messaging, behind the `webview` capability. |
 
