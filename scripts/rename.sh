@@ -110,11 +110,13 @@ rename_tree() {
     local f
     while IFS= read -r f; do
         [ -n "$f" ] || continue
-        LC_ALL=C sed -i '' \
+        # With a suffix `-i` means the same to BSD and GNU sed.
+        LC_ALL=C sed -i.rename-bak \
             -e "s/$pat_id/$new_id/g" \
             -e "s/$pat_name/$new_name/g" \
             -e "s/$pat_snake/$new_snake/g" \
             "$f"
+        rm -f "$f.rename-bak"
     done <<<"$files"
 
     echo "Renamed $old_name_v ($old_id_v) -> $new_name ($new_id) in:"

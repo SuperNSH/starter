@@ -1,9 +1,10 @@
-//! The speech card: dictation through `recognize_speech`, with its
-//! availability shown. Reading text aloud is not exposed on 0.6.0 (`nsh-core/src/speech.rs` is recognition only) and the
-//! card says so.
+//! The speech card: dictation through `nsh_extra::speech`, with its
+//! availability shown. The module is recognition only, so the card says
+//! that reading text aloud is not exposed.
 
 use nsh_base::theme;
-use nsh_core::{prelude::*, speech::SpeechRequest};
+use nsh_core::prelude::*;
+use nsh_extra::speech::{self, SpeechEvent, SpeechRequest};
 
 // nsh_core's prelude has a `t!` of its own; the app translates with rust-i18n.
 use rust_i18n::t;
@@ -19,7 +20,7 @@ fn SpeechCard() -> impl IntoElement {
     let transcript = signal(String::new());
     let owner = Owner::current();
     spawn(async move {
-        let ok = speech_available().await;
+        let ok = speech::available().await;
         if owner.is_live() {
             available.set(Some(ok));
         }
@@ -63,13 +64,13 @@ fn SpeechCard() -> impl IntoElement {
                     listening.set(true);
                     transcript.set(String::new());
                     let owner = Owner::current();
-                    let mut session = recognize_speech(SpeechRequest::default());
+                    let mut session = speech::recognize(SpeechRequest::default());
                     spawn(async move {
                         while let Some(event) = session.next().await {
                             if !owner.is_live() {
                                 break;
                             }
-                            if let nsh_core::speech::SpeechEvent::Result { text, .. } = event {
+                            if let SpeechEvent::Result { text, .. } = event {
                                 transcript.set(text);
                             }
                         }

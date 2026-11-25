@@ -1,5 +1,5 @@
 //! Everything that runs once at launch, in order. `App` calls [`install`]
-//! from its body, so each piece lives exactly as long as the app's root.
+//! from its window's content, so each piece lives as long as the window.
 
 use nsh_core::prelude::*;
 
@@ -21,14 +21,17 @@ pub fn install() {
     // 2. The back order: modals first, then pushed pages, then the exit ask.
     back::install();
 
-    // 3. The lifecycle phase the status bar shows.
+    // 3. The window comes back when the Dock asks for it.
+    chrome::show_on_reopen();
+
+    // 4. The lifecycle phase the status bar shows.
     lifecycle::watch();
 
-    // 4. Deep links: the one the app was launched with, then every later one.
+    // 5. Deep links: the one the app was launched with, then every later one.
     deep_link::open_pending();
     deep_link::listen();
 
-    // 5. Config saves leave a line in the log.
+    // 6. Config saves leave a line in the log.
     event_bus::subscribe(event_bus::TOPIC_CONFIG_SAVED, |event| {
         let name = config::load().display_name;
         let who = if name.is_empty() {

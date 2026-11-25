@@ -6,7 +6,7 @@ use std::sync::LazyLock;
 
 use nsh_core::element::SharedString;
 
-/// The capability keys NSH 0.6.0 knows, in the order of the runtime's
+/// The capability keys NSH 0.7.0 knows, in the order of the runtime's
 /// own list (`KNOWN` in `nsh-core/src/access.rs`). Since 0.5.0 an unknown
 /// key is only a build warning, so this list is checked against the source.
 pub const KNOWN_CAPABILITIES: &[&str] = &[
@@ -103,5 +103,11 @@ mod tests {
         assert!(declared("clipboard"));
         assert!(declared("webview"));
         assert!(!declared("network"));
+    }
+    // Break seen: `windows` left out of nsh.json — the desktop app ran with
+    // no window, and only this test said so (headless grants everything).
+    #[test]
+    fn the_manifest_grants_the_window_the_desktop_app_opens() {
+        assert!(declared("windows"));
     }
 }

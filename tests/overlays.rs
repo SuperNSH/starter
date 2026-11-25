@@ -45,11 +45,11 @@ fn reveal(app: &mut Headless, selector: &str) {
 use nsh_core::{Points, geometry::point};
 use nsh_engine::{EngineConfig, Root};
 use nsh_starter::showcase::overlays::OverlaysTestRoot;
-use nsh_testing::{DialogAnswer, Headless};
+use nsh_testing::{DialogAnswer, DragOptions, Headless, windowed_root};
 
 /// A desktop-sized surface at `width`, on the manual clock.
 fn desktop(width: f32) -> Headless {
-    let mut config = EngineConfig::new(Root::of::<OverlaysTestRoot>());
+    let mut config = EngineConfig::new(windowed_root::<OverlaysTestRoot>());
     config.viewport = nsh_core::Size::new(Points(width), Points(700.0));
     config.environment.os = nsh_core::platform::Os::MacOs;
     config.environment.idiom = nsh_core::platform::Idiom::Desktop;
@@ -289,8 +289,12 @@ fn the_dock_drag_lands_in_the_layout_data() {
     app.wait_for("text:Layout: row([Readme, main.rs] [Preview])")
         .unwrap();
     // Drag the Preview tab onto the first group, below its tab bar.
-    app.drag("id:tab-preview", point(Points(-130.0), Points(140.0)))
-        .unwrap();
+    app.drag(
+        "id:tab-preview",
+        point(Points(-130.0), Points(140.0)),
+        DragOptions::default(),
+    )
+    .unwrap();
     app.wait_for("text:Layout: row([Readme, main.rs, Preview])")
         .unwrap();
     // The layout is the app's data: Reset writes the initial one back.

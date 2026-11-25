@@ -9,7 +9,7 @@
 extern crate rust_i18n;
 
 use nsh_base::theme;
-use nsh_core::prelude::*;
+use nsh_core::{element::desktop::window as app_window, prelude::*};
 
 i18n!("i18n", fallback = "en");
 
@@ -64,12 +64,20 @@ fn macos_components(components: &nsh_platform_macos::Components) {
 /// The application's root: the launch wiring, then the shell on the
 /// surface's background and text color. The safe area is left to the
 /// shell's pages and bars, which know where their headers and tab bars sit.
+/// The app's root: its one window. Off the desktops `window()` shows its
+/// content in the app's one surface.
 #[component]
 pub fn App() -> impl IntoElement {
-    startup::install();
-    view()
-        .flex_1()
-        .bg(move || theme().background)
-        .text_color(move || theme().foreground)
-        .child(shell::shell())
+    app_window()
+        .id("main")
+        .title(services::manifest::info().0.to_string())
+        .content(|| {
+            // Inside the window: keystrokes and the title bar are its own.
+            startup::install();
+            view()
+                .flex_1()
+                .bg(move || theme().background)
+                .text_color(move || theme().foreground)
+                .child(shell::shell())
+        })
 }

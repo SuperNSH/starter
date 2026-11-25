@@ -6,7 +6,7 @@
 use nsh_base::theme;
 use nsh_core::{
     desktop::{MenuRole, WindowFrame},
-    element::desktop::{MenuItem, main_window, popup_menu, set_application_menu},
+    element::desktop::{MenuItem, current_window, popup_menu, set_application_menu},
     prelude::*,
 };
 
@@ -53,6 +53,7 @@ fn context_menu() -> Vec<MenuItem> {
 
 #[component]
 fn WindowCard() -> impl IntoElement {
+    let window = stored(current_window());
     // The application-menu items chosen since the page opened.
     let picks = signal(0_u32);
     // The menu lives while this card does; the effect re-sets it when the
@@ -74,11 +75,8 @@ fn WindowCard() -> impl IntoElement {
                     localized("platform.desktop.title_button"),
                     {
                         move || {
-                            set_window_title(format!(
-                                "{} — {}",
-                                t!("app.name"),
-                                t!("platform.title")
-                            ));
+                            let title = format!("{} — {}", t!("app.name"), t!("platform.title"));
+                            window.with(|window| set_window_title(window, title));
                             picks.update(|count| *count += 1);
                         }
                     },
@@ -99,7 +97,7 @@ fn WindowCard() -> impl IntoElement {
                     localized("platform.desktop.maximize"),
                     {
                         move || {
-                            toggle_maximize();
+                            window.with(|window| toggle_maximize(window));
                             picks.update(|count| *count += 1);
                         }
                     },
@@ -109,11 +107,12 @@ fn WindowCard() -> impl IntoElement {
                     localized("platform.desktop.frame"),
                     {
                         move || {
-                            main_window().set_bounds(WindowFrame {
+                            let frame = WindowFrame {
                                 width: Some(px(480.0)),
                                 height: Some(px(720.0)),
                                 ..WindowFrame::default()
-                            });
+                            };
+                            window.with(|window| window.set_bounds(frame));
                             picks.update(|count| *count += 1);
                         }
                     },

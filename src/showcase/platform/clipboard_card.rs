@@ -26,7 +26,9 @@ fn ClipboardCard() -> impl IntoElement {
                     "platform-clipboard-copy",
                     localized("platform.clipboard.copy"),
                     move || {
-                        set_clipboard(draft.get_untracked());
+                        // The copy happens either way; the answer only says
+                        // whether the system took it.
+                        drop(set_clipboard(draft.get_untracked()));
                     },
                 ))
                 .child(quiet_button(

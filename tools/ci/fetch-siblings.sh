@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Fetch the sibling libraries that Cargo.toml and packages/remote-screen read by relative path.
+# Fetch the sibling libraries whose TSX packages packages/remote-screen reads by relative path.
 # The SHAs are the revisions this repo was built against locally; both are ancestors of origin's master.
 set -euo pipefail
 
@@ -15,5 +15,10 @@ fetch() {
   echo "$name at $(git -C "$dir" rev-parse --short HEAD)"
 }
 
-fetch nsh-query SuperNSH/query 4f5ee0edcc1e153a381739e4063c952b7ceffdb7
-fetch nsh-form SuperNSH/form 06053c367618e0feeec8cd3765636d552f987b9d
+fetch nsh-query SuperNSH/query 1088fddd053cb10d71e9978a3c6704420f8ed970
+fetch nsh-form SuperNSH/form 7b26c60f365d7a3892cd47abea9ecb7aad1f3ac2
+
+# The TSX packages import TanStack from npm; install what they depend on.
+for name in nsh-query nsh-form; do
+  (cd "$parent/$name/packages/$name" && npm install --omit=dev --no-package-lock --no-audit --no-fund)
+done

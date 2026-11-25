@@ -1,0 +1,695 @@
+A large release: 606 pull requests since v0.6.0 from 76 contributors (fixes already shipped in v0.6.1 are included). Highlights are independent desktop windows with app quit modes, NSH modules (nshm) installed with `nsh add` and locked in `nsh.lock`, the official `nsh-extra` modules (camera, push, photos, speech, location), `nsh publish` to the App Store, Google Play, Flathub and the Microsoft Store, a built-in update prompt with resumable and delta downloads, and a RichEditor aligned with Tiptap.
+
+## New Features
+
+- **Desktop lifecycle**: `application.quitMode` and `Application.setQuitMode()`, `reopen` / `lastWindowClosed` / cancellable `quitRequest` events, per-window key bindings (#2307); `TitleBar` in `nsh/base` for windows with a hidden title bar, kept clear of the window controls (#2937).
+- **NSH modules (nshm)**: `nsh add`, `nsh remove` and `nsh upgrade` install crates of components and modules from crates.io, GitHub, Git or a path, listed in `nsh.json` `dependencies` and locked in `nsh.lock`; installed modules build once per machine, so later runs start in about 0.2 s (#2349, #2521, #2522, #2733). `nsh init --template mixed` puts the app's Rust in an `ext/` nshm (#2829).
+- **`nsh-extra`**: first-party modules with per-module features: `camera` (#2692), `push` on iOS and Android (#2729, #2818), `photos` and the embedded `PhotosPicker` on iOS (#2935, #2949), `speech` on every platform (#2947) and `location` on macOS, iOS and the web (#3070).
+- **Publishing and packaging**: `nsh publish ios|android|linux|windows` uploads to the App Store / TestFlight, Google Play, Flathub and the Microsoft Store from a `store` section in `nsh.json`, with `nsh publish status` (#3101, #3113, #3114). `nsh package` builds AppImage, Flatpak and MSIX (#3101). Android: adaptive icons, launch screen, `android/res`, `android.permissions`, `android.libraries` (jar, dex, AAR), queries and components (#2592, #2594, #2735, #2523, #2820, #2828). Apple: app extensions on iOS and macOS, localized `Info.plist` strings, a privacy manifest merged with NSH's own entries, crate-declared plist and entitlements (#2699, #2879, #2819, #2834, #3125, #2878). `nsh.json` gains `links` for Universal Links / App Links (#2537), `entry`, `logDir`, `watch` and `timeZones` (#2942, #3083, #2971, #3129).
+- **Updater**: a built-in update prompt, `promptForUpdate({ quiet })`, with release notes, skip, remind and install, also for Rust apps (#2346); downloads resume after interruption (#2489); apps on the previous version download a zstd patch (#2800); updates can change the app id or executable name (#2339).
+- **Runtime APIs**: `network()` for online state, link kind and metered state (#2875); `Storage.on("change")` across tabs and windows (#2844); `AppSettings.open()` on mobile (#2823); runtime `addTranslations` (#2806); `AlertDialog.show({ input })` with the system text field (#2354); Rust `host_call` / `host_post` / `on_host_event` and `app_info()` (#2887, #2689); `fetch`'s `cache` option (#2649); Android runtime permissions from Rust (#2536).
+- **Input and gestures**: `captureKeys="text"` forwards typing to the first `Input` in chat-style layouts (#2960); `keymap.bind(..., { overFocused: true })` (#2755); `Modifiers.altGraph` (#2979); `onFocusIn` / `onFocusOut` (#2493); directional and edge pans (#2905); Android predictive back progress (#2915); `smoothWheel` / `wheelLineHeight` (#2661).
+- **Files**: file drop on the web, Android and iOS, and image drops from browsers and Mail on macOS (#2867, #2918, #2693, #2964); pasted and dropped files are readable without an `fs` root (#2968); `pasteMaxSize` (#2972); Android share-sheet targets for declared file types (#2902).
+- **Styling and components**: transitionable `clipPath` (#2894), `accentColor` (#2462), `scrollbarInset` (#2403); `DataTable` `grow` / `autoFit` and `onRowActivate` (#2743, #2872); `Tabs` `orientation` (#2873); `Calendar` / `DatePicker` range preview (#3086); `Tree` header and empty slots, `DockArea` handle and toolbar renderers (#2416, #2420, #2425); `copyText` for inline views and `clearSelection()` (#2697, #2585); WebView `zoomable` and `allowOrigin` (#3144, #3145); Windows 11 backdrop blur (#2471).
+- **Rich editor**: tables size columns to their content and scroll on their own, with row and column move grips (#3044, #2950); keyboard accessory bar on iOS (#2747).
+- **Accessibility**: live regions on every platform (#2816), `tabpanel` and `textbox` roles (#2952, #2958), state words spoken in the app's language (#2838), VoiceOver reaches inline links (#2876).
+- **Terminal backend**: images through the kitty graphics protocol or half blocks, pinned sticky headers, and roomier, clearer default styling (#2586, #2596, #2982, #2993).
+- **CLI and testing**: `--device` / `ANDROID_SERIAL` (#2675), `nsh run --background` (#2780), `nsh test --jobs` and `--release` (#2809, #2815), `nsh dev --host` (#2946), `nsh check` warns about unknown `nsh.json` keys (#2776); `app.layout()`, `app.accessibility()`, `app.screenshot()` on macOS and Linux, and pressing a given point (#2812, #2928, #2998).
+
+## Improvements
+
+- **Performance**: Taffy 0.16 makes first-frame layout 5–18% faster (#2989); many quadratic paths are now linear (mounting children, tooltips, list variants, long RichEditor documents) (#2347, #2413, #2616, #2962, #2768); RichEditor mounts only blocks near the viewport (#2796); long Markdown parses in parts (1.9 MB from ~21 s to under 1 s) (#2360); layout memory is about 20% lower on large tables (#2810); hot-update bytecode is about 84% smaller (#3064); on macOS, cached canvas text, layer-only text nodes and fewer system round trips (#3121, #3133, #2997).
+- **Security**: `fetch` drops credentials on cross-origin redirects (#2666); web view downloads stay within the allowed hosts (#2648); web view pop-ups respect the `webview` capability on Windows (#2423).
+- **Android**: apps survive activity recreation with pages, dialogs, scroll and focus intact (#3050); text selection, menus, Back on Android 13–15, keyboards and system bars all behave like native apps (#3019–#3023, #3047, #2986, #2630, #2602).
+- **iOS**: modals, sheets and system UI over a closing dialog behave correctly (#2745, #2821, #2969); multi-finger touches deliver every finger (#3152); keyboard, safe-area and navigation-bar fixes (#2850, #3123, #2822).
+- **macOS**: smooth window drags with edge tiling again (#2663); resizes no longer show stale content (#3132); multiline inputs hand unused scrolls to the outer scroll view (#2984, #3142); synthetic italic for CJK fonts (#3041, #3120).
+- **Windows**: multiline inputs, IME composition, fractional-DPI text and wheel gliding (#2672, #3024, #2931, #2690).
+- **Linux**: desktop font rendering settings, a multi-font crash fix, focus after modals and display-rate animations (#2396, #2508, #2671, #2943).
+- **Web**: on-demand loading of `nsh/base` parts and the shader compiler shrinks the main wasm module (#3081, #3122, #3146); `TextView` links are real `<a href>` (#2945); CSS `zoom` is respected (#3153).
+- **Right-to-left, i18n and text**: RTL fixes on Apple and Android (#2343, #2357, #2547), more month and weekday names (#2774), `text-pretty` everywhere (#2792), text typeset at the measured width (#2545).
+
+
+## Breaking Changes
+
+- **Desktop windows close independently.** Windows opened with `<Window>` / `Window.open` no longer close with the main window. Plain TSX roots get an implicit first window named `main`; Rust desktop roots must declare a `window()` to show content, and code that called `main_window().close()` to end the app should call `quit()`. The default `application.quitMode` is `platform`: macOS keeps running after the last window closes, Windows and Linux quit. (#2307)
+- **`Speech` moved to `nsh-extra`.** Run `nsh add nsh-extra --features speech` and import `Speech` from `"nsh-extra"`; in Rust use `nsh_extra::speech::{available, recognize, set_backend}`. iOS and macOS apps no longer get the microphone and speech usage descriptions unless the `speech` feature is on. Tests use `app.fake("nsh-extra/speech", ...)`. (#2947)
+- **`nsh-extra` follows the nsh that builds the app.** A release pins it to its own version, a nightly to its commit; an `nsh.json` asking for a version the building nsh does not satisfy now fails up front. (#2980)
+- **Focus and keys.** On macOS and iOS a pointer press no longer moves keyboard focus to the pressed control, and pointer-opened menus no longer focus their trigger on close; call `ref.focus()` in `onPress` if you relied on it (#2783). With no focused view, raw key events start at the window root and bubble (#2414, #2574). Focused content whose `captureKeys` includes `escape` now gets Escape before an open `Popover` or `Sheet` (#2794). Pointer-opened menus take Down/Enter while an outside input is editing (#3080). macOS Tab skips disabled and `focusable={false}` inputs (#3038).
+- **Events.** Enter/Space and assistive-technology presses report `clickCount: 0` (#2509). Linux media, volume and browser keys use UI Events names such as `MediaPlayPause` (#2459). On macOS and iOS, `Notifications.on("press")` fires only for notifications the app showed; others go to a native handler (#2700).
+- **Results instead of silence.** `Clipboard.writeText` / `write` resolve with `"written" | "failed" | "requested"`, and the Rust setters return `Answer<ClipboardWrite>` (#2753). Web `Storage.setItem` rejects with `ERR_NSH_QUOTA_EXCEEDED` when the browser refuses a value; `StorageBackend::write` returns `Result` (#2408). `checkForUpdate` rejects when the `updater` feature is off but the app has an update configuration (#2641). `open_auth_session` fails at once on web, GPUI and the terminal backend (#2722). Without a host, `host.call` / `host.post` reject with `ERR_ACCESS_DENIED` (#2887).
+- **Tree depth limit.** Apps nesting views more than 1024 levels deep stop with an error instead of overflowing the stack; Rust `ApplyError` gains `TooDeep` (#2614).
+- **RichEditor matches Tiptap.** Enter keeps marks, input rules undo in two steps, string `insertContent` is parsed as HTML (use `pasteHTML` for a paste), `setMark("textStyle")` merges attributes, `javascript:` / `data:` links are dropped, and table HTML follows Tiptap's, so saved HTML can differ from before (#3089–#3099).
+- **Components.** Android `ContextMenu` with `items` shows the system popup menu instead of drawing its children (#2549). DockArea tabs sit in a scroll view: space tabs with a margin in `tabClass`, not `gap` (#2431). iOS web views play video inline (#2970).
+- **Packaging.** Linux and Windows packages leave out WebKitGTK / WebView2 unless the app makes a `WebView`; add `"features": ["webview"]` if the analysis can't see yours (#2397). A Rust app pinning `nsh-core` to a Git revision other than the running `nsh`'s now stops with an error (#2721). Android native components must unwrap `ContextWrapper`s to reach the `Activity` (#3050).
+- **Rust API.** New fields on public structs need `..Default::default()` in literals: `ScrollBehavior.scrollbar_inset`, `ScreenConfig.header_shadow_visible`, `HttpRequest.cache`, `AttributedText.copy_texts`, `Environment.scheme_links`, `KeyOptions` / `KeyBinding.over_focused`, `Effects.clip_path`, `PanActivation` and `EventPayload::Pan` fields, `Modifiers.alt_graph`, `InputConfig.paste_max_size`, GPUI `AppOptions.inline_root` (#2403, #2404, #2649, #2697, #2722, #2755, #2894, #2905, #2979, #2972, #2974). `AccessibilityRole` gains `TabPanel` and `Textbox` (#2952, #2958). Updater host calls take a resume offset and `Installation::install` returns the new executable path (#2489, #2339). `Bundle` carries `links: AppLinks` instead of `url_schemes` (#2537). `Dialog` gains `input` and answers with a `DialogReply` (#2354). Testing drags take `DragOptions` (#2726). After `set_host_tokens`, GPUI embeds use the host's foreground colour for uncoloured text (#2569).
+
+<details><summary>Contributors</summary>
+
+@0x1306a94 @1havecoke @821869798 @aiiven @AkaraChen @alexwan02 @BeADre @Blackman99 @blueberrycongee @burdygin @chaxus @ClarkThan @Cooooooker @cosformula @daoleno @davo20019 @daydoing @Debbl @Duskriver @Geylnu @gilbertwong96 @haveanicedavid @Hermon000 @hexuria @hmziqrs @hsingjui @huacnlee @ihavecoke @itisvincent @jcdiv47 @jjyr @Joy-jinyu @jsiu93 @KeepNoob @kim0 @labcoder @LeeDashan @Lemenxzy @lnnduy @lurenjia534 @lyricat @M4n5ter @maanaskarwa @madcodelife @mengyinghu-sys @mrtolkien @NiceBlueChai @obito-t @PeatBoy @Petit-Iceberg @rankjie @razvangeangu @RebelBIrd @richerfu @Rosemary1812 @sunfuze @sunli829 @t4t5 @tacshi @teng-lin @ttizze @Tzyito @UncertaintyDeterminesYou4ndMe @villatothesea @wabzqem @wenlingang @wu21-web @yangkx1024 @yerlytech @YougLin-dev @youguanxinqing @yuanzhuang-svg @yuluod @YuniqueUnic @zbysir @ZZombiee
+
+</details>
+
+<details><summary>What's Changed</summary>
+
+- xtask: Build the distribution and runtimes from the committed lock files by @teng-lin in https://github.com/longbridge/nsh/pull/2330
+- macos: Keep a hovered window as the input's under nsh test by @teng-lin in https://github.com/longbridge/nsh/pull/2335
+- ios: Let VoiceOver move into labelled lists by @madcodelife in https://github.com/longbridge/nsh/pull/2336
+- windows: Draw input text in place on a monitor of another scale than the system's by @sunli829 in https://github.com/longbridge/nsh/pull/2338
+- docs: Recommend a custom title bar on desktop in Design Guides by @huacnlee in https://github.com/longbridge/nsh/pull/2348
+- android: Report Back's release to a view's onKeyUp by @teng-lin in https://github.com/longbridge/nsh/pull/2344
+- android: Keep a focus() request until its view is shown by @teng-lin in https://github.com/longbridge/nsh/pull/2345
+- core: Mount many children of one parent without a search for each by @madcodelife in https://github.com/longbridge/nsh/pull/2347
+- macos: Keep the start of right-to-left text in view when a line is cut by @teng-lin in https://github.com/longbridge/nsh/pull/2343
+- updater: Install updates that change the app's id or executable name by @huacnlee in https://github.com/longbridge/nsh/pull/2339
+- menu: Stop overscroll bounce and hide internal scroll bars by @huacnlee in https://github.com/longbridge/nsh/pull/2340
+- text_view: Add a tableGrid part so apps can frame a table by @UncertaintyDeterminesYou4ndMe in https://github.com/longbridge/nsh/pull/2342
+- android: Share input alignment and letter spacing with TextLayouts by @blueberrycongee in https://github.com/longbridge/nsh/pull/2356
+- android: Tell TalkBack a control's new state after the app changes it by @teng-lin in https://github.com/longbridge/nsh/pull/2352
+- android: Move the focus into the app on the first arrow key by @teng-lin in https://github.com/longbridge/nsh/pull/2367
+- text_view: Read a long Markdown text in parts by @madcodelife in https://github.com/longbridge/nsh/pull/2360
+- alert_dialog: Add a text field to the system alert by @madcodelife in https://github.com/longbridge/nsh/pull/2354
+- text: Share CoreText RTL decoration bounds and truncated-line alignment by @blueberrycongee in https://github.com/longbridge/nsh/pull/2357
+- fs: Give the fs capability its roots on every native OS by @blueberrycongee in https://github.com/longbridge/nsh/pull/2359
+- web: Measure letter spacing and clamping by grapheme cluster by @blueberrycongee in https://github.com/longbridge/nsh/pull/2355
+- cli: Build an app's Rust code for its packages' minimum Apple system by @madcodelife in https://github.com/longbridge/nsh/pull/2368
+- web: Put a page in the back / forward cache in the background by @madcodelife in https://github.com/longbridge/nsh/pull/2369
+- list: Read a keyed row at its new index whichever memo runs first by @madcodelife in https://github.com/longbridge/nsh/pull/2370
+- ios: Link AuthenticationServices in apps that embed the runtime by @daoleno in https://github.com/longbridge/nsh/pull/2374
+- website: Tighten Elements demo layout and accordion hover by @huacnlee in https://github.com/longbridge/nsh/pull/2365
+- core: Keep a text block's only raw text run without a node by @huacnlee in https://github.com/longbridge/nsh/pull/2366
+- docs: Name `modifiers.control` in the onWheel declaration by @jsiu93 in https://github.com/longbridge/nsh/pull/2401
+- docs: Point non-essential features to third-party extensions by @huacnlee in https://github.com/longbridge/nsh/pull/2400
+- linux: Draw a menu's check as a check, not a wide "V" by @yangkx1024 in https://github.com/longbridge/nsh/pull/2383
+- text: Show a view's own cursor over the texts inside it in a selectable view by @huacnlee in https://github.com/longbridge/nsh/pull/2363
+- cli: Add `nsh add` for third-party extensions by @huacnlee in https://github.com/longbridge/nsh/pull/2349
+- mobile: Let embedding apps turn content culling off by @ZZombiee in https://github.com/longbridge/nsh/pull/2385
+- windows: Give back Escape and Ctrl+C when a selected text gets new content by @sunli829 in https://github.com/longbridge/nsh/pull/2394
+- web: Skip redundant writes when reconciling ARIA attributes by @cosformula in https://github.com/longbridge/nsh/pull/2380
+- web: Step a held frame's animations at the time its callbacks run by @Blackman99 in https://github.com/longbridge/nsh/pull/2390
+- scroll: Add `scrollbarInset` to keep the indicator clear of floating bars by @madcodelife in https://github.com/longbridge/nsh/pull/2403
+- ios: Hide the hairline under a NavPage's header with headerShadowVisible by @madcodelife in https://github.com/longbridge/nsh/pull/2404
+- web: Follow other tabs' storage changes and report refused writes by @madcodelife in https://github.com/longbridge/nsh/pull/2408
+- text_view: Read a long Markdown text in parts with plugins too by @madcodelife in https://github.com/longbridge/nsh/pull/2409
+- text_view: Put a list's markers before their items in a selection by @aiiven in https://github.com/longbridge/nsh/pull/2387
+- core: Keep a memo let go during its own run from reading or writing another node by @madcodelife in https://github.com/longbridge/nsh/pull/2402
+- core: Refuse a Windows path as a URL to open by @sunli829 in https://github.com/longbridge/nsh/pull/2388
+- web: Keep the pointer fields on touch events in the browser runtime by @jsiu93 in https://github.com/longbridge/nsh/pull/2399
+- macos: Build the text tests again with a qualified Arc by @jsiu93 in https://github.com/longbridge/nsh/pull/2412
+- web: Send only the animated values that changed on a frame by @Blackman99 in https://github.com/longbridge/nsh/pull/2407
+- dock: Scroll a tab bar's tabs when they do not fit by @KeepNoob in https://github.com/longbridge/nsh/pull/2431
+- windows: Keep hover across drag regions and off the system title bar by @teng-lin in https://github.com/longbridge/nsh/pull/2353
+- data_table: Keep the horizontal scroll bar between the fixed columns by @Lemenxzy in https://github.com/longbridge/nsh/pull/2430
+- web: Let a swipe on a scroll view with nothing to scroll scroll the view around it by @Blackman99 in https://github.com/longbridge/nsh/pull/2418
+- resizable: Stop a drag where the panel after the handle reaches its maxSize by @aiiven in https://github.com/longbridge/nsh/pull/2415
+- js: Skip the status bar command when setup receives null by @jsiu93 in https://github.com/longbridge/nsh/pull/2410
+- text: Share one approximate line height between estimates and tests by @blueberrycongee in https://github.com/longbridge/nsh/pull/2358
+- linux: Follow the desktop's font rendering settings by @huacnlee in https://github.com/longbridge/nsh/pull/2396
+- cli: Identify dev sessions by absolute entry path by @huacnlee in https://github.com/longbridge/nsh/pull/2395
+- android: Treat the D-pad center key as Enter for shortcuts by @huacnlee in https://github.com/longbridge/nsh/pull/2382
+- dialog: Let Escape reach a dialog over a focused field in headless tests by @huacnlee in https://github.com/longbridge/nsh/pull/2364
+- button: Add `busy`, so screen readers say a button's action is running by @itisvincent in https://github.com/longbridge/nsh/pull/2444
+- android: Let an app's Rust crate register native components by @821869798 in https://github.com/longbridge/nsh/pull/2405
+- web: Keep the keyboard focus out of hidden views by @Joy-jinyu in https://github.com/longbridge/nsh/pull/2392
+- list: Count the texts a block shows without a node in the keyed list tests by @madcodelife in https://github.com/longbridge/nsh/pull/2426
+- core: Mount many tooltips at once in time linear in their number by @madcodelife in https://github.com/longbridge/nsh/pull/2413
+- android: Keep scroll calls from reaching native code after the view is destroyed by @alexwan02 in https://github.com/longbridge/nsh/pull/2449
+- ios: Prepare haptic feedback generators when an interaction starts by @madcodelife in https://github.com/longbridge/nsh/pull/2446
+- linux: Press a focused stop once per key press, not on auto-repeat by @kim0 in https://github.com/longbridge/nsh/pull/2470
+- linux: Drop popup shadows and solid-csd bezels on uncomposited X11 by @jjyr in https://github.com/longbridge/nsh/pull/2460
+- linux: Apply background and popover tokens to root surfaces and text edit menus by @jjyr in https://github.com/longbridge/nsh/pull/2452
+- linux: Report standard key names for media, volume and browser keys by @teng-lin in https://github.com/longbridge/nsh/pull/2459
+- ios: Keep a scroll view resting at its start when its content inset changes by @madcodelife in https://github.com/longbridge/nsh/pull/2475
+- core: Add the accentColor style and color the system switch with it by @madcodelife in https://github.com/longbridge/nsh/pull/2462
+- linux: Take what the engine sends before the frame clock paints by @aiiven in https://github.com/longbridge/nsh/pull/2480
+- linux: Release keyboard focus when a stop becomes ineligible by @kim0 in https://github.com/longbridge/nsh/pull/2481
+- scroll: Place a built-in bar at its `scrollbarInset`'s top and left by @madcodelife in https://github.com/longbridge/nsh/pull/2458
+- ios: Play the selection haptic when touch selects in a selectable view by @madcodelife in https://github.com/longbridge/nsh/pull/2494
+- ios: Keep the keyboard up when UIKit reports no next focused view by @maanaskarwa in https://github.com/longbridge/nsh/pull/2486
+- linux: Offset menu separator negative margins with min-width by @jjyr in https://github.com/longbridge/nsh/pull/2451
+- ios: Preserve the latest content height when narrowing a scroll view by @ttizze in https://github.com/longbridge/nsh/pull/2491
+- ios: Dispatch press-down before moving keyboard focus by @ttizze in https://github.com/longbridge/nsh/pull/2492
+- macos: Keep a hidden window hidden when it is asked for full screen by @sunli829 in https://github.com/longbridge/nsh/pull/2487
+- ios: Cover an untitled header with its background on scroll by @madcodelife in https://github.com/longbridge/nsh/pull/2503
+- android: Unbox the dialog command before moving its fields out by @madcodelife in https://github.com/longbridge/nsh/pull/2498
+- windows: Keep a composition in a point-wide input where the input is by @Blackman99 in https://github.com/longbridge/nsh/pull/2497
+- video: Act on `paused` only when it changes on Apple and Android by @sunli829 in https://github.com/longbridge/nsh/pull/2495
+- website: Bring the storage tests and demo up to refused writes by @madcodelife in https://github.com/longbridge/nsh/pull/2511
+- animation: Keep an animation's start when its first frame is held by @madcodelife in https://github.com/longbridge/nsh/pull/2505
+- ios: Revert the invisible title of an untitled header that shows its background on scroll by @madcodelife in https://github.com/longbridge/nsh/pull/2512
+- cli: Leave WebKitGTK out of a packaged app that makes no web view by @huacnlee in https://github.com/longbridge/nsh/pull/2397
+- android: Skip scroll callbacks after the view is destroyed by @huacnlee in https://github.com/longbridge/nsh/pull/2442
+- windows: Leave an ended video ended when another prop changes by @sunli829 in https://github.com/longbridge/nsh/pull/2427
+- windows: Keep the app's size while its main window is minimized by @sunli829 in https://github.com/longbridge/nsh/pull/2428
+- windows: Keep a hidden window hidden when its mode or bounds are set by @sunli829 in https://github.com/longbridge/nsh/pull/2419
+- windows: Open no browser window for a web view's new-window request by @sunli829 in https://github.com/longbridge/nsh/pull/2423
+- keyboard: Send raw keys to the window's root view when nothing is focused by @huacnlee in https://github.com/longbridge/nsh/pull/2414
+- updater: Add built-in update prompt by @huacnlee in https://github.com/longbridge/nsh/pull/2346
+- cli: Name the crates nsh add installs nshm by @huacnlee in https://github.com/longbridge/nsh/pull/2521
+- windows: Fit a view's background, clip and shadow corners as its border's by @sunli829 in https://github.com/longbridge/nsh/pull/2435
+- mobile: Play a long press's weight when it selects a word by @madcodelife in https://github.com/longbridge/nsh/pull/2513
+- android: Leave no keyboard padding in a dialog's scroll view by @lyricat in https://github.com/longbridge/nsh/pull/2518
+- web: Act on a video's `paused` only when it changes by @sunli829 in https://github.com/longbridge/nsh/pull/2515
+- android: Keep a page's headerRight off the screen edge in RTL by @chaxus in https://github.com/longbridge/nsh/pull/2534
+- android: Place a page's headerLeft before its title by @chaxus in https://github.com/longbridge/nsh/pull/2528
+- core: Fix scrollbar insets and align regression checks by @Rosemary1812 in https://github.com/longbridge/nsh/pull/2301
+- dock: Pass renderHandle on to the handles between a split's groups by @KeepNoob in https://github.com/longbridge/nsh/pull/2420
+- docs: Add Windows nightly install and drop comments from install commands by @huacnlee in https://github.com/longbridge/nsh/pull/2562
+- linux: Measure text with PangoFT2 so the engine never uses cairo-ft by @huacnlee in https://github.com/longbridge/nsh/pull/2508
+- linux: Take a disabled view's subtree out of the Tab order by @huacnlee in https://github.com/longbridge/nsh/pull/2482
+- android: Claim the schemes a packaged JS app declares by @huacnlee in https://github.com/longbridge/nsh/pull/2510
+- core: Report pointerless presses with clickCount 0 by @huacnlee in https://github.com/longbridge/nsh/pull/2509
+- macos: Keep lifted input pads in their logical hover chain by @huacnlee in https://github.com/longbridge/nsh/pull/2484
+- terminal: Lay the terminal tests' text out one row a line as the TUI does by @huacnlee in https://github.com/longbridge/nsh/pull/2468
+- android: Start a page's headerLeft where the navigation icon stands by @madcodelife in https://github.com/longbridge/nsh/pull/2543
+- android: Show no focus ring after the back button or a volume key by @madcodelife in https://github.com/longbridge/nsh/pull/2548
+- cli: Let Android packages declare the permissions an app lists by @hmziqrs in https://github.com/longbridge/nsh/pull/2523
+- text: Let a view color the selections of the texts inside it by @madcodelife in https://github.com/longbridge/nsh/pull/2546
+- ios: Let a floating view shape a scroll view's edge effect by @madcodelife in https://github.com/longbridge/nsh/pull/2532
+- android: Show the system's popup menu for MenuButton and ContextMenu by @madcodelife in https://github.com/longbridge/nsh/pull/2549
+- carousel: Clear the indicator target when its carousel is disposed by @richerfu in https://github.com/longbridge/nsh/pull/2527
+- gpui: Count a line's hanging whitespace in its reported width by @obito-t in https://github.com/longbridge/nsh/pull/2525
+- android: Keep a TabBar badge's count in its order in RTL by @chaxus in https://github.com/longbridge/nsh/pull/2561
+- navigation: Add `headerTitleAlign` to center a page's title on Android by @madcodelife in https://github.com/longbridge/nsh/pull/2564
+- android: Mirror a TabBar item's badge in right-to-left locales by @chaxus in https://github.com/longbridge/nsh/pull/2547
+- website: Show nsh-omarchy as the nshm example by @huacnlee in https://github.com/longbridge/nsh/pull/2522
+- web: Keep hover and focus styles of views drawn as links or headings by @BeADre in https://github.com/longbridge/nsh/pull/2550
+- tree: Add header and empty slots by @KeepNoob in https://github.com/longbridge/nsh/pull/2416
+- android: Let Rust code ask the user for Android runtime permissions by @hmziqrs in https://github.com/longbridge/nsh/pull/2536
+- collapsible: Hide closing reveal content from pointer input and accessibility by @jjyr in https://github.com/longbridge/nsh/pull/2453
+- linux: End a selected text's focus and keys when its content changes by @huacnlee in https://github.com/longbridge/nsh/pull/2445
+- android: Drain unread COMPONENT_PROPS payload when component is missing by @821869798 in https://github.com/longbridge/nsh/pull/2560
+- web: Keep a smooth scroll running through the list's anchoring scroll by @Cooooooker in https://github.com/longbridge/nsh/pull/2567
+- web: Give view refs animateLayout, as the other backends do by @BeADre in https://github.com/longbridge/nsh/pull/2566
+- android: Build the crate's tests again and check them with clippy-android by @mengyinghu-sys in https://github.com/longbridge/nsh/pull/2563
+- windows: Report the dedicated Play key as MediaPlay by @teng-lin in https://github.com/longbridge/nsh/pull/2575
+- web: Build the host tests again and run them in CI by @burdygin in https://github.com/longbridge/nsh/pull/2576
+- macos: Avoid retaining CoreGraphics frame cache across screenshots by @burdygin in https://github.com/longbridge/nsh/pull/2577
+- macos: Keep active tap impulses in core and preserve onFocus selection by @lnnduy in https://github.com/longbridge/nsh/pull/2441
+- macos: Run a web view's evaluate scripts by @RebelBIrd in https://github.com/longbridge/nsh/pull/2582
+- macos: Let web pages capture media in the development host by @RebelBIrd in https://github.com/longbridge/nsh/pull/2583
+- android: Keep a scroll view's edge pull when nothing around takes the drag by @madcodelife in https://github.com/longbridge/nsh/pull/2584
+- terminal: Give a wide character its one cell in a one-column screen by @davo20019 in https://github.com/longbridge/nsh/pull/2450
+- android: Keep the default system bars in contrast with the app's appearance by @madcodelife in https://github.com/longbridge/nsh/pull/2602
+- android: Hide the keyboard when the view holding its field is deleted by @madcodelife in https://github.com/longbridge/nsh/pull/2605
+- ios: Use the soft scroll edge effect under a view floating over a scroll view by @madcodelife in https://github.com/longbridge/nsh/pull/2604
+- ios: Keep a stack's safe area when a transformed container lays it out by @madcodelife in https://github.com/longbridge/nsh/pull/2601
+- cli: Build the Android dev host only for the device's ABI by @madcodelife in https://github.com/longbridge/nsh/pull/2599
+- android: Hide the keyboard when a deleted view takes its field by @madcodelife in https://github.com/longbridge/nsh/pull/2607
+- android: Keep header and tab bar items clear of a side navigation bar by @madcodelife in https://github.com/longbridge/nsh/pull/2608
+- platforms: Always link SVG images on native platforms by @huacnlee in https://github.com/longbridge/nsh/pull/2609
+- tui: Join only dividers that split their box by @huacnlee in https://github.com/longbridge/nsh/pull/2598
+- tui: Keep a menu's padding inside its line by @huacnlee in https://github.com/longbridge/nsh/pull/2597
+- tui: Pin a list's sticky cells by @huacnlee in https://github.com/longbridge/nsh/pull/2596
+- tui: Lay a box out by the fill it rests with by @huacnlee in https://github.com/longbridge/nsh/pull/2595
+- tui: Cut no word a Cell away from an overlay's own line by @huacnlee in https://github.com/longbridge/nsh/pull/2593
+- tui: Show images with kitty graphics or half blocks by @huacnlee in https://github.com/longbridge/nsh/pull/2586
+- gallery: Space and open things as the terminal reads them by @huacnlee in https://github.com/longbridge/nsh/pull/2587
+- terminal: Take typing in a terminal backend by @huacnlee in https://github.com/longbridge/nsh/pull/2588
+- text-view: Keep a table's sides on every line of a wrapped row by @huacnlee in https://github.com/longbridge/nsh/pull/2589
+- tui: Give an inline view only the rows it takes by @huacnlee in https://github.com/longbridge/nsh/pull/2590
+- tui: Report Escape to a text field's onKeyPress by @huacnlee in https://github.com/longbridge/nsh/pull/2591
+- package: Let icon.android be an adaptive icon, not a square on a plate by @madcodelife in https://github.com/longbridge/nsh/pull/2592
+- fs: Traverse the filesystem root with search permission by @richerfu in https://github.com/longbridge/nsh/pull/2571
+- svg: Update resvg to use HarfRust by @teng-lin in https://github.com/longbridge/nsh/pull/2573
+- desktop: Route unfocused keys through the app root by @teng-lin in https://github.com/longbridge/nsh/pull/2574
+- testing: Skip redundant settle wait when nothing changed by @burdygin in https://github.com/longbridge/nsh/pull/2578
+- macOS: Dismiss an open Select when clicking a native input by @huacnlee in https://github.com/longbridge/nsh/pull/2579
+- testing: Select text with a mouse drag in a selectable view by @RebelBIrd in https://github.com/longbridge/nsh/pull/2580
+- core: Make svg optional again and fail the build when SVG assets need it by @huacnlee in https://github.com/longbridge/nsh/pull/2615
+- updater: Resume interrupted update and package downloads with HTTP Range by @blueberrycongee in https://github.com/longbridge/nsh/pull/2489
+- menu_button: Mark a submenu or section as one choice for the system menus by @madcodelife in https://github.com/longbridge/nsh/pull/2603
+- macos: Refresh shader inputs after a deferred view draws by @huacnlee in https://github.com/longbridge/nsh/pull/2483
+- engine: Make the paced remainder once a display frame by @huacnlee in https://github.com/longbridge/nsh/pull/2488
+- desktop: Let app windows close independently and configure when the app quits by @YougLin-dev in https://github.com/longbridge/nsh/pull/2307
+- dock: Add renderToolbar for the displayed tab's actions by @KeepNoob in https://github.com/longbridge/nsh/pull/2425
+- linux: Leave an ended or control-paused video so when another prop changes by @huacnlee in https://github.com/longbridge/nsh/pull/2443
+- data_table: Scroll the columns of a table with no rows by @Lemenxzy in https://github.com/longbridge/nsh/pull/2429
+- gpui: Preserve shared prefixes when typing into a cleared Editor by @Rosemary1812 in https://github.com/longbridge/nsh/pull/2469
+- core: Report features that are off instead of failing silently by @huacnlee in https://github.com/longbridge/nsh/pull/2613
+- windows: Blur what is behind a transparent window under one view by @labcoder in https://github.com/longbridge/nsh/pull/2471
+- animation: Cancel pending composite animations when their nodes are stopped or replaced by @cosformula in https://github.com/longbridge/nsh/pull/2507
+- tailwind: Skip interaction styles on disabled views by @Rosemary1812 in https://github.com/longbridge/nsh/pull/2467
+- input: Implement InputRef.insertText for iOS and macOS by @ttizze in https://github.com/longbridge/nsh/pull/2600
+- cli: Set Android's launch window and splash screen from `android.launchScreen` by @madcodelife in https://github.com/longbridge/nsh/pull/2594
+- docs: Describe which native features a packaged app keeps by @huacnlee in https://github.com/longbridge/nsh/pull/2622
+- tui: Fix images, focus marks and controls across the gallery by @huacnlee in https://github.com/longbridge/nsh/pull/2623
+- text: Add `ViewRef.clearSelection()` to clear a selectable view's selection by @RebelBIrd in https://github.com/longbridge/nsh/pull/2585
+- web: Animate the core's scroll commands here, not with `behavior: "smooth"` by @Cooooooker in https://github.com/longbridge/nsh/pull/2625
+- testing: Update windowed roots and the compact Dock drop by @huacnlee in https://github.com/longbridge/nsh/pull/2618
+- docs: Add an Embedding in an existing app guide by @huacnlee in https://github.com/longbridge/nsh/pull/2631
+- web: Let an address pushed as a page closes take over that page's entry by @Blackman99 in https://github.com/longbridge/nsh/pull/2572
+- linux: Run the platform tests on X11 on a Wayland session by @huacnlee in https://github.com/longbridge/nsh/pull/2639
+- web: Keep the page from scrolling when focus moves between views by @sunfuze in https://github.com/longbridge/nsh/pull/2637
+- macos: Keep an input method's composition whole in an input with maxLength by @ClarkThan in https://github.com/longbridge/nsh/pull/2633
+- base: Focus a NumberInput's field through its ref by @huacnlee in https://github.com/longbridge/nsh/pull/2634
+- fetch: Pass the cache mode to the platform's network stack by @huacnlee in https://github.com/longbridge/nsh/pull/2649
+- macos: Fall back to inline images for unreadable pasted files by @huacnlee in https://github.com/longbridge/nsh/pull/2644
+- core: Add onFocusIn and onFocusOut for TSX views by @huacnlee in https://github.com/longbridge/nsh/pull/2493
+- android: Keep a fling's curve when anchoring moves the scroll view by @zbysir in https://github.com/longbridge/nsh/pull/2642
+- text_view: Show text in the colors HTML and documents give it by @BeADre in https://github.com/longbridge/nsh/pull/2643
+- rich_editor: Binary-search the hit position in a line by @huacnlee in https://github.com/longbridge/nsh/pull/2645
+- macos: Stop the refresh spinner of a scroll view the core deletes by @ClarkThan in https://github.com/longbridge/nsh/pull/2646
+- macos: Let go of a navigator's stack and pages when the app takes it away by @ClarkThan in https://github.com/longbridge/nsh/pull/2647
+- android: Lay out the system menus as Material 3 menus on every device by @madcodelife in https://github.com/longbridge/nsh/pull/2630
+- windows: Stream large animations at preview resolution by @NiceBlueChai in https://github.com/longbridge/nsh/pull/2371
+- text: Grow non-middle attachments on Apple only on the side they reach past by @M4n5ter in https://github.com/longbridge/nsh/pull/2440
+- testing: Drag with the mouse on a desktop or the web in headless runs by @Blackman99 in https://github.com/longbridge/nsh/pull/2455
+- core: Fill a list row's scroll views once the list places the row by @aiiven in https://github.com/longbridge/nsh/pull/2466
+- cli: Package the dex files an app lists after the runtime's by @hmziqrs in https://github.com/longbridge/nsh/pull/2524
+- core: Typeset text in the width it was measured in by @Blackman99 in https://github.com/longbridge/nsh/pull/2545
+- rich_editor: Count a widget decoration's width where the caret goes by @haveanicedavid in https://github.com/longbridge/nsh/pull/2551
+- rich_editor: Keep a whole document's own attributes when it is loaded by @haveanicedavid in https://github.com/longbridge/nsh/pull/2553
+- linux: Give the keyboard back when a selected text's content changes by @sunli829 in https://github.com/longbridge/nsh/pull/2626
+- updater: Find no update in a run without a configuration, feature or not by @madcodelife in https://github.com/longbridge/nsh/pull/2641
+- core: Add Text::on_text_layout so RichEditor hit tests with the engine's layout by @huacnlee in https://github.com/longbridge/nsh/pull/2651
+- core: Place a view inserted before a sibling without counting the siblings before it by @ClarkThan in https://github.com/longbridge/nsh/pull/2616
+- animation: Preserve surviving parallel branches and spring velocity on pending composite cancellation by @cosformula in https://github.com/longbridge/nsh/pull/2621
+- linux: Play a video on after its end when the app seeks it by @sunli829 in https://github.com/longbridge/nsh/pull/2627
+- rich_editor: Test hits in a padded, larger-font mark by @huacnlee in https://github.com/longbridge/nsh/pull/2665
+- base: Fix the widget decoration caret test's root by @huacnlee in https://github.com/longbridge/nsh/pull/2659
+- cli: Skip edits in Git checkouts kept inside the app's directory by @huacnlee in https://github.com/longbridge/nsh/pull/2673
+- windows: Leave the user's pointer out of a window under nsh test by @LeeDashan in https://github.com/longbridge/nsh/pull/2664
+- windows: Report a hidden title bar's area before the window shows by @YougLin-dev in https://github.com/longbridge/nsh/pull/2658
+- macos: Re-enable autoresizing translation on app window root views by @blueberrycongee in https://github.com/longbridge/nsh/pull/2662
+- core: Give the typed style placeholder, caret and selection colours by @hmziqrs in https://github.com/longbridge/nsh/pull/2656
+- core: Keep admitted node IDs in range after releasing a page by @richerfu in https://github.com/longbridge/nsh/pull/2526
+- webview: Keep a download within the hosts the webview grant allows by @ClarkThan in https://github.com/longbridge/nsh/pull/2648
+- android: Keep the touch an inner Scroll claimed when the Scroll around it gives the drag up by @alexwan02 in https://github.com/longbridge/nsh/pull/2653
+- examples: Embed NSH from a scene in embed-ios by @hmziqrs in https://github.com/longbridge/nsh/pull/2654
+- fetch: Keep credential headers off a redirect to another origin by @ClarkThan in https://github.com/longbridge/nsh/pull/2666
+- editor: Bind autoFocus directly on the caret sink input by @jjyr in https://github.com/longbridge/nsh/pull/2669
+- linux: Restore editor and control focus after modals close by @jjyr in https://github.com/longbridge/nsh/pull/2671
+- core: Stop an app that nests views deeper than the stack allows by @ClarkThan in https://github.com/longbridge/nsh/pull/2614
+- cli: Choose the Android device with `--device` or `ANDROID_SERIAL` by @madcodelife in https://github.com/longbridge/nsh/pull/2675
+- windows: Draw multiline input lines at the line height by @huacnlee in https://github.com/longbridge/nsh/pull/2672
+- core: Measure a keyed list row its cell takes back before placing the rows after it by @huacnlee in https://github.com/longbridge/nsh/pull/2676
+- base: checkbox: Add invalid and accessibilityDescribedBy for screen readers by @huacnlee in https://github.com/longbridge/nsh/pull/2691
+- list: Follow the end of a list scrolled under a content inset by @madcodelife in https://github.com/longbridge/nsh/pull/2674
+- core: Keep the image disk cache out of WebAssembly builds again by @madcodelife in https://github.com/longbridge/nsh/pull/2679
+- rich_editor: Drop the unused `Root` import from the view feature tests by @madcodelife in https://github.com/longbridge/nsh/pull/2682
+- web: Let the browser scroll a wheel it would put on the same view by @zbysir in https://github.com/longbridge/nsh/pull/2680
+- macos: Synchronize hover cursor updates across tracking areas and batches by @jjyr in https://github.com/longbridge/nsh/pull/2678
+- macos: Let the window server move the window from drag regions by @youguanxinqing in https://github.com/longbridge/nsh/pull/2663
+- core: Let a Rust app read its appInfo() by @hmziqrs in https://github.com/longbridge/nsh/pull/2689
+- notifications: Hand notifications NSH did not show to a native handler by @madcodelife in https://github.com/longbridge/nsh/pull/2700
+- ios: Deliver the application's remote-notification callbacks to observers by @madcodelife in https://github.com/longbridge/nsh/pull/2698
+- cli: Embed and sign app extensions in iOS packages by @madcodelife in https://github.com/longbridge/nsh/pull/2699
+- macos: Write the denied test file's mode in octal by @madcodelife in https://github.com/longbridge/nsh/pull/2707
+- rich_editor: Keep the content box out of the Tab order by @madcodelife in https://github.com/longbridge/nsh/pull/2694
+- windows: Keep inputs in rich text mode so lines follow the line height by @madcodelife in https://github.com/longbridge/nsh/pull/2701
+- text: Copy inline views as their `copyText` by @madcodelife in https://github.com/longbridge/nsh/pull/2697
+- select: Drop the search query when searchable turns off by @huacnlee in https://github.com/longbridge/nsh/pull/2703
+- macos: Take an app's menu bar down with the app by @ClarkThan in https://github.com/longbridge/nsh/pull/2668
+- rich_editor: Drop the 16px geometry estimator and use TextGeometry everywhere by @blueberrycongee in https://github.com/longbridge/nsh/pull/2650
+- android: Set ndk-context to the VM and the application by @hmziqrs in https://github.com/longbridge/nsh/pull/2688
+- macOS: Use octal permissions in the paste regression test by @huacnlee in https://github.com/longbridge/nsh/pull/2705
+- android: Cache box shadows and blur backdrops at the size they need by @mrtolkien in https://github.com/longbridge/nsh/pull/2716
+- web: Write a pushed address's entry before the next frame when no page is open by @huacnlee in https://github.com/longbridge/nsh/pull/2710
+- a11y: Speak iOS and Android state words in the user's language by @huacnlee in https://github.com/longbridge/nsh/pull/2711
+- cli: Turn web views on in a Rust app's development runner by @huacnlee in https://github.com/longbridge/nsh/pull/2714
+- ios: Deliver file drops to views that listen to onFileDrop by @yuanzhuang-svg in https://github.com/longbridge/nsh/pull/2693
+- docs: Document Canvas hit testing in the module reference by @jsiu93 in https://github.com/longbridge/nsh/pull/2719
+- ios: Close a dialog that a video's close button dismissed by @jcdiv47 in https://github.com/longbridge/nsh/pull/2718
+- extra: Take photos with the system camera in a new `nsh-extra` nshm by @madcodelife in https://github.com/longbridge/nsh/pull/2692
+- windows: Keep rich text's final paragraph mark out of inputs' text by @madcodelife in https://github.com/longbridge/nsh/pull/2728
+- testing: Wait for a window to show before a step acts on it by @burdygin in https://github.com/longbridge/nsh/pull/2727
+- macos: Let a click reach an input lifted above a transform by @ihavecoke in https://github.com/longbridge/nsh/pull/2670
+- core: Send a list's grown content before the scroll that follows its end as its viewport grows by @davo20019 in https://github.com/longbridge/nsh/pull/2681
+- rich_editor: Keep the caret on a node view's content as edits move it by @youguanxinqing in https://github.com/longbridge/nsh/pull/2683
+- cli: Stop retargeting a Git-pinned nsh-core by @YougLin-dev in https://github.com/longbridge/nsh/pull/2721
+- core: Fail sign-in at once where no link can bring the callback back by @hmziqrs in https://github.com/longbridge/nsh/pull/2722
+- fetch: Close a cancelled request's connection on the ureq stack by @hmziqrs in https://github.com/longbridge/nsh/pull/2723
+- text: Match formulas copied as their source in a TextView's selection by @madcodelife in https://github.com/longbridge/nsh/pull/2720
+- ios: Let a one-axis pan win diagonals over a scroll view inside it by @teng-lin in https://github.com/longbridge/nsh/pull/2724
+- xtask: Build the Android embedding libraries on their own by @0x1306a94 in https://github.com/longbridge/nsh/pull/2677
+- android: Hand presses of notifications NSH did not show to a native handler by @madcodelife in https://github.com/longbridge/nsh/pull/2732
+- extra: Receive remote notifications on iOS with a new `push` module by @madcodelife in https://github.com/longbridge/nsh/pull/2729
+- cli: Compile an app's android/res into its Android package by @huacnlee in https://github.com/longbridge/nsh/pull/2735
+- base: split_view: Make columns resizable and polish the gallery demo by @huacnlee in https://github.com/longbridge/nsh/pull/2734
+- android: Keep test presses within scroll boundaries by @YuniqueUnic in https://github.com/longbridge/nsh/pull/2737
+- android: Avoid lifting sheets twice over the keyboard by @YuniqueUnic in https://github.com/longbridge/nsh/pull/2738
+- cli: Resolve nshm with versions, a lock and a shared installation by @huacnlee in https://github.com/longbridge/nsh/pull/2733
+- gallery: Open the tested demo directly in desktop tests by @huacnlee in https://github.com/longbridge/nsh/pull/2742
+- windows: native: Let drawn components take the pointer where they hit by @huacnlee in https://github.com/longbridge/nsh/pull/2739
+- testing: Bring views out from under a scroll view's content insets by @madcodelife in https://github.com/longbridge/nsh/pull/2740
+- docs: Expand comparison page for teams moving to NSH by @huacnlee in https://github.com/longbridge/nsh/pull/2756
+- docs(install): add macports installation method by @wu21-web in https://github.com/longbridge/nsh/pull/2761
+- clipboard: Report whether a clipboard write reached the system by @huacnlee in https://github.com/longbridge/nsh/pull/2753
+- testing: Settle steps by asking the engine on the system clock by @huacnlee in https://github.com/longbridge/nsh/pull/2744
+- android: Keep WebViews painted under blurred siblings by @YuniqueUnic in https://github.com/longbridge/nsh/pull/2763
+- js: Give the global WebSocket its own TLS crypto provider by @huacnlee in https://github.com/longbridge/nsh/pull/2762
+- toolbar: Do not read a disposed group's disabled prop when items unmount by @villatothesea in https://github.com/longbridge/nsh/pull/2748
+- ios: Keep a modal opened while another one closes by @madcodelife in https://github.com/longbridge/nsh/pull/2745
+- data_table: Let columns fit their content and grow to fill the table by @wenlingang in https://github.com/longbridge/nsh/pull/2743
+- windows: Zoom scroll views, glide wheel notches and follow the app's window size by @huacnlee in https://github.com/longbridge/nsh/pull/2690
+- website: Clarify custom styling and native interaction in NSH by @huacnlee in https://github.com/longbridge/nsh/pull/2769
+- windows: Resolve an input's fontFamily stack and registered fonts by @villatothesea in https://github.com/longbridge/nsh/pull/2760
+- core: Document what a bad keystroke panic does by @huacnlee in https://github.com/longbridge/nsh/pull/2770
+- testing: Wait for host calls the test's handlers answer before settling a step by @huacnlee in https://github.com/longbridge/nsh/pull/2771
+- testing: Support held iOS drags after a long press by @YuniqueUnic in https://github.com/longbridge/nsh/pull/2726
+- macos: Keep a multiline input whose text fits from bouncing by @t4t5 in https://github.com/longbridge/nsh/pull/2772
+- check: Warn of what nsh.json is ignored or refused by @yuluod in https://github.com/longbridge/nsh/pull/2776
+- cli: Add `nsh run --background` for runs nobody watches by @sunfuze in https://github.com/longbridge/nsh/pull/2780
+- ios: Keep a sheet on the keyboard when its input focuses as it opens by @jcdiv47 in https://github.com/longbridge/nsh/pull/2781
+- chore: Refresh the GPUI workspace lockfile by @huacnlee in https://github.com/longbridge/nsh/pull/2778
+- platform: Lay out windows opened with open_window at their own size only by @huacnlee in https://github.com/longbridge/nsh/pull/2765
+- core: Send requests made before a window opens after it opens by @huacnlee in https://github.com/longbridge/nsh/pull/2766
+- docs: Show starting async class work in the JS call with Later by @huacnlee in https://github.com/longbridge/nsh/pull/2773
+- chore: Sync crates/gpui Cargo.lock by @huacnlee in https://github.com/longbridge/nsh/pull/2775
+- i18n: Fill month and weekday names for eight languages by @yerlytech in https://github.com/longbridge/nsh/pull/2774
+- rich_editor: Mount long documents with tables in linear time by @lurenjia534 in https://github.com/longbridge/nsh/pull/2768
+- i18n: Put the weekday after the date in Turkish by @yerlytech in https://github.com/longbridge/nsh/pull/2782
+- selection: Keep gap and margin drags local to their column by @blueberrycongee in https://github.com/longbridge/nsh/pull/2784
+- macos: Keep the zoom button aligned during hidden title bar resizes by @blueberrycongee in https://github.com/longbridge/nsh/pull/2786
+- list: Add alignItems to ListContentStyle by @yerlytech in https://github.com/longbridge/nsh/pull/2787
+- core: Keep pointer presses on macOS and iOS from giving controls the keyboard focus by @Petit-Iceberg in https://github.com/longbridge/nsh/pull/2783
+- android: Route hovers by pointerEvents as touches by @teng-lin in https://github.com/longbridge/nsh/pull/2789
+- text_view: Keep generated chrome and markers out of text selection by @blueberrycongee in https://github.com/longbridge/nsh/pull/2746
+- extra: Check the notifications capability in every Push call by @lurenjia534 in https://github.com/longbridge/nsh/pull/2791
+- rich_editor: Insert text dropped on the editor on iOS by @yuanzhuang-svg in https://github.com/longbridge/nsh/pull/2702
+- core: Let focused content that captures Escape take it before an overlay by @huacnlee in https://github.com/longbridge/nsh/pull/2794
+- bench: Drive examples/bench/data-table scroll with nsh/test on desktop by @villatothesea in https://github.com/longbridge/nsh/pull/2799
+- keymap: Let an app take a key a focused component binds by @wenlingang in https://github.com/longbridge/nsh/pull/2755
+- core: Make text-pretty keep a lone word off the last line by @huacnlee in https://github.com/longbridge/nsh/pull/2792
+- ci: Check nsh-core and nsh/base for WebAssembly on pull requests by @huacnlee in https://github.com/longbridge/nsh/pull/2793
+- nshm: Build platform nshm without a native module or a recursive copy by @huacnlee in https://github.com/longbridge/nsh/pull/2795
+- rich_editor: Mount only the blocks near the viewport in long documents by @huacnlee in https://github.com/longbridge/nsh/pull/2796
+- android: Apply NavPage animation before the stack transition starts by @huacnlee in https://github.com/longbridge/nsh/pull/2801
+- core: Share layout styles between nodes styled alike by @huacnlee in https://github.com/longbridge/nsh/pull/2810
+- diff: Give each line's gutter row a test id by @huacnlee in https://github.com/longbridge/nsh/pull/2807
+- webview: Dismiss popups on a press inside a web view on Linux and Windows by @huacnlee in https://github.com/longbridge/nsh/pull/2808
+- windows: Show a WebView created together with its <Window> by @huacnlee in https://github.com/longbridge/nsh/pull/2804
+- cli: Keep websocket in packaged runners that use the global WebSocket by @huacnlee in https://github.com/longbridge/nsh/pull/2803
+- input: Keep wheels over a macOS input's padding off views under it by @huacnlee in https://github.com/longbridge/nsh/pull/2802
+- windows: Keep a web view's size in step with a layout animation by @huacnlee in https://github.com/longbridge/nsh/pull/2805
+- i18n: Add addTranslations to load translations at run time by @villatothesea in https://github.com/longbridge/nsh/pull/2806
+- cli: Run test files in parallel with nsh test --jobs by @huacnlee in https://github.com/longbridge/nsh/pull/2809
+- linux: Screenshot the app's window in nsh test by @huacnlee in https://github.com/longbridge/nsh/pull/2811
+- testing: Add app.layout and app.accessibility queries by @huacnlee in https://github.com/longbridge/nsh/pull/2812
+- core: Box a layout leaf's measure context by @huacnlee in https://github.com/longbridge/nsh/pull/2814
+- ios: Hide or show the navigation bar when a page on top changes `headerVisible` by @madcodelife in https://github.com/longbridge/nsh/pull/2822
+- cli: Show runner feature choices only in verbose builds by @huacnlee in https://github.com/longbridge/nsh/pull/2825
+- cli: Make ext/ the home of a TSX app's Rust in nsh init by @huacnlee in https://github.com/longbridge/nsh/pull/2829
+- text_view: Read a selection across list items as Markdown or HTML by @RebelBIrd in https://github.com/longbridge/nsh/pull/2629
+- runtime: Open the app from https links it claims, by host and path by @hmziqrs in https://github.com/longbridge/nsh/pull/2537
+- updater: Download a zstd patch from the previous version by @huacnlee in https://github.com/longbridge/nsh/pull/2800
+- ios: Wait for pending modal dismissals and report closes by the app by @madcodelife in https://github.com/longbridge/nsh/pull/2821
+- rich_editor: Show an input accessory over the keyboard by @madcodelife in https://github.com/longbridge/nsh/pull/2747
+- linux: Paste a copied image when its listed file cannot be opened by @aiiven in https://github.com/longbridge/nsh/pull/2824
+- core: Announce live regions on every platform by @yuluod in https://github.com/longbridge/nsh/pull/2816
+- extra: Receive remote notifications on Android in the `push` module by @madcodelife in https://github.com/longbridge/nsh/pull/2818
+- mobile: Add AppSettings to open the app's page in the system settings by @madcodelife in https://github.com/longbridge/nsh/pull/2823
+- core: Give the deep-tree tests room on Windows by @yuluod in https://github.com/longbridge/nsh/pull/2817
+- cli: Write the app's privacy manifest into iOS packages by @hmziqrs in https://github.com/longbridge/nsh/pull/2834
+- ios: Read the temperature unit from the locale identifier by @huacnlee in https://github.com/longbridge/nsh/pull/2839
+- js: Read a Rust component's props by atoms made once per component by @sunli829 in https://github.com/longbridge/nsh/pull/2638
+- core: Add `text_pretty` and `whitespace_*` to Rust `Styled` by @madcodelife in https://github.com/longbridge/nsh/pull/2836
+- core: Let `accessibility_actions` follow signals in place by @madcodelife in https://github.com/longbridge/nsh/pull/2837
+- core: Give the system title back when header_title shows nothing by @huacnlee in https://github.com/longbridge/nsh/pull/2843
+- a11y: Speak iOS and Android state words in the language the app shows by @madcodelife in https://github.com/longbridge/nsh/pull/2838
+- core: Keep a device pixel for boxes under a pixel thick by @madcodelife in https://github.com/longbridge/nsh/pull/2841
+- package: Translate Info.plist strings per language on iOS and macOS by @madcodelife in https://github.com/longbridge/nsh/pull/2819
+- android: Report picked files over the Java heap as too large by @huacnlee in https://github.com/longbridge/nsh/pull/2845
+- core: Let `View::follow` follow elements in list rows and scrolled content by @madcodelife in https://github.com/longbridge/nsh/pull/2846
+- runtime: Tell apps what changed their storage elsewhere by @madcodelife in https://github.com/longbridge/nsh/pull/2844
+- extra: Report the camera unavailable in the iOS simulator by @madcodelife in https://github.com/longbridge/nsh/pull/2849
+- cli: Package the Java libraries an app and its crates list by @madcodelife in https://github.com/longbridge/nsh/pull/2820
+- testing: Wait for host call answers that land after the engine went idle by @madcodelife in https://github.com/longbridge/nsh/pull/2848
+- cli: Package Android libraries (AAR): classes, native libraries, assets and manifest by @madcodelife in https://github.com/longbridge/nsh/pull/2853
+- chore: Refresh the GPUI workspace dependency edges by @huacnlee in https://github.com/longbridge/nsh/pull/2854
+- web: Register a variable font with its wght range by @huacnlee in https://github.com/longbridge/nsh/pull/2856
+- ios: Inset a scroll view for the keyboard after the app lays out by @madcodelife in https://github.com/longbridge/nsh/pull/2850
+- ios: Paste documents with their names, not only images by @madcodelife in https://github.com/longbridge/nsh/pull/2851
+- cli: Link the resources of Android libraries by @madcodelife in https://github.com/longbridge/nsh/pull/2855
+- ios: Reach controls with Tab in the keyboard tests, as a tap no longer focuses them by @madcodelife in https://github.com/longbridge/nsh/pull/2862
+- cli: Let nsh.json add Android queries and manifest components by @hmziqrs in https://github.com/longbridge/nsh/pull/2828
+- cli: Build the Android test host for the device's ABI alone by @madcodelife in https://github.com/longbridge/nsh/pull/2860
+- ios: Return the editor after a cancelled swipe back, and keep a selection through a short scroll by @madcodelife in https://github.com/longbridge/nsh/pull/2868
+- macos: Attach FPS HUD to the visible app window under Window Model v2 by @Duskriver in https://github.com/longbridge/nsh/pull/2866
+- clipboard: Restore macOS clipboard write confirmation dropped by #2537 by @hmziqrs in https://github.com/longbridge/nsh/pull/2857
+- testing: Type and paste on iOS without tapping the focused input again by @madcodelife in https://github.com/longbridge/nsh/pull/2863
+- cli: Find the Android platforms sdkmanager installs as android-<n>.0 by @hmziqrs in https://github.com/longbridge/nsh/pull/2864
+- web: Deliver files dragged in from the system to onFileDrop by @huacnlee in https://github.com/longbridge/nsh/pull/2867
+- testing: Fail a step on iOS whose finger would land on a selection's edit menu by @madcodelife in https://github.com/longbridge/nsh/pull/2871
+- android: Give textLocale its own command opcode and test that opcodes stay unique by @ihavecoke in https://github.com/longbridge/nsh/pull/2859
+- data_table: Activate the focused row with Enter / Return by @yerlytech in https://github.com/longbridge/nsh/pull/2872
+- cli: Run the entries of the nshm a Rust app depends on through Cargo by @madcodelife in https://github.com/longbridge/nsh/pull/2874
+- docs: Link nsh-maven, which resolves Android libraries from Maven repositories by @hmziqrs in https://github.com/longbridge/nsh/pull/2880
+- cli: Find the app's Git dependencies on nsh by package, not library name by @madcodelife in https://github.com/longbridge/nsh/pull/2877
+- ios: Hand inline links and views of a text to VoiceOver by @madcodelife in https://github.com/longbridge/nsh/pull/2876
+- core: Report how the device reaches the network by @madcodelife in https://github.com/longbridge/nsh/pull/2875
+- cli: Leave out the resources an Android library lists but never reads by @madcodelife in https://github.com/longbridge/nsh/pull/2882
+- cli: Link iOS frameworks and linker flags into the app's executables by @madcodelife in https://github.com/longbridge/nsh/pull/2881
+- tabs: Pick the arrow keys from an orientation prop by @yerlytech in https://github.com/longbridge/nsh/pull/2873
+- cli: Carry app extensions in nsh run on the iOS simulator by @hmziqrs in https://github.com/longbridge/nsh/pull/2884
+- cli: Reinstall the Android development host when an update has no room by @madcodelife in https://github.com/longbridge/nsh/pull/2885
+- android: Choose from and close system menus in tests by @madcodelife in https://github.com/longbridge/nsh/pull/2886
+- rich_editor: Mark the selections the pointer makes with the pointer meta by @haveanicedavid in https://github.com/longbridge/nsh/pull/2555
+- time_field: Add min and max bounds by @yerlytech in https://github.com/longbridge/nsh/pull/2883
+- web: Focus an autoFocus input in the batch that shows it by @davo20019 in https://github.com/longbridge/nsh/pull/2889
+- core: Let Rust code call, post to and hear the app's host by @madcodelife in https://github.com/longbridge/nsh/pull/2887
+- rich_editor: Join textblocks at different depths, as ProseMirror does by @haveanicedavid in https://github.com/longbridge/nsh/pull/2552
+- docs: Show how an nshm links a native SDK from its build.rs by @hmziqrs in https://github.com/longbridge/nsh/pull/2891
+- js: Deliver a Rust component's events by atoms made once per event name by @sunli829 in https://github.com/longbridge/nsh/pull/2895
+- ios: Report the leave of a file drag whose view went away before the drop by @yuanzhuang-svg in https://github.com/longbridge/nsh/pull/2900
+- packaging: Let iOS frameworks name their targets and be optional by @madcodelife in https://github.com/longbridge/nsh/pull/2896
+- jsx: Ignore comments beside If and Each function children by @huacnlee in https://github.com/longbridge/nsh/pull/2892
+- cli: Add --release to nsh test for apps with Rust code by @villatothesea in https://github.com/longbridge/nsh/pull/2815
+- website: Expand framework comparison with Tauri, Qt, Slint and GPUI detail by @huacnlee in https://github.com/longbridge/nsh/pull/2893
+- input: Clip multiline text at its content box and let app bars follow it by @madcodelife in https://github.com/longbridge/nsh/pull/2904
+- android: Receive files from the share sheet by @ihavecoke in https://github.com/longbridge/nsh/pull/2902
+- touch: Let pans activate one way and start at a screen edge by @madcodelife in https://github.com/longbridge/nsh/pull/2905
+- cli: Merge macOS Info.plist and entitlements from nshm metadata by @blueberrycongee in https://github.com/longbridge/nsh/pull/2878
+- cli: Package macOS app extensions and support --sign with Hardened Runtime by @blueberrycongee in https://github.com/longbridge/nsh/pull/2879
+- core: Clip views to a rounded inset rectangle with a transitionable `clipPath` by @madcodelife in https://github.com/longbridge/nsh/pull/2894
+- macos: Draw views at the scale they are shown at by @hexuria in https://github.com/longbridge/nsh/pull/2911
+- install: Show total size and progress while downloading by @huacnlee in https://github.com/longbridge/nsh/pull/2906
+- cli: Translate crates' macOS Info.plist keys, and read every architecture of a macOS package by @hmziqrs in https://github.com/longbridge/nsh/pull/2827
+- animation: Keep leaf completions while programs are advancing by @hexuria in https://github.com/longbridge/nsh/pull/2908
+- macos: Report Up and Down from a text input by @hexuria in https://github.com/longbridge/nsh/pull/2909
+- js: Retire replaced app-menu callbacks one menu later by @hexuria in https://github.com/longbridge/nsh/pull/2910
+- core: Keep anchored overlays above the software keyboard by @madcodelife in https://github.com/longbridge/nsh/pull/2914
+- core: Count folded text runs toward the node quota and keep them when allocation fails by @hexuria in https://github.com/longbridge/nsh/pull/2907
+- core: Let apps follow the predictive back gesture by @madcodelife in https://github.com/longbridge/nsh/pull/2915
+- android: Deliver file drops to views that listen to onFileDrop by @mengyinghu-sys in https://github.com/longbridge/nsh/pull/2918
+- cli: Start Android development runs in an emptied task by @madcodelife in https://github.com/longbridge/nsh/pull/2920
+- docs: Present Mac Catalyst as an on-demand development tool by @huacnlee in https://github.com/longbridge/nsh/pull/2930
+- linux: Measure and show the FPS monitor in the app's window by @huacnlee in https://github.com/longbridge/nsh/pull/2925
+- macos: Follow the app's primary window for windowSize() by @huacnlee in https://github.com/longbridge/nsh/pull/2923
+- cli: Remove ios.frameworks and ios.linkerFlags by @huacnlee in https://github.com/longbridge/nsh/pull/2890
+- macos: Show unanchored share menus in a visible app window by @huacnlee in https://github.com/longbridge/nsh/pull/2919
+- cli: Build a packaged TSX runner from the installed nightly revision by @huacnlee in https://github.com/longbridge/nsh/pull/2922
+- gallery: Draw the Clip path card's button in `onAccent` on `accentFill` by @madcodelife in https://github.com/longbridge/nsh/pull/2926
+- extra: Read the recent photos of the iOS library in a new `photos` module by @madcodelife in https://github.com/longbridge/nsh/pull/2935
+- macos: Screenshot the app's window in nsh test by @madcodelife in https://github.com/longbridge/nsh/pull/2928
+- web: Keep a link clicked with a modifier key from opening twice by @BeADre in https://github.com/longbridge/nsh/pull/2927
+- cli: Let nsh.json name the app's entry by @huacnlee in https://github.com/longbridge/nsh/pull/2942
+- linux: Tick animations on the clock of a window that shows by @huacnlee in https://github.com/longbridge/nsh/pull/2943
+- linux: Clip continuous corners in pieces instead of masking the whole view by @huacnlee in https://github.com/longbridge/nsh/pull/2939
+- desktop: Follow the app's primary window for windowSize on Linux and macOS by @huacnlee in https://github.com/longbridge/nsh/pull/2924
+- core: Gate a pan activation only while a pan or responder follows it by @madcodelife in https://github.com/longbridge/nsh/pull/2938
+- extra: Embed the system's photo picker in the layout with `PhotosPicker` by @madcodelife in https://github.com/longbridge/nsh/pull/2949
+- ios: Let test drags from the screen edge start edge pans and back swipes by @madcodelife in https://github.com/longbridge/nsh/pull/2941
+- extra: Number the photos selected in `PhotosPicker` in the order the user selects them by @madcodelife in https://github.com/longbridge/nsh/pull/2951
+- base: Add TitleBar that avoids window controls where it meets them by @huacnlee in https://github.com/longbridge/nsh/pull/2937
+- gpui: Expose mounted content height for embedded views by @wabzqem in https://github.com/longbridge/nsh/pull/2569
+- runtime: Return the font's ascent and descent from canvas measureText by @alexwan02 in https://github.com/longbridge/nsh/pull/2619
+- apple: Keep each app's speech session its own, and end it when its app stops by @ClarkThan in https://github.com/longbridge/nsh/pull/2667
+- button: Pass accessibility hints to press targets by @lurenjia534 in https://github.com/longbridge/nsh/pull/2940
+- extra: Show the camera once a closing sheet has closed by @madcodelife in https://github.com/longbridge/nsh/pull/2955
+- web: Cancel active pointers and reset hoverButtons on window blur by @cosformula in https://github.com/longbridge/nsh/pull/2944
+- macos: Apply a mode asked for while full screen animates once it ends by @huacnlee in https://github.com/longbridge/nsh/pull/2948
+- scroll: Add smoothWheel and wheelLineHeight for mouse wheels on the desktops by @zbysir in https://github.com/longbridge/nsh/pull/2661
+- extra: Move `Speech` into `nsh-extra` and recognize speech on Android, Windows and the web by @madcodelife in https://github.com/longbridge/nsh/pull/2947
+- ios: Keep system UI shown over a dialog that closes by @madcodelife in https://github.com/longbridge/nsh/pull/2969
+- docs: Explain pasting a file copied in the macOS Finder by @huacnlee in https://github.com/longbridge/nsh/pull/2961
+- cli: Let nsh.json's "watch" keep directories out of the watcher by @yuluod in https://github.com/longbridge/nsh/pull/2971
+- cli: Read nsh.json and the theme file written as UTF-16 by @yuluod in https://github.com/longbridge/nsh/pull/2967
+- ios: Keep delivering touch gestures to a reopened modal by @Hermon000 in https://github.com/longbridge/nsh/pull/2954
+- core: Add textbox to AccessibilityRole by @yerlytech in https://github.com/longbridge/nsh/pull/2958
+- docs: Document Later return gotchas for #[class] members by @huacnlee in https://github.com/longbridge/nsh/pull/2973
+- macos: Drop images dragged out of Safari and Chrome on onFileDrop by @huacnlee in https://github.com/longbridge/nsh/pull/2964
+- core: Quit when the last window closes in a development session by @huacnlee in https://github.com/longbridge/nsh/pull/2981
+- gpui: Let embedded views mount JS roots inline by @wabzqem in https://github.com/longbridge/nsh/pull/2974
+- ios: Keep the system's alert tint where white does not read on the theme's by @madcodelife in https://github.com/longbridge/nsh/pull/2977
+- core: Add altGraph to key modifiers by @huacnlee in https://github.com/longbridge/nsh/pull/2979
+- gpui: Fix Windows build after altGraph modifier by @huacnlee in https://github.com/longbridge/nsh/pull/2985
+- core: Look at sibling positions once per parent before each flush by @sunli829 in https://github.com/longbridge/nsh/pull/2962
+- docs: Drop user defaults from the categories NSH's iOS runtime declares by @madcodelife in https://github.com/longbridge/nsh/pull/2975
+- input: Add `pasteMaxSize` so pasted files over a limit arrive unread by @madcodelife in https://github.com/longbridge/nsh/pull/2972
+- windows: Build the test agent without a modifier the platform lacks by @huacnlee in https://github.com/longbridge/nsh/pull/2990
+- windows: Draw the scroll indicator of a multiline Input by @huacnlee in https://github.com/longbridge/nsh/pull/2978
+- core: Let a global shortcut keystroke that is not one answer false by @yuluod in https://github.com/longbridge/nsh/pull/2976
+- macos: Chain unused Input wheels to the Scroll around them by @razvangeangu in https://github.com/longbridge/nsh/pull/2984
+- windows: Blur a text field when a press lands on blank space by @huacnlee in https://github.com/longbridge/nsh/pull/2991
+- ios: Fail a test's typing when no text input has the focus by @madcodelife in https://github.com/longbridge/nsh/pull/2987
+- windows: Drop `alt_graph` from the test agent's Windows `Modifiers` by @madcodelife in https://github.com/longbridge/nsh/pull/2988
+- android: Report one cancel per back press on a modal by @madcodelife in https://github.com/longbridge/nsh/pull/2986
+- android: Show the date and time dialogs in the app's language by @madcodelife in https://github.com/longbridge/nsh/pull/3001
+- android: Restyle header titles and control text after a configuration change by @madcodelife in https://github.com/longbridge/nsh/pull/3002
+- android: Keep the app visible when the keyboard opens in landscape by @madcodelife in https://github.com/longbridge/nsh/pull/3000
+- android: Show a date and time picker's values in the app's language by @madcodelife in https://github.com/longbridge/nsh/pull/3008
+- linux: Fix piecewise clip dropping fractional box edges by @huacnlee in https://github.com/longbridge/nsh/pull/3005
+- gpui: Optimize text shaping in debug builds by @huacnlee in https://github.com/longbridge/nsh/pull/3012
+- macos: Start each fetch in an autorelease pool by @daoleno in https://github.com/longbridge/nsh/pull/3017
+- android: Keep a selection through a scroll; end it on a tap by @daoleno in https://github.com/longbridge/nsh/pull/3019
+- menu: Choose the tapped item, not the one the keys moved the focus to by @tacshi in https://github.com/longbridge/nsh/pull/3025
+- testing: Send `app.paste` files of tens of megabytes to hosts by @madcodelife in https://github.com/longbridge/nsh/pull/2966
+- windows: Tell a window that did not answer in time from one that is gone by @LeeDashan in https://github.com/longbridge/nsh/pull/2932
+- windows: Improve text clarity at fractional DPI and inside clips by @hsingjui in https://github.com/longbridge/nsh/pull/2931
+- android: Show the magnifier while a selection end is dragged by @daoleno in https://github.com/longbridge/nsh/pull/3021
+- linux: Test piecewise clipping on the cairo and NGL renderers by @madcodelife in https://github.com/longbridge/nsh/pull/3029
+- android: Retint selection handles when the selection color changes by @daoleno in https://github.com/longbridge/nsh/pull/3023
+- android: Put an app's selection menu items before other apps' text actions by @daoleno in https://github.com/longbridge/nsh/pull/3022
+- gpui: Report the failing case of the window suite by its caller line by @huacnlee in https://github.com/longbridge/nsh/pull/3039
+- ios: Let a web view play a page's videos in place by @gilbertwong96 in https://github.com/longbridge/nsh/pull/2970
+- macos: Hand trackpad edge stretch from fitting scroll views to outer ones by @haveanicedavid in https://github.com/longbridge/nsh/pull/2556
+- web: Draw TextView's links as `<a href>` elements by @BeADre in https://github.com/longbridge/nsh/pull/2945
+- cli: Add --host bind address option to nsh dev by @cosformula in https://github.com/longbridge/nsh/pull/2946
+- windows: Keep a text field focused when a press starts a selection by @huacnlee in https://github.com/longbridge/nsh/pull/2994
+- macos: Draw plain texts as layers with no view in the hierarchy by @huacnlee in https://github.com/longbridge/nsh/pull/2997
+- text_view: Let MarkdownOptions leave out links and images by @yerlytech in https://github.com/longbridge/nsh/pull/2999
+- core: Keep a sized image's natural size out of the scrollable extent by @rankjie in https://github.com/longbridge/nsh/pull/3007
+- js: Keep a Rust component's late events off the JS node below its id by @daoleno in https://github.com/longbridge/nsh/pull/3014
+- android: End the text toolbar after a paste that inserts nothing by @madcodelife in https://github.com/longbridge/nsh/pull/3046
+- android: Report back presses on a modal on Android 13 by @madcodelife in https://github.com/longbridge/nsh/pull/3047
+- input: Keep multiline scroll when a press focuses the field on Windows by @huacnlee in https://github.com/longbridge/nsh/pull/2992
+- cli: Build an nshm-only app, and `nsh-extra`, with the installed nsh by @madcodelife in https://github.com/longbridge/nsh/pull/2980
+- core: Update Taffy to 0.16 by @huacnlee in https://github.com/longbridge/nsh/pull/2989
+- rich_editor: Size columns from content and scroll wide tables by @Geylnu in https://github.com/longbridge/nsh/pull/3044
+- core: Add captureKeys="text" to move typing into an Input by @huacnlee in https://github.com/longbridge/nsh/pull/2960
+- tui: Roomier cards and a Bubbles-style selection by @huacnlee in https://github.com/longbridge/nsh/pull/2982
+- tui: Space filled buttons apart, bold table titles, brand accent, gallery key help by @huacnlee in https://github.com/longbridge/nsh/pull/2993
+- rich_editor: Show move grips for the current table cell by @Geylnu in https://github.com/longbridge/nsh/pull/2950
+- core: Build with Taffy 0.16's packed scrollable overflow by @huacnlee in https://github.com/longbridge/nsh/pull/3058
+- core: Add a tab panel accessibility role by @lurenjia534 in https://github.com/longbridge/nsh/pull/2952
+- windows: Report what an input method composes while it composes by @M4n5ter in https://github.com/longbridge/nsh/pull/3024
+- macos: Keep a focused Input focused when a new placeholder or style restarts its editing by @huacnlee in https://github.com/longbridge/nsh/pull/3066
+- fs: Let apps read the files the user pastes or drops by @huacnlee in https://github.com/longbridge/nsh/pull/2968
+- toast: Announce a toast once when it moves to another parent by @madcodelife in https://github.com/longbridge/nsh/pull/2995
+- dev: Strip function source from hot bytecode and back off failing sessions by @huacnlee in https://github.com/longbridge/nsh/pull/3064
+- list: Make no new cell for a row past the end of shrunk data by @huacnlee in https://github.com/longbridge/nsh/pull/3061
+- windows: Enable the IME only in the window of the focused field by @M4n5ter in https://github.com/longbridge/nsh/pull/3026
+- number-input: Don't focus the field when pressing + / - by @huacnlee in https://github.com/longbridge/nsh/pull/3032
+- ios: Focus a stop under a transparent view, as the other platforms do by @tacshi in https://github.com/longbridge/nsh/pull/3035
+- testing: Expose a toggle button's pressed state in accessibility queries by @Lemenxzy in https://github.com/longbridge/nsh/pull/3036
+- text: Slant italics in fonts without an italic face on iOS and macOS by @BeADre in https://github.com/longbridge/nsh/pull/3041
+- dev: Put the error overlay's Copy beside the title, smaller and copyable by @huacnlee in https://github.com/longbridge/nsh/pull/3065
+- android: Keep the app running when the activity is recreated by @madcodelife in https://github.com/longbridge/nsh/pull/3050
+- tailwind: Resolve scale and ring token references by their value type by @Lemenxzy in https://github.com/longbridge/nsh/pull/3037
+- macos: Keep one app's tray from removing another's by @ClarkThan in https://github.com/longbridge/nsh/pull/3051
+- macos: Drop a modifier released in another window from the tracked ones by @ClarkThan in https://github.com/longbridge/nsh/pull/3052
+- web: Split nsh/base parts a Rust app makes by name into side modules by @huacnlee in https://github.com/longbridge/nsh/pull/3081
+- testing: Let app.press land at a point in the view by @yerlytech in https://github.com/longbridge/nsh/pull/2998
+- engine: Test that a Rust component in a top-level JS window changes that window by @huacnlee in https://github.com/longbridge/nsh/pull/3085
+- docs: Add a publish page for App Store and Google Play uploads by @huacnlee in https://github.com/longbridge/nsh/pull/3084
+- cli: Scope a crate's assets to the targets that read them by @1havecoke in https://github.com/longbridge/nsh/pull/3072
+- desktop: Let an app choose the directory of its log files by @sunfuze in https://github.com/longbridge/nsh/pull/3083
+- android: Clip continuous corners without a mask for every draw by @mengyinghu-sys in https://github.com/longbridge/nsh/pull/3082
+- menu: Let navigation keys enter a menu while a field outside it edits by @Lemenxzy in https://github.com/longbridge/nsh/pull/3080
+- core: Let a tab bar out of sight take no presses by @gilbertwong96 in https://github.com/longbridge/nsh/pull/3057
+- macos: Close an app's open file panels when it stops by @ClarkThan in https://github.com/longbridge/nsh/pull/3053
+- android: Close only the system menu on a back gesture over a dialog by @madcodelife in https://github.com/longbridge/nsh/pull/3069
+- macos: Show an image's placeholder after its filters change while it loads by @ClarkThan in https://github.com/longbridge/nsh/pull/3054
+- extra: Add Location, the device's position on macOS, iOS and the web by @huacnlee in https://github.com/longbridge/nsh/pull/3070
+- web: Give the file drop browser test time for the bytes to arrive by @huacnlee in https://github.com/longbridge/nsh/pull/3067
+- macos: Hand the focus of a removed view to the root, not the window by @madcodelife in https://github.com/longbridge/nsh/pull/3079
+- macos: Keep a view's rounded corners when it has a mask image by @ClarkThan in https://github.com/longbridge/nsh/pull/3056
+- calendar: Preview a range under the pointer while its second end is chosen by @lurenjia534 in https://github.com/longbridge/nsh/pull/3086
+- base: Follow the sink's caret in Editor and RichEditor by @AkaraChen in https://github.com/longbridge/nsh/pull/3088
+- rich_editor: Keep marks on the new line when Enter splits a block by @Tzyito in https://github.com/longbridge/nsh/pull/3089
+- rich_editor: Undo an input rule in two steps, as Tiptap does by @Tzyito in https://github.com/longbridge/nsh/pull/3090
+- rich_editor: Hoist a branching nested list on Delete at an item's end by @Tzyito in https://github.com/longbridge/nsh/pull/3091
+- rich_editor: Move the caret past a horizontal rule set at the end by @Tzyito in https://github.com/longbridge/nsh/pull/3092
+- rich_editor: Keep script and data URLs out of the link mark's HTML by @Tzyito in https://github.com/longbridge/nsh/pull/3094
+- rich_editor: Parse insertContent's HTML as Tiptap's insertContent does by @Tzyito in https://github.com/longbridge/nsh/pull/3097
+- cli: Publish to the App Store, Google Play, Flathub and the Microsoft Store from nsh.json by @huacnlee in https://github.com/longbridge/nsh/pull/3101
+- macos: Leave disabled and unfocusable inputs out of Tab's stops by @Lemenxzy in https://github.com/longbridge/nsh/pull/3038
+- web: Keep apps from crashing macOS Chrome 97–103 when measuring text by @chaxus in https://github.com/longbridge/nsh/pull/3105
+- docs: Nest menu items with Submenu, never an in-place accordion by @huacnlee in https://github.com/longbridge/nsh/pull/3102
+- base: Build `sink_text` only with the editors that use it by @madcodelife in https://github.com/longbridge/nsh/pull/3108
+- rich_editor: Read and write table HTML as Tiptap's tables do by @Tzyito in https://github.com/longbridge/nsh/pull/3099
+- rich_editor: Read sub, sup and text-align from styles as Tiptap by @Tzyito in https://github.com/longbridge/nsh/pull/3096
+- core: Keep the text of a fixed-height input out of the Scroll around it by @Debbl in https://github.com/longbridge/nsh/pull/3103
+- skills: Show tasks-rs's by-name RichEditor in the Rust recipe by @huacnlee in https://github.com/longbridge/nsh/pull/3106
+- android: Back ends a text selection first by @daoleno in https://github.com/longbridge/nsh/pull/3020
+- ios: Grow a `MenuButton`'s menu out of the app's trigger by @madcodelife in https://github.com/longbridge/nsh/pull/3104
+- docs: Lead with TSX and introduce Rust through nshm by @huacnlee in https://github.com/longbridge/nsh/pull/3093
+- rich-editor: Let Copy with nothing selected copy the selection around the editor by @AkaraChen in https://github.com/longbridge/nsh/pull/3071
+- testing: Wait for a window to show on Linux before a step acts on it by @madcodelife in https://github.com/longbridge/nsh/pull/3110
+- android: Hide TabBar when hidden is set by @jjyr in https://github.com/longbridge/nsh/pull/3109
+- install.sh: Stop the install on Ctrl-C by @huacnlee in https://github.com/longbridge/nsh/pull/3111
+- cli: Commit App Store uploads with an MD5 checksum by @huacnlee in https://github.com/longbridge/nsh/pull/3113
+- cli: Build the Flathub manifest for the archive's processor by @huacnlee in https://github.com/longbridge/nsh/pull/3114
+- linux: Let a click focus the fields of an app window opened after another by @huacnlee in https://github.com/longbridge/nsh/pull/3118
+- package: Remove unused nsh-core dependency by @blueberrycongee in https://github.com/longbridge/nsh/pull/3107
+- docs: Show runtime density with number tokens and setTheme by @huacnlee in https://github.com/longbridge/nsh/pull/3117
+- docs: Say how an app carries a library that must stay dynamic by @huacnlee in https://github.com/longbridge/nsh/pull/3116
+- gpui: Build on gpui-fast 0.1.19 for synthetic italic by @huacnlee in https://github.com/longbridge/nsh/pull/3120
+- macos: Ask for the activation policy only when a background key window is set by @huacnlee in https://github.com/longbridge/nsh/pull/3121
+- web: Load a Rust app's shader compiler on demand by @huacnlee in https://github.com/longbridge/nsh/pull/3122
+- nsh-testing: spanStyle: Report lineHeight, letterSpacing and fontFamily by @huacnlee in https://github.com/longbridge/nsh/pull/3124
+- cli: Add NSH's required-reason APIs to every iOS privacy manifest by @huacnlee in https://github.com/longbridge/nsh/pull/3125
+- testing: Report busy, value and name in the accessibility tree by @huacnlee in https://github.com/longbridge/nsh/pull/3128
+- core: Never measure a leaf's content with negative room by @madcodelife in https://github.com/longbridge/nsh/pull/3115
+- windows: Announce an alert when it appears by @yuluod in https://github.com/longbridge/nsh/pull/3119
+- gpui: Drop nsh-package's nsh-core from the GPUI lock files by @huacnlee in https://github.com/longbridge/nsh/pull/3130
+- intl: Format dates in the named time zones nsh.json lists by @huacnlee in https://github.com/longbridge/nsh/pull/3129
+- ios: Resize navigation bar when headerLargeTitle toggles on the top screen by @jjyr in https://github.com/longbridge/nsh/pull/3123
+- terminal: Accept raw byte slices in TerminalApi::write_bytes by @jjyr in https://github.com/longbridge/nsh/pull/3140
+- macos: Write a backdrop's and a layer's geometry only when it changed by @huacnlee in https://github.com/longbridge/nsh/pull/3135
+- core: Warn of a translation no language has in development builds by @yuluod in https://github.com/longbridge/nsh/pull/3137
+- core: Name a Windows file URL's drive in the file path test by @yuluod in https://github.com/longbridge/nsh/pull/3134
+- testing: Name a busy window in a step's failure, not a missing view by @LeeDashan in https://github.com/longbridge/nsh/pull/3139
+- macos: Cache canvas text lines across draws by @LeeDashan in https://github.com/longbridge/nsh/pull/3133
+- android: Hide TabBar on pages with hidesBottomBarWhenPushed by @jjyr in https://github.com/longbridge/nsh/pull/3112
+- rich_editor: Drop empty textStyle spans and unsafe style values by @Tzyito in https://github.com/longbridge/nsh/pull/3098
+- macos: Wait for an app window's layout when it resizes by @LeeDashan in https://github.com/longbridge/nsh/pull/3132
+- web: Keep naga out of the main module for Rust apps by @huacnlee in https://github.com/longbridge/nsh/pull/3146
+- macos: Decide a multiline Input's trackpad gesture by its first move by @huacnlee in https://github.com/longbridge/nsh/pull/3142
+- webview: Add zoomable, pinch zoom of the page past its viewport's limits by @daoleno in https://github.com/longbridge/nsh/pull/3144
+- bundler: Keep an If branch's last value while it is cleaned up by @huacnlee in https://github.com/longbridge/nsh/pull/3141
+- web: Give a selectable view's onSelectionChange the selection's box by @BeADre in https://github.com/longbridge/nsh/pull/3148
+- ios: Enable multipleTouchEnabled for multi-finger onTouch streams by @daydoing in https://github.com/longbridge/nsh/pull/3152
+- core: Uncull subtree when promoting a view to position: fixed by @daydoing in https://github.com/longbridge/nsh/pull/3150
+- cli: Build a platform nshm from crates.io inside a Rust app by @huacnlee in https://github.com/longbridge/nsh/pull/3149
+- testing: Report the core's scrolls so measure() matches the screen by @BeADre in https://github.com/longbridge/nsh/pull/3147
+- web: Account for CSS zoom in pointer, mouse, wheel, and scrollbar coordinates by @cosformula in https://github.com/longbridge/nsh/pull/3153
+- android: Report a modal's keyboard as the keyboard inset by @PeatBoy in https://github.com/longbridge/nsh/pull/3154
+- webview: Add allowOrigin, one origin decided at run time, granted by webview.runtimeOrigin by @daoleno in https://github.com/longbridge/nsh/pull/3145
+
+</details>
+
+<details><summary>New Contributors</summary>
+
+- @821869798 made their first contribution in https://github.com/longbridge/nsh/pull/2405
+- @lyricat made their first contribution in https://github.com/longbridge/nsh/pull/2518
+- @Rosemary1812 made their first contribution in https://github.com/longbridge/nsh/pull/2301
+- @zbysir made their first contribution in https://github.com/longbridge/nsh/pull/2642
+- @NiceBlueChai made their first contribution in https://github.com/longbridge/nsh/pull/2371
+- @M4n5ter made their first contribution in https://github.com/longbridge/nsh/pull/2440
+- @haveanicedavid made their first contribution in https://github.com/longbridge/nsh/pull/2551
+- @youguanxinqing made their first contribution in https://github.com/longbridge/nsh/pull/2663
+- @0x1306a94 made their first contribution in https://github.com/longbridge/nsh/pull/2677
+- @YuniqueUnic made their first contribution in https://github.com/longbridge/nsh/pull/2737
+- @wu21-web made their first contribution in https://github.com/longbridge/nsh/pull/2761
+- @yuluod made their first contribution in https://github.com/longbridge/nsh/pull/2776
+- @yerlytech made their first contribution in https://github.com/longbridge/nsh/pull/2774
+- @Petit-Iceberg made their first contribution in https://github.com/longbridge/nsh/pull/2783
+- @Duskriver made their first contribution in https://github.com/longbridge/nsh/pull/2866
+- @wabzqem made their first contribution in https://github.com/longbridge/nsh/pull/2569
+- @Hermon000 made their first contribution in https://github.com/longbridge/nsh/pull/2954
+- @razvangeangu made their first contribution in https://github.com/longbridge/nsh/pull/2984
+- @gilbertwong96 made their first contribution in https://github.com/longbridge/nsh/pull/2970
+- @rankjie made their first contribution in https://github.com/longbridge/nsh/pull/3007
+- @Geylnu made their first contribution in https://github.com/longbridge/nsh/pull/3044
+- @1havecoke made their first contribution in https://github.com/longbridge/nsh/pull/3072
+- @AkaraChen made their first contribution in https://github.com/longbridge/nsh/pull/3088
+- @Debbl made their first contribution in https://github.com/longbridge/nsh/pull/3103
+- @PeatBoy made their first contribution in https://github.com/longbridge/nsh/pull/3154
+
+</details>
+
+🤖 [Noop](https://huacnlee.github.io/noop) (lead) · AI agent acting for @huacnlee
+
+

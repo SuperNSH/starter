@@ -28,7 +28,7 @@ use std::time::Duration;
 
 use nsh_core::prelude::*;
 use nsh_engine::{Clock, EngineConfig, Environment, Root, Size};
-use nsh_testing::Headless;
+use nsh_testing::{DragOptions, Headless};
 
 /// The page on its own, so the tests do not depend on the shell's root.
 #[component]
@@ -112,11 +112,15 @@ fn a_swipe_recovers_and_a_fling_dismisses_the_row() -> Result<(), String> {
     let mut app = start();
     // The headless finger is quick, so its projection carries the fling:
     // this swipe ends short of every snap line and springs home.
-    app.drag("id:Beta", point(px(30.0), px(0.0)))?;
+    app.drag("id:Beta", point(px(30.0), px(0.0)), DragOptions::default())?;
     app.wait_for("text:/^Beta recovered/")?;
     assert!(app.shows("Beta"), "{}", on_screen(&app));
     // A fling projects past the dismiss line: the row leaves the data.
-    app.drag("id:Beta", point(px(-240.0), px(0.0)))?;
+    app.drag(
+        "id:Beta",
+        point(px(-240.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^Beta dismissed/")?;
     app.wait_for_gone("id:Beta", Duration::from_secs(2))?;
     // The Delete underlay's action dismisses through the same data update.
@@ -129,7 +133,11 @@ fn a_swipe_recovers_and_a_fling_dismisses_the_row() -> Result<(), String> {
 #[test]
 fn restoring_brings_the_dismissed_rows_back() -> Result<(), String> {
     let mut app = start();
-    app.drag("id:Alpha", point(px(-240.0), px(0.0)))?;
+    app.drag(
+        "id:Alpha",
+        point(px(-240.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^Alpha dismissed/")?;
     app.press("role:button[Restore rows]")?;
     app.wait_for("id:Alpha")?;
@@ -141,10 +149,10 @@ fn a_drop_moves_the_item_in_the_data() -> Result<(), String> {
     let mut app = start();
     app.wait_for("text:Order: One · Two · Three · Four")?;
     // One row down.
-    app.drag("id:Two", point(px(0.0), px(64.0)))?;
+    app.drag("id:Two", point(px(0.0), px(64.0)), DragOptions::default())?;
     app.wait_for("text:Order: One · Three · Two · Four")?;
     // And back up, so the drop works both ways.
-    app.drag("id:Two", point(px(0.0), px(-64.0)))?;
+    app.drag("id:Two", point(px(0.0), px(-64.0)), DragOptions::default())?;
     app.wait_for("text:Order: One · Two · Three · Four")?;
     Ok(())
 }
@@ -174,7 +182,11 @@ fn a_route_flip_leaves_after_the_exit_and_enters() -> Result<(), String> {
 #[test]
 fn the_transform_readout_follows_the_drag_and_resets() -> Result<(), String> {
     let mut app = start();
-    app.drag("id:transform-card", point(px(40.0), px(-20.0)))?;
+    app.drag(
+        "id:transform-card",
+        point(px(40.0), px(-20.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:Drag 45 pt · scale 1.00× · angle 0°")?;
     app.press("role:button[Reset]")?;
     app.wait_for("text:Drag 0 pt · scale 1.00× · angle 0°")?;
@@ -198,13 +210,21 @@ fn pan_activation_hands_the_scrubber_the_horizontal_drag() -> Result<(), String>
     // A horizontal drag past the active offset claims the touches. Held
     // mid-drag the pad reports the scrub; the lift ends it, leaving the
     // playhead where the release put it (a scrubber keeps its position).
-    app.drag_and_hold("id:scrub-pad", point(px(80.0), px(0.0)))?;
+    app.drag_and_hold(
+        "id:scrub-pad",
+        point(px(80.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^1 grant · scrubbing at/")?;
     app.drop_held()?;
     app.wait_for("text:/^1 grant · scrubbed to/")?;
     // A vertical drag passes the fail offset first: the scroll keeps it,
     // so no second grant and the playhead stays.
-    app.drag("id:scrub-pad", point(px(0.0), px(60.0)))?;
+    app.drag(
+        "id:scrub-pad",
+        point(px(0.0), px(60.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^1 grant · scrubbed to/")?;
     Ok(())
 }

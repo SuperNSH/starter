@@ -21,6 +21,7 @@ src/
 tests/          <screen>.rs for every screen folder, shell.rs, architecture.rs; TSX suites in smoke/, vision/, trace/
 docs/recipes/   step lists for the common changes
 i18n/  themes/  assets/  packages/remote-screen/  scripts/
+vendor/         nsh-query and nsh-form 0.1.0 on NSH 0.7.0, until their 0.7 releases
 ```
 
 Read in this order: `src/lib.rs`, `src/routes.rs`, `src/pages/mod.rs`, then the folder of the screen you are changing. [docs/architecture.md](docs/architecture.md) explains how the pieces work together.
@@ -116,7 +117,7 @@ Subagents do not commit, branch, stash, reset or check files out of git; the orc
 
 ## Facts that bite
 
-`docs/PROMPT.md` section "Facts that bite" overrides any docs, including upstream skills, when they disagree. Verify every nsh subcommand and flag against `nsh --help` and the source of the installed release (`~/.cargo/registry/src/*/nsh-core-0.6.0`) before documenting it.
+`docs/PROMPT.md` section "Facts that bite" overrides any docs, including upstream skills, when they disagree. Verify every nsh subcommand and flag against `nsh --help` and the source of the installed release (`~/.cargo/registry/src/*/nsh-core-0.7.0`) before documenting it.
 
 Two more, from this layout:
 
