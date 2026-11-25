@@ -14,6 +14,10 @@ All notable changes to this project are documented here. The format follows
 
 ### Changed
 
+- `ui::layout::page_scroll` is every page's scroll; it no longer bounces on desktops, where the bounce pulled the page far off its header.
+- macOS: the header's native icon buttons are 32 pt circles (they were squashed to the symbol's height). The narrow window's header has no sidebar toggle, as it has no sidebar.
+- Home's cards drop their empty bottom space; Overlays and Sign in keep to the left edge at a readable width.
+- The TSX suites scroll by the difference they need, never thousands of points past an end.
 - `nsh-query` and `nsh-form` come from crates.io (0.1.0) instead of `../` path dependencies; the TSX package still links the sibling checkouts.
 - `scripts/new-app.sh` keeps the fake API and both libraries; the new app's phone tabs are Home, Items and Settings.
 - The phone tab bar is Home, Forms, Data, Motion, Items (Lists left it to stay at five).

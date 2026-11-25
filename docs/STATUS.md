@@ -4,6 +4,11 @@ What is done, what was verified how (command + evidence path under
 `docs/evidence/<area>/`), and what is NOT verified. A claim with no evidence
 is unverified. Every area updates its own section as it lands work.
 
+## UI pass, 2026-11-25
+
+- macOS window, looked at: 1280 (dark) Home, Gallery, Forms, Data, Lists, Overlays, Items, Settings, Sign in, Diagnostics; light: Home at 390, 500 and 700, Gallery at 390, 700 and 820, Items at 390. iOS simulator, looked at: Home only. Fixed: the squashed header buttons, the page bounce, card and column alignment (CHANGELOG).
+- Not run, by the owner's choice: the full vision suites. Not verified: the other iOS screens, Android on screen, the desktop bounce under a real trackpad, and the new `tests/vision/{items,settings,sign_in}` on a device.
+
 ## Template screens: Items and Sign in (2026-11-25)
 
 Added `src/pages/items/` (list + detail on `nsh-query` over the fake API), `src/pages/sign_in/` with `src/store/session.rs` (`nsh-form` over the mock auth seam), an Account card in Settings, `ui::form` and `ui::nav::list_row`. `nsh-query`/`nsh-form` now come from crates.io 0.1.0 (same source as the sibling checkouts, `diff -r` clean). `scripts/new-app.sh` keeps both and the fake API; the new app's tabs are Home, Items, Settings. Logs: `docs/evidence/project/template-screens/`.
