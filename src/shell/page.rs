@@ -11,7 +11,7 @@ use crate::{
     native::{kit::native_icon_button, soft_edges},
     pages,
     routes::{Content, Frame, Route},
-    shell::{chrome, palette},
+    shell::{chrome, desktop, palette},
     store::nav,
     ui::{icons, layout, nav::themed_header},
 };
@@ -114,7 +114,7 @@ fn content(route: Route) -> AnyElement {
 /// presence is decided here.
 fn page_header(route: Route) -> impl IntoElement {
     let lead = move || {
-        if chrome::sidebar_open() {
+        if chrome::sidebar_open() || !desktop() {
             px(12.0)
         } else {
             chrome::controls_inset() + px(12.0)
@@ -132,7 +132,8 @@ fn page_header(route: Route) -> impl IntoElement {
         .bg(move || theme().background)
         .window_drag(true)
         .child(when(
-            move || !chrome::sidebar_open(),
+            // The narrow layout has no sidebar to show.
+            move || desktop() && !chrome::sidebar_open(),
             || {
                 native_icon_button(
                     "sidebar.left",
