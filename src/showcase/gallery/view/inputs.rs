@@ -177,7 +177,13 @@ pub(super) fn nav_rows_section() -> impl IntoElement {
                 .disabled(true)
                 .into_element(),
             ])
-            .child(text::muted(move || format!("{} row selected", which.get()))),
+            .child(text::muted(move || format!("{} row selected", which.get())))
+            .child(crate::ui::nav::list_row(
+                "Quarterly report",
+                "Ada Lovelace · 3 comments",
+                "nav-record",
+                move || which.set(SharedString::from("Record")),
+            )),
     )
 }
 

@@ -413,7 +413,7 @@ fn every_language_has_every_string() {
     }
     report(
         "every language file under i18n/ has every key",
-        "add the missing key to the file named, translated (docs/recipes/add-a-language.md).",
+        "add the missing key to the file named, translated (docs/recipes/add-a-string.md).",
         problems,
     );
 }

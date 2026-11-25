@@ -39,7 +39,8 @@ pub trait AuthProvider: Send + Sync {
 }
 
 /// The local mock: any well-formed email and a non-empty password signs in
-/// a fake user, kept in memory only.
+/// a fake user, kept in memory only. [`MockAuthProvider::REJECTED_PASSWORD`]
+/// is refused as a real provider refuses a wrong password.
 #[derive(Debug, Default)]
 pub struct MockAuthProvider {
     user: Mutex<Option<AuthUser>>,
@@ -51,6 +52,10 @@ impl MockAuthProvider {
 
     /// The display name the mock user gets.
     const MOCK_NAME: &'static str = "Mock User";
+
+    /// The one password the mock refuses, with code `"denied"`, so the
+    /// server-error path can be seen without a server.
+    pub const REJECTED_PASSWORD: &'static str = "wrong-password";
 }
 
 impl AuthProvider for MockAuthProvider {
@@ -67,6 +72,9 @@ impl AuthProvider for MockAuthProvider {
             }
             if password.is_empty() {
                 return Err(AppError::new("invalid", "Enter a password"));
+            }
+            if password == Self::REJECTED_PASSWORD {
+                return Err(AppError::new("denied", "Wrong email or password"));
             }
             let user = AuthUser {
                 id: Self::MOCK_ID.into(),

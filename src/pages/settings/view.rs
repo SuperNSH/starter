@@ -2,7 +2,8 @@
 
 use nsh_core::prelude::*;
 
-use crate::store::{appearance, config, errors, locale};
+use crate::routes::Route;
+use crate::store::{appearance, config, errors, locale, nav, session};
 use crate::ui::{
     button::{ButtonSize, ButtonVariant, button_with, choice_button},
     controls, field, layout, text,
@@ -20,6 +21,7 @@ pub fn settings_page() -> impl IntoElement {
                     locale::text("settings.title"),
                     locale::text("settings.summary"),
                 ))
+                .child(account_card())
                 .child(name_card())
                 .child(language_card())
                 .child(appearance_card())
@@ -30,6 +32,48 @@ pub fn settings_page() -> impl IntoElement {
 /// A titled card.
 fn card(title: &'static str) -> View {
     layout::card().child(text::section_title(locale::text(title)))
+}
+
+/// Who is signed in: Sign in opens its page; signed in, the name and
+/// Sign out.
+fn account_card() -> impl IntoElement {
+    card("settings.account.title").child(
+        when(
+            || session::user().is_some(),
+            || {
+                view()
+                    .gap_2()
+                    .child(text::body(move || {
+                        session::user()
+                            .map(|user| user.display_name)
+                            .unwrap_or_default()
+                    }))
+                    .child(view().flex_row().child(button_with(
+                        locale::text("settings.account.sign_out"),
+                        ButtonVariant::Outline,
+                        ButtonSize::Medium,
+                        false,
+                        None,
+                        session::sign_out,
+                    )))
+                    .into_element()
+            },
+        )
+        .otherwise(|| {
+            view()
+                .gap_2()
+                .child(text::muted(locale::text("settings.account.signed_out")))
+                .child(view().flex_row().child(button_with(
+                    locale::text("settings.account.sign_in"),
+                    ButtonVariant::Primary,
+                    ButtonSize::Medium,
+                    false,
+                    None,
+                    || nav::push(Route::SignIn),
+                )))
+                .into_element()
+        }),
+    )
 }
 
 /// The name the app calls the user, saved on the button.

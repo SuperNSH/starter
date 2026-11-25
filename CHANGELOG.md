@@ -5,7 +5,19 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Two template screens a new app keeps. **Items** (`src/pages/items/`): a list on `nsh-query` over the fake API, with skeletons, an error with Retry, an empty state, and a row that opens the item (pushed on phones, presented by the list on desktop widths); links `items` and `items/<id>`. **Sign in** (`src/pages/sign_in/`): an email and password form on `nsh-form` over the new `store::session`, which calls the mock auth seam; field errors, a refusal on the form, the signed-in name and Sign out; link `sign_in`. Settings gains an Account card. Nothing is gated on signing in. Both are translated (`items.*`, `sign_in.*`, `settings.account.*`).
+- `ui::form` (the form glue the demo forms used, moved out of the showcase so pages can use it) and `ui::nav::list_row`.
+- The fake API's empty switch (`set_empty`), `posts()`, and `ApiError::NotFound` for an id that does not exist (it panicked before).
+- The mock auth provider refuses the password `wrong-password` (code `denied`), so the refusal path can be seen.
+
 ### Changed
+
+- `nsh-query` and `nsh-form` come from crates.io (0.1.0) instead of `../` path dependencies; the TSX package still links the sibling checkouts.
+- `scripts/new-app.sh` keeps the fake API and both libraries; the new app's phone tabs are Home, Items and Settings.
+- The phone tab bar is Home, Forms, Data, Motion, Items (Lists left it to stay at five).
+- Home's rows come from `pages::home_rows()` (was the `HOME_ROWS` const) and open the item and Sign in.
 
 - The source is laid out for navigation: `src/pages` (the app's screens), `src/showcase` (the demo screens), `src/shell`, `src/store`, `src/services`, `src/ui`, `src/native`, with `routes.rs`, `error.rs` and `startup.rs` at the root. `features`, `foundation`, `state`, `platform` and `app` are gone. `AGENTS.md` is the map.
 - Every screen declares one `Page` record; the shell reads records and names no screen. Adding a screen is a folder, a `Route` variant and one line in `src/pages/mod.rs`, where it was eleven edits in the route table.

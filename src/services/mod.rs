@@ -6,8 +6,8 @@
 //!   (in-memory sinks). They do not fake the real libraries' depth (no
 //!   retry policy, no token refresh, no batching): only the calls the app
 //!   makes.
-//! - `fake_api`: the local backend the data screens read, with latency,
-//!   failure and offline switches.
+//! - `fake_api`: the local backend the Items page (and the demo feed)
+//!   reads, with latency, failure, offline and empty switches.
 //! - `logging`, `manifest`, `capabilities`, `time`, `id` and `validation`:
 //!   the log, what `nsh.json` declares, the engine's clock, ids and input
 //!   checks.

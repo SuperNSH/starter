@@ -1,0 +1,31 @@
+Renamed nsh-starter (com.example.nshstarter) -> acme (com.acme.app) in:
+Cargo.toml
+tests/smoke/app.test.tsx
+tests/diagnostics.rs
+tests/shell.rs
+tests/home.rs
+tests/first_run.rs
+tests/items.rs
+tests/settings.rs
+tests/sign_in.rs
+docs/architecture.md
+docs/recipes/add-a-page.md
+README.md
+CONTRIBUTING.md
+i18n/en.yml
+i18n/zh-CN.yml
+nsh.json
+src/native/command_bar/macos/main_window.rs
+src/native/command_bar/macos/panel.rs
+src/shell/first_run.rs
+src/shell/deep_link.rs
+src/shell/back.rs
+src/lib.rs
+src/routes.rs
+src/main.rs
+src/services/logging.rs
+Cargo.lock refreshes on the next cargo command.
+
+Made acme (com.acme.app) in /private/tmp/claude-501/newapp-template/acme
+Next: cd /private/tmp/claude-501/newapp-template/acme && git init && just check && just test
+exit 0

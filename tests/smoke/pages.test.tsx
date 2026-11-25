@@ -5,7 +5,7 @@
 import { expect, open, test } from "nsh/test";
 import type { App } from "nsh/test";
 
-// One entry per page the shell can show. `id` is the row on Home,
+// One entry per page the shell can show. `id` is the card or row on Home,
 // `marker` a selector for something only that page shows (a title alone
 // also matches its Home row and sidebar entry, and would pass too early).
 // A screen keeps its marker stable, or this list changes with it
@@ -23,6 +23,9 @@ const PAGES: Array<{ id: string; marker: string }> = [
   { id: "page-platform", marker: "text:Pick an image" },
   { id: "page-platform_device", marker: "text:Screen reader" },
   { id: "page-remote_screen", marker: "text:Delivery status" },
+  { id: "page-items", marker: "id:items-row-1" },
+  { id: "page-items_detail", marker: "id:items_detail-body" },
+  { id: "page-sign_in", marker: "id:sign_in-email" },
   { id: "page-settings", marker: "text:Language" },
   { id: "page-diagnostics", marker: "text:Start sample task" },
 ];
@@ -49,6 +52,10 @@ async function openShell(): Promise<{ app: App; phone: boolean }> {
   }
 }
 
+// Home's rows under its cards, in their order (`pages::home_rows`); the
+// other entries are cards.
+const HOME_ROWS = ["page-items_detail", "page-sign_in", "page-data_item"];
+
 // iOS and Android pop with back; the desktop sidebar has no back (the
 // macOS host ignores it), so Home is its first row.
 // Home keeps its scroll offset, and a row under the title bar or the tab
@@ -56,8 +63,12 @@ async function openShell(): Promise<{ app: App; phone: boolean }> {
 // is nothing to scroll, and trying costs a 25 s timeout a page on the web.
 async function homeRowInView(app: App, phone: boolean, index: number): Promise<void> {
   if (!phone) return;
-  // PAGES skips the "Native vs app" tile; the data item row is the last.
-  index = PAGES[index].id === "page-data_item" ? 15 : index + 1;
+  // Cards first, then the rows; PAGES skips the "Native vs app" card.
+  const cards = PAGES.filter((page) => !HOME_ROWS.includes(page.id));
+  const id = PAGES[index].id;
+  index = HOME_ROWS.includes(id)
+    ? cards.length + 1 + HOME_ROWS.indexOf(id)
+    : cards.findIndex((page) => page.id === id) + 1;
   try {
     await app.scroll("id:home-scroll", -10000);
     if (index > 2) await app.scroll("id:home-scroll", index * 110 - 250);
@@ -102,5 +113,5 @@ test("every page opens from the shell", async () => {
 
   // Back at Home: every page reachable again.
   await app.waitFor("text:Home");
-  // 30 s is too short for 15 captures on a simulator or an emulator.
-}, 240_000);
+  // 30 s is too short for 17 captures on a simulator or an emulator.
+}, 300_000);

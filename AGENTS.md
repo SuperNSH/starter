@@ -11,10 +11,10 @@ src/
   routes.rs     every screen's address (Route) and the record each screen declares (Page)
   error.rs      the app's one error type (AppError)
   startup.rs    everything that runs once at launch, in order
-  pages/        the app's screens, one folder each; mod.rs is the table of all screens
+  pages/        the app's screens, one folder each (home, items, sign_in, settings, diagnostics); mod.rs is the table of all screens
   showcase/     the demo screens, built like pages/; a new app leaves this folder behind
   shell/        the frame around the screens: sidebar, tabs, headers, palette, back, links, error banner
-  store/        what the app remembers: navigation, config, locale, appearance, tasks, events, errors
+  store/        what the app remembers: navigation, config, locale, appearance, session, tasks, events, errors
   services/     what the app talks to: the fake API, auth, HTTP, analytics, monitoring, the log, nsh.json
   ui/           the component library: one control per file, styled from the theme
   native/       platform code (UIKit, AppKit); the only folder that may use unsafe
@@ -29,7 +29,7 @@ Read in this order: `src/lib.rs`, `src/routes.rs`, `src/pages/mod.rs`, then the 
 
 | You are adding | It goes in |
 |---|---|
-| A screen | `src/pages/<name>/` ([recipe](docs/recipes/add-a-page.md)) |
+| A screen | `src/pages/<name>/` ([recipe](docs/recipes/add-a-page.md)); copy `items/` for a list with a detail, `sign_in/` for a form |
 | State two screens share, or that outlives a screen | `src/store/` ([recipe](docs/recipes/add-shared-state.md)) |
 | A call to the outside: network, files, a system API with no view | `src/services/` ([recipe](docs/recipes/add-a-service.md)) |
 | A control or layout piece more than one screen uses | `src/ui/` ([recipe](docs/recipes/add-a-control.md)) |
@@ -51,7 +51,7 @@ pages/settings/
 tests/settings.rs
 ```
 
-A screen has one name. `settings` is the folder, the `Route::Settings` variant, the record's `key`, `tests/settings.rs`, and the ids the shell gives it (`page-settings`, `nav-settings`, `tab-settings`). New strings and test ids inside the screen start with it too (`settings.title`, `settings-save`); some older demo screens predate that prefix. A screen pushed from another lives in its parent's folder and starts with its name (`Route::DataItem` is `showcase/data/item.rs`).
+A screen has one name. `settings` is the folder, the `Route::Settings` variant, the record's `key`, `tests/settings.rs`, and the ids the shell gives it (`page-settings`, `nav-settings`, `tab-settings`). New strings and test ids inside the screen start with it too (`settings.title`, `settings-save`); some older demo screens predate that prefix. A screen pushed from another lives in its parent's folder and starts with its name (`Route::ItemsDetail` is `pages/items/detail.rs`, key `items_detail`).
 
 The shell knows no screen by name. Its sidebar row, tab, header, card on Home and palette entry all come from the `PAGE` record, so a new screen changes nothing in `src/shell/`.
 

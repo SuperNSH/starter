@@ -1,6 +1,6 @@
 //! Navigation controls: the full-width row for lists of destinations (a
 //! sidebar, a settings list), with a trailing slot and a selected state,
-//! and the card for a grid of them.
+//! the two-line row for a list of records, and the card for a grid of them.
 
 use nsh_base::{ButtonElement, button, theme};
 use nsh_core::prelude::*;
@@ -63,6 +63,64 @@ pub fn nav_row(
                         .text_color(move || theme().foreground),
                 )
                 .when_some(trailing, |row, trailing| row.child(trailing)),
+        )
+}
+
+/// A row of a list of records: `title` over one line of `detail`, a
+/// chevron, the whole row the target. Its name is the title; `test_id`
+/// rides the inner view, as [`nav_row`]'s does.
+pub fn list_row(
+    title: impl Into<SharedString>,
+    detail: impl IntoReactive<SharedString>,
+    test_id: &str,
+    on_press: impl Fn() + 'static,
+) -> ButtonElement {
+    let title = title.into();
+    button()
+        .on_press(on_press)
+        .accessibility_label(title.clone())
+        .w_full()
+        .min_h(move || px(if is_desktop() { 44.0 } else { 56.0 }))
+        .flex_row()
+        .items_center()
+        .rounded(move || theme().radius)
+        .transition_colors()
+        .hover(|s| s.bg(move || theme().accent))
+        .active(|s| s.opacity(0.8))
+        .focus(|s| {
+            s.outline(px(2.0))
+                .outline_offset(px(2.0))
+                .outline_color(move || theme().ring)
+        })
+        .child(
+            view()
+                .test_id(test_id)
+                .flex_1()
+                .flex_row()
+                .items_center()
+                .gap_3()
+                .px_3()
+                .py_2()
+                .child(
+                    view()
+                        .flex_1()
+                        .min_w(px(0.0))
+                        .gap_0p5()
+                        .child(
+                            text(title)
+                                .text_sm()
+                                .font_weight(FontWeight::MEDIUM)
+                                .number_of_lines(1)
+                                .text_color(move || theme().foreground),
+                        )
+                        .child(
+                            text(detail.into_reactive())
+                                .text_xs()
+                                .number_of_lines(1)
+                                .text_color(move || theme().muted_foreground),
+                        ),
+                )
+                .child(chevron()),
         )
 }
 

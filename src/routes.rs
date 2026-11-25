@@ -20,6 +20,10 @@ pub const SCHEME: &str = "nsh-starter://";
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Route {
     Home,
+    Items,
+    /// One item of the list, pushed over `Items`.
+    ItemsDetail(u64),
+    SignIn,
     Settings,
     Diagnostics,
     /// One of the demo screens (`src/showcase`). A new app deletes this
@@ -31,6 +35,7 @@ impl Route {
     /// The id the route carries, for a screen that shows one item.
     pub fn id(self) -> Option<u64> {
         match self {
+            Route::ItemsDetail(id) => Some(id),
             Route::Showcase(route) => route.id(),
             _ => None,
         }
@@ -40,6 +45,7 @@ impl Route {
     /// parent opens the parent under it.
     pub fn parent(self) -> Option<Route> {
         match self {
+            Route::ItemsDetail(_) => Some(Route::Items),
             Route::Showcase(route) => route.parent().map(Route::Showcase),
             _ => None,
         }
@@ -55,6 +61,9 @@ impl Route {
     pub fn path(self) -> String {
         match self {
             Route::Home => String::new(),
+            Route::Items => "items".into(),
+            Route::ItemsDetail(id) => format!("items/{id}"),
+            Route::SignIn => "sign_in".into(),
             Route::Settings => "settings".into(),
             Route::Diagnostics => "diagnostics".into(),
             Route::Showcase(route) => route.path(),
@@ -66,6 +75,9 @@ impl Route {
     pub fn parse(segments: &[&str]) -> Option<Route> {
         match segments {
             [] => Some(Route::Home),
+            ["items"] => Some(Route::Items),
+            ["items", id] => Some(Route::ItemsDetail(id.parse().ok()?)),
+            ["sign_in"] => Some(Route::SignIn),
             ["settings"] => Some(Route::Settings),
             ["diagnostics"] => Some(Route::Diagnostics),
             other => showcase::Route::parse(other).map(Route::Showcase),
@@ -155,5 +167,18 @@ mod tests {
         assert_eq!(Route::from_url("other://diagnostics"), None);
         assert_eq!(Route::parse(&[]), Some(Route::Home));
         assert_eq!(Route::parse(&["nowhere"]), None);
+    }
+
+    #[test]
+    fn an_item_link_carries_its_id_and_sits_on_its_list() {
+        assert_eq!(
+            Route::from_url("nsh-starter://items/4"),
+            Some(Route::ItemsDetail(4))
+        );
+        assert_eq!(Route::ItemsDetail(4).path(), "items/4");
+        assert_eq!(Route::ItemsDetail(4).id(), Some(4));
+        assert_eq!(Route::ItemsDetail(4).parent(), Some(Route::Items));
+        assert_eq!(Route::parse(&["items", "x"]), None);
+        assert_eq!(Route::parse(&["sign_in"]), Some(Route::SignIn));
     }
 }

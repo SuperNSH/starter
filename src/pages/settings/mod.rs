@@ -1,6 +1,7 @@
-//! Settings: the user's name, the language, the appearance and the
-//! telemetry switch. Reads and writes `store::config`, `store::locale` and
-//! `store::appearance`; every string is translated (`settings.*`).
+//! Settings: the account, the user's name, the language, the appearance
+//! and the telemetry switch. Reads and writes `store::session`,
+//! `store::config`, `store::locale` and `store::appearance`; every string
+//! is translated (`settings.*`).
 //!
 //! Test: `tests/settings.rs`.
 
@@ -17,7 +18,7 @@ use crate::ui::icons::lucide;
 pub const PAGE: Page = Page {
     key: "settings",
     title: "Settings",
-    summary: "Your name, the language, the appearance and telemetry.",
+    summary: "Your account, your name, the language, the appearance and telemetry.",
     icon: lucide!(
         r#"<path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/>"#
     ),

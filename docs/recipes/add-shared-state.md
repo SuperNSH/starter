@@ -28,4 +28,4 @@ State goes in `src/store/` when two screens read it, or when it must outlive the
 
 5. **Check:** `just rules && just test`.
 
-`src/store/locale.rs` is a small example; `src/store/nav.rs` a larger one.
+`src/store/locale.rs` is a small example; `src/store/session.rs` one that calls a service (the auth seam); `src/store/nav.rs` a larger one.

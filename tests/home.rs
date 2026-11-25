@@ -49,7 +49,7 @@ fn a_card_opens_its_page_and_back_returns() {
 #[test]
 fn the_rows_under_the_cards_are_listed() {
     let app = app();
-    for (id, label, _) in pages::HOME_ROWS {
+    for (id, label, _) in pages::home_rows() {
         assert!(app.screen().shows(label), "{label}");
         assert_eq!(app.screen().count(&format!("id:{id}")).unwrap(), 1, "{id}");
     }

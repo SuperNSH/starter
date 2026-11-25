@@ -4,6 +4,32 @@ What is done, what was verified how (command + evidence path under
 `docs/evidence/<area>/`), and what is NOT verified. A claim with no evidence
 is unverified. Every area updates its own section as it lands work.
 
+## Template screens: Items and Sign in (2026-11-25)
+
+Added `src/pages/items/` (list + detail on `nsh-query` over the fake API), `src/pages/sign_in/` with `src/store/session.rs` (`nsh-form` over the mock auth seam), an Account card in Settings, `ui::form` and `ui::nav::list_row`. `nsh-query`/`nsh-form` now come from crates.io 0.1.0 (same source as the sibling checkouts, `diff -r` clean). `scripts/new-app.sh` keeps both and the fake API; the new app's tabs are Home, Items, Settings. Logs: `docs/evidence/project/template-screens/`.
+
+### Verified, and how
+
+| Command (repo) | Result | Log |
+|---|---|---|
+| `cargo fmt --all -- --check` | exit 0 | `fmt.log` |
+| `cargo clippy --all-targets -- -D warnings` | exit 0 | `clippy.log` |
+| `cargo test` (all, incl. `--test architecture`) | exit 0, 162 passed (items 5, sign_in 4 new) | `cargo-test.log` |
+| `cargo clippy --lib --target aarch64-apple-ios-sim -- -D warnings` | exit 0 | `clippy-ios-sim.log` |
+| `nsh test tests/smoke/app.test.tsx` | 2 passed | `nsh-test-app.log` |
+| `nsh test tests/smoke/pages.test.tsx` | 1 passed (17 pages, incl. items, items_detail, sign_in) | `nsh-test-pages.log` |
+| Seen to fail: one break per new test (9) and the new gallery assertion | each failed as intended, code restored | `seen-to-fail.log` |
+| `scripts/new-app.sh /private/tmp/claude-501/newapp-template/acme acme com.acme.app` | exit 0 | `new-app.log` |
+| In the copy (`CARGO_TARGET_DIR` in scratch): fmt check, clippy `-D warnings`, `cargo test`, both `nsh test` smoke files | all exit 0; `cargo test` 59 passed | `generated-app/*.log` |
+
+The generated copy was made before two comment-only edits (`items/view.rs`, `store/session.rs`); the repo gates above ran after them.
+
+### Not verified
+
+- Nothing was looked at on screen: no target run, no screenshot. The desktop presentation of an item is tested headless only (macOS environment, 1280 × 800); its `pt_safe_area` under an iPad's system header is unverified.
+- `tests/smoke/pages.test.tsx` per target (`--target ios|android|macos|web`): not run; its phone scroll offsets for the new Home rows are computed, not seen.
+- CI (`.github/workflows/ci.yml`) still fetches the sibling checkouts; the Rust build no longer needs them. Not run.
+
 ## Restructure for navigation (2026-11-25)
 
 The source moved to the layout in `AGENTS.md`. No product behavior was meant to change except what is listed under "Behavior changes".

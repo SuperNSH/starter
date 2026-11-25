@@ -40,7 +40,7 @@ The app is Rust-first: one crate at the repo root is the UI, and `packages/remot
   export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
   ```
 - **just** for the recipes (`brew install just`).
-- The two sibling libraries as path dependencies. `Cargo.toml` points at `../nsh-query` and `../nsh-form`, so a checkout of each must sit next to this repo:
+- The two sibling libraries, for the TSX package only. The Rust crate takes `nsh-query` and `nsh-form` 0.1.0 from crates.io; `packages/remote-screen` links their TypeScript packages from checkouts next to this repo:
   ```
   parent/
   ├── nsh-starter/   (this repo)
@@ -96,7 +96,7 @@ Per-target smoke suites (open every page, screenshot) run as `nsh test --target 
 just new-app ../acme-notes acme-notes com.acme.notes
 ```
 
-This copies the repo to the directory without the demo screens (`src/showcase`), their tests, the remote-screen package, the fake API and this starter's build records, then renames it. The copy keeps Home, Settings and Diagnostics, the shell, the store, the services, the ui library and the native code, and passes `just check` and `just test` as made.
+This copies the repo to the directory without the demo screens (`src/showcase`), their tests, the remote-screen package and this starter's build records, then renames it. The copy keeps Home, Items (a list with a detail on `nsh-query`), Sign in (a form on `nsh-form`), Settings and Diagnostics, the shell, the store, the services with the fake API, the ui library and the native code, and passes `just check` and `just test` as made.
 
 ## Renaming the app
 

@@ -5,11 +5,12 @@
 #   scripts/new-app.sh <directory> <name> <id>
 #   scripts/new-app.sh ../acme acme com.acme.app
 #
-# The copy keeps the app's own screens (Home, Settings, Diagnostics), the
-# shell, the store, the services, the ui library and the native code. It
-# drops src/showcase, the demo tests, the remote-screen package, the fake
-# API, the nsh-query and nsh-form dependencies (only the demos used them)
-# and this starter's build records. Run the gates in the copy afterwards:
+# The copy keeps the app's own screens (Home, Items, Sign in, Settings,
+# Diagnostics), the shell, the store, the services with the fake API the
+# Items page reads, the nsh-query and nsh-form dependencies, the ui library
+# and the native code. Its phone tabs are Home, Items and Settings. It
+# drops src/showcase, the demo tests, the remote-screen package and this
+# starter's build records. Run the gates in the copy afterwards:
 # `just check && just test`.
 set -euo pipefail
 
@@ -41,7 +42,7 @@ cd "$dest"
 rm -rf src/showcase packages assets/canvas tests/vision tests/trace docs/evidence \
     docs/upstream-drafts .zcode .github tools
 rm -f tests/{canvas,data,forms,gallery,lists,motion,native_vs_app,overlays,platform,remote_screen,showcase}.rs \
-    tests/smoke/controls.test.tsx src/services/fake_api.rs \
+    tests/smoke/controls.test.tsx \
     docs/STATUS.md docs/PROMPT.md docs/coverage.md docs/gpui-starter-parity.md \
     docs/nsh-0.5.0-migration.md docs/upstream-issues.md CHANGELOG.md \
     scripts/new-app.sh
@@ -68,8 +69,8 @@ edit("src/lib.rs", [("text", "#[forbid(unsafe_code)]\npub mod showcase;\n", "")]
 edit("src/routes.rs", [
     ("text", "\nuse crate::showcase;\n", "\n"),
     ("re", r"    /// One of the demo screens.*?    Showcase\(showcase::Route\),\n", ""),
-    ("re", r"    pub fn id\(self\) -> Option<u64> \{\n.*?\n    \}\n", "    pub fn id(self) -> Option<u64> {\n        None\n    }\n"),
-    ("re", r"    pub fn parent\(self\) -> Option<Route> \{\n.*?\n    \}\n", "    pub fn parent(self) -> Option<Route> {\n        None\n    }\n"),
+    ("text", "            Route::Showcase(route) => route.id(),\n", ""),
+    ("text", "            Route::Showcase(route) => route.parent().map(Route::Showcase),\n", ""),
     ("text", "            Route::Showcase(route) => route.path(),\n", ""),
     ("text", "            other => showcase::Route::parse(other).map(Route::Showcase),\n", "            _ => None,\n"),
     ("re", r"impl From<showcase::Route> for Route \{.*?\n\}\n\n", ""),
@@ -79,18 +80,10 @@ edit("src/pages/mod.rs", [
     ("text", "use crate::showcase;\n", ""),
     ("text", "            Route::Showcase(route) => route.page(),\n", ""),
     ("text", "        list.extend(showcase::SIDEBAR.iter().copied().map(Route::Showcase));\n", ""),
-    ("text", "        list.extend(showcase::TABS.iter().copied().map(Route::Showcase));\n", "        list.push(Route::Settings);\n"),
-    ("text", "pub const HOME_ROWS: &[(&str, &str, fn())] = showcase::HOME_ROWS;", "pub const HOME_ROWS: &[(&str, &str, fn())] = &[];"),
+    ("text", "        list.extend(showcase::TABS.iter().copied().map(Route::Showcase));\n        list.push(Route::Items);\n", "        list.push(Route::Items);\n        list.push(Route::Settings);\n"),
+    ("text", "        list.extend_from_slice(showcase::HOME_ROWS);\n", ""),
 ])
 edit("src/pages/home/view.rs", [("text", "\"Everything the boilerplate demonstrates, one page each.\"", "\"Every page of the app.\"")])
-edit("src/services/mod.rs", [
-    ("text", "pub mod fake_api;\n", ""),
-    ("re", r"//! - `fake_api`:.*?switches\.\n", ""),
-])
-edit("Cargo.toml", [
-    ("re", r"^nsh-query = [^\n]*\n", ""),
-    ("re", r"^nsh-form = [^\n]*\n", ""),
-])
 edit("tests/architecture.rs", [
     ("text", "    (\"src/routes.rs\", &[\"showcase\"]),\n", "    (\"src/routes.rs\", &[]),\n"),
     ("text", "    for group in [\"pages\", \"showcase\"] {", "    for group in [\"pages\"] {"),
@@ -99,7 +92,8 @@ edit("tests/architecture.rs", [
 edit("tests/home.rs", [("text", "Everything the boilerplate demonstrates, one page each.", "Every page of the app.")])
 edit("tests/smoke/app.test.tsx", [("text", "Everything the boilerplate demonstrates, one page each.", "Every page of the app.")])
 edit("tests/smoke/pages.test.tsx", [
-    ("re", r"^  \{ id: \"page-(?!settings|diagnostics)[a-z_]+\", marker: [^\n]*\n", ""),
+    ("re", r"^  \{ id: \"page-(?!settings|diagnostics|items|sign_in)[a-z_]+\", marker: [^\n]*\n", ""),
+    ("text", ", \"page-data_item\"]", "]"),
 ])
 edit("justfile", [
     ("re", r"^# TSX package gate in packages/remote-screen.*?nsh test\n\n", ""),

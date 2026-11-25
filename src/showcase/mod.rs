@@ -61,8 +61,9 @@ pub const SIDEBAR: &[Route] = &[
     Route::RemoteScreen,
 ];
 
-/// The demo screens on the phone's tab bar, after Home.
-pub const TABS: &[Route] = &[Route::Forms, Route::Data, Route::Lists, Route::Motion];
+/// The demo screens on the phone's tab bar, after Home and before the
+/// app's Items (`pages::tabs`).
+pub const TABS: &[Route] = &[Route::Forms, Route::Data, Route::Motion];
 
 /// Rows Home shows under its cards: a test id, a label and what a press
 /// does. They demonstrate a pushed screen and a deep link.

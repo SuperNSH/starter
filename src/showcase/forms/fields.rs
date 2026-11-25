@@ -1,11 +1,13 @@
-//! The forms section's field glue: the layout a `nsh-form` field needs
-//! (label, control, error) over the ui library's primitives, and the input
-//! look with the failed state the ui signal-based wrappers cannot express.
-//! No raw `nsh_base` control leaves it.
+//! The forms section's field layout: sections, labelled rows that scroll
+//! into view on a failed submit, and the page header, over the generic form
+//! glue in `ui::form` (re-exported here for the section's screens).
 
-use nsh_base::{Input, input, theme};
+use nsh_base::theme;
 use nsh_core::prelude::*;
 
+pub use crate::ui::form::{
+    SubmitRule, error_line, field_label, hint_line, input_shell, message_banner, submit_first_form,
+};
 use crate::ui::text;
 
 /// A section of fields: the ui card's box (rebuilt here: `ui::layout::card`
@@ -23,28 +25,6 @@ pub fn field_section(title: &'static str, fields: impl IntoIterator<Item = View>
         .text_color(move || theme().card_foreground)
         .child(text::section_title(title))
         .children(fields)
-}
-
-/// A field's label.
-pub fn field_label(label: &'static str) -> AnyElement {
-    text::label(label).into_element()
-}
-
-/// A live hint under a label (`""` hides it): the age, "Checking…".
-pub fn hint_line(hint: impl Fn() -> SharedString + Copy + 'static) -> impl IntoElement {
-    when(move || !hint().is_empty(), move || text::muted(hint))
-}
-
-/// The message a field shows, once its field has one to give.
-pub fn error_line(error: impl Fn() -> Option<String> + Copy + 'static) -> impl IntoElement {
-    when(
-        move || error().is_some(),
-        move || {
-            text(move || error().unwrap_or_default())
-                .text_sm()
-                .text_color(move || theme().destructive)
-        },
-    )
 }
 
 /// A labelled field: label, the control, its error.
@@ -149,45 +129,6 @@ pub fn revealed_row(row: View, failed: impl Fn() -> bool + 'static) -> View {
     row.element_ref(&target)
 }
 
-/// The app's text input look, as `ui::field`'s frame draws it, with the
-/// border reading destructive while the field fails. Behavior (value,
-/// autofill, the form's binding) belongs to the caller, then
-/// `.bind(field)`.
-pub fn input_shell(failed: impl Fn() -> bool + Copy + 'static) -> Input {
-    let touch = !is_desktop();
-    input()
-        .min_h(move || px(if touch { 44.0 } else { 36.0 }))
-        .px_3()
-        .py_2()
-        .text_sm()
-        .text_color(move || theme().foreground)
-        .rounded(move || theme().radius)
-        .border_1()
-        .border_color(move || {
-            if failed() {
-                theme().destructive
-            } else {
-                theme().input
-            }
-        })
-        .bg(move || theme().background)
-        .transition_colors()
-        .focus(move |s| {
-            s.border_color(move || {
-                if failed() {
-                    theme().destructive
-                } else {
-                    theme().ring
-                }
-            })
-            .outline(px(2.0))
-            .outline_offset(px(2.0))
-            .outline_color(move || theme().ring)
-        })
-        .placeholder_color(move || color(theme().muted_foreground))
-        .caret_color(move || color(theme().foreground))
-}
-
 /// The app's header for the desktops and the web (iOS and Android draw the
 /// system one from `title`): its back button pops the feature's own stack,
 /// so only a page the stack can pop passes `on_back`.
@@ -205,49 +146,4 @@ pub fn page_header(title: &'static str, on_back: Option<impl Fn() + 'static>) ->
             crate::ui::button::icon_svg_button(crate::ui::icons::BACK, "Back", on_back)
         }))
         .child(text::label(title))
-}
-
-/// The banner a form-level message shows in; `tone` picks the role color.
-pub fn message_banner(
-    message: impl Fn() -> SharedString + 'static,
-    tone: impl Fn() -> AdaptiveColor + Copy + 'static,
-) -> impl IntoElement {
-    view()
-        .flex_row()
-        .items_center()
-        .gap_2()
-        .px_3()
-        .py_2()
-        .rounded(move || theme().radius)
-        .bg(move || theme().muted)
-        .border_1()
-        .border_color(tone)
-        .child(
-            text(move || message().to_string())
-                .text_sm()
-                .text_color(tone),
-        )
-}
-
-/// The forms' one validation timing (`ValidationLogic::revalidate`): a rule
-/// stays quiet until the first submit, then follows every edit. Blur alone
-/// never shows an error.
-pub trait SubmitRule<H, T> {
-    fn check(self, rule: impl Fn(&T, &H) -> Option<String> + 'static) -> Self;
-}
-
-impl<H: Clone + PartialEq + 'static, T: Clone + PartialEq + 'static> SubmitRule<H, T>
-    for nsh_form::Field<H, T>
-{
-    fn check(self, rule: impl Fn(&T, &H) -> Option<String> + 'static) -> Self {
-        self.validators(nsh_form::FieldValidators::new().on_dynamic(rule))
-    }
-}
-
-/// A form whose rules run on submit, then on change (see [`SubmitRule`]).
-pub fn submit_first_form<H: Clone + PartialEq + 'static>(initial: H) -> nsh_form::Form<H> {
-    nsh_form::use_form_with(
-        nsh_form::FormOptions::new(initial)
-            .validation_logic(nsh_form::ValidationLogic::revalidate()),
-    )
 }

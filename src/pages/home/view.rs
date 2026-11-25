@@ -42,10 +42,10 @@ pub fn home_page() -> AnyElement {
                     ),
                 )
                 // The rows under the cards, when the page table has any.
-                .when(!pages::HOME_ROWS.is_empty(), |page| {
+                .when(!pages::home_rows().is_empty(), |page| {
                     page.child(
                         view().gap_1().child(section_label("Pushed")).children(
-                            pages::HOME_ROWS
+                            pages::home_rows()
                                 .iter()
                                 .map(|(id, label, open)| demo_row(id, label, *open)),
                         ),

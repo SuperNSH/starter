@@ -28,6 +28,7 @@ pub mod dialog;
 pub mod dock;
 pub mod editor;
 pub mod field;
+pub mod form;
 pub mod icons;
 pub mod layout;
 pub mod link;

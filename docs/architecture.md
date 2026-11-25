@@ -57,9 +57,9 @@ Two layers, both signals.
 
 **App state** (`src/store`): plain signals behind functions. Navigation, the typed config (persisted through NSH's `Storage`, with schema migrations), the UI language, the appearance, the event bus, the background task manager and the error queue. A store keeps its signal private and exports what reads and changes it. `global::<T>()` keeps one value per type, so every global has a type of its own. NSH's own reads (`dark()`, `locale()`, `font_scale()`) are already reactive and are not copied into the store.
 
-**Async state** (`nsh-query`, in the showcase's data screens): every server-shaped read is a `use_query*` with a typed key, a cache policy and a retry policy; writes are `use_mutation*` that invalidate keys on success. The fetchers call `services::fake_api`, never a real network.
+**Async state** (`nsh-query`, in the Items page and the demo data screens): every server-shaped read is a `use_query*` with a typed key, a cache policy and a retry policy; writes are `use_mutation*` that invalidate keys on success. The fetchers call `services::fake_api`, never a real network.
 
-**Forms** (`nsh-form`, in the showcase's forms screens): `use_form` owns one value type per form; `field!` binds fields with rules; `form.submit` maps server failures to field errors; dirty state drives the back guard and draft autosave.
+**Forms** (`nsh-form`, in the Sign in page and the demo forms screens): `use_form` owns one value type per form; `field!` binds fields with rules; `form.submit` maps server failures to field errors; dirty state drives the back guard and draft autosave.
 
 Two NSH constraints shape this code: `Signal::update` needs `T: Clone`, and a component's signals are already disposed when its `cleanup` runs.
 
@@ -84,16 +84,16 @@ Each seam is a trait with a local implementation, so the real library replaces i
 | `services/analytics.rs`: event sink | an in-memory sink |
 | `services/monitoring.rs`: error and breadcrumb sink | an in-memory sink; `report_error` feeds it |
 
-Nothing in the app calls the HTTP, auth or analytics seams yet: they are the places a real app plugs in. `services/logging.rs` keeps a bounded in-memory ring; `init_file` adds a log file, and the app does not call it (add the call to `startup.rs` to turn it on).
+The Sign in page calls the auth seam through `store::session`; nothing calls the HTTP or analytics seams yet: they are the places a real app plugs in. `services/logging.rs` keeps a bounded in-memory ring; `init_file` adds a log file, and the app does not call it (add the call to `startup.rs` to turn it on).
 
 ## What is built but not switched on
 
 - **The first-run flow** (`shell/first_run.rs`): the welcome page and its storage flag work and are tested (`tests/first_run.rs`), but `App` does not gate on it. `startup.rs` and `App` are where the gate goes.
-- **File logging** and the three seams above.
+- **File logging**, and the HTTP and analytics seams.
 
 ## i18n
 
-`i18n!` in `src/lib.rs` loads `i18n/*.yml` at compile time. `store::locale` mirrors `rust-i18n`'s locale into a signal; `locale::text("key")` gives a closure that redraws when the language changes. The Settings page and the showcase's Platform pages are translated; the other demo screens and the shell's labels are English literals.
+`i18n!` in `src/lib.rs` loads `i18n/*.yml` at compile time. `store::locale` mirrors `rust-i18n`'s locale into a signal; `locale::text("key")` gives a closure that redraws when the language changes. The Items, Sign in and Settings pages and the demo Platform pages are translated; the other demo screens and the shell's labels are English literals.
 
 ## The signed package path
 
@@ -117,4 +117,9 @@ Capability keys declared in `nsh.json` come from the real 0.6.0 set (`KNOWN_CAPA
 
 ## A new app
 
-`just new-app <dir> <name> <id>` copies the repo without the demo screens, the remote-screen package, the fake API and this starter's build records, then renames it. The copy keeps Home, Settings and Diagnostics.
+`just new-app <dir> <name> <id>` copies the repo without the demo screens, the remote-screen package and this starter's build records, then renames it. The copy keeps Home, Items (with its detail), Sign in, Settings and Diagnostics, the fake API Items reads, and the `nsh-query` and `nsh-form` dependencies; its phone tabs are Home, Items and Settings.
+
+## The template screens
+
+- **Items** (`src/pages/items/`): the list-with-detail pattern. `queries.rs` holds the keys and the `use_query*` reads over `services::fake_api`; the list shows skeletons, the error with Retry, the empty case, then a row per item. A row calls `nav::push_child(Route::ItemsDetail(id))`: on phones the shell pushes the item's screen, elsewhere the list presents it over itself.
+- **Sign in** (`src/pages/sign_in/`): an `nsh-form` form over `store::session`, which calls the auth seam's mock provider. Rules show field errors after the first submit; a refusal shows on the form; signed in, the page and Settings' Account card show the user and Sign out. Nothing in the app is gated on it.

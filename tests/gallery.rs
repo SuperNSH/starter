@@ -237,6 +237,9 @@ fn a_nav_row_press_selects_it() -> Result<(), String> {
     app.wait_for("text:Inbox row selected")?;
     app.press("id:nav-reports")?;
     app.wait_for("text:Reports row selected")?;
+    // The two-line record row is pressed by its title.
+    app.press("role:button[Quarterly report]")?;
+    app.wait_for("text:Record row selected")?;
     Ok(())
 }
 
