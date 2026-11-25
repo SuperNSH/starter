@@ -86,6 +86,9 @@ impl TaskHandle {
 // thread, where `spawn` and the executor live; the thread ending (the app
 // leaving) drops the handles, which cancels what is still running.
 thread_local! {
+    // Already const: clippy misreads the expansion on Android, whose
+    // thread locals are emulated, and asks for the `const` written here.
+    #[cfg_attr(target_os = "android", allow(clippy::missing_const_for_thread_local))]
     static LIVE: RefCell<Vec<(u64, Spawned<()>)>> = const { RefCell::new(Vec::new()) };
 }
 
