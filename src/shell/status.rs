@@ -9,6 +9,10 @@ use rust_i18n::t;
 
 use crate::store::{lifecycle, nav};
 
+/// The bar's height above the safe area: a line of small text, its pads
+/// and its border.
+pub const HEIGHT: f32 = 25.0;
+
 pub fn status_bar() -> impl IntoElement {
     // macOS: the window's title bar material behind the row, as AppKit's
     // own bars; elsewhere the card fill.
