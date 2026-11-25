@@ -35,6 +35,7 @@ pub fn sign_in_page() -> impl IntoElement {
     });
     layout::page_scroll(0.0).test_id("sign_in-scroll").child(
         layout::page_body()
+            .max_w(px(480.0))
             .child(text::page_intro(
                 locale::text("sign_in.title"),
                 locale::text("sign_in.summary"),

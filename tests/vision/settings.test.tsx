@@ -48,7 +48,7 @@ const HOME_INDEX: Record<string, number> = {
 async function openFromHome(app: App, id: string): Promise<void> {
   try {
     const index = HOME_INDEX[id];
-    if (index > 2) await app.scroll("id:home-scroll", index * 110 - 250);
+    if (index > 2) await app.scroll("id:home-scroll", index * 90 - 250);
   } catch {
     // The desktop Home fits without scrolling.
   }

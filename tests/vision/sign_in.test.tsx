@@ -40,7 +40,7 @@ async function openAt(scheme: "light" | "dark", desktop: boolean): Promise<App |
 async function openSignIn(app: App): Promise<void> {
   await app.waitFor("text:Home");
   try {
-    await app.scroll("id:home-scroll", 16 * 110 - 250);
+    await app.scroll("id:home-scroll", 16 * 90 - 250);
   } catch {
     // The desktop Home fits without scrolling.
   }

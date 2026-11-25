@@ -152,7 +152,7 @@ pub(crate) fn shortcut(keys: &'static str) -> impl IntoElement {
 pub fn overlays_page() -> impl IntoElement {
     view().flex_1().bg(move || theme().background).child(
         crate::ui::layout::page_scroll(0.0).child(
-            view().w_full().flex_col().items_center().child(
+            view().w_full().flex_col().child(
                 crate::ui::layout::page_body()
                     .max_w(px(720.0))
                     .child(crate::ui::text::page_intro(

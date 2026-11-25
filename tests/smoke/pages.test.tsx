@@ -72,7 +72,7 @@ async function homeRowInView(app: App, phone: boolean, index: number): Promise<v
   index = HOME_ROWS.includes(id)
     ? cards.length + 1 + HOME_ROWS.indexOf(id)
     : cards.findIndex((page) => page.id === id) + 1;
-  const to = Math.max(0, index * 110 - 250);
+  const to = Math.max(0, index * 90 - 250);
   try {
     // By the difference: a scroll past the top drags the page off screen.
     if (to !== homeOffset) await app.scroll("id:home-scroll", to - homeOffset);

@@ -147,7 +147,7 @@ pub fn nav_tile(
         .accessibility_label(title)
         .flex_grow(1.0)
         .basis(px(240.0))
-        .min_h(px(84.0))
+        .min_h(px(72.0))
         .rounded_lg()
         .border_1()
         .border_color(move || theme().border)
@@ -164,7 +164,6 @@ pub fn nav_tile(
             view()
                 .test_id(test_id)
                 .flex_1()
-                .justify_center()
                 .p_4()
                 .gap_1()
                 .child(

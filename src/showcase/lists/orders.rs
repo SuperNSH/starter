@@ -152,6 +152,7 @@ fn head_row(label: &'static str, amounts: &'static str) -> TableHeaderElement {
                 table_head().w(AMOUNT_WIDTH).px_3().py_2().child(
                     text(amounts)
                         .text_xs()
+                        .text_right()
                         .uppercase()
                         .font_weight(FontWeight::MEDIUM)
                         .text_color(move || theme().muted_foreground),

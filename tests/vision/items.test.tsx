@@ -47,7 +47,7 @@ let homeOffset = 0;
 /** Presses a Home entry, scrolled into view where Home scrolls. */
 async function openFromHome(app: App, id: string): Promise<void> {
   // Home keeps its offset: scroll by the difference, never past an end.
-  const to = Math.max(0, HOME_INDEX[id] * 110 - 250);
+  const to = Math.max(0, HOME_INDEX[id] * 90 - 250);
   try {
     if (to !== homeOffset) await app.scroll("id:home-scroll", to - homeOffset);
     homeOffset = to;
