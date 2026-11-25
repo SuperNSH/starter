@@ -1,0 +1,2 @@
+✓ built the Rust crates nsh-starter, nsh-extra (787ms)
+✓ built the Rust app nsh.json into .nsh/out (no bundle: its runners mount the root, 9 assets)

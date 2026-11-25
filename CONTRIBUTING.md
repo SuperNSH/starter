@@ -2,7 +2,7 @@
 
 ## Setup
 
-Follow [README.md](README.md) — nsh 0.7.0, the Rust targets, Xcode and the Android SDK, and `../nsh-query` and `../nsh-form` checked out beside this repo.
+Follow [README.md](README.md) — nsh 0.7.1, the Rust targets, Xcode and the Android SDK, and `../nsh-query` and `../nsh-form` checked out beside this repo.
 
 [AGENTS.md](AGENTS.md) is the map of the source and the rules `just rules` checks; read it before changing anything. When several agents work at once, file areas are disjoint (its Ownership section): do not edit files outside your area, including other areas' tests.
 
@@ -43,7 +43,7 @@ nsh test tests/smoke/pages.test.tsx
 - Prose reads like a competent human wrote it: direct, concrete, no marketing filler. No "seamless", no "leverage", no rule-of-three padding.
 - Code comments are 1-2 lines and state a non-obvious constraint — why the code is shaped this way, a workaround, an invariant. Never narrate the next line. Never explain a diff in code; that belongs in the commit message.
 - Dead code is deleted, not commented out. No speculative abstractions; write the second implementation when the second use case exists.
-- Every API name in docs is verified against nsh 0.7.0 (`nsh <cmd> --help`, the `.nsh/types` declarations, or the crate source). Never invent an API.
+- Every API name in docs is verified against nsh 0.7.1 (`nsh <cmd> --help`, the `.nsh/types` declarations, or the crate source). Never invent an API.
 - `docs/STATUS.md` stays current: what is done, what was verified how (command + evidence path), what is unverified. A claim with no evidence is unverified.
 
 ## Commits

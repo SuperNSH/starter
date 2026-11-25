@@ -1,0 +1,5 @@
+✓ built the Rust crates nsh-starter, nsh-extra (520ms)
+✓ built the headless runner of nsh-starter, nsh-extra (5m 22s)
+✓ tests/smoke/app.test.tsx › the root mounts (57ms)
+✓ tests/smoke/app.test.tsx › the shell navigates from Home (78ms)
+✓ 2 tests: 2 passed, 0 failed (5m 26s)

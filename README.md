@@ -1,6 +1,6 @@
 # nsh-starter
 
-A production-grade application boilerplate for [Native Shell](https://nsh.dev) (NSH): clone it, rename it, ship it on macOS, iOS, Android and the web. It is also the living reference for what NSH 0.7.0 can do — every element and base component ships in a real screen, all async state runs on [`nsh-query`](../nsh-query) and every form on [`nsh-form`](../nsh-form).
+A production-grade application boilerplate for [Native Shell](https://nsh.dev) (NSH): clone it, rename it, ship it on macOS, iOS, Android and the web. It is also the living reference for what NSH 0.7.1 can do — every element and base component ships in a real screen, all async state runs on [`nsh-query`](../nsh-query) and every form on [`nsh-form`](../nsh-form).
 
 The app is Rust-first: one crate at the repo root is the UI, and `packages/remote-screen` is a TypeScript (TSX) feature published as a signed package and loaded on demand, proving the mixed path. There is no server and no account anywhere; a local fake API backs the data screens.
 
@@ -23,12 +23,12 @@ The app is Rust-first: one crate at the repo root is the UI, and `packages/remot
 ## Prerequisites
 
 - **macOS** with Xcode and an iOS simulator runtime (tested against iOS 27).
-- **nsh 0.7.0**, from the release's installer (Homebrew's tap still ships 0.4.0):
+- **nsh 0.7.1**, from the release's installer (Homebrew's tap still ships 0.4.0):
   ```sh
-  curl -fsSL https://github.com/longbridge/nsh/releases/download/v0.7.0/install.sh | NSH_VERSION=v0.7.0 sh
+  curl -fsSL https://github.com/longbridge/nsh/releases/download/v0.7.1/install.sh | NSH_VERSION=v0.7.1 sh
   nsh component add android ios web
   ```
-  It installs into `~/.nsh` and links `~/.local/bin/nsh`. `nsh --version` must print 0.7.0: if an older Homebrew `nsh` comes first on your `PATH`, put `~/.local/bin` before it. The Rust crates pin 0.7.0, and the CLI must match them. Platform runtimes are components since 0.5.0; a command that needs one also adds it on demand.
+  It installs into `~/.nsh` and links `~/.local/bin/nsh`. `nsh --version` must print 0.7.1: if an older Homebrew `nsh` comes first on your `PATH`, put `~/.local/bin` before it. The Rust crates pin 0.7.1, and the CLI must match them. Platform runtimes are components since 0.5.0; a command that needs one also adds it on demand.
 - **Rust stable** with the cross-compile targets:
   ```sh
   rustup target add aarch64-apple-ios aarch64-apple-ios-sim \

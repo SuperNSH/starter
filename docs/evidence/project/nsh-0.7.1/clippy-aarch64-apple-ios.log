@@ -1,0 +1,12 @@
+   Compiling nsh-macros v0.7.1
+   Compiling nsh-platform-apple v0.7.1
+    Checking nsh-updater v0.7.1
+    Checking nsh-core v0.7.1
+    Checking nsh-engine v0.7.1
+    Checking nsh-base v0.7.1
+    Checking nsh-query v0.1.0 (~/fo/nsh-starter/vendor/nsh-query)
+    Checking nsh-platform-ios v0.7.1
+    Checking nsh-form v0.1.0 (~/fo/nsh-starter/vendor/nsh-form)
+    Checking nsh-extra v0.7.1
+    Checking nsh-starter v0.1.0 (~/fo/nsh-starter)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 27.40s

@@ -1,0 +1,4 @@
+✓ built the Rust crates nsh-starter, nsh-extra (1.2s)
+✓ built the headless runner of nsh-starter, nsh-extra (1.2s)
+✓ tests/smoke/pages.test.tsx › every page opens from the shell (2.3s)
+✓ 1 test: 1 passed, 0 failed (7.3s)

@@ -1,6 +1,6 @@
 # Architecture
 
-nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.7.0 application boilerplate. One Rust crate at the repo root is the app; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
+nsh-starter is a [Native Shell](https://nsh.dev) (NSH) 0.7.1 application boilerplate. One Rust crate at the repo root is the app; `packages/remote-screen` is a TypeScript (TSX) feature delivered as a signed package. There is no server: `src/services/fake_api.rs` is the backend, with latency and failure switches, so the data screens run offline.
 
 `AGENTS.md` is the map and the rules. This file explains how the parts work together.
 
@@ -105,7 +105,7 @@ The Sign in page calls the auth seam through `store::session`; nothing calls the
 4. **Deliver** — the app verifies with `nsh verify` semantics against its trusted root and loads the package on demand. Bytecode loads only from the app bundle, the APK or a verified package. `nsh revoke` signs a revocation list; the app shows the revocation path.
 5. **Fail closed** — host calls reject with `ERR_ACCESS_DENIED` when the capability is undeclared, `ERR_NSH_HOST_ERROR` when unhandled or thrown, and `ERR_FEATURE_UNAVAILABLE_ON_PLATFORM` with no host.
 
-Capability keys declared in `nsh.json` come from the real 0.7.0 set (`KNOWN_CAPABILITIES` in `src/services/capabilities.rs`: sixteen keys, the 0.5.0 thirteen plus `application`, `homeDir` and `share`) — kept tight. Since 0.5.0 a typo is only a warning from `nsh build` (the key is not granted), so read the build output.
+Capability keys declared in `nsh.json` come from the real 0.7.1 set (`KNOWN_CAPABILITIES` in `src/services/capabilities.rs`: sixteen keys, the 0.5.0 thirteen plus `application`, `homeDir` and `share`) — kept tight. Since 0.5.0 a typo is only a warning from `nsh build` (the key is not granted), so read the build output.
 
 ## Testing
 

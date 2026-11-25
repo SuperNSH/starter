@@ -3,10 +3,10 @@
   "packages": [
     {
       "name": "nsh-extra",
-      "version": "0.7.0",
+      "version": "0.7.1",
       "source": "crates.io",
-      "checksum": "sha256-d23d7ff9d2471b2c1a7154b1ebd14e0e93c07c4d95e10c0677f390978559de80",
-      "dir": "nsh-extra/0.7.0",
+      "checksum": "sha256-40bc806c5aa90e23f58fb1974cc8de2b65975ce287b1187a407212eacf04c008",
+      "dir": "nsh-extra/0.7.1",
       "module": "nsh-extra"
     }
   ]

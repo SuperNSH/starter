@@ -30,7 +30,7 @@ const PAGES: Array<{ id: string; marker: string }> = [
   { id: "page-diagnostics", marker: "text:Start sample task" },
 ];
 
-// What the web target does not have on 0.7.0, asserted so a silently
+// What the web target does not have on 0.7.1, asserted so a silently
 // missing feature cannot pass unnoticed. Page navigation itself works
 // everywhere (every page is Rust).
 const SKIPPED_ON_WEB = [

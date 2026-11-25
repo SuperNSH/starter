@@ -14,14 +14,15 @@ All notable changes to this project are documented here. The format follows
 
 ### Changed
 
+- **NSH 0.7.1** (was 0.7.0): crates, `nsh-extra` in `nsh.lock`, the vendored libraries' requirements and the CLI CI installs. No source change was needed; 0.7.1 is rendering and tooling fixes.
 - **NSH 0.7.0** (was 0.6.0). Breaking for code built on this starter:
   - `App` declares the app's `window()`; `startup::install()` runs in its content. `nsh.json` must grant `"windows"`, or the desktop app runs with no window.
   - The exit ask calls `quit()`. On macOS the close button still hides the window, and the Dock brings it back (`chrome::show_on_reopen`).
   - The helpers in `ui::desktop` take the `WindowRef` they act on (`current_window()`, read while rendering).
   - Speech comes from `nsh-extra` (`nsh.json` `"dependencies"`, pinned in `nsh.lock`); tests reach its fake with `call_fake`. A generated app leaves it out.
   - Test drags take `DragOptions`; a test that mounts one page as a desktop uses `nsh_testing::windowed_root`.
-- `nsh-query` and `nsh-form` 0.1.0 require NSH 0.6, so their unchanged sources are in `vendor/` on 0.7.0 until they release for it.
-- CI uses NSH 0.7.0 and installs the sibling TSX packages' npm dependencies (its Rust and TypeScript jobs failed without them).
+- `nsh-query` and `nsh-form` 0.1.0 require NSH 0.6, so their unchanged sources are in `vendor/` on 0.7.1 until they release for it.
+- CI uses NSH 0.7.1 and installs the sibling TSX packages' npm dependencies (its Rust and TypeScript jobs failed without them).
 - The error banner sits above the tab bar, the status bar and the home indicator, and leaves their presses alone.
 - A page's bottom room is padding (`ui::layout::page_bottom`), counted once; on iOS the home indicator's inset was added three times. Content starts right under iOS's large title.
 - `ui::layout::page_scroll` is every page's scroll; it no longer bounces on desktops, where the bounce pulled the page far off its header.

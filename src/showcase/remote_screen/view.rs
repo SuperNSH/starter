@@ -179,7 +179,7 @@ fn embedding_section() -> impl IntoElement {
                 .text_color(move || theme().foreground),
         )
         .child(
-            text("NSH 0.7.0 runs a verified package in a surface of its own: nsh_engine::load_package verifies against a TrustStore and hands its bundle to App::Js. This app's one surface runs its Rust root, and no element embeds a second engine in a page tree, so displaying the package needs an embedding host: NshAppView.loadPackage on iOS, NshView.runPackage on Android, or AppView::load(App::Js(bundle)) in a Rust host. tests/remote_screen.rs loads the published package into a headless engine of this crate, so the mixed path stays proven.")
+            text("NSH 0.7.1 runs a verified package in a surface of its own: nsh_engine::load_package verifies against a TrustStore and hands its bundle to App::Js. This app's one surface runs its Rust root, and no element embeds a second engine in a page tree, so displaying the package needs an embedding host: NshAppView.loadPackage on iOS, NshView.runPackage on Android, or AppView::load(App::Js(bundle)) in a Rust host. tests/remote_screen.rs loads the published package into a headless engine of this crate, so the mixed path stays proven.")
                 .text_sm()
                 .text_color(move || theme().foreground),
         )

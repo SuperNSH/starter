@@ -4,6 +4,15 @@ What is done, what was verified how (command + evidence path under
 `docs/evidence/<area>/`), and what is NOT verified. A claim with no evidence
 is unverified. Every area updates its own section as it lands work.
 
+## NSH 0.7.1 (2026-11-25)
+
+- Crates from crates.io; the CLI built with `cargo install nsh-cli --version 0.7.1` (f78eace, the tag's commit). Logs: `docs/evidence/project/nsh-0.7.1/`.
+- Gates: fmt 0, clippy 0 (`--all-targets`; `--lib` for both iOS targets and wasm32), `cargo test` 166 passed, `nsh check`, `nsh build`, smoke `app` 2 and `pages` 1 passed, the remote-screen package 9/9, a generated app 60 tests.
+- macOS host: `nsh test --target macos tests/smoke/pages.test.tsx` opens every page; its 17 captures (dark, 1280) looked at, none kept. `app.test.tsx` fails there: it waits for the exit ask, which `back()` (Escape on macOS) does not raise. `back()` is the same source in 0.7.0; not run on 0.7.0.
+- NSH published v0.7.1 at 18:01 UTC, during this work; the gates above ran on the crates.io build of the same commit, not the release binary. `SuperNSH/nsh-builds` had no v0.7.1 yet, so CI's macos-x86_64, linux-arm64 and windows-arm64 demo jobs cannot install it until that builds.
+- Release notes: `docs/evidence/project/nsh-0.7.1/release-notes-v0.7.1.md`. No breaking change.
+- Not verified: CI, Android (clippy stops in `onig_sys`'s C build on this Mac, as before), Windows and Linux, iOS on screen, the web build in a browser, the vision suites.
+
 ## NSH 0.7.0 (2026-11-25)
 
 - Gates with the 0.7.0 crates and CLI: fmt 0, clippy 0 (`--all-targets`; `--lib` for both iOS targets and wasm32), `cargo test` 166 passed, `nsh check`, `nsh build`, both smoke suites, the remote-screen package 9/9, a generated app 59 tests. Breaking changes read from `docs/evidence/project/nsh-0.7.0/release-notes-v0.7.0.md`.

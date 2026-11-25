@@ -1,0 +1,18 @@
+ Downloading crates ...
+  Downloaded nsh-extra v0.7.1
+   Compiling nsh-macros v0.7.1
+    Checking nsh-updater v0.7.1
+    Checking nsh-i18n v0.7.1
+    Checking nsh-package v0.7.1
+   Compiling nsh-platform-apple v0.7.1
+    Checking nsh-core v0.7.1
+    Checking nsh-js v0.7.1
+    Checking nsh-base v0.7.1
+    Checking nsh-query v0.1.0 (~/fo/nsh-starter/vendor/nsh-query)
+    Checking nsh-extra v0.7.1
+    Checking nsh-engine v0.7.1
+    Checking nsh-testing v0.7.1
+    Checking nsh-platform-macos v0.7.1
+    Checking nsh-form v0.1.0 (~/fo/nsh-starter/vendor/nsh-form)
+    Checking nsh-starter v0.1.0 (~/fo/nsh-starter)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 39.85s

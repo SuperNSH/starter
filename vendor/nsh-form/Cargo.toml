@@ -13,8 +13,8 @@ persist = ["dep:serde", "dep:serde_json"]
 
 [dependencies]
 freeoxide-gpui-form-core = "0.11"
-nsh-base = "0.7.0"
-nsh-core = "0.7.0"
+nsh-base = "0.7.1"
+nsh-core = "0.7.1"
 regex = "1.13.1"
 phonenumber = { version = "0.3", optional = true }
 serde = { version = "1", features = ["derive"], optional = true }
