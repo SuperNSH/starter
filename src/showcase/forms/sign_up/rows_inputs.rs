@@ -254,8 +254,9 @@ pub(super) fn terms_row(terms: Field<SignUp, bool>) -> View {
                                 .border_color(move || theme().primary)
                         })
                 })
+                // Unchecked, an always-drawn mark shows dim on the dark box.
                 .indicator(
-                    text("✓")
+                    text(move || if terms.value() { "✓" } else { "" })
                         .text_size(px(13.0))
                         .text_color(move || theme().primary_foreground),
                 )

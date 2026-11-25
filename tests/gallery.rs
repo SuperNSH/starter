@@ -131,6 +131,37 @@ fn the_tri_state_checkbox_selects_all_or_none() -> Result<(), String> {
     Ok(())
 }
 
+/// The gallery's inline command palette leaves the focus alone as it
+/// mounts: on a device the focused search field scrolled the page to it.
+#[test]
+fn the_inline_palette_does_not_take_the_focus() -> Result<(), String> {
+    let mut app = start();
+    app.wait_for("text:Type a command…")?;
+    // A key goes to the focused input, if there is one.
+    app.press_key("q")?;
+    assert_eq!(
+        app.screen().input_text("text:Type a command…"),
+        Ok(Some("")),
+        "the palette's search field took the key (its placeholder no longer shows)"
+    );
+    Ok(())
+}
+
+/// The mark shows only while checked: drawn always, it showed as a dim
+/// check in the dark theme's empty box.
+#[test]
+fn a_checkbox_shows_its_mark_only_while_checked() -> Result<(), String> {
+    let mut app = start();
+    app.wait_for("text:2 of 2 selected, plan Standard")?;
+    flick(&mut app, 1200.0)?;
+    let marks = |app: &Headless| app.screen().count("text:✓");
+    let before = marks(&app)?;
+    app.press("role:checkbox[Subscribe to the changelog]")?;
+    let after = marks(&app)?;
+    assert_eq!(before.abs_diff(after), 1, "marks {before} then {after}");
+    Ok(())
+}
+
 #[test]
 fn the_dialog_card_opens_and_cancels() -> Result<(), String> {
     let mut app = start();

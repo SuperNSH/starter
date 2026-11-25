@@ -164,6 +164,7 @@ pub fn nav_tile(
             view()
                 .test_id(test_id)
                 .flex_1()
+                .justify_center()
                 .p_4()
                 .gap_1()
                 .child(
