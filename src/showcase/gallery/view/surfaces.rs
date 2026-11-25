@@ -156,6 +156,7 @@ pub(super) fn overlays_section(
                     command::command_entry("copy.id", "Copy the app id"),
                 ],
                 "Type a command…",
+                false,
                 move |_| toast::notify("Command run"),
             ))
             .child(

@@ -115,6 +115,7 @@ pub fn palette_dialog() -> AnyElement {
                         .child(command_palette(
                             items(),
                             "Type a command…",
+                            true,
                             move |id: SharedString| dispatch(&id),
                         )),
                 )
