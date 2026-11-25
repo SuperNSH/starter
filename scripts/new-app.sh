@@ -41,7 +41,7 @@ cd "$dest"
 # 2. Drop the demo screens and everything only they used.
 rm -rf src/showcase packages assets/canvas tests/vision tests/trace docs/evidence \
     docs/upstream-drafts .zcode .github tools
-rm -f tests/{canvas,data,forms,gallery,lists,motion,native_vs_app,overlays,platform,remote_screen,showcase}.rs \
+rm -f nsh.lock tests/{canvas,data,forms,gallery,lists,motion,native_vs_app,overlays,platform,remote_screen,showcase}.rs \
     tests/smoke/controls.test.tsx \
     docs/STATUS.md docs/PROMPT.md docs/coverage.md docs/gpui-starter-parity.md \
     docs/nsh-0.5.0-migration.md docs/upstream-issues.md CHANGELOG.md \
@@ -66,6 +66,12 @@ def edit(path, steps):
     open(path, "w").write(text)
 
 edit("src/lib.rs", [("text", "#[forbid(unsafe_code)]\npub mod showcase;\n", "")])
+# Dictation is a demo: its module and grant go with it.
+edit("Cargo.toml", [("re", r"^nsh-extra = [^\n]*\n", "")])
+edit("nsh.json", [
+    ("text", "    \"speech\": true,\n", ""),
+    ("re", r",\n  \"dependencies\": \{.*?\n  \}\n\}", "\n}"),
+])
 edit("src/routes.rs", [
     ("text", "\nuse crate::showcase;\n", "\n"),
     ("re", r"    /// One of the demo screens.*?    Showcase\(showcase::Route\),\n", ""),

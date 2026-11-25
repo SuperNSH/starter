@@ -271,6 +271,7 @@ fn loading_older_messages_appends_at_the_top() {
 
     // Deeper: pages keep appending, still one gapless run.
     app.scroll("id:chat-list", px(-2000.0)).unwrap();
+    app.scroll("id:chat-list", px(-600.0)).unwrap();
     app.wait_for("text:msg 170").unwrap();
 
     // Whatever is mounted is one gapless run of ids: no holes, no dupes.

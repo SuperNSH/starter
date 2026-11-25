@@ -34,6 +34,8 @@ fn DeviceRoot() -> impl IntoElement {
 fn start<C: Component<Props = ()>>() -> Headless {
     let config = EngineConfig {
         clock: Clock::manual(SystemTime::UNIX_EPOCH),
+        // The modules the app installs (`nsh.json`), whose fakes answer.
+        ui_sets: vec![nsh_extra::registry()],
         ..EngineConfig::new(Root::of::<C>())
     };
     let mut app = Headless::start(config).unwrap();
@@ -137,8 +139,8 @@ fn speech_transcribes_a_heard_phrase() -> Result<(), String> {
     app.wait_for("id:platform-speech-start")?;
     app.press("id:platform-speech-start")?;
     // Only a listening session accepts words, so this doubles as its assertion.
-    app.hear("hello nsh")?;
-    app.end_speech(None)?;
+    app.call_fake("nsh-extra/speech", "hear", &["hello nsh".into()])?;
+    app.call_fake("nsh-extra/speech", "end", &[])?;
     app.wait_for("hello nsh")?;
     Ok(())
 }

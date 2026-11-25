@@ -1,6 +1,6 @@
 //! The remote screen: the signed TSX package's delivery status, the
 //! revocation control that models a host applying a revocation list, and the
-//! embedding contract an NSH 0.6.0 host must provide to run the package.
+//! embedding contract an NSH 0.7.0 host must provide to run the package.
 //!
 //! Test: `tests/remote_screen.rs`.
 

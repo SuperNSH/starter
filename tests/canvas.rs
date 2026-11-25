@@ -10,7 +10,7 @@ use std::time::Duration;
 use nsh_core::{Size, prelude::*};
 use nsh_engine::{Clock, EngineConfig, Root};
 use nsh_starter::showcase::canvas::canvas_page;
-use nsh_testing::Headless;
+use nsh_testing::{DragOptions, Headless};
 
 /// The page alone: no shell, so selectors name only this area's views.
 #[component]
@@ -41,7 +41,11 @@ fn tick_of(app: &mut Headless) -> Option<u32> {
 fn a_dragged_stroke_stays_and_undo_removes_it() -> Result<(), String> {
     let mut app = app();
     app.wait_for("text:/^0 strokes/")?;
-    app.drag("id:sketch", point(px(90.0), px(50.0)))?;
+    app.drag(
+        "id:sketch",
+        point(px(90.0), px(50.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^1 strokes/")?;
     app.press("text:Undo")?;
     app.wait_for("text:/^0 strokes/")?;
@@ -53,7 +57,11 @@ fn the_drawing_survives_a_re_layout() -> Result<(), String> {
     let mut app = app();
     // `start` can return before the first frame, so wait for one first.
     app.wait_for("text:Sketch")?;
-    app.drag("id:sketch", point(px(40.0), px(30.0)))?;
+    app.drag(
+        "id:sketch",
+        point(px(40.0), px(30.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^1 strokes/")?;
     // A wider window lays the canvas out again; the strokes are data, so
     // they redraw in the new width.
@@ -121,7 +129,11 @@ fn the_world_board_pans_zooms_and_selects_a_node_at_zoom() -> Result<(), String>
     let mut app = app();
     app.wait_for("text:/^world 100% · pan 0, 0$/")?;
     // A drag on the empty board pans: the readout's pan follows the drag.
-    app.drag("id:world-board", point(px(60.0), px(0.0)))?;
+    app.drag(
+        "id:world-board",
+        point(px(60.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^world 100% · pan 60, 0$/")?;
     // Zoom in: anchored at the view's center, so the pan scales by the
     // same ratio as the zoom.
@@ -129,7 +141,11 @@ fn the_world_board_pans_zooms_and_selects_a_node_at_zoom() -> Result<(), String>
     app.wait_for("text:/^world 125% · pan 75, 0$/")?;
     // The hit test runs in world space: the viewport center's world point
     // is 20, 0 — on Notes — and the readout names both exactly.
-    app.drag("id:world-board", point(px(-100.0), px(0.0)))?;
+    app.drag(
+        "id:world-board",
+        point(px(-100.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^center 20, 0 · under: Notes$/")?;
     // A further zoom keeps the node under the center: the same world
     // point, at a different zoom.
@@ -138,7 +154,11 @@ fn the_world_board_pans_zooms_and_selects_a_node_at_zoom() -> Result<(), String>
     app.wait_for("text:/^center 20, 0 · under: Notes$/")?;
     // A drag from the center selects Notes and moves it in world units:
     // 30 screen points at 156% is 19 world points.
-    app.drag("id:world-board", point(px(30.0), px(0.0)))?;
+    app.drag(
+        "id:world-board",
+        point(px(30.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:/^selected: Notes · 89, 0$/")?;
     Ok(())
 }
@@ -170,15 +190,31 @@ fn the_shape_editor_selects_moves_and_resizes() -> Result<(), String> {
     app.wait_for("text:selected bounds: none")?;
     // Every drag presses the canvas center; there it is on the rect's
     // interior, so the first drag selects and moves.
-    app.drag("id:shape-edit", point(px(40.0), px(0.0)))?;
+    app.drag(
+        "id:shape-edit",
+        point(px(40.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:selected bounds: 54, 90 · 150 × 84")?;
-    app.drag("id:shape-edit", point(px(0.0), px(18.0)))?;
+    app.drag(
+        "id:shape-edit",
+        point(px(0.0), px(18.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:selected bounds: 54, 108 · 150 × 84")?;
     // This drag parks the east handle on the center, so the next press
     // grabs the handle instead of the interior and grows the width.
-    app.drag("id:shape-edit", point(px(-40.0), px(0.0)))?;
+    app.drag(
+        "id:shape-edit",
+        point(px(-40.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:selected bounds: 14, 108 · 150 × 84")?;
-    app.drag("id:shape-edit", point(px(40.0), px(0.0)))?;
+    app.drag(
+        "id:shape-edit",
+        point(px(40.0), px(0.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:selected bounds: 14, 108 · 190 × 84")?;
     app.press("id:shape-edit-reset >> text:Reset")?;
     app.wait_for("text:selected bounds: none")?;
@@ -191,7 +227,11 @@ fn the_bezier_editor_drags_a_control_point_and_reset_restores_it() -> Result<(),
     app.wait_for("text:c1 164, 120 · c2 250, 190")?;
     // The center press lands on c1 itself, and a grab sets the point to
     // the pointer, so the drag leaves c1 at press + delta.
-    app.drag("id:bezier", point(px(30.0), px(-20.0)))?;
+    app.drag(
+        "id:bezier",
+        point(px(30.0), px(-20.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:c1 194, 100 · c2 250, 190")?;
     app.press("id:bezier-reset >> text:Reset")?;
     app.wait_for("text:c1 164, 120 · c2 250, 190")?;
@@ -204,16 +244,28 @@ fn the_node_graph_moves_a_node_and_marquee_selects_two() -> Result<(), String> {
     app.wait_for("text:0 selected")?;
     // The center press is on Input: the drag selects and moves it, and
     // the readout's first node follows.
-    app.drag("id:node-graph", point(px(30.0), px(10.0)))?;
+    app.drag(
+        "id:node-graph",
+        point(px(30.0), px(10.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:1 selected")?;
     app.wait_for("text:first node 146, 130")?;
     // This drag moves Input clear of the center, so the next press has
     // empty space under it and starts a marquee instead.
-    app.drag("id:node-graph", point(px(-100.0), px(40.0)))?;
+    app.drag(
+        "id:node-graph",
+        point(px(-100.0), px(40.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:first node 46, 170")?;
     // A marquee from the center to the upper right crosses Filter and
     // Merge but neither of the others.
-    app.drag("id:node-graph", point(px(180.0), px(-80.0)))?;
+    app.drag(
+        "id:node-graph",
+        point(px(180.0), px(-80.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:2 selected")?;
     app.press("id:node-graph-reset >> text:Reset")?;
     app.wait_for("text:0 selected")?;
@@ -258,7 +310,11 @@ fn the_shared_board_peers_ride_the_clock_and_a_drag_selects_a_card() -> Result<(
     let mut app = app();
     app.wait_for("text:/^2 demo peers orbit the board; peer 1 nudges its card · tick /")?;
     // The center press is on Plan: the drag selects it and moves it.
-    app.drag("id:collab-board", point(px(25.0), px(10.0)))?;
+    app.drag(
+        "id:collab-board",
+        point(px(25.0), px(10.0)),
+        DragOptions::default(),
+    )?;
     app.wait_for("text:selected: Plan")?;
     // The peers ride the interval on the manual clock, so the caption's
     // tick advances with no input at all.

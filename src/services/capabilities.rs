@@ -6,7 +6,7 @@ use std::sync::LazyLock;
 
 use nsh_core::element::SharedString;
 
-/// The capability keys NSH 0.6.0 knows, in the order of the runtime's
+/// The capability keys NSH 0.7.0 knows, in the order of the runtime's
 /// own list (`KNOWN` in `nsh-core/src/access.rs`). Since 0.5.0 an unknown
 /// key is only a build warning, so this list is checked against the source.
 pub const KNOWN_CAPABILITIES: &[&str] = &[

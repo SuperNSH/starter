@@ -4,7 +4,7 @@
 use std::time::{Duration, SystemTime};
 
 use nsh_core::prelude::*;
-use nsh_engine::{Clock, EngineConfig, Points, Root, Size};
+use nsh_engine::{Clock, EngineConfig, Points, Size};
 use nsh_starter::showcase::gallery::gallery_page;
 use nsh_testing::Headless;
 
@@ -17,7 +17,7 @@ fn GalleryRoot() -> impl IntoElement {
 fn start() -> Headless {
     Headless::start(EngineConfig {
         clock: Clock::manual(SystemTime::UNIX_EPOCH),
-        ..EngineConfig::new(Root::of::<GalleryRoot>())
+        ..EngineConfig::new(nsh_testing::windowed_root::<GalleryRoot>())
     })
     .unwrap()
 }
@@ -39,7 +39,7 @@ fn start_as_desktop() -> Headless {
             ..nsh_engine::Environment::default()
         },
         clock: Clock::manual(SystemTime::UNIX_EPOCH),
-        ..EngineConfig::new(Root::of::<GalleryRoot>())
+        ..EngineConfig::new(nsh_testing::windowed_root::<GalleryRoot>())
     })
     .unwrap()
 }
@@ -48,7 +48,7 @@ fn start_at_desktop_width() -> Headless {
     Headless::start(EngineConfig {
         viewport: Size::new(Points(1200.0), Points(800.0)),
         clock: Clock::manual(SystemTime::UNIX_EPOCH),
-        ..EngineConfig::new(Root::of::<GalleryRoot>())
+        ..EngineConfig::new(nsh_testing::windowed_root::<GalleryRoot>())
     })
     .unwrap()
 }

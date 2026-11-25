@@ -16,5 +16,11 @@
     "notifications": true,
     "webview": { "hosts": [] }
   },
-  "schemes": ["nsh-starter"]
+  "schemes": ["nsh-starter"],
+  "dependencies": {
+    "nsh-extra": {
+      "version": "^0.7.0",
+      "features": ["speech"]
+    }
+  }
 }
