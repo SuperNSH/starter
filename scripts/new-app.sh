@@ -52,8 +52,17 @@ rm -f nsh.lock tests/{canvas,data,forms,gallery,lists,motion,native_vs_app,overl
 python3 -I - <<'PY'
 import re, sys
 
+# UTF-8 and LF whatever the machine's defaults (Windows has others).
+def read(path):
+    with open(path, encoding="utf-8") as file:
+        return file.read()
+
+def write(path, text):
+    with open(path, "w", encoding="utf-8", newline="\n") as file:
+        file.write(text)
+
 def edit(path, steps):
-    text = open(path).read()
+    text = read(path)
     for kind, old, new in steps:
         if kind == "text":
             if old not in text:
@@ -63,7 +72,7 @@ def edit(path, steps):
             text, count = re.subn(old, new, text, flags=re.M | re.S)
             if count == 0:
                 sys.exit(f"new-app: {path} no longer matches: {old}")
-    open(path, "w").write(text)
+    write(path, text)
 
 edit("src/lib.rs", [("text", "#[forbid(unsafe_code)]\npub mod showcase;\n", "")])
 # Dictation is a demo: its module and grant go with it.
@@ -107,15 +116,15 @@ edit("justfile", [
     ("re", r"^# Make a new app from this starter.*?\n\n", ""),
 ])
 for path in ("i18n/en.yml", "i18n/zh-CN.yml"):
-    lines = [line for line in open(path).read().split("\n") if not line.startswith("platform.")]
-    open(path, "w").write("\n".join(lines))
+    lines = [line for line in read(path).split("\n") if not line.startswith("platform.")]
+    write(path, "\n".join(lines))
 # The map and the docs: lines about the showcase go.
 for path in ("AGENTS.md", "docs/architecture.md", "README.md", "tests/shell.rs"):
     try:
-        lines = open(path).read().split("\n")
+        lines = read(path).split("\n")
     except FileNotFoundError:
         continue
-    open(path, "w").write("\n".join(line for line in lines if "showcase" not in line.lower()))
+    write(path, "\n".join(line for line in lines if "showcase" not in line.lower()))
 PY
 
 # 4. The new name and id, everywhere they live.
