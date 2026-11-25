@@ -104,4 +104,10 @@ mod tests {
         assert!(declared("webview"));
         assert!(!declared("network"));
     }
+    // Break seen: `windows` left out of nsh.json — the desktop app ran with
+    // no window, and only this test said so (headless grants everything).
+    #[test]
+    fn the_manifest_grants_the_window_the_desktop_app_opens() {
+        assert!(declared("windows"));
+    }
 }

@@ -4,6 +4,14 @@ What is done, what was verified how (command + evidence path under
 `docs/evidence/<area>/`), and what is NOT verified. A claim with no evidence
 is unverified. Every area updates its own section as it lands work.
 
+## NSH 0.7.0 (2026-11-25)
+
+- Gates with the 0.7.0 crates and CLI: fmt 0, clippy 0 (`--all-targets`; `--lib` for both iOS targets and wasm32), `cargo test` 166 passed, `nsh check`, `nsh build`, both smoke suites, the remote-screen package 9/9, a generated app 59 tests. Breaking changes read from `docs/evidence/project/nsh-0.7.0/release-notes-v0.7.0.md`.
+- macOS, the packaged app: the window opens, its close button hides it, a second `open` brings it back. Headless runs grant every capability, so only the packaged app showed that `windows` was missing; `capabilities::tests` now checks it.
+- Looked at: macOS Home and Settings (light, 1280), Home (dark, 640); iOS simulator Home and Diagnostics (light).
+- `tests/lists.rs` scrolls 600 points further in one test: 0.7.0 mounts fewer rows past the viewport.
+- Not verified: Android (clippy stops in `onig_sys`'s C build on this Mac, as before; CI checks it), Windows and Linux on screen, the web build in a browser, dictation with a microphone, the vision suites.
+
 ## UI pass, 2026-11-25
 
 - macOS window, looked at: 1280 (dark) Home, Gallery, Forms, Data, Lists, Overlays, Items, Settings, Sign in, Diagnostics; light: Home at 390, 500 and 700, Gallery at 390, 700 and 820, Items at 390. iOS simulator (light), looked at: Home, Diagnostics with the error banner, Forms, Items, Settings, Data. Fixed: the squashed header buttons, the page bounce, card and column alignment (CHANGELOG).

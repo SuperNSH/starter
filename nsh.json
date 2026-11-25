@@ -9,6 +9,7 @@
   "rust": ".",
   "root": "App",
   "capabilities": {
+    "windows": true,
     "application": true,
     "clipboard": true,
     "picker": true,

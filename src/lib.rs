@@ -71,8 +71,6 @@ pub fn App() -> impl IntoElement {
     app_window()
         .id("main")
         .title(services::manifest::info().0.to_string())
-        // Wide enough for the desktop shell (`shell::desktop`).
-        .default_size(Size::new(px(1280.0), px(800.0)))
         .content(|| {
             // Inside the window: keystrokes and the title bar are its own.
             startup::install();
