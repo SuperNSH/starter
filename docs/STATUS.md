@@ -6,7 +6,7 @@ is unverified. Every area updates its own section as it lands work.
 
 ## UI pass, 2026-11-25
 
-- macOS window, looked at: 1280 (dark) Home, Gallery, Forms, Data, Lists, Overlays, Items, Settings, Sign in, Diagnostics; light: Home at 390, 500 and 700, Gallery at 390, 700 and 820, Items at 390. iOS simulator, looked at: Home only. Fixed: the squashed header buttons, the page bounce, card and column alignment (CHANGELOG).
+- macOS window, looked at: 1280 (dark) Home, Gallery, Forms, Data, Lists, Overlays, Items, Settings, Sign in, Diagnostics; light: Home at 390, 500 and 700, Gallery at 390, 700 and 820, Items at 390. iOS simulator (light), looked at: Home, Diagnostics with the error banner, Forms, Items, Settings, Data. Fixed: the squashed header buttons, the page bounce, card and column alignment (CHANGELOG).
 - Not run, by the owner's choice: the full vision suites. Not verified: the other iOS screens, Android on screen, the desktop bounce under a real trackpad, and the new `tests/vision/{items,settings,sign_in}` on a device.
 
 ## Template screens: Items and Sign in (2026-11-25)

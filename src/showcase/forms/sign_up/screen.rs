@@ -257,7 +257,8 @@ pub(super) fn sign_up_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
                     reveal.content(
                         view()
                             .p_4()
-                            .pb_safe_area_plus(px(24.0))
+                            .pt(px(crate::ui::layout::page_top()))
+                            .pb(move || crate::ui::layout::page_bottom(24.0))
                             .gap_4()
                             .child(account)
                             .child(profile)

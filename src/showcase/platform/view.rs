@@ -25,16 +25,12 @@ fn page(title: &'static str, scroll_id: &'static str, cards: Vec<AnyElement>) ->
                 // scroll under the header already, so the top is no inset.
                 .w_full()
                 .flex_col()
-                .pt(px(16.0))
+                .pt(px(crate::ui::layout::page_top()))
                 .pr_safe_area_plus(px(16.0))
                 .pl_safe_area_plus(px(16.0))
                 .pb(move || {
-                    let above = if keyboard_height().0 > 0.0 {
-                        keyboard_height().0
-                    } else {
-                        safe_area().bottom.0
-                    };
-                    px(above + 16.0)
+                    let bars = crate::ui::layout::page_bottom(0.0).0;
+                    px(keyboard_height().0.max(bars) + 24.0)
                 })
                 .gap_6()
                 .text_color(move || theme().foreground)

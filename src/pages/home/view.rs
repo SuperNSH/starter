@@ -10,6 +10,7 @@ use crate::{
     routes::Route,
     store::nav,
     ui::{
+        layout,
         nav::{chevron, nav_row, nav_tile},
         text::muted,
     },
@@ -18,13 +19,14 @@ use crate::{
 /// Home's content, under the page's header: a card per page, wrapping
 /// into as many columns as the width holds (one on a phone).
 pub fn home_page() -> AnyElement {
-    crate::ui::layout::page_scroll(0.0)
+    layout::page_scroll(0.0)
         .test_id("home-scroll")
         .child(
             view()
                 .gap_6()
                 .p_4()
-                .pb_safe_area_plus(px(16.0))
+                .pt(px(layout::page_top()))
+                .pb(move || layout::page_bottom(16.0))
                 // The header above already says "Home".
                 .child(muted(
                     "Everything the boilerplate demonstrates, one page each.",

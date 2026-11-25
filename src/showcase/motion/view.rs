@@ -17,9 +17,8 @@ pub fn motion_page() -> impl IntoElement {
     crate::ui::layout::page_scroll(0.0)
         .test_id("motion-page-scroll")
         .bg(move || theme().background)
-        // The sides only: UIKit insets the scroll under the header and the
-        // content inset clears the tab bar, so a top and bottom safe-area
-        // padding would leave the space twice.
+        // The sides only: UIKit insets the scroll under the header, and the
+        // page body clears the tab bar.
         .pl_safe_area()
         .pr_safe_area()
         .child(

@@ -279,7 +279,7 @@ pub fn feed_page() -> impl IntoElement {
     .keys(move || rows.with(|rows| rows.iter().map(|post| post.id).collect::<Vec<_>>()))
     .estimated_item_size(px(108.0))
     .content_padding(px(16.0))
-    .content_inset(crate::ui::layout::page_insets(0.0))
+    .content_inset(crate::ui::layout::list_insets())
     .bounces(crate::ui::layout::page_bounces())
     .row_gap(px(12.0))
     .on_load_more(move |_: &()| posts.fetch_next_page())

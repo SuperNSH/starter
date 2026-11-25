@@ -14,6 +14,8 @@ All notable changes to this project are documented here. The format follows
 
 ### Changed
 
+- The error banner sits above the tab bar, the status bar and the home indicator, and leaves their presses alone.
+- A page's bottom room is padding (`ui::layout::page_bottom`), counted once; on iOS the home indicator's inset was added three times. Content starts right under iOS's large title.
 - `ui::layout::page_scroll` is every page's scroll; it no longer bounces on desktops, where the bounce pulled the page far off its header.
 - macOS: the header's native icon buttons are 32 pt circles (they were squashed to the symbol's height). The narrow window's header has no sidebar toggle, as it has no sidebar.
 - Home's cards drop their empty bottom space; Overlays and Sign in keep to the left edge at a readable width.

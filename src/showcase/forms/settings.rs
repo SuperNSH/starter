@@ -128,7 +128,8 @@ pub(crate) fn settings_screen(routes: Signal<Vec<FormsRoute>>) -> Screen {
                 .child(
                     view()
                         .p_4()
-                        .pb_safe_area_plus(px(24.0))
+                        .pt(px(crate::ui::layout::page_top()))
+                        .pb(move || crate::ui::layout::page_bottom(24.0))
                         .gap_4()
                         .child(account)
                         .child(reading)

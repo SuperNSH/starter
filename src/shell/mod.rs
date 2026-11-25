@@ -103,7 +103,7 @@ fn phone_shell() -> AnyElement {
             // surface color whatever the theme, so Android draws the bar
             // in the theme's colors instead.
             // It floats over the stack's bottom edge: pages scroll under it
-            // and keep room at their end (`ui::layout::page_insets`).
+            // and keep room at their end (`ui::layout::page_bottom`).
             view()
                 .absolute()
                 .left_0()
