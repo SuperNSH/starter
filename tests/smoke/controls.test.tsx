@@ -11,8 +11,9 @@ async function shot(app: App, name: string): Promise<void> {
   try {
     await app.wait(800);
     await app.screenshot(`${OUT}/${name}.png`);
-  } catch {
-    // Headless draws nothing.
+  } catch (error) {
+    // Headless draws nothing; any other failure (a missing folder) counts.
+    if (!String(error).includes("needs a real platform")) throw error;
   }
 }
 
@@ -21,8 +22,8 @@ test("forms switch and date picker, overlays sheet, light and dark", async () =>
   await app.waitFor("text:Home");
   for (const scheme of ["light", "dark"] as const) {
     await app.setColorScheme(scheme);
-    await app.scroll("id:home-scroll", -10000);
-    await app.scroll("id:home-scroll", 150);
+    // The second round starts where the first left Home, 1050 down.
+    await app.scroll("id:home-scroll", scheme === "light" ? 150 : -900);
     await app.press("id:page-forms");
     await app.waitFor("id:forms-scroll");
     await shot(app, `forms-top-${scheme}`);

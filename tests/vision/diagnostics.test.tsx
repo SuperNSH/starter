@@ -8,14 +8,13 @@
 // central error surface, routes to `foundation::diagnostics_page`, and
 // honors the first-run contract (`app.first_run_done` in Storage skips the
 // flow). Every screenshot is saved under docs/evidence/foundation/.
-import { mkdir } from "fs/promises";
 import { open, test } from "nsh/test";
 import type { App } from "nsh/test";
 
 const DIR = "docs/evidence/foundation";
 
+// The folder must exist: the test's sandbox grants no fs.write to make it.
 async function shot(app: App, name: string) {
-  await mkdir(DIR, { recursive: true });
   await app.screenshot(`${DIR}/${name}.png`);
 }
 

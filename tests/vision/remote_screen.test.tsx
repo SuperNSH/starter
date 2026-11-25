@@ -6,7 +6,8 @@
 import { open, test } from "nsh/test";
 
 test("the remote screen page in both appearances", async () => {
-  const app = await open("../..");
+  // Explicit: a target run otherwise follows the machine's appearance.
+  const app = await open("../..", { colorScheme: "light" });
   await app.press("text:Remote screen");
   await app.waitFor("text:/Delivery status/");
 

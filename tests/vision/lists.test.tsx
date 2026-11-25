@@ -18,7 +18,8 @@ const VIEWS: [string, string, string][] = [
 
 async function capture(width: number, height: number, tag: string) {
   const app = await open("../..", { width, height, colorScheme: "light", clock: {} });
-  await app.press("text:Lists");
+  // The Home card and, on desktop, the sidebar row: both are the page.
+  await app.press("id:page-lists >> nth=0");
   for (const scheme of ["light", "dark"] as const) {
     if (scheme === "dark") {
       await app.setColorScheme("dark");

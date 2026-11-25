@@ -15,8 +15,9 @@ import { open, test } from "nsh/test";
 
 const OUT = "docs/evidence/ui/vision";
 const SCROLL_VIEW = "id:gallery-scroll";
-/** Points per flick down the gallery scroll. */
-const STEP = 1300;
+/** Points per flick down the gallery scroll: under the phone's visible
+ * height, so the stops overlap (1300 left gaps between them). */
+const STEP = 700;
 /** Stops per sweep, top to bottom. */
 const STOPS = 14;
 const TEST_TIMEOUT = 300_000;
@@ -30,8 +31,6 @@ for (const scheme of ["light", "dark"] as const) {
     // The gallery's subtitle: unique to the page (the home row's own text
     // would match before the push).
     await app.waitFor("text:Every control of the app's own library, with its states. Hover, press, focus and disable each one.");
-    // Clamp the scroll to the top whatever a restored state left it at.
-    await app.scroll(SCROLL_VIEW, -30000);
     await sweep(app, scheme, "phone");
   }, TEST_TIMEOUT);
 
@@ -41,7 +40,6 @@ for (const scheme of ["light", "dark"] as const) {
     await app.waitFor("text:Every control of the app's own library, with its states. Hover, press, focus and disable each one.");
     await app.setViewport(1280, 800);
     await app.waitFor("text:Every control of the app's own library, with its states. Hover, press, focus and disable each one.");
-    await app.scroll(SCROLL_VIEW, -30000);
     await sweep(app, scheme, "desktop");
   }, TEST_TIMEOUT);
 }

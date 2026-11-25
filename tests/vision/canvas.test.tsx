@@ -19,7 +19,9 @@ async function capture(app: App, path: string) {
 
 // The app at the Canvas page, reached the way a user reaches it.
 async function canvasApp(): Promise<App> {
-  const app = await open("../..", { clock: {} });
+  // Explicit: a target run otherwise follows the machine's appearance,
+  // and the captures are named for light.
+  const app = await open("../..", { clock: {}, colorScheme: "light" });
   await app.press("text:Canvas");
   await app.waitFor("text:Sketch");
   return app;

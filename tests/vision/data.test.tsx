@@ -23,7 +23,9 @@ test("captures the feed, a detail and the devtools", async () => {
   await app.press("role:button[Post]");
   await app.screenshot(`${DIR}/detail-comment-required.png`);
 
-  await app.press("role:button[Back to feed]");
+  // At phone width the post is a pushed screen (`nav::push_child`), so the
+  // header's back returns; the desktop's "Back to feed" is not drawn here.
+  await app.back();
   await app.waitFor("label:Post 3, Signals over snapshots");
 
   await app.back();

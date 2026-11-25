@@ -32,16 +32,10 @@ async function capture(app: FormsApp, path: string) {
   }
 }
 
-/** Clamps the sign-up scroll to the top whatever a restored state left. */
-async function scrollToTop(app: FormsApp) {
-  await app.scroll(SCROLL_VIEW, -30000);
-}
-
 test("sign-up sweep and errors, then settings, light, phone", async () => {
   const app = await open("../..", { colorScheme: "light" });
   await app.press("id:page-forms");
   await app.waitFor("text:Create account");
-  await scrollToTop(app);
   await capture(app, "sign-up-fresh-light.png");
   // Stops 1..4 tile the rest of the scroll with overlap, so every control
   // (region, interests, plan, slider, switch, color, budget, OTP, bio,
@@ -70,7 +64,6 @@ test("sign-up sweep and errors, then settings, dark, phone", async () => {
   const app = await open("../..", { colorScheme: "dark" });
   await app.press("id:page-forms");
   await app.waitFor("text:Create account");
-  await scrollToTop(app);
   await capture(app, "sign-up-fresh-dark.png");
   for (let stop = 1; stop < PHONE_STOPS; stop += 1) {
     try {
@@ -95,7 +88,6 @@ test("sign-up sweep and errors, then settings, light, desktop", async () => {
   // The desktop shell's sidebar row and the page header both match.
   await app.press("id:page-forms");
   await app.waitFor("text:Create account");
-  await scrollToTop(app);
   await capture(app, "sign-up-desktop-fresh-light.png");
   for (let stop = 1; stop < DESKTOP_STOPS; stop += 1) {
     try {
@@ -119,7 +111,6 @@ test("sign-up sweep and errors, then settings, dark, desktop", async () => {
   const app = await open("../..", { colorScheme: "dark", width: 1280, height: 800 });
   await app.press("id:page-forms");
   await app.waitFor("text:Create account");
-  await scrollToTop(app);
   await capture(app, "sign-up-desktop-fresh-dark.png");
   for (let stop = 1; stop < DESKTOP_STOPS; stop += 1) {
     try {

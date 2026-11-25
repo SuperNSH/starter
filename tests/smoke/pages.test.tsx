@@ -56,6 +56,9 @@ async function openShell(): Promise<{ app: App; phone: boolean }> {
 // other entries are cards.
 const HOME_ROWS = ["page-items_detail", "page-sign_in", "page-data_item"];
 
+/** Where the phone's Home scroll stands. */
+let homeOffset = 0;
+
 // iOS and Android pop with back; the desktop sidebar has no back (the
 // macOS host ignores it), so Home is its first row.
 // Home keeps its scroll offset, and a row under the title bar or the tab
@@ -69,9 +72,11 @@ async function homeRowInView(app: App, phone: boolean, index: number): Promise<v
   index = HOME_ROWS.includes(id)
     ? cards.length + 1 + HOME_ROWS.indexOf(id)
     : cards.findIndex((page) => page.id === id) + 1;
+  const to = Math.max(0, index * 110 - 250);
   try {
-    await app.scroll("id:home-scroll", -10000);
-    if (index > 2) await app.scroll("id:home-scroll", index * 110 - 250);
+    // By the difference: a scroll past the top drags the page off screen.
+    if (to !== homeOffset) await app.scroll("id:home-scroll", to - homeOffset);
+    homeOffset = to;
   } catch {
     // Nothing to scroll.
   }
@@ -105,8 +110,10 @@ test("every page opens from the shell", async () => {
       // Relative to the run's working directory; per-target runs write
       // over these, one page per file.
       await app.screenshot(`docs/evidence/shell/smoke/${page.id}.png`);
-    } catch {
-      // Headless draws nothing: captures are for real targets.
+    } catch (error) {
+      // Headless draws nothing: captures are for real targets. Any other
+      // failure (a missing folder) must not pass silently.
+      if (!String(error).includes("needs a real platform")) throw error;
     }
     await goHome(app);
   }

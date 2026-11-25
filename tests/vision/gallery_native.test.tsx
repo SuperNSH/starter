@@ -15,7 +15,6 @@ for (const scheme of ["light", "dark"] as const) {
     await app.setViewport(1280, 800);
     await app.press("label:UI gallery >> nth=0");
     await app.waitFor(SUMMARY);
-    await app.scroll("id:gallery-scroll", -30000);
     await app.screenshot(`${OUT}/gallery-top-${scheme}-macos.png`);
     // The native section follows Buttons.
     await app.scroll("id:gallery-scroll", 420);

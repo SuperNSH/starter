@@ -13,7 +13,6 @@ for (const scheme of ["light", "dark"] as const) {
     await app.setViewport(1280, 800);
     await app.press("label:Native vs app >> nth=0");
     await app.waitFor("text:last pressed: none");
-    await app.scroll("id:native-scroll", -30000);
     for (let at = 0; at < 9; at++) {
       await app.screenshot(`${OUT}/${scheme}-${at}.png`);
       await app.scroll("id:native-scroll", 620);
