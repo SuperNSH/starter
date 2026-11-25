@@ -1,20 +1,16 @@
-//! Deep links: [`route_from_deep_link`](crate::shell::routes) parses the
-//! path. The system hands the app links of the scheme `nsh.json` claims
-//! (`schemes`) through `next_url_scheme_open`, the one that launched it
-//! included ([`listen`]); a desktop launch argument and an embedding host's
-//! `host.on` wiring call [`open`] too.
+//! Deep links: `Route::from_url` parses the link. The system hands the app
+//! links of the scheme `nsh.json` claims (`schemes`) through
+//! `next_url_scheme_open`, the one that launched it included ([`listen`]);
+//! a desktop launch argument and an embedding host's `host.on` wiring call
+//! [`open`] too.
 
 use std::sync::OnceLock;
 
 use nsh_core::prelude::*;
 
-use crate::shell::{
-    nav,
-    routes::{Route, route_from_deep_link},
-};
+use crate::{routes::Route, store::nav};
 
-/// The scheme the app answers to.
-pub const SCHEME: &str = "nsh-starter://";
+pub use crate::routes::SCHEME;
 
 /// A deep link from the desktop launch arguments, read once at startup.
 static PENDING: OnceLock<String> = OnceLock::new();
@@ -28,8 +24,7 @@ pub fn from_launch(url: impl Into<String>) {
 /// or `None` when it is not one of the app's. The seam an embedding host's
 /// delivery wires into.
 pub fn open(url: &str) -> Option<Route> {
-    let path = url.strip_prefix(SCHEME)?;
-    let route = route_from_deep_link(&path.split('/').collect::<Vec<_>>())?;
+    let route = Route::from_url(url)?;
     nav::open(route);
     Some(route)
 }

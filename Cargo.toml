@@ -9,8 +9,8 @@ publish = false
 [dependencies]
 nsh-core = "0.6.0"
 nsh-base = "0.6.0"
-nsh-query = { path = "../nsh-query/crates/nsh-query" }
-nsh-form = { path = "../nsh-form/crates/nsh-form" }
+nsh-query = "0.1.0"
+nsh-form = "0.1.0"
 chrono = { version = "0.4.45", default-features = false, features = ["std"] }
 log = "0.4"
 env_logger = "0.11"

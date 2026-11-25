@@ -4,6 +4,80 @@ What is done, what was verified how (command + evidence path under
 `docs/evidence/<area>/`), and what is NOT verified. A claim with no evidence
 is unverified. Every area updates its own section as it lands work.
 
+## UI pass, 2026-11-25
+
+- macOS window, looked at: 1280 (dark) Home, Gallery, Forms, Data, Lists, Overlays, Items, Settings, Sign in, Diagnostics; light: Home at 390, 500 and 700, Gallery at 390, 700 and 820, Items at 390. iOS simulator (light), looked at: Home, Diagnostics with the error banner, Forms, Items, Settings, Data. Fixed: the squashed header buttons, the page bounce, card and column alignment (CHANGELOG).
+- Not run, by the owner's choice: the full vision suites. Not verified: the other iOS screens, Android on screen, the desktop bounce under a real trackpad, and the new `tests/vision/{items,settings,sign_in}` on a device.
+
+## Template screens: Items and Sign in (2026-11-25)
+
+Added `src/pages/items/` (list + detail on `nsh-query` over the fake API), `src/pages/sign_in/` with `src/store/session.rs` (`nsh-form` over the mock auth seam), an Account card in Settings, `ui::form` and `ui::nav::list_row`. `nsh-query`/`nsh-form` now come from crates.io 0.1.0 (same source as the sibling checkouts, `diff -r` clean). `scripts/new-app.sh` keeps both and the fake API; the new app's tabs are Home, Items, Settings. Logs: `docs/evidence/project/template-screens/`.
+
+### Verified, and how
+
+| Command (repo) | Result | Log |
+|---|---|---|
+| `cargo fmt --all -- --check` | exit 0 | `fmt.log` |
+| `cargo clippy --all-targets -- -D warnings` | exit 0 | `clippy.log` |
+| `cargo test` (all, incl. `--test architecture`) | exit 0, 162 passed (items 5, sign_in 4 new) | `cargo-test.log` |
+| `cargo clippy --lib --target aarch64-apple-ios-sim -- -D warnings` | exit 0 | `clippy-ios-sim.log` |
+| `nsh test tests/smoke/app.test.tsx` | 2 passed | `nsh-test-app.log` |
+| `nsh test tests/smoke/pages.test.tsx` | 1 passed (17 pages, incl. items, items_detail, sign_in) | `nsh-test-pages.log` |
+| Seen to fail: one break per new test (9) and the new gallery assertion | each failed as intended, code restored | `seen-to-fail.log` |
+| `scripts/new-app.sh /private/tmp/claude-501/newapp-template/acme acme com.acme.app` | exit 0 | `new-app.log` |
+| In the copy (`CARGO_TARGET_DIR` in scratch): fmt check, clippy `-D warnings`, `cargo test`, both `nsh test` smoke files | all exit 0; `cargo test` 59 passed | `generated-app/*.log` |
+
+The generated copy was made before two comment-only edits (`items/view.rs`, `store/session.rs`); the repo gates above ran after them.
+
+### Not verified
+
+- Nothing was looked at on screen: no target run, no screenshot. The desktop presentation of an item is tested headless only (macOS environment, 1280 × 800); its `pt_safe_area` under an iPad's system header is unverified.
+- `tests/smoke/pages.test.tsx` per target (`--target ios|android|macos|web`): not run; its phone scroll offsets for the new Home rows are computed, not seen.
+- CI (`.github/workflows/ci.yml`) still fetches the sibling checkouts; the Rust build no longer needs them. Not run.
+
+## Restructure for navigation (2026-11-25)
+
+The source moved to the layout in `AGENTS.md`. No product behavior was meant to change except what is listed under "Behavior changes".
+
+### Verified, and how
+
+Evidence: `docs/evidence/project/restructure/` (`summary.txt` lists every exit code).
+
+| Check | Command | Result |
+|---|---|---|
+| Format | `cargo fmt --all -- --check` | exit 0 (`fmt.log`) |
+| Lint | `cargo clippy --all-targets -- -D warnings` | exit 0 (`clippy.log`) |
+| Rust tests | `cargo test` | 152 passed, 0 failed (`test.log`); 132 before, on the old layout |
+| iOS compile | `cargo clippy --lib --target aarch64-apple-ios-sim` and `aarch64-apple-ios`, `-D warnings` | exit 0 |
+| Web compile | `cargo clippy --lib --target wasm32-unknown-unknown -- -D warnings` | exit 0 |
+| Headless TSX | `nsh test tests/smoke/app.test.tsx`, `tests/smoke/pages.test.tsx`, `tests/trace/data.test.tsx` | 2, 1 and 1 passed |
+| remote-screen | `nsh check`, `nsh build`, `nsh test` in `packages/remote-screen` | exit 0, 9 tests passed |
+| Rules | `cargo test --test architecture` | 9 passed; each rule seen to fail with a throwaway violating file |
+| New app | `scripts/new-app.sh <tmp>/acme-notes acme-notes com.acme.notes`, then in the copy `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, `cargo test`, `nsh test` on both smoke files | exit 0; 49 Rust tests, 2 and 1 TSX tests passed (run in a scratch directory; no log kept in the repo) |
+
+New tests seen to fail once: `tests/home.rs` (Home skipping a page; `nav_tile` ignoring its press), `tests/native_vs_app.rs` (the fallback switch bound to its own signal).
+
+### Behavior changes
+
+- Links and test ids of six screens follow their new names (see `CHANGELOG.md`).
+- The error banner is mounted in the real app, so an error raised anywhere shows; before, only the test root mounted it.
+- A config save writes a log line in the real app.
+- Home lists a Settings page.
+
+### Not verified
+
+- Nothing was run on a device, a simulator, an emulator or a desktop window after the move: `tests/vision/` and the per-target smoke runs were not repeated. Their files were moved and their ids and `open` paths rewritten by script.
+- The Settings page has not been looked at on any target; only its headless test ran.
+- `tests/smoke/controls.test.tsx` fails headless, as it did before the move (it scrolls Home, which headless cannot); it is a per-target test.
+- `cargo clippy --lib --target aarch64-linux-android` fails on this Mac building `onig_sys` (a C dependency; the NDK toolchain is not set up in this shell). CI runs it on Linux.
+- The moved macOS and iOS native code compiles; the command bar, the system controls and the soft edges were not exercised on screen.
+- Not rechecked against the new layout, and still describing what was true when written: the sections below, `docs/coverage.md` beyond its paths, and the evidence paths `docs/evidence/<area>/` that name the old areas.
+
+### Open decisions
+
+- The first-run welcome flow works and is tested but the app does not show it (`docs/architecture.md`, "What is built but not switched on").
+- `docs/evidence/` holds 931 tracked files (about 120 MB) under the old area names.
+
 ## Baseline (bootstrap, pre-workflow)
 
 - Scaffolded the Rust app at the repo root with `nsh init --template rust`

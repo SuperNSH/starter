@@ -7,6 +7,44 @@ All notable changes to this project are documented here. The format follows
 
 ### Added
 
+- Two template screens a new app keeps. **Items** (`src/pages/items/`): a list on `nsh-query` over the fake API, with skeletons, an error with Retry, an empty state, and a row that opens the item (pushed on phones, presented by the list on desktop widths); links `items` and `items/<id>`. **Sign in** (`src/pages/sign_in/`): an email and password form on `nsh-form` over the new `store::session`, which calls the mock auth seam; field errors, a refusal on the form, the signed-in name and Sign out; link `sign_in`. Settings gains an Account card. Nothing is gated on signing in. Both are translated (`items.*`, `sign_in.*`, `settings.account.*`).
+- `ui::form` (the form glue the demo forms used, moved out of the showcase so pages can use it) and `ui::nav::list_row`.
+- The fake API's empty switch (`set_empty`), `posts()`, and `ApiError::NotFound` for an id that does not exist (it panicked before).
+- The mock auth provider refuses the password `wrong-password` (code `denied`), so the refusal path can be seen.
+
+### Changed
+
+- The error banner sits above the tab bar, the status bar and the home indicator, and leaves their presses alone.
+- A page's bottom room is padding (`ui::layout::page_bottom`), counted once; on iOS the home indicator's inset was added three times. Content starts right under iOS's large title.
+- `ui::layout::page_scroll` is every page's scroll; it no longer bounces on desktops, where the bounce pulled the page far off its header.
+- macOS: the header's native icon buttons are 32 pt circles (they were squashed to the symbol's height). The narrow window's header has no sidebar toggle, as it has no sidebar.
+- Home's cards drop their empty bottom space; Overlays and Sign in keep to the left edge at a readable width.
+- The TSX suites scroll by the difference they need, never thousands of points past an end.
+- `nsh-query` and `nsh-form` come from crates.io (0.1.0) instead of `../` path dependencies; the TSX package still links the sibling checkouts.
+- `scripts/new-app.sh` keeps the fake API and both libraries; the new app's phone tabs are Home, Items and Settings.
+- The phone tab bar is Home, Forms, Data, Motion, Items (Lists left it to stay at five).
+- Home's rows come from `pages::home_rows()` (was the `HOME_ROWS` const) and open the item and Sign in.
+
+- The source is laid out for navigation: `src/pages` (the app's screens), `src/showcase` (the demo screens), `src/shell`, `src/store`, `src/services`, `src/ui`, `src/native`, with `routes.rs`, `error.rs` and `startup.rs` at the root. `features`, `foundation`, `state`, `platform` and `app` are gone. `AGENTS.md` is the map.
+- Every screen declares one `Page` record; the shell reads records and names no screen. Adding a screen is a folder, a `Route` variant and one line in `src/pages/mod.rs`, where it was eleven edits in the route table.
+- One name per screen. Renamed: `ui` → `gallery`, `native` → `native_vs_app`, `remote` → `remote_screen`, `device` → `platform_device`, `query-devtools` → `data_devtools`, `data-item` → `data_item`. Their links (`nsh-starter://gallery`, `nsh-starter://platform/device`) and test ids (`page-gallery`) changed with them.
+- TSX suites moved under `tests/` (`tests/smoke`, `tests/vision`, `tests/trace`).
+- The error banner and the config-save log line now run in the real app (`shell/error_surface.rs`, `startup.rs`); the demo root that used to host them is gone.
+- Every `global::<T>()` has a type of its own; `unsafe` is confined to `src/native` and forbidden elsewhere by the compiler; no source file is longer than 500 lines.
+
+### Added
+
+- `tests/architecture.rs` (`just rules`): the layout's rules, each failure saying how to fix it.
+- A Settings page (name, language, appearance, telemetry), translated in both languages.
+- `scripts/new-app.sh` (`just new-app`): a new app from the starter without the demo screens.
+- `docs/recipes/`: step lists for the common changes.
+
+### Removed
+
+- `state::history::History`, `foundation::page_placeholder` and `foundation::DemoRoot`: unused outside tests.
+
+### Added
+
 - Links of the `nsh-starter://` scheme open their page: `nsh.json` claims the scheme and the shell listens with `next_url_scheme_open`.
 - A Notifications card on the Platform page: permission state, ask, and a test notification (`notifications` capability).
 

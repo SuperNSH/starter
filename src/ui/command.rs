@@ -10,9 +10,12 @@ pub fn command_entry(id: &'static str, label: &'static str) -> CommandItem {
 }
 
 /// The palette: type to filter `items`; choosing one reports its id.
+/// `auto_focus` suits a palette that opens on demand: one inline in a page
+/// would take the focus and scroll the page to itself as it mounts.
 pub fn command_palette(
     items: Vec<CommandItem>,
     placeholder: impl Into<String>,
+    auto_focus: bool,
     on_select: impl Fn(SharedString) + 'static,
 ) -> impl IntoElement {
     let placeholder = placeholder.into();
@@ -20,7 +23,7 @@ pub fn command_palette(
         .items(items)
         .searchable(true)
         .filterable(true)
-        .auto_focus(true)
+        .auto_focus(auto_focus)
         .separator(true)
         .accessibility_label("Command palette")
         .placeholder(SharedString::from(placeholder.clone()))

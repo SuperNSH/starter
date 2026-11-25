@@ -1,0 +1,6 @@
+✓ built the Rust crate nsh-starter (21.0s)
+✓ built the headless runner of nsh-starter (21.6s, 1 warning: -v shows it)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/smoke/app.test.tsx › the root mounts (21ms)
+✓ tests/smoke/app.test.tsx › the shell navigates from Home (22ms)
+✓ 2 tests: 2 passed, 0 failed (25.6s)

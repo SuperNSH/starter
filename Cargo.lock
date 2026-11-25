@@ -2687,6 +2687,8 @@ dependencies = [
 [[package]]
 name = "nsh-form"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a3c176cbed589ec201ae8f956980d92ae305361bce9201cb0529898b76006a9"
 dependencies = [
  "freeoxide-gpui-form-core",
  "nsh-base",
@@ -2879,6 +2881,8 @@ dependencies = [
 [[package]]
 name = "nsh-query"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "771699c49dd225b9efbb95a4d402d7fe9bc597f2b56828e8dcbc36d17a16501c"
 dependencies = [
  "gpui-query",
  "nsh-core",

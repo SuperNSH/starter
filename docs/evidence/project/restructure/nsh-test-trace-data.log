@@ -1,0 +1,7 @@
+✓ built the Rust crate nsh-starter (245ms)
+✓ built the headless runner of nsh-starter (349ms, 1 warning: -v shows it)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+trace-measure: the like tap's commit lines follow
+trace-measure: the scroll's commit lines follow
+✓ tests/trace/data.test.tsx › a like tap and a feed scroll stay cheap (87ms)
+✓ 1 test: 1 passed, 0 failed (4.3s)

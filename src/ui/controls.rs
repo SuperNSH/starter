@@ -93,8 +93,10 @@ pub fn checkbox_row(label: impl Into<SharedString>, checked: Signal<bool>) -> im
                         .border_color(move || theme().primary)
                 })
         })
+        // The mark draws whether checked or not: unchecked, it would show
+        // as a dim check on the dark theme's empty box.
         .indicator(
-            text("✓")
+            text(move || if checked.get() { "✓" } else { "" })
                 .text_xs()
                 .text_color(move || theme().primary_foreground),
         )
@@ -275,14 +277,11 @@ pub fn slider(value: Signal<f64>, min: f64, max: f64) -> impl IntoElement {
                 .outline_offset(px(2.0))
                 .outline_color(move || theme().ring)
         })
-        .track_style(|s| {
-            s.h(px(6.0))
-                .rounded_full()
-                .bg(move || theme().muted)
-                .overflow_hidden()
-        })
-        .indicator_style(|s| s.h_full().rounded_full().bg(move || theme().primary))
-        .range_style(|s| s.h_full().bg(move || theme().primary.opacity(0.35)))
+        // The track is the hit area around the rail (the indicator); the
+        // range fills the rail up to the thumb, which sits on the rail.
+        .track_style(|s| s.h(px(24.0)).justify_center())
+        .indicator_style(|s| s.h(px(6.0)).rounded_full().bg(move || theme().muted))
+        .range_style(|s| s.rounded_full().bg(move || theme().primary))
         .thumb_style(|s| {
             s.size(px(18.0))
                 .rounded_full()

@@ -7,12 +7,16 @@ use nsh_core::prelude::*;
 // nsh_core's prelude has a `t!` of its own; the app translates with rust-i18n.
 use rust_i18n::t;
 
-use crate::shell::{lifecycle, nav};
+use crate::store::{lifecycle, nav};
+
+/// The bar's height above the safe area: a line of small text, its pads
+/// and its border.
+pub const HEIGHT: f32 = 25.0;
 
 pub fn status_bar() -> impl IntoElement {
     // macOS: the window's title bar material behind the row, as AppKit's
     // own bars; elsewhere the card fill.
-    let material = crate::ui::native_kit::native_material("titlebar");
+    let material = crate::native::kit::native_material("titlebar");
     let native = material.is_some();
     view()
         .children(material)
@@ -39,7 +43,7 @@ pub fn status_bar() -> impl IntoElement {
                 .items_center()
                 .gap_3()
                 .child(
-                    text(move || nav::current().label())
+                    text(move || nav::current().title())
                         .text_xs()
                         .number_of_lines(1)
                         .text_color(move || theme().muted_foreground),

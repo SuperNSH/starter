@@ -29,7 +29,7 @@ pub fn mobile_tab_bar(items: Vec<TabBarItem>, selected: Signal<u32>) -> impl Int
 pub struct ThemedTab {
     pub label: &'static str,
     pub svg: &'static str,
-    pub test_id: &'static str,
+    pub test_id: String,
 }
 
 /// A Material 3 navigation bar drawn in the theme's colors, for Android:
@@ -63,7 +63,7 @@ pub fn themed_tab_bar(tabs: Vec<ThemedTab>, selected: Signal<u32>) -> impl IntoE
         };
         bar = bar.child(
             view()
-                .test_id(tab.test_id)
+                .test_id(&tab.test_id)
                 .accessible(true)
                 .label(tab.label)
                 .flex_1()

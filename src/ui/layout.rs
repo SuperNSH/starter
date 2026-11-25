@@ -132,15 +132,26 @@ pub fn divider() -> impl IntoElement {
 
 /// A page's content column, the gallery's frame shared by every page: 16pt
 /// around, 24pt between sections, room under the last one. Put it inside the
-/// page's scroll and give it `text::page_intro` first.
+/// page's scroll ([`page_scroll`]) and give it `text::page_intro` first.
 pub fn page_body() -> nsh_core::element::View {
     view()
         .w_full()
         .flex_col()
         .gap_6()
         .p_4()
-        .pb_safe_area_plus(px(24.0))
+        .pt(px(page_top()))
+        .pb(move || page_bottom(24.0))
         .text_color(move || theme().foreground)
+}
+
+/// The space above a page's content: none under iOS's large title, which
+/// brings its own.
+pub fn page_top() -> f32 {
+    if os() == nsh_core::platform::Os::Ios && !is_desktop() {
+        0.0
+    } else {
+        16.0
+    }
 }
 
 /// The height the phone tab bar floats over at the bottom of a page, above
@@ -158,22 +169,48 @@ pub fn tab_bar_room() -> f32 {
     }
 }
 
-/// A page scroll's content inset on phones: `top` above the content, and
-/// room at the end so the last row scrolls clear of the floating tab bar
-/// (the content passes under the bar on its way there, as under the
-/// header). Read where the scroll is made: `.content_inset(page_insets(0.0))`.
-pub fn page_insets(top: f32) -> impl Fn() -> nsh_core::EdgeInsets + 'static {
-    move || {
-        let room = tab_bar_room();
-        let bottom = if room > 0.0 {
-            room + safe_area().bottom.0
-        } else {
-            0.0
-        };
-        nsh_core::EdgeInsets {
+/// A page's scroll (`top` extra points above its content). The content
+/// passes under the phone's bars; its own [`page_bottom`] padding lets it
+/// rest clear of them. It bounces on phones only: on a desktop the bounce
+/// pulls the page far off its header.
+pub fn page_scroll(top: f32) -> nsh_core::element::Scroll {
+    scroll()
+        .flex_1()
+        .content_inset(nsh_core::EdgeInsets {
             top: px(top),
-            bottom: px(bottom),
             ..nsh_core::EdgeInsets::default()
-        }
+        })
+        .bounces(page_bounces())
+}
+
+/// The padding under a page's last row: `gap` points, over the floating
+/// tab bar. Padding, not an inset: a page whose content changes while it
+/// rests in the inset jumps back by it. Tracked.
+pub fn page_bottom(gap: f32) -> nsh_core::Points {
+    px(gap + bottom_room())
+}
+
+/// The bars at a page's bottom that its scroll must add room for. UIKit
+/// adds the home indicator's itself.
+fn bottom_room() -> f32 {
+    use nsh_core::platform::Os;
+    if os() == Os::Ios {
+        tab_bar_room()
+    } else {
+        tab_bar_room() + safe_area().bottom.0
+    }
+}
+
+/// Whether a page's own scroll bounces at its ends (see [`page_scroll`]).
+pub fn page_bounces() -> bool {
+    !is_desktop()
+}
+
+/// The bottom room as a content inset, for a page that is one virtual list
+/// (its rows take no padding under them).
+pub fn list_insets() -> impl Fn() -> nsh_core::EdgeInsets + 'static {
+    || nsh_core::EdgeInsets {
+        bottom: px(bottom_room()),
+        ..nsh_core::EdgeInsets::default()
     }
 }

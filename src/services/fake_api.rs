@@ -1,6 +1,7 @@
-//! The local fake API backing the data feature: a deterministic dataset of
-//! posts, authors, likes and comments, with latency, failure and offline
-//! switches, so no screen or test needs a server or randomness.
+//! The local fake API the screens that read posts call (Items, the demo
+//! feed): a deterministic dataset of posts, authors, likes and comments,
+//! with latency, failure, offline and empty switches, so no screen or test
+//! needs a server or randomness. A real backend replaces the calls.
 
 use std::time::Duration;
 
@@ -66,6 +67,8 @@ pub enum ApiError {
     Offline,
     /// The failure switch picked this request.
     Failed,
+    /// No post has that id (a link to one that never existed).
+    NotFound,
 }
 
 impl std::fmt::Display for ApiError {
@@ -73,6 +76,7 @@ impl std::fmt::Display for ApiError {
         match self {
             Self::Offline => write!(f, "You are offline"),
             Self::Failed => write!(f, "The request failed"),
+            Self::NotFound => write!(f, "Nothing has that id"),
         }
     }
 }
@@ -108,7 +112,7 @@ pub struct PostPage {
 }
 
 /// The fake API's state: its dataset and its switches. Held in one global
-/// signal, so the devtools page can turn the switches at run time.
+/// signal, so a screen or a test can turn the switches at run time.
 #[derive(Debug, Clone)]
 pub struct FakeApi {
     posts: Vec<Post>,
@@ -118,6 +122,8 @@ pub struct FakeApi {
     /// Every Nth request fails; 0 never fails.
     pub fail_every: u32,
     pub offline: bool,
+    /// Lists answer with no posts, so a screen's empty state can be seen.
+    pub empty: bool,
     /// Requests counted by the gate, failed ones included.
     pub requests: u64,
     /// Requests the failure switch rejected.
@@ -163,6 +169,7 @@ impl Default for FakeApi {
             latency_ms: 100,
             fail_every: 0,
             offline: false,
+            empty: false,
             requests: 0,
             failures: 0,
             in_flight: 0,
@@ -185,6 +192,12 @@ impl FakeApi {
     }
 
     fn page(&self, cursor: u64) -> PostPage {
+        if self.empty {
+            return PostPage {
+                posts: Vec::new(),
+                next_cursor: None,
+            };
+        }
         let start = (cursor * PAGE_SIZE) as usize;
         let posts: Vec<Post> = self
             .posts
@@ -250,14 +263,23 @@ pub async fn posts_page(cursor: u64) -> Result<PostPage, ApiError> {
     respond(|api| api.page(cursor)).await
 }
 
-/// One post; each successful read bumps its `revision`.
-pub async fn post(id: u64) -> Result<Post, ApiError> {
+/// Every post, in id order: the list a screen without paging shows.
+pub async fn posts() -> Result<Vec<Post>, ApiError> {
     respond(|api| {
-        api.post(id)
-            .map(|post| post.clone())
-            .expect("the dataset holds every id the pages hand out")
+        if api.empty {
+            Vec::new()
+        } else {
+            api.posts.clone()
+        }
     })
     .await
+}
+
+/// One post; each successful read bumps its `revision`.
+pub async fn post(id: u64) -> Result<Post, ApiError> {
+    respond(|api| api.post(id).map(|post| post.clone()))
+        .await?
+        .ok_or(ApiError::NotFound)
 }
 
 /// The comments on a post, oldest first.
@@ -317,4 +339,9 @@ pub fn set_fail_every(n: u32) {
 /// Sets the offline switch; offline requests fail at once.
 pub fn set_offline(offline: bool) {
     fake_api().update(|api| api.offline = offline);
+}
+
+/// Sets the empty switch: lists answer with no posts.
+pub fn set_empty(empty: bool) {
+    fake_api().update(|api| api.empty = empty);
 }

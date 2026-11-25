@@ -1,14 +1,19 @@
 //! Every page's frame: a `nav_page` with the route's key (pages below
 //! keep their state), its title for the system header, and the shell's
 //! header slot for the desktops and the web, which carry the back button
-//! and the palette.
+//! and the palette. What differs from page to page is read from the
+//! page's record (`Page::frame`, `Page::action`), never from its name.
 
 use nsh_base::{nav_page, theme};
 use nsh_core::{element::Screen, prelude::*};
 
 use crate::{
-    shell::{chrome, nav, palette, routes::Route},
-    ui::{icons, native_kit::native_icon_button, nav::themed_header},
+    native::{kit::native_icon_button, soft_edges},
+    pages,
+    routes::{Content, Frame, Route},
+    shell::{chrome, desktop, palette},
+    store::nav,
+    ui::{icons, layout, nav::themed_header},
 };
 
 /// The widest the page content grows, in points: past it, label and value
@@ -17,54 +22,50 @@ const CONTENT_MAX: f32 = 1040.0;
 
 /// The route's page as the stack shows it.
 pub fn page_screen(route: Route) -> Screen {
-    let mut screen = themed_header(nav_page().key(route.key()).title(route.title()));
-    // A detail over the tab bar's pages keeps the bar out while it is up.
-    if route.is_detail() {
+    let page = route.page();
+    let phone = !is_desktop();
+    let ios = os() == nsh_core::platform::Os::Ios;
+    let own_stack = page.frame == Frame::OwnStack;
+    let pushed = route.parent().is_some();
+    let mut screen = themed_header(nav_page().key(route.stack_key()).title(route.title()));
+    // A pushed screen over the tab bar's pages keeps the bar out while it
+    // is up.
+    if pushed {
         screen = screen.hides_bottom_bar_when_pushed(true);
     }
     // A tab is a root on phones: the tab bar, not a back button, leaves it
     // (Android's system back still returns Home, the shell's back order).
-    if route.is_tab() && !is_desktop() {
+    if phone && pages::tabs().contains(&route) {
         screen = screen.header_back_visible(false).pop_on_swipe(false);
     }
-    // One system header per screen: the feature's own stack draws it.
-    if route.has_own_stack() && !is_desktop() {
+    // One system header per screen: a page with its own stack draws it.
+    if phone && own_stack {
         screen = screen.header_visible(false);
     }
-    // The Lists page's top is its view switcher, not a scroll view: it keeps
-    // the same clear header as every page, but starts below it and stops
-    // above the floating tab bar, since nothing scrolls under either.
-    let fixed = route == Route::Lists && !is_desktop();
-    // The gallery's appearance switch as a native header button (SF
-    // Symbol), beside the system's back button.
-    if route == Route::UiGallery && os() == nsh_core::platform::Os::Ios && !is_desktop() {
+    // A fixed page's top is not a scroll view: it keeps the same clear
+    // header as every page, but starts below it and stops above the
+    // floating tab bar, since nothing scrolls under either.
+    let fixed = phone && page.frame == Frame::Fixed;
+    // The page's own action as a native header button: UIKit draws the SF
+    // Symbol, and a press on it presses this view's button.
+    if let Some(action) = &page.action
+        && ios
+        && phone
+    {
         screen = screen
             .header_right(
-                view().test_id("gallery-appearance").child(
+                view().test_id(action.test_id).child(
                     nsh_base::button()
-                        .on_press(crate::shell::toggle_appearance)
-                        .child(text("Appearance")),
+                        .on_press(action.run)
+                        .child(text(action.label)),
                 ),
             )
-            .header_right_symbol("circle.lefthalf.filled");
-    }
-    // The feed's reload as a native header button: UIKit draws the SF
-    // Symbol and a press on it presses this view's button.
-    if route == Route::Data && os() == nsh_core::platform::Os::Ios && !is_desktop() {
-        screen = screen
-            .header_right(
-                view().test_id("data-refresh").child(
-                    nsh_base::button()
-                        .on_press(crate::features::data::refresh_feed)
-                        .child(text("Refresh")),
-                ),
-            )
-            .header_right_symbol("arrow.clockwise");
+            .header_right_symbol(action.symbol);
     }
     // Under the transparent iOS header, UIKit's soft edge: content fades
-    // and blurs lightly as it slides under.
-    // The Forms stack's own pages carry theirs (`soft_edges::page_edges`).
-    let top_fade = os() == nsh_core::platform::Os::Ios && !is_desktop() && !route.has_own_stack();
+    // and blurs lightly as it slides under. A page with its own stack
+    // places its own (`soft_edges::page_edges`).
+    let top_fade = ios && phone && !own_stack;
     // nav_page paints the platform's window color (macOS dark: #1e1e1e),
     // so the content area takes the theme's own background on every page;
     // wide windows center the content at a readable measure.
@@ -75,7 +76,7 @@ pub fn page_screen(route: Route) -> Screen {
             .when(fixed, |page| {
                 // The screen's own top inset, which takes in its header.
                 page.pt_safe_area()
-                    .pb(move || px(crate::ui::layout::tab_bar_room() + safe_area().bottom.0))
+                    .pb(move || px(layout::tab_bar_room() + safe_area().bottom.0))
             })
             .bg(move || theme().background)
             .child(
@@ -83,19 +84,27 @@ pub fn page_screen(route: Route) -> Screen {
                     .flex_1()
                     .w_full()
                     .max_w(px(CONTENT_MAX))
-                    .child(route.page()),
+                    .child(content(route)),
             )
-            .child(when(move || top_fade, crate::shell::soft_edges::soft_edges))
+            .child(when(move || top_fade, soft_edges::soft_edges))
             // ...and behind the floating tab bar, the bottom one.
             .child(when(
-                move || top_fade && !fixed && !route.is_detail(),
-                || {
-                    crate::shell::soft_edges::soft_bottom_edge(|| {
-                        crate::ui::layout::tab_bar_room() + safe_area().bottom.0
-                    })
-                },
+                move || top_fade && !fixed && !pushed,
+                || soft_edges::soft_bottom_edge(|| layout::tab_bar_room() + safe_area().bottom.0),
             )),
     )
+}
+
+/// What the route's page draws, given the route's id when it shows one
+/// item.
+fn content(route: Route) -> AnyElement {
+    match (&route.page().content, route.id()) {
+        (Content::Plain(draw), _) => draw(),
+        (Content::WithId(draw), Some(id)) => draw(id),
+        // The page table pairs every `WithId` record with a route that
+        // carries an id (`pages::tests`), so this draws nothing in practice.
+        (Content::WithId(_), None) => view().into_element(),
+    }
 }
 
 /// The header slot (desktops and the web only; iOS and Android draw their
@@ -105,7 +114,7 @@ pub fn page_screen(route: Route) -> Screen {
 /// presence is decided here.
 fn page_header(route: Route) -> impl IntoElement {
     let lead = move || {
-        if chrome::sidebar_open() {
+        if chrome::sidebar_open() || !desktop() {
             px(12.0)
         } else {
             chrome::controls_inset() + px(12.0)
@@ -123,7 +132,8 @@ fn page_header(route: Route) -> impl IntoElement {
         .bg(move || theme().background)
         .window_drag(true)
         .child(when(
-            move || !chrome::sidebar_open(),
+            // The narrow layout has no sidebar to show.
+            move || desktop() && !chrome::sidebar_open(),
             || {
                 native_icon_button(
                     "sidebar.left",

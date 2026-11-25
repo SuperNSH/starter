@@ -1,0 +1,446 @@
+   Compiling unicode-ident v1.0.27
+   Compiling subtle v2.6.1
+   Compiling typenum v1.20.1
+   Compiling rand_core v0.10.1
+   Compiling regex-syntax v0.8.11
+   Compiling siphasher v1.0.4
+   Compiling smallvec v1.16.5
+   Compiling stable_deref_trait v1.2.1
+   Compiling num-traits v0.2.19
+   Compiling simd-adler32 v0.3.10
+   Compiling semver v1.0.28
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling scopeguard v1.2.0
+   Compiling ctutils v0.4.8
+   Compiling zlib-rs v0.6.8
+   Compiling pin-project-lite v0.2.17
+   Compiling proc-macro2 v1.0.107
+   Compiling pem-rfc7468 v1.0.0
+   Compiling generic-array v0.14.7
+   Compiling regex-automata v0.4.18
+   Compiling rustc-hash v2.1.3
+   Compiling same-file v1.0.6
+   Compiling miniz_oxide v0.9.1
+   Compiling rustc_version v0.4.1
+   Compiling zmij v1.0.23
+   Compiling utf_types v1.0.0
+   Compiling writeable v0.6.4
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling quote v1.0.47
+   Compiling untrusted v0.9.0
+   Compiling walkdir v2.5.0
+   Compiling flate2 v1.1.11
+   Compiling utf8_iter v1.1.0
+   Compiling unicode-width v0.2.3
+   Compiling utf-8 v0.7.6
+   Compiling regex v1.13.1
+   Compiling digest v0.10.7
+   Compiling globset v0.4.21
+   Compiling syn v2.0.119
+   Compiling syn v3.0.10
+   Compiling ring v0.17.14
+   Compiling arc-swap v1.9.5
+   Compiling objc2-encode v4.1.0
+   Compiling encoding_rs v0.8.44
+   Compiling ff v0.14.0
+   Compiling ignore v0.4.34
+   Compiling strict-num v0.1.1
+   Compiling synstructure v0.14.0
+   Compiling annotate-snippets v0.12.18
+   Compiling ttf-parser v0.25.1
+   Compiling prettyplease v0.2.37
+   Compiling objc2 v0.6.5
+   Compiling getrandom v0.4.3
+   Compiling curve25519-dalek v4.1.3
+   Compiling encoding_rs_io v0.1.8
+   Compiling rand_core v0.9.5
+   Compiling zeroize_derive v1.5.0
+   Compiling serde_derive v1.0.229
+   Compiling zerocopy-derive v0.8.63
+   Compiling zerovec-derive v0.11.7
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling displaydoc v0.2.7
+   Compiling der_derive v0.8.0
+   Compiling thiserror-impl v2.0.21
+   Compiling globwalk v0.8.1
+   Compiling tokio-macros v2.7.2
+   Compiling polycool v0.4.0
+   Compiling phf_shared v0.11.3
+   Compiling socket2 v0.6.5
+   Compiling percent-encoding v2.3.2
+   Compiling zeroize v1.9.1
+   Compiling zerocopy v0.8.63
+   Compiling serde v1.0.229
+   Compiling kurbo v0.13.1
+   Compiling bindgen v0.72.1
+   Compiling tiny-skia-path v0.11.4
+   Compiling serde-saphyr v1.3.0
+   Compiling zerofrom v0.1.8
+   Compiling hybrid-array v0.4.15
+   Compiling rustls-pki-types v1.16.0
+   Compiling thiserror v2.0.21
+   Compiling der v0.8.3
+   Compiling tokio v1.54.1
+   Compiling rustix v1.1.6
+   Compiling toml_datetime v0.6.11
+   Compiling yoke v0.8.4
+   Compiling serde_spanned v0.6.9
+   Compiling half v2.7.1
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling block-padding v0.4.2
+   Compiling crypto-bigint v0.7.11
+   Compiling rustls-webpki v0.103.16
+   Compiling ppv-lite86 v0.2.21
+   Compiling zerovec v0.11.9
+   Compiling zerotrie v0.2.5
+   Compiling toml_edit v0.22.27
+   Compiling webpki-roots v1.0.12
+   Compiling digest v0.11.3
+   Compiling spki v0.8.1
+   Compiling inout v0.2.6
+   Compiling triomphe v0.1.17
+   Compiling rustls v0.23.46
+   Compiling rand_chacha v0.9.0
+   Compiling tinystr v0.8.5
+   Compiling potential_utf v0.1.6
+   Compiling group v0.14.0
+   Compiling pkcs8 v0.11.0
+   Compiling hmac v0.13.0
+   Compiling signature v3.0.0
+   Compiling cipher v0.5.2
+   Compiling toml v0.8.23
+   Compiling slotmap v1.1.1
+   Compiling icu_locale_core v2.4.0
+   Compiling security-framework-sys v2.17.0
+   Compiling icu_collections v2.4.0
+   Compiling serde_json v1.0.154
+   Compiling fdeflate v0.3.7
+   Compiling miniz_oxide v0.8.9
+   Compiling signature v2.2.0
+   Compiling unicode-properties v0.1.5
+   Compiling tinyvec v1.13.3
+   Compiling unicode-bidi-mirroring v0.4.0
+   Compiling unicode-script v0.5.9
+   Compiling unicode-ccc v0.4.0
+   Compiling security-framework v3.7.0
+   Compiling icu_provider v2.4.0
+   Compiling png v0.17.16
+   Compiling rust-i18n-support v4.2.4
+   Compiling zopfli v0.8.4
+   Compiling fontdb v0.23.0
+   Compiling ed25519 v2.2.3
+   Compiling sec1 v0.8.1
+   Compiling hkdf v0.13.0
+   Compiling rustybuzz v0.20.1
+   Compiling fs-set-times v0.20.3
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling rand v0.9.5
+   Compiling constant_time_eq v0.6.1
+   Compiling quickjs-jit-sys v0.14.2
+   Compiling svgtypes v0.16.2
+   Compiling rust-i18n v4.2.4
+   Compiling form_urlencoded v1.2.2
+   Compiling objc2-core-foundation v0.3.2
+   Compiling futures-macro v0.3.34
+   Compiling sha2 v0.10.9
+   Compiling idna_adapter v1.2.2
+   Compiling sha1 v0.10.7
+   Compiling simplecss v0.2.2
+   Compiling roxmltree v0.21.2
+   Compiling xmlwriter v0.1.0
+   Compiling typed-path v0.13.0
+   Compiling unicode-bidi v0.3.18
+   Compiling slab v0.4.12
+   Compiling pico-args v0.5.0
+   Compiling weezl v0.1.12
+   Compiling unicode-vo v0.1.0
+   Compiling idna v1.1.0
+   Compiling zune-core v0.5.3
+   Compiling quick-error v2.0.1
+   Compiling cap-primitives v4.0.3
+   Compiling ureq-proto v0.7.1
+   Compiling wuff v0.2.10
+   Compiling tungstenite v0.28.0
+   Compiling image-webp v0.2.4
+   Compiling futures-util v0.3.34
+   Compiling zip v9.5.1
+   Compiling url v2.5.8
+   Compiling gif v0.14.2
+   Compiling usvg v0.46.0
+   Compiling zune-jpeg v0.5.15
+   Compiling tar v0.4.46
+   Compiling elliptic-curve v0.14.3
+   Compiling tiny-skia v0.11.4
+   Compiling rust-i18n-macro v4.2.4
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling phf_generator v0.11.3
+   Compiling tokio-rustls v0.26.6
+   Compiling primefield v0.14.0
+   Compiling sha2 v0.11.1
+   Compiling webpki-roots v0.26.11
+   Compiling universal-hash v0.6.1
+   Compiling rgb v0.8.53
+   Compiling codespan-reporting v0.13.1
+   Compiling rustc-hash v1.1.0
+   Compiling unicode-segmentation v1.13.3
+   Compiling utf8-zero v0.8.1
+   Compiling nsh-macros v0.6.0
+   Compiling ed25519-dalek v2.2.0
+   Compiling tokio-tungstenite v0.28.0
+   Compiling wnaf v0.14.1
+   Compiling chrono v0.4.45
+   Compiling cap-std v4.0.3
+   Compiling resvg v0.46.0
+   Compiling naga v29.0.4
+   Compiling rfc6979 v0.6.0
+   Compiling ureq v3.5.1
+   Compiling curve25519-dalek v5.0.0
+   Compiling nsh-updater v0.6.0
+   Compiling ordered-float v5.5.1
+   Compiling event-listener v5.4.2
+   Compiling taffy v0.15.1
+   Compiling unicode-linebreak v0.1.5
+   Compiling toml_edit v0.25.19+spec-1.1.0
+   Compiling ecdsa v0.17.0
+   Compiling primeorder v0.14.0
+   Compiling parking_lot_core v0.9.12
+   Compiling string_cache_codegen v0.5.4
+   Compiling phf_codegen v0.11.3
+   Compiling event-listener-strategy v0.5.4
+   Compiling lock_api v0.4.14
+   Compiling phf_shared v0.14.0
+   Compiling outref v0.5.2
+   Compiling sponge-cursor v0.1.0
+   Compiling vsimd v0.8.0
+   Compiling proc-macro-crate v3.5.0
+   Compiling convert_case v0.12.0
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+   Compiling async-lock v3.5.0
+   Compiling phf_generator v0.14.0
+   Compiling markup5ever v0.12.1
+   Compiling parking_lot v0.12.5
+   Compiling polyval v0.7.3
+   Compiling chacha20 v0.10.2
+   Compiling aead v0.6.1
+   Compiling crc32c v0.6.9
+   Compiling float-cmp v0.10.0
+   Compiling precomputed-hash v0.1.1
+   Compiling relative-path v2.0.3
+   Compiling ryu v1.0.23
+   Compiling phf_macros v0.14.0
+   Compiling zstd-safe v8.2.0
+   Compiling ghash v0.6.0
+   Compiling base64-simd v0.8.0
+   Compiling tendril v0.4.3
+   Compiling poly1305 v0.9.1
+   Compiling aes v0.9.4
+   Compiling ctr v0.10.1
+   Compiling value-trait v0.12.3
+   Compiling string_cache v0.8.9
+   Compiling ed25519 v3.0.0
+   Compiling crypto-primes v0.7.2
+   Compiling pkcs1 v0.8.0
+   Compiling phf v0.11.3
+   Compiling tracing-core v0.1.36
+   Compiling simdutf8 v0.1.5
+   Compiling phf v0.14.0
+   Compiling aes-kw v0.3.1
+   Compiling aes-gcm v0.11.1
+   Compiling chacha20poly1305 v0.11.0
+   Compiling zstd v0.14.3
+   Compiling rand v0.10.3
+   Compiling rsa v0.10.0-rc.19
+   Compiling tracing v0.1.44
+   Compiling onig_sys v69.9.3
+   Compiling hex-simd v0.8.0
+   Compiling simd-json v0.18.1
+   Compiling sha3 v0.12.0
+   Compiling cshake v0.2.1
+   Compiling shake v0.1.0
+   Compiling p521 v0.14.0
+   Compiling p256 v0.14.0
+   Compiling p384 v0.14.0
+   Compiling objc2-core-graphics v0.3.2
+   Compiling cbc v0.2.1
+   Compiling sha1 v0.11.0
+   Compiling pbkdf2 v0.13.0
+   Compiling md-5 v0.11.0
+   Compiling nsh-core v0.6.0
+   Compiling block2 v0.6.2
+   Compiling html5ever v0.27.0
+   Compiling onig v6.5.3
+   Compiling fancy-regex v0.16.2
+   Compiling env_filter v2.0.0
+   Compiling bincode v1.3.3
+   Compiling oxc_sourcemap v9.0.0
+   Compiling objc2-io-surface v0.3.2
+   Compiling unicode-id v0.3.7
+   Compiling str_indices v0.4.4
+   Compiling vte v0.15.0
+   Compiling objc2-foundation v0.3.2
+   Compiling utf8parse v0.2.2
+   Compiling syntect v5.3.0
+   Compiling dispatch2 v0.3.1
+   Compiling ahash v0.8.12
+   Compiling objc2-image-io v0.3.2
+   Compiling ropey v1.6.1
+   Compiling anstyle-parse v1.0.0
+   Compiling markdown v1.0.0
+   Compiling nsh-package v0.6.0
+   Compiling two-face v0.4.5
+   Compiling objc2-quartz-core v0.3.2
+   Compiling quickjs-jit-core v0.14.2
+   Compiling gpui-query v0.3.1
+   Compiling ed25519-dalek v3.0.0
+   Compiling x25519-dalek v3.0.0
+   Compiling anstream v1.0.0
+   Compiling objc2-core-text v0.3.2
+   Compiling objc2-io-kit v0.3.2
+   Compiling objc2-app-kit v0.3.2
+   Compiling xml5ever v0.18.1
+   Compiling nsh-query v0.1.0
+   Compiling env_logger v0.11.11
+   Compiling quickjs-jit-macro v0.14.2
+   Compiling quickjs-jit v0.14.2
+   Compiling quickjs-jit-stdlib v0.14.2
+   Compiling nsh-js v0.6.0
+   Compiling nsh-engine v0.6.0
+   Compiling nsh-platform-apple v0.6.0
+   Compiling nsh-testing v0.6.0
+   Compiling markup5ever_rcdom v0.3.0
+   Compiling nsh-base v0.6.0
+   Compiling nsh-form v0.1.0
+   Compiling nsh-platform-macos v0.6.0
+   Compiling acme v0.1.0 (/private/tmp/claude-501/newapp-template/acme)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 39.19s
+     Running unittests src/lib.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/acme-029701ab874ad694)
+
+running 19 tests
+test services::id::tests::counter_ids_increase ... ok
+test routes::tests::a_link_names_its_route ... ok
+test services::time::tests::formats_utc_wall_time ... ok
+test routes::tests::an_item_link_carries_its_id_and_sits_on_its_list ... ok
+test store::event_bus::tests::topics_are_stable_names ... ok
+test services::validation::tests::email_rules_match_what_forms_need ... ok
+test services::validation::tests::strength_scores_length_kinds ... ok
+test pages::tests::every_listed_screen_opens_from_its_link ... ok
+test services::validation::tests::password_and_phone_have_floors ... ok
+test shell::command_bar::tests::every_route_and_action_is_a_command ... ok
+test pages::tests::every_key_is_its_routes_name_in_snake_case ... ok
+test store::undo::tests::the_stack_is_bounded ... ok
+test store::undo::tests::undo_returns_to_the_recorded_state ... ok
+test services::capabilities::tests::the_manifest_is_read_as_declared ... ok
+test services::capabilities::tests::every_known_key_is_listed_once ... ok
+test native::command_bar::rank::tests::an_empty_query_keeps_the_list_order ... ok
+test native::command_bar::rank::tests::a_prefix_ranks_above_a_word_start_and_letters_in_order ... ok
+test ui::tokens::tests::every_custom_token_is_declared ... ok
+test services::logging::tests::truncates_the_file_back_to_a_bound ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running unittests src/main.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/acme-3ff2678713082cdf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/architecture.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/architecture-870b9989a78eaba9)
+
+running 9 tests
+test the_path_reader_reads_grouped_imports ... ok
+test the_map_names_every_folder ... ok
+test every_screen_folder_has_the_same_shape ... ok
+test the_apps_pages_draw_with_ui ... ok
+test every_language_has_every_string ... ok
+test no_file_is_longer_than_the_limit ... ok
+test imports_point_one_way ... ok
+test every_global_has_a_type_of_its_own ... ok
+test unsafe_stays_in_native ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/diagnostics.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/diagnostics-0165b83b69481d5b)
+
+running 6 tests
+test migrate_maps_schema_zero_fields ... ok
+test config_migration_roundtrip ... ok
+test event_bus_ordering ... ok
+test error_surface_shows_and_dismisses ... ok
+test task_manager_cancel ... ok
+test task_manager_runs_to_done_and_drains ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/first_run.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/first_run-bdb6a1bc1fc3b813)
+
+running 1 test
+test first_run_once_only ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/home.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/home-bcff51b4b066b6c9)
+
+running 3 tests
+test the_rows_under_the_cards_are_listed ... ok
+test every_page_has_a_card_on_home ... ok
+test a_card_opens_its_page_and_back_returns ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/items.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/items-44a3ea0543a56911)
+
+running 5 tests
+test an_empty_answer_shows_the_empty_state ... ok
+test a_row_opens_its_item_and_back_returns_to_the_list ... ok
+test on_a_wide_window_the_list_presents_the_item_itself ... ok
+test a_link_to_an_item_that_does_not_exist_says_so ... ok
+test a_failed_load_shows_the_error_and_retry_loads_the_list ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/settings.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/settings-10f31ba9d971918d)
+
+running 1 test
+test the_name_saves_and_the_language_switches ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/shell.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/shell-1805916d9ec34817)
+
+running 11 tests
+test the_lifecycle_machine_follows_the_engine_events ... ok
+test the_back_order_is_overlays_pages_then_the_exit_ask ... ok
+test deep_links_parse_into_routes ... ok
+test undo_history_is_bounded ... ok
+test the_sidebar_key_parses_on_every_os ... ok
+test the_lifecycle_watch_follows_the_environment ... ok
+test a_link_of_the_claimed_scheme_opens_its_page ... ok
+test the_sidebar_collapses_and_comes_back ... ok
+test the_palette_opens_and_navigates ... ok
+test the_desktop_width_takes_the_sidebar ... ok
+test back_pops_a_page_then_asks_to_exit ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/sign_in.rs (/private/tmp/claude-501/newapp-template/target/debug/deps/sign_in-3d29ba966a3de9da)
+
+running 4 tests
+test a_bad_email_shows_its_field_error_and_signs_no_one_in ... ok
+test a_refused_password_shows_on_the_form ... ok
+test a_good_sign_in_shows_the_name_and_sign_out_returns_the_form ... ok
+test settings_shows_who_is_signed_in_and_signs_out ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+   Doc-tests acme
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit 0

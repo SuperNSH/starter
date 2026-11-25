@@ -10,6 +10,10 @@ This repository holds only directories, `.agents/skills`, `.zcode` and this prom
 
 Read `gpui-starter` before designing anything, at `~/ps/torii/gpui-starter`. Its `README.md`, `docs/architecture.md`, `docs/desktop-boilerplate-features-plan.md`, `src/` layout and `AGENTS.md` are the bar for structure and depth: `app`, `shell`, `features`, `ui`, `services`, `state`, `platform`, `foundation`, and `tests`. Reproduce the ideas, translated to NSH, and never copy GPUI code. Its feature list includes a lifecycle state machine, routed pages with deep links, command palette, undo and redo, an event bus, typed config with migrations, persistence, a background task manager, a status bar, a central error surface, a diagnostics view, first-run setup, file logging, telemetry with pluggable sinks, i18n in two locales, accessibility, themes, and a capability registry. Each of those gets an NSH version unless NSH makes it meaningless, in which case `docs/gpui-starter-parity.md` says why.
 
+## Layout (amended 2026-11-25)
+
+The source layout named above (`app`, `shell`, `features`, `ui`, `services`, `state`, `platform`, `foundation`) was replaced on 2026-11-25 by the one in `AGENTS.md`: `pages`, `showcase`, `shell`, `store`, `services`, `ui`, `native`. The areas below keep their meaning; `AGENTS.md` says which files each owns now. Everything else in this brief stands.
+
 ## Architecture
 
 - A Rust app (`nsh init . --template rust`, `"rust"` and `"root"` in `nsh.json`) is the shell and most features, since the official guidance prefers Rust for an app shipped in its binary.

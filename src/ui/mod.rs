@@ -2,7 +2,9 @@
 //! styled with the theme's tokens only, so screens import controls from
 //! `ui` and never from `nsh_base` directly.
 //!
-//! NSH UI rules (bind every area):
+//! May import: nothing else of the app.
+//!
+//! The rules:
 //! - Screens import controls from this module, never from `nsh/base` or
 //!   `nsh_base`.
 //! - No raw hex, rgb or hsl colors outside `themes/theme.json`; a missing
@@ -26,13 +28,10 @@ pub mod dialog;
 pub mod dock;
 pub mod editor;
 pub mod field;
-pub mod gallery;
+pub mod form;
 pub mod icons;
 pub mod layout;
 pub mod link;
-pub mod native;
-pub mod native_kit;
-pub mod native_vs_app;
 pub mod nav;
 pub mod number;
 pub mod pagination;

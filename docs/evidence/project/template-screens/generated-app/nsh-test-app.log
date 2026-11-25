@@ -1,0 +1,7 @@
+✓ built the Rust crate acme (15.3s)
+✓ built the headless runner of acme (34.7s, 1 warning: -v shows it)
+warn the status bar is not granted: add `"statusBar": true` to capabilities in nsh.json
+✓ tests/smoke/app.test.tsx › the root mounts (17ms)
+✓ tests/smoke/app.test.tsx › the shell navigates from Home (17ms)
+✓ 2 tests: 2 passed, 0 failed (38.3s)
+exit 0

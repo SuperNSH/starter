@@ -8,15 +8,23 @@ use nsh_base::{
 };
 use nsh_core::{prelude::*, time::now};
 
+/// The messages waiting for the host to show them.
+#[derive(Clone, Default, PartialEq)]
+struct Pending(Vec<SharedString>);
+
+/// The id the next toast takes.
+#[derive(Clone, Default, PartialEq)]
+struct NextId(u64);
+
 /// The queued messages, drained by the host; a global so a listener or a
 /// task anywhere can notify without context.
-fn queue() -> Signal<Vec<SharedString>> {
-    global::<Vec<SharedString>>()
+fn queue() -> Signal<Pending> {
+    global::<Pending>()
 }
 
 /// A message for a while over the app: "Copied", "Could not send".
 pub fn notify(message: impl Into<SharedString>) {
-    queue().update(|q| q.push(message.into()));
+    queue().update(|q| q.0.push(message.into()));
 }
 
 /// The host that draws the queue as toasts: mounted once, app level.
@@ -29,7 +37,7 @@ pub fn ToastHost(_props: ToastHostProps) -> impl IntoElement {
     let manager = stored(ToastManager::<u64, SharedString>::new(ToastMotion::sonner()));
     let shown = signal(Vec::new());
     let state = ToastStackState::new();
-    let next_id = global::<u64>();
+    let next_id = global::<NextId>();
     let sync = move || {
         shown.set(manager.with(|m| {
             m.visible(3)
@@ -39,12 +47,12 @@ pub fn ToastHost(_props: ToastHostProps) -> impl IntoElement {
     };
     // The lifecycle advances on the engine clock, paused while expanded.
     set_interval(Duration::from_millis(50), move || {
-        let drained = queue().with(Vec::clone);
+        let drained = queue().with(|q| q.0.clone());
         if !drained.is_empty() {
-            queue().set(Vec::new());
+            queue().set(Pending::default());
             for message in drained {
-                next_id.update(|n| *n += 1);
-                let id = next_id.get_untracked();
+                next_id.update(|n| n.0 += 1);
+                let id = next_id.get_untracked().0;
                 manager.with(|m| {
                     m.push(
                         id,

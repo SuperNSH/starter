@@ -7,7 +7,7 @@ use std::sync::Arc;
 
 use nsh_core::element::{HttpRequest, HttpResponse};
 
-use crate::foundation::error::AppError;
+use crate::error::AppError;
 
 /// A request in flight, boxed because `fetch`'s future is the engine's own
 /// (not `Send`, not nameable).
@@ -42,7 +42,7 @@ impl HttpService for NshHttp {
     fn send(&self, request: HttpRequest) -> HttpFut<'_> {
         Box::pin(async move {
             nsh_core::element::fetch(request).await.map_err(|reason| {
-                crate::foundation::error::AppError::new("network", "The request could not be made")
+                crate::error::AppError::new("network", "The request could not be made")
                     .detail(reason)
             })
         })

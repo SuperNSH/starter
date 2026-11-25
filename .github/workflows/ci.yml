@@ -95,6 +95,15 @@ jobs:
         run: cargo clippy --all-targets -- -D warnings
       - name: Test (the just test gate)
         run: cargo test --no-fail-fast
+      # A new app made from the starter, without the demo screens, must pass the same gate.
+      - name: New app gate (scripts/new-app.sh)
+        shell: bash
+        run: |
+          scripts/new-app.sh "$RUNNER_TEMP/acme-notes" acme-notes com.acme.notes
+          cd "$RUNNER_TEMP/acme-notes"
+          cargo fmt --all -- --check
+          cargo clippy --all-targets -- -D warnings
+          cargo test --no-fail-fast
 
   cross-check:
     name: check (${{ matrix.target }})
@@ -173,15 +182,15 @@ jobs:
           ln -s "$parent/nsh-query/packages/nsh-query" packages/remote-screen/node_modules/nsh-query
           ln -s "$parent/nsh-form/packages/nsh-form" packages/remote-screen/node_modules/nsh-form
       - name: Root app, check and build without warnings, then test
-        # vision/ is not in this headless gate: its tests drive screenshots that need a real
-        # target (`nsh test vision/<file> --target macos`) and a model to review them. Headless
-        # runs fail there by design, so only App.test.tsx and smoke/ run; each run also does cargo test.
+        # tests/vision/ is not in this headless gate: its tests drive screenshots that need a real
+        # target (`nsh test tests/vision/<file> --target macos`) and a model to review them. Headless
+        # runs fail there by design, so only tests/smoke/app.test.tsx and tests/smoke/pages.test.tsx run; each run also does cargo test.
         run: |
           nsh check
           nsh build 2>&1 | tee build.log
           ! grep -i warn build.log
-          nsh test App.test.tsx
-          nsh test smoke/pages.test.tsx
+          nsh test tests/smoke/app.test.tsx
+          nsh test tests/smoke/pages.test.tsx
       - name: packages/remote-screen, check and build without warnings, then test
         working-directory: packages/remote-screen
         run: |

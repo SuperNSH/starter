@@ -1,0 +1,14 @@
+fmt exit 0
+clippy exit 0
+cargo test exit 0
+rust tests passed=152 failed=0
+clippy --lib aarch64-apple-ios-sim exit 0
+clippy --lib aarch64-apple-ios exit 0
+nsh test tests/smoke/app.test.tsx exit 0
+nsh test tests/smoke/pages.test.tsx exit 0
+nsh test tests/trace/data.test.tsx exit 0
+remote-screen nsh check exit 0
+remote-screen nsh build exit 0
+remote-screen nsh test exit 0
+clippy --lib wasm32-unknown-unknown exit 0
+clippy --lib aarch64-linux-android exit 101

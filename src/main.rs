@@ -25,7 +25,7 @@ fn main() -> impl std::process::Termination {
         not(any(target_os = "linux", target_os = "windows")),
         allow(unused_variables)
     )]
-    let (name, id, _) = nsh_starter::foundation::manifest_info();
+    let (name, id, _) = nsh_starter::services::manifest::info();
     platform::run_app(
         platform::AppSource::Rust(platform::Root::of::<nsh_starter::App>()),
         platform::AppOptions {

@@ -244,7 +244,7 @@ impl Drop for RestoreRecord {
 fn the_status_page_reports_the_delivery_and_its_revocation_flips() {
     // The page reads one fixed path; swap in the fixture behind a guard, so
     // whatever a delivery run left there comes back even on a failed assert.
-    let path = nsh_starter::features::remote_screen::state_path();
+    let path = nsh_starter::showcase::remote_screen::state_path();
     let previous = std::fs::read_to_string(&path).ok();
     std::fs::create_dir_all(path.parent().unwrap()).unwrap();
     std::fs::write(&path, FIXTURE).unwrap();
@@ -268,5 +268,5 @@ fn RemoteScreenHost() -> impl IntoElement {
     view()
         .flex_1()
         .bg(move || nsh_base::theme().background)
-        .child(nsh_starter::features::remote_screen::remote_screen_page())
+        .child(nsh_starter::showcase::remote_screen::remote_screen_page())
 }

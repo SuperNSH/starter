@@ -9,7 +9,7 @@ use nsh_engine::{Clock, EngineConfig, Root};
 use nsh_testing::Headless;
 
 use nsh_query::query_client;
-use nsh_starter::features::data::{data_page, feed_key, query_devtools_page};
+use nsh_starter::showcase::data::{data_devtools_page, data_page, feed_key};
 
 /// The test's surface: the data page on top and the devtools beneath, so a
 /// switch flip reaches a live feed without unmounting it. `Remount feed`
@@ -56,7 +56,7 @@ pub fn DataTestApp() -> impl IntoElement {
                 .h(px(300.0))
                 .border_t_1()
                 .border_color(move || theme().border)
-                .child(query_devtools_page()),
+                .child(data_devtools_page()),
         )
 }
 

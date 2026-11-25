@@ -1,27 +1,31 @@
-//! The shell: lifecycle, the typed route stack, deep links, the sidebar on
-//! desktop widths and tabs on phones, the command palette, shortcuts,
-//! undo and redo, the desktop chrome, the status bar and the Android back
-//! order. The rest of the crate hangs off the route enum here.
+//! The shell: the frame around the pages. The sidebar on desktop widths
+//! and the tab bar on phones, each page's header, the command palette, the
+//! desktop chrome, the status bar, the Android back order, deep links and
+//! the error surface.
+//!
+//! The shell knows no page by name. Everything it shows about a page comes
+//! from that page's record (`Route::page`, `src/routes.rs`), so a new
+//! page needs no change here.
+//!
+//! May import: `pages` (the table only), `store`, `ui`, `native`, `routes`.
 
 pub mod back;
 pub mod chrome;
 pub mod command_bar;
 pub mod deep_link;
-pub mod home;
-pub mod lifecycle;
-pub mod nav;
+pub mod error_surface;
+pub mod first_run;
 pub mod page;
 pub mod palette;
-pub mod routes;
-pub mod soft_edges;
 pub mod status;
-pub mod undo;
 
 use nsh_base::{nav_stack, theme};
 use nsh_core::{element::ImageSrc, prelude::*};
 
 use crate::{
-    shell::routes::Route,
+    pages,
+    routes::Route,
+    store::nav,
     ui::{
         button::icon_svg_button,
         icons,
@@ -38,28 +42,6 @@ pub fn desktop() -> bool {
     window().width >= if is_desktop() { px(700.0) } else { px(900.0) }
 }
 
-/// Flips the system's appearance between light and dark.
-pub fn toggle_appearance() {
-    if dark() {
-        set_color_scheme(crate::Appearance::Light);
-    } else {
-        set_color_scheme(crate::Appearance::Dark);
-    }
-}
-
-/// The shell-wide wiring: shortcuts, the back order, the lifecycle watch
-/// and the launch deep link. Once, from the root's body.
-pub fn install() {
-    on_key("mod+k", move |_| palette::toggle());
-    on_key("mod+z", move |_| undo::undo());
-    on_key("mod+shift+z", move |_| undo::redo());
-    on_key(chrome::sidebar_key(), move |_| chrome::toggle_sidebar());
-    back::install();
-    lifecycle::watch();
-    deep_link::open_pending();
-    deep_link::listen();
-}
-
 /// The shell: the layout of the window's width, with the palette, the
 /// exit ask and the toast host over it all.
 pub fn shell() -> impl IntoElement {
@@ -72,12 +54,14 @@ pub fn shell() -> impl IntoElement {
         .child(back::exit_prompt_dialog())
         // App level, so a toast from any page or task reaches the host.
         .child(toast::toast_host())
+        // Over everything: an error raised anywhere shows here.
+        .child(error_surface::error_surface())
 }
 
 /// Phones: the stack of Home and the pushed pages, and the system tab bar
 /// for the primary pages (the status bar is the desktop shell's).
 fn phone_shell() -> AnyElement {
-    let tabs = Route::TABS;
+    let tabs = pages::tabs();
     // One past the tabs selects none (a route the bar does not show).
     let selected = signal(tabs.len() as u32);
     // The stack drives the tabs...
@@ -88,17 +72,12 @@ fn phone_shell() -> AnyElement {
             .map_or(tabs.len() as u32, |at| at as u32);
         selected.set(at);
     });
-    // A feed post opened on a phone is pushed as the detail route: the
-    // system header brings its own back button and the tab bar steps aside.
-    // Only while this shell is up: a desktop shell after it overlays.
-    crate::features::data::pushes_detail().set(true);
-    cleanup(|| crate::features::data::pushes_detail().set(false));
-    effect(move || {
-        if let Some(id) = crate::features::data::detail_request().get() {
-            crate::features::data::close_post();
-            nav::push(Route::DataDetail(id));
-        }
-    });
+    // A page that opens a child screen (a post from a feed) has it pushed
+    // here: the system header brings its own back button and the tab bar
+    // steps aside. Only while this shell is up: on desktop widths the page
+    // presents the child itself.
+    nav::set_pushes_children(true);
+    cleanup(|| nav::set_pushes_children(false));
     // ...and the tabs drive the stack (a no-op when this effect itself
     // moved the selection, so the two never loop).
     effect(move || {
@@ -118,29 +97,30 @@ fn phone_shell() -> AnyElement {
                 .child(pushed()),
         )
         .child(
-            // Off the detail pages; the bar itself shows nothing off iOS
+            // Off the pushed screens; the bar itself shows nothing off iOS
             // and Android. iOS keeps its system bar (Liquid Glass over the
             // page's own background); Android's Material bar paints its own
             // surface color whatever the theme, so Android draws the bar
             // in the theme's colors instead.
             // It floats over the stack's bottom edge: pages scroll under it
-            // and keep room at their end (`ui::layout::page_insets`).
+            // and keep room at their end (`ui::layout::page_bottom`).
             view()
                 .absolute()
                 .left_0()
                 .right_0()
                 .bottom_0()
-                .style_when(move || nav::current().is_detail(), |s| s.hidden())
+                .style_when(move || nav::current().parent().is_some(), |s| s.hidden())
                 .child(
                     when(
                         || os() == nsh_core::platform::Os::Android,
                         move || {
                             themed_tab_bar(
                                 tabs.iter()
-                                    .map(|route| ThemedTab {
-                                        label: route.label_str(),
-                                        svg: route.tab_svg(),
-                                        test_id: route.tab_id(),
+                                    .map(|route| route.page())
+                                    .map(|page| ThemedTab {
+                                        label: page.title,
+                                        svg: page.icon,
+                                        test_id: format!("tab-{}", page.key),
                                     })
                                     .collect(),
                                 selected,
@@ -149,9 +129,12 @@ fn phone_shell() -> AnyElement {
                         },
                     )
                     .otherwise(move || {
+                        let ios = os() == nsh_core::platform::Os::Ios;
                         mobile_tab_bar(
                             tabs.iter()
-                                .map(|route| tab_item(route.label_str(), route.tab_icon()))
+                                .map(|route| route.page())
+                                // The symbol is an SF Symbol: iOS's bar only.
+                                .map(|page| tab_item(page.title, ios.then_some(page.symbol)))
                                 .collect::<Vec<_>>(),
                             selected,
                         )
@@ -191,7 +174,7 @@ fn pushed() -> AnyElement {
     let routes = nav::stack();
     each(
         move || routes.with(|routes| routes.0.clone()),
-        |route: &Route| route.key(),
+        |route: &Route| route.stack_key(),
         |route, depth| {
             let route = route.get_untracked();
             page::page_screen(route).on_dismiss(move || nav::truncate(depth.get_untracked()))
@@ -239,7 +222,7 @@ fn sidebar() -> impl IntoElement {
                             .pt_1()
                             .pb_1(),
                     )
-                    .children(Route::ALL.iter().copied().map(sidebar_row)),
+                    .children(pages::sidebar().iter().copied().map(sidebar_row)),
             ),
         )
 }
@@ -249,6 +232,7 @@ fn sidebar() -> impl IntoElement {
 /// carries the full pill (the default theme's `accent` and `secondary`
 /// are the same gray).
 fn sidebar_row(route: Route) -> AnyElement {
+    let page = route.page();
     let selected = move || nav::current() == route;
     let tint = move || {
         if selected() {
@@ -259,7 +243,7 @@ fn sidebar_row(route: Route) -> AnyElement {
     };
     nsh_base::button()
         .on_press(move || nav::open(route))
-        .accessibility_label(route.label_str())
+        .accessibility_label(page.title)
         .selected(selected)
         .w_full()
         .h(px(30.0))
@@ -278,18 +262,18 @@ fn sidebar_row(route: Route) -> AnyElement {
         })
         .child(
             view()
-                .test_id(route.nav_row_id())
+                .test_id(&format!("nav-{}", page.key))
                 .flex_1()
                 .flex_row()
                 .items_center()
                 .gap_2()
                 .child(
-                    svg(ImageSrc::svg_markup(route.tab_svg()))
+                    svg(ImageSrc::svg_markup(page.icon))
                         .size(px(16.0))
                         .text_color(tint),
                 )
                 .child(
-                    text(route.label_str())
+                    text(page.title)
                         .flex_1()
                         .text_size(px(13.0))
                         .font_weight(FontWeight::MEDIUM)

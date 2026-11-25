@@ -8,7 +8,7 @@ use std::sync::{Arc, Mutex};
 
 use nsh_core::element::SharedString;
 
-use crate::foundation::error::AppError;
+use crate::error::AppError;
 
 /// A sign-in in flight, boxed so the trait stays object-safe.
 pub type AuthFut<'a> = Pin<Box<dyn Future<Output = Result<AuthUser, AppError>> + 'a>>;
@@ -39,7 +39,8 @@ pub trait AuthProvider: Send + Sync {
 }
 
 /// The local mock: any well-formed email and a non-empty password signs in
-/// a fake user, kept in memory only.
+/// a fake user, kept in memory only. [`MockAuthProvider::REJECTED_PASSWORD`]
+/// is refused as a real provider refuses a wrong password.
 #[derive(Debug, Default)]
 pub struct MockAuthProvider {
     user: Mutex<Option<AuthUser>>,
@@ -51,6 +52,10 @@ impl MockAuthProvider {
 
     /// The display name the mock user gets.
     const MOCK_NAME: &'static str = "Mock User";
+
+    /// The one password the mock refuses, with code `"denied"`, so the
+    /// server-error path can be seen without a server.
+    pub const REJECTED_PASSWORD: &'static str = "wrong-password";
 }
 
 impl AuthProvider for MockAuthProvider {
@@ -62,11 +67,14 @@ impl AuthProvider for MockAuthProvider {
         let email = email.trim().to_owned();
         let password = password.to_owned();
         Box::pin(async move {
-            if crate::foundation::validation::email_error(&email).is_some() {
+            if crate::services::validation::email_error(&email).is_some() {
                 return Err(AppError::new("invalid", "Enter a valid email address"));
             }
             if password.is_empty() {
                 return Err(AppError::new("invalid", "Enter a password"));
+            }
+            if password == Self::REJECTED_PASSWORD {
+                return Err(AppError::new("denied", "Wrong email or password"));
             }
             let user = AuthUser {
                 id: Self::MOCK_ID.into(),

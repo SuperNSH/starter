@@ -1,7 +1,8 @@
 //! The app's buttons: one styled wrapper over `nsh_base::button`, with
 //! the variants, sizes and the press, hover, focus and disabled states.
 
-use nsh_base::{ButtonElement, button as base_button, theme};
+pub use nsh_base::ButtonElement;
+use nsh_base::{button as base_button, theme};
 use nsh_core::element::ImageSrc;
 use nsh_core::prelude::*;
 

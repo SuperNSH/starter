@@ -26,6 +26,8 @@
 // Break seen, picking_a_day_selects_it_and_weekends_refuse: the
 // calendar's `on_change` made a no-op — failed waiting for "Selected
 // 2026-11-18. Weekends are off.".
+// Break seen, a_switcher_chip_opens_its_view_by_test_id: the id back on
+// a plain view wrapping the button — "no pressable view matches".
 // Break seen, choosing_a_page_shows_its_rows: `first()` pinned to page 1
 // (`move || 1`) — the caption still reached "Page 3 of 50" (it reads the
 // signal `pagination_of` writes), so the break failed at the
@@ -36,7 +38,7 @@ use std::time::{Duration, SystemTime};
 use nsh_base::{DataTableSort, DataTableSortDirection};
 use nsh_core::{Size, prelude::*};
 use nsh_engine::{Clock, EngineConfig, Root};
-use nsh_starter::features::lists::{
+use nsh_starter::showcase::lists::{
     calendar_view::CalendarDemo,
     chat::{ChatDemo, WINDOW_BOTTOM, WINDOW_TOP},
     grid::GridDemo,
@@ -90,7 +92,7 @@ fn visible_msgs(app: &Headless) -> Vec<u32> {
 
 #[test]
 fn chat_pages_stay_contiguous_with_the_window() {
-    use nsh_starter::features::lists::chat::{OLDEST, PAGE, newer_page, older_page};
+    use nsh_starter::showcase::lists::chat::{OLDEST, PAGE, newer_page, older_page};
 
     // The window and the counters, exactly as the demo holds them. The
     // ceiling of a newer page is the room's newest, which Receive grows.
@@ -317,4 +319,22 @@ fn choosing_a_page_shows_its_rows() {
         app.screen().count("text:Archive 1") == Ok(0),
         "the first page's rows lingered"
     );
+}
+
+/// The page with its switcher, as the shell mounts it.
+#[component]
+fn ListsRoot() -> impl IntoElement {
+    view()
+        .flex_1()
+        .child(nsh_starter::showcase::lists::lists_page())
+}
+
+/// The switcher's chips take presses by their test ids (the vision pass
+/// presses them so: their labels collide with the shell's nav).
+#[test]
+fn a_switcher_chip_opens_its_view_by_test_id() {
+    let mut app = start::<ListsRoot>();
+    app.press("id:lists-tab-quotes").unwrap();
+    app.wait_for("text:3000 rows, in table order. Titles sort.")
+        .unwrap();
 }

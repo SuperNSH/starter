@@ -1,0 +1,87 @@
+== break 1: src/pages/items/view.rs
+-- if !nav::push_child(Route::ItemsDetail(id)) {
+            presented.set(Some(id));
+        }
+++ let _ = Route::ItemsDetail(id);
+        presented.set(Some(id));
+$ cargo test --test items a_row_opens_its_item_and_back_returns_to_the_list -- --exact
+exit 101; a_row_opens_its_item_and_back_returns_to_the_list FAILED (as intended)
+   thread 'a_row_opens_its_item_and_back_returns_to_the_list' (165985617) panicked at tests/items.rs:81:6:
+   called `Result::unwrap()` on an `Err` value: "item 3 is on top never happened in 5000 ms; on screen: [\"Items\", \"A list from the fake API; a row opens its item.\", \"Shipping a Rust shell\", \"Ada Lovelace · Likes 3\", \"›\", \"Why cells recycle\", \"Grace Hopper · Likes 10\", \"›\", \"Signals over snapshots\", \"Alan Kay · Likes 17\", \"›\", \"The five-minute query\", \"Barbara Liskov · Likes 2
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 5.12s
+
+== break 2: src/pages/items/view.rs
+-- move || presented.get().is_some(),
+++ move || presented.get().is_some() && false,
+$ cargo test --test items on_a_wide_window_the_list_presents_the_item_itself -- --exact
+exit 101; on_a_wide_window_the_list_presents_the_item_itself FAILED (as intended)
+   thread 'on_a_wide_window_the_list_presents_the_item_itself' (165986747) panicked at tests/items.rs:99:42:
+   called `Result::unwrap()` on an `Err` value: "`id:items_detail-body` showing never happened in 5000 ms; on screen: [\"Pages\", \"Home\", \"UI gallery\", \"Native vs app\", \"Forms\", \"Data\", \"Query devtools\", \"Lists\", \"Canvas\", \"Motion\", \"Overlays\", \"Platform\", \"Device\", \"Remote screen\", \"Items\", \"Settings\", \"Diagnostics\", \"Items\", \"Items\", \"A list from the fake API; a
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 5.12s
+
+== break 3: src/pages/items/view.rs
+-- move || !loaded() && items.is_failure(),
+++ move || !loaded() && items.is_failure() && false,
+$ cargo test --test items a_failed_load_shows_the_error_and_retry_loads_the_list -- --exact
+exit 101; a_failed_load_shows_the_error_and_retry_loads_the_list FAILED (as intended)
+   thread 'a_failed_load_shows_the_error_and_retry_loads_the_list' (165987763) panicked at tests/items.rs:112:50:
+   called `Result::unwrap()` on an `Err` value: "`text:Couldn't load the items` showing never happened in 5000 ms; on screen: [\"Items\", \"A list from the fake API; a row opens its item.\", \"Fail all\", \"Fail none\", \"Empty\"]"
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 5.08s
+
+== break 4: src/services/fake_api.rs
+-- respond(|api| if api.empty { Vec::new() } else { api.posts.clone() }).await
+++ respond(|api| api.posts.clone()).await
+$ cargo test --test items an_empty_answer_shows_the_empty_state -- --exact
+exit 101; an_empty_answer_shows_the_empty_state FAILED (as intended)
+   thread 'an_empty_answer_shows_the_empty_state' (165988936) panicked at tests/items.rs:127:36:
+   called `Result::unwrap()` on an `Err` value: "`id:items-empty` showing never happened in 5000 ms; on screen: [\"Items\", \"A list from the fake API; a row opens its item.\", \"Shipping a Rust shell\", \"Ada Lovelace · Likes 3\", \"›\", \"Why cells recycle\", \"Grace Hopper · Likes 10\", \"›\", \"Signals over snapshots\", \"Alan Kay · Likes 17\", \"›\", \"The five-minute query\", \"Barbara Liskov ·
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 5.09s
+
+== break 5: src/pages/items/queries.rs
+-- Some(ApiError::NotFound) => "items.error.not_found",
+++ Some(ApiError::NotFound) => "items.error.failed",
+$ cargo test --test items a_link_to_an_item_that_does_not_exist_says_so -- --exact
+exit 101; a_link_to_an_item_that_does_not_exist_says_so FAILED (as intended)
+   thread 'a_link_to_an_item_that_does_not_exist_says_so' (165990519) panicked at tests/items.rs:136:47:
+   called `Result::unwrap()` on an `Err` value: "`text:Nothing has that id.` showing never happened in 5000 ms; on screen: [\"Item 999\", \"Couldn't load the items\", \"The request failed. Try again.\", \"Retry\", \"Fail all\", \"Fail none\", \"Empty\"]"
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 5.08s
+
+== break 6: src/pages/sign_in/view.rs
+-- validation::email_error(email).map(|_| locale::text("sign_in.email_invalid")())
+++ validation::email_error(email).map(|_| locale::text("sign_in.email_invalid")()).filter(|_| false)
+$ cargo test --test sign_in a_bad_email_shows_its_field_error_and_signs_no_one_in -- --exact
+exit 101; a_bad_email_shows_its_field_error_and_signs_no_one_in FAILED (as intended)
+   thread 'a_bad_email_shows_its_field_error_and_signs_no_one_in' (165991659) panicked at tests/sign_in.rs:40:54:
+   called `Result::unwrap()` on an `Err` value: "`text:Enter a valid email address` showing never happened in 5000 ms; on screen: [\"Sign in\", \"Your account. The provider here is a local mock: no real account, no network.\", \"Email\", \"Password\", \"Enter your password\", \"Any email and password sign in, except the password wrong-password.\", \"Sign in\"]"
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3 filtered out; finished in 5.11s
+
+== break 7: src/store/session.rs
+-- global::<Session>().set(Session(Some(user.clone())));
+++ 
+$ cargo test --test sign_in a_good_sign_in_shows_the_name_and_sign_out_returns_the_form -- --exact
+exit 101; a_good_sign_in_shows_the_name_and_sign_out_returns_the_form FAILED (as intended)
+   thread 'a_good_sign_in_shows_the_name_and_sign_out_returns_the_form' (165993291) panicked at tests/sign_in.rs:58:40:
+   called `Result::unwrap()` on an `Err` value: "`id:sign_in-account` showing never happened in 5000 ms; on screen: [\"Sign in\", \"Your account. The provider here is a local mock: no real account, no network.\", \"Email\", \"Password\", \"Any email and password sign in, except the password wrong-password.\", \"Sign in\"]"
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3 filtered out; finished in 5.10s
+
+== break 8: src/services/auth.rs
+-- if password == Self::REJECTED_PASSWORD {
+++ if password == Self::REJECTED_PASSWORD && false {
+$ cargo test --test sign_in a_refused_password_shows_on_the_form -- --exact
+exit 101; a_refused_password_shows_on_the_form FAILED (as intended)
+   thread 'a_refused_password_shows_on_the_form' (165994644) panicked at tests/sign_in.rs:76:50:
+   called `Result::unwrap()` on an `Err` value: "`text:Wrong email or password` showing never happened in 5000 ms; on screen: [\"Sign in\", \"Your account. The provider here is a local mock: no real account, no network.\", \"Signed in as\", \"Mock User\", \"ada@example.com\", \"Sign out\"]"
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3 filtered out; finished in 5.10s
+
+== break 9: src/pages/settings/view.rs
+-- || session::user().is_some(),
+++ || session::user().is_some() && false,
+$ cargo test --test sign_in settings_shows_who_is_signed_in_and_signs_out -- --exact
+exit 101; settings_shows_who_is_signed_in_and_signs_out FAILED (as intended)
+   thread 'settings_shows_who_is_signed_in_and_signs_out' (165995829) panicked at tests/sign_in.rs:92:36:
+   called `Result::unwrap()` on an `Err` value: "`text:Mock User` showing never happened in 5000 ms; on screen: [\"Settings\", \"Your account, your name, the language, the appearance and telemetry.\", \"Account\", \"You are not signed in.\", \"Sign in\", \"Your name\", \"Save\", \"Language\", \"English\", \"中文\", \"Appearance\", \"The app is light.\", \"Switch appearance\", \"Telemetry\", \"Share usa
+   test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3 filtered out; finished in 5.09s
+
+== break 10: src/ui/nav.rs list_row ignoring on_press
+$ cargo test --test gallery a_nav_row_press_selects_it
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 15 filtered out; finished in 5.21s
